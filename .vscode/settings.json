@@ -10,6 +10,7 @@
         "**/*.run.xml": true,
         "**/*.synctex.gz": true,
         "**/*.blg": true,
-        "**/*.synctex(busy)": true
+        "**/*.synctex(busy)": true,
+        "**/*_temp.tex": true
     }
 }

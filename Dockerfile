@@ -11,4 +11,5 @@ RUN DEBIAN_FRONTEND=noninteractive apt-get update && apt-get install -y \
     liblog-dispatch-perl \
     libyaml-tiny-perl \
     libfile-homedir-perl
+RUN cpanm Unicode::GCString
 RUN curl -fsSL https://starship.rs/install.sh | bash -s -- --yes
