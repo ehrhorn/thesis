@@ -14,3 +14,4 @@ RUN DEBIAN_FRONTEND=noninteractive apt-get update && apt-get install -y \
     cpanminus
 RUN cpanm Unicode::GCString
 RUN curl -fsSL https://starship.rs/install.sh | bash -s -- --yes
+RUN tlmgr update --all
