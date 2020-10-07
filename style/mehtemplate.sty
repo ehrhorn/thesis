@@ -1,0 +1,58 @@
+\ProvidesPackage{./style/mehtemplate}
+
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[USenglish]{babel}
+
+\usepackage{mathpazo}
+\usepackage{mathtools}
+\usepackage{amssymb}
+\usepackage[ISO]{diffcoeff}
+\usepackage{braket}
+\usepackage{bm}
+\usepackage{siunitx}
+
+\usepackage{microtype}
+\usepackage{import}
+\usepackage{todonotes}
+\usepackage{standalone}
+\usepackage{subfiles}
+\usepackage{csquotes}
+
+\usepackage[
+    backend=biber,
+    natbib=true,
+    style=phys,
+    biblabel=brackets,
+    giveninits=true,
+    abbreviate=false,
+    doi=false,
+	url=false,
+	isbn=false,
+    block=space,
+    backref=true,
+	backrefstyle=two,
+]{biblatex}
+\addbibresource{refs.bib}
+
+% \usepackage{tikz}
+% \usepackage{tikz-feynman}
+% \usetikzlibrary{external}
+% \usepackage{pgf}
+
+% \usepackage{fontspec}
+% \setmonofont[Contextuals={Alternate}]{BlexMono Nerd Font Mono}
+% % \usepackage{plex-mono}
+% \usepackage[outputdir=.texpadtmp]{minted}
+% \renewcommand{\MintedPygmentize}{/Users/ehrhorn/miniconda3/bin/pygmentize}
+
+\usepackage{hyperref}
+\usepackage{cleveref}
+\usepackage[document]{ragged2e}
+
+% The number `e'.
+\def\eu{\ensuremath{\mathrm{e}}}
+% The imaginary unit.
+\def\iu{\ensuremath{\mathrm{i}}}
+% The differential operator.
+\def\du{\ensuremath{\mathrm{d}}}
