@@ -16,10 +16,10 @@
 		"James-Yu.latex-workshop",
 		"tecosaur.latex-utilities",
 		"valentjn.vscode-ltex"
-	]
-	// "forwardPorts": [
-	// 	8501
-	// ]
+	],
+	"forwardPorts": [
+		8501
+	],
 	// Use 'forwardPorts' to make a list of ports inside the container available locally.
 	// "forwardPorts": [],
 	// Uncomment the next line to run commands after the container is created - for example installing curl.
