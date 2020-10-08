@@ -12,5 +12,51 @@
         "**/*.blg": true,
         "**/*.synctex(busy)": true,
         "**/*_temp.tex": true
-    }
+    },
+    "ltex.workspaceFolderDictionary": {
+        "en-US": [
+            "aether",
+            "Genevan",
+            "IceCube",
+            "luminiferous",
+            "PegLeg",
+            "photomultiplier",
+            "Reco",
+            "Saeta"
+        ]
+    },
+    "ltex.ignoreRuleInSentence": [
+        {
+            "rule": "WORD_CONTAINS_UNDERSCORE",
+            "sentence": "^\\QIceCube is also capable of searching for point-like sources icecube_collaboration_time-integrated_2020, and serves in the SuperNova Early Warning System kopke_supernova_2011.\\E$"
+        },
+        {
+            "rule": "MORFOLOGIK_RULE_EN_US",
+            "sentence": "^\\QIceCube is also capable of searching for point-like sources icecube_collaboration_time-integrated_2020, and serves in the SuperNova Early Warning System kopke_supernova_2011.\\E$"
+        },
+        {
+            "rule": "WORD_CONTAINS_UNDERSCORE",
+            "sentence": "^\\QMeasurements of certain neutrino properties may help us understand phenomena such as why the universe is matter-dominated nunokawa_cp_2008 and dark matter baur_dark_2019.\\E$"
+        },
+        {
+            "rule": "WORD_CONTAINS_UNDERSCORE",
+            "sentence": "^\\QTo date, classical methods, such as PegLeg leuermann_testing_2018 and Retro Reco have mostly been used for this purpose, but the burgeoning proliferation of the use of machine learning (ML) for scientific discovery raghu_survey_2020 inspires the development of new methods for this cause.\\E$"
+        },
+        {
+            "rule": "MORFOLOGIK_RULE_EN_US",
+            "sentence": "^\\QThe intention of this thesis is to explore that proposition, specifically for up-going muon neutrinos in the sub-teraelectronvolt range.\\E$"
+        },
+        {
+            "rule": "MORFOLOGIK_RULE_EN_US",
+            "sentence": "^\\QThe current best reconstruction algorithm for this case, Retro Reco, can take minutes to reconstruct a neutrino, while an ML-based approach can be expected to reconstruct several thousand each second.\\E$"
+        },
+        {
+            "rule": "WORD_CONTAINS_UNDERSCORE",
+            "sentence": "^\\QAn additional focus will be the IceCube upgrade ishihara_icecube_2019, which will install additional improved detectors, and for which there is no current functioning reconstruction algorithm.\\E$"
+        },
+        {
+            "rule": "WORD_CONTAINS_UNDERSCORE",
+            "sentence": "^\\Q./chapters/summary_and_outlook\\E$"
+        }
+    ]
 }

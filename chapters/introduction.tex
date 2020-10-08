@@ -2,20 +2,37 @@
 
 \begin{document}
 
-Deep beneath the Amundsen-Scott station, on the geographic South Pole,
-lurks a telescope in the ice.
-This observatory hunts for the some of the most elusive particles in our
-universe, hoping they may answer foundational questions about nature, and glean
-insight into new physics that the monstrous particle collider situated in
-Geneva\,---\,and its potential successors\,---\,may never be able to.
+Deep beneath the Amundsen-Scott station on the geographic South Pole, lurks a telescope in the ice.
+This observatory hunts for some of the most elusive particles in our universe, hoping they may answer foundational questions about nature, and glean insight into new physics that the Genevan collider\,---\,or its potential successors\,---\,may never be able to.
 
-The IceCube Neutrino Observatory was built between 2005 and 2010, but its
-heritage goes back several decades before.
-Spanning one cubic kilometer of Antarctic ice, the telescope consists of some
-60 strings, hot water drilled into the ice, with each string containing a number
-of photomultiplier tubes, capable of detecting photons originating from
-processes involving neutrinos\,---\,the aforementioned elusive particles.
+The IceCube Neutrino Observatory was built between 2005 and 2010, but its heritage stretches back several decades.
+Spanning one cubic kilometer of Antarctic ice, the telescope consists of some 60 strings, hot water drilled into the ice, with each string containing a number of photomultiplier tubes, capable of detecting photons originating from processes involving neutrinos\,---\,the aforementioned elusive particles.
 
-Measurements of certain neutrino properties may help us understand
+Measurements of certain neutrino properties may help us understand phenomena such as why the universe is matter-dominated~\autocite{nunokawa_cp_2008} and dark matter~\autocite{baur_dark_2019}.
+IceCube is also capable of searching for point-like sources~\autocite{icecube_collaboration_time-integrated_2020}, and serves in the SuperNova Early Warning System~\autocite{kopke_supernova_2011}.
+
+But one thing is the ability to observe derived photons in Antarctic ice; another is reconstruction of this light in order to infer properties of the originating particles.
+To date, classical methods, such as PegLeg~\autocite{leuermann_testing_2018} and Retro Reco\footnote{\url{https://github.com/IceCubeOpenSource/retro}} have mostly been used for this purpose, but the burgeoning proliferation of the use of machine learning (ML) for scientific discovery~\autocite{raghu_survey_2020} inspires the development of new methods for this cause.
+
+Whereas classical methods require a hypothesis and thus preset logic, ML \enquote{changes these [problems] from logic problems to statistical problems}\footnote{\url{https://www.ben-evans.com/benedictevans/2019/9/6/face-recognition}}.
+That is to say, given a large enough\,---\,or rather, a representative enough\,---\,dataset, an ML algorithm may find statistical similarities in disparate neutrino events sharing similar underlying properties, giving the network an ability to predict these same properties for previously unseen data.
+As a \enquote{machine learning model is almost like a pure function at inference time}\footnote{Brennan Saeta, \url{https://www.swiftbysundell.com/podcast/58/}}, owing to the universal approximation theorems, it should be possible to construct an ML reconstruction algorithm that is both faster, preciser, more extensible, captures a wider spectrum and is more future-proof than the current methods.
+
+The intention of this thesis is to explore that proposition, specifically for up-going muon neutrinos in the sub-teraelectronvolt range.
+
+This problem is selected as it is the focus of the oscillations group at IceCube, studying neutrino oscillations.
+The current best reconstruction algorithm for this case, Retro Reco, can take minutes to reconstruct a neutrino, while an ML-based approach can be expected to reconstruct several thousand each second.
+An additional focus will be the IceCube upgrade~\autocite{ishihara_icecube_2019}, which will install additional improved detectors, and for which there is no current functioning reconstruction algorithm.
+
+For that, we need an understanding of the particle physics and machine learning techniques involved, which is explored in \cref{chap:particle_physics,chap:machine_learning}, respectively.
+
+The data used for any ML problem is even more important than the algorithm used and technically the dataset should be designed with ML applications in mind to be of optimal use.
+This is not the case, as IceCube's data structure is not well suited for a machine learning task, and thus \cref{chap:data} goes into both the design of the databases used for the datasets and the selection and features of the data itself.
+
+\Cref{chap:design} goes into the design of the algorithm, including such details as loss functions and optimizers, while \cref{chap:results} shows results and comparisons to existing methods.
+
+Lastly, a summary and outlook is given in \cref{chap:summary_and_outlook}.
+
+With the introduction out of the way, let us start by looking at the particle physics involved in the interactions relevant for IceCube.
 
 \end{document}

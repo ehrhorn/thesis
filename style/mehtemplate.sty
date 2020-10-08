@@ -1,7 +1,9 @@
 \ProvidesPackage{./style/mehtemplate}
 
+% Silence warnings
+\RequirePackage{silence}
+
 \usepackage[T1]{fontenc}
-\usepackage[utf8]{inputenc}
 \usepackage[USenglish]{babel}
 
 \usepackage{mathpazo}
@@ -14,19 +16,37 @@
 \usepackage[mathpazo]{flexisym}
 \usepackage{breqn}
 
-\usepackage{microtype}
+\usepackage[
+    activate={
+        true,
+        nocompatibility
+    },
+    final,
+    tracking=true,
+    factor=1100,
+    stretch=10,
+    shrink=10
+]{microtype}
+
 \usepackage{import}
 \usepackage{todonotes}
 \usepackage{standalone}
 \usepackage{subfiles}
+% To surpress warning
+\usepackage{fvextra}
 \usepackage{csquotes}
+\usepackage[symbol]{footmisc}
+% To surpress warning
+\usepackage{scrhack}
 
 \usepackage[
     backend=biber,
     natbib=true,
+    maxbibnames=9,
+    maxcitenames=5,
     style=phys,
     biblabel=brackets,
-    giveninits=true,
+    giveninits=false,
     abbreviate=false,
     doi=false,
 	url=false,
@@ -35,19 +55,26 @@
     backref=true,
 	backrefstyle=two,
 ]{biblatex}
-\addbibresource{refs.bib}
+\addbibresource{~/work/new_thesis/refs.bib}
 
 \usepackage{tikz}
-\usepackage{tikz-feynman}
+\usepackage[compat=1.1.0]{tikz-feynman}
 \usetikzlibrary{external}
 \usepackage{pgf}
 
 \usepackage{plex-mono}
 \usepackage{minted}
 
+\usepackage{url}
 \usepackage{hyperref}
 \usepackage{cleveref}
-\usepackage[document]{ragged2e}
+
+% Smaller url fontsize
+\renewcommand{\UrlFont}{\scriptsize}
+% Replace footnote command
+\renewcommand{\thefootnote}{\fnsymbol{footnote}}
+
+\sisetup{detect-all}
 
 % The number `e'.
 \def\eu{\ensuremath{\mathrm{e}}}
