@@ -57,6 +57,22 @@
         {
             "rule": "WORD_CONTAINS_UNDERSCORE",
             "sentence": "^\\Q./chapters/summary_and_outlook\\E$"
+        },
+        {
+            "rule": "WORD_CONTAINS_UNDERSCORE",
+            "sentence": "^\\QFor that, we need an understanding of the particle physics and machine learning techniques involved, which is explored in chap:particle_physics,chap:machine_learning, respectively.\\E$"
+        },
+        {
+            "rule": "COMMA_PARENTHESIS_WHITESPACE",
+            "sentence": "^\\QFor that, we need an understanding of the particle physics and machine learning techniques involved, which is explored in chap:particle_physics,chap:machine_learning, respectively.\\E$"
+        },
+        {
+            "rule": "UPPERCASE_SENTENCE_START",
+            "sentence": "^\\Qchap:design goes into the design of the algorithm, including such details as loss functions and optimizers, while chap:results shows results and comparisons to existing methods.\\E$"
+        },
+        {
+            "rule": "WORD_CONTAINS_UNDERSCORE",
+            "sentence": "^\\QLastly, a summary and outlook is given in chap:summary_and_outlook.\\E$"
         }
     ]
 }
