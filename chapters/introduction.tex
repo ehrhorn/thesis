@@ -24,15 +24,29 @@ This problem is selected as it is the focus of the oscillations group at IceCube
 The current best reconstruction algorithm for this case, Retro Reco, can take minutes to reconstruct a neutrino, while an ML-based approach can be expected to reconstruct several thousand each second.
 An additional focus will be the IceCube upgrade~\autocite{ishihara_icecube_2019}, which will install additional improved detectors, and for which there is no current functioning reconstruction algorithm.
 
-For that, we need an understanding of the particle physics and machine learning techniques involved, which is explored in~\vref{chap:particle_physics,chap:machine_learning}, respectively.
+\section{Flow}
 
-The data used for any ML problem is even more important than the algorithm used and technically the dataset should be designed with ML applications in mind to be of optimal use.
-This is not the case, as IceCube's data structure is not well suited for a machine learning task, and thus~\vref{chap:data} goes into both the design of the databases used for the datasets and the selection and features of the data itself.
+To weave a common thread through this document, and ensure the reader is informed about the big picture throughout, the following section presents the flow of the thesis.
 
-\Vref{chap:design} goes into the design of the algorithm, including such details as loss functions and optimizers, while~\vref{chap:results} shows results and comparisons to existing methods.
+The story of an interaction in IceCube from physics to analysis proceeds at a very high level as follows:
+The universe is created with mechanisms that only allow a certain chirality of neutrinos to interact with forces other than gravity (\vref{sec:the_weak_interaction}).
+At some point an interaction will create such a particle (\vref{sec:neutrino_interactions}), which oscillates between different flavors (\vref{sec:neutrino_oscillations}).
+As chance allows some neutrinos to interact in or around the instrumented ice, new particles are created that in turn send out a specific form of light (\vref{sec:cherenkov_radiation}) which the photomultiplier tubes (\vref{sec:doms}) can detect.
+Today each in-ice digital optical module contains one photomultiplier tube.
+With the IceCube upgrade this changes (\vref{sec:icecube_upgrade}), and new optical modules will be fitted with additional photomultiplier tubes which should help with determining the direction of neutrinos.
+The detector is set up with certain triggers in differing levels (\vref{sec:triggers}), to ensure that not just any light is recorded and saved to disk.
+Even further processing is done, as the bandwidth from pole to America is quite low, and so care must be taken in the choice of what to actually send down the wires for analysis.
+When the data arrives for analysis, different level of cleaning takes place to root out noise (\vref{sec:levels}).
+This pipeline also attempts to classify event types, using decision trees, until finally algorithms\,---\,none of them machine learning based\,---\,reconstruct neutrino properties of interest such as energy and direction (\vref{sec:current_reconstruction_methods}), and the events at all levels of cleaning are saved in an IceCube proprietary format, called I3 (\vref{sec:i3_file_format}).
 
-Lastly, a summary and outlook is given in~\vref{chap:summary_and_outlook}.
+With this part done, we turn towards machine learning generalities.
+First the basics of machine learning in general (\vref{sec:ml_basics}), then deep learning in particular (\vref{sec:deep_learning}).
+Special attention is given to temporal convolutional neural networks (\vref{sec:temporal_convolutional_neural_networks}), as this is the architecture used.
+Because loss functions are such an important part of any deep learning project, a section is devoted to this concept as well (\vref{sec:loss_functions}), and for the most part, before data can be meaningfully trained in a neural network, some form of data transformation is required (\vref{sec:data_transformation}).
 
-With the introduction out of the way, let us start by looking at the particle physics involved in the interactions relevant for IceCube.
+The last part of the thesis concerns the work by the author.
+The data format provided by IceCube is not machine learning friendly, so a new solution fixing those shortcomings was built (\vref{sec:sqlite}).
+So that the reader is on the same page as the author, plots and metrics used for comparison are explained.
+The opponent algorithm is detailed (\vref{sec:opponents}), before the structure of the data itself used in training is explained (\vref{sec:data_structure}) and the algorithm laid out (\vref{sec:algorithm}).
 
 \end{document}

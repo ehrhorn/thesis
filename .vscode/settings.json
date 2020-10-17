@@ -73,6 +73,54 @@
         {
             "rule": "WORD_CONTAINS_UNDERSCORE",
             "sentence": "^\\QLastly, a summary and outlook is given in chap:summary_and_outlook.\\E$"
+        },
+        {
+            "rule": "WORD_CONTAINS_UNDERSCORE",
+            "sentence": "^\\QAs chance allows some neutrinos to interact in or around the instrumented ice, new particles are created that in turn send out a specific form of light (sec:cherenkov_radiation) which the photomultiplier tubes can detect.\\E$"
+        },
+        {
+            "rule": "WORD_CONTAINS_UNDERSCORE",
+            "sentence": "^\\QAt some point an interaction will create such a particle (sec:neutrino_interactions), which oscillates between different flavors (sec:neutrino_oscillations).\\E$"
+        },
+        {
+            "rule": "WORD_CONTAINS_UNDERSCORE",
+            "sentence": "^\\QThe story of an interaction in IceCube, as told in this thesis, proceeds at a very high level as follows: The universe is created with mechanisms that only allow a certain chirality of neutrinos to interact with forces other than gravity (sec:the_weak_interaction).\\E$"
+        },
+        {
+            "rule": "WORD_CONTAINS_UNDERSCORE",
+            "sentence": "^\\QAs chance allows some neutrinos to interact in or around the instrumented ice, new particles are created that in turn send out a specific form of light (sec:cherenkov_radiation) which the photomultiplier tubes (sec:doms) can detect.\\E$"
+        },
+        {
+            "rule": "MORFOLOGIK_RULE_EN_US",
+            "sentence": "^\\QAs chance allows some neutrinos to interact in or around the instrumented ice, new particles are created that in turn send out a specific form of light (sec:cherenkov_radiation) which the photomultiplier tubes (sec:doms) can detect.\\E$"
+        },
+        {
+            "rule": "WORD_CONTAINS_UNDERSCORE",
+            "sentence": "^\\Q(sec:current_reconstruction_methods).\\E$"
+        },
+        {
+            "rule": "WORD_CONTAINS_UNDERSCORE",
+            "sentence": "^\\QThis pipeline also attempts to classify event types, using decision trees, until finally algorithms — none of them machine learning based — reconstruct neutrino properties of interest such as energy and direction (sec:current_reconstruction_methods), and the events at all levels of cleaning are saved in an IceCube proprietary format, called I3 (sec:i3_file_format).\\E$"
+        },
+        {
+            "rule": "WORD_CONTAINS_UNDERSCORE",
+            "sentence": "^\\QWith the IceCube upgrade this changes (sec:icecube_upgrade), and new optical modules will be fitted with additional photomultiplier tubes which should help with determining the direction of neutrinos.\\E$"
+        },
+        {
+            "rule": "WORD_CONTAINS_UNDERSCORE",
+            "sentence": "^\\QFirst the basics of machine learning in general (sec:ml_basics), then deep learning in particular (sec:deep_learning).\\E$"
+        },
+        {
+            "rule": "WORD_CONTAINS_UNDERSCORE",
+            "sentence": "^\\QBecause loss functions are such an important part of any deep learning project, a section is devoted to this concept as well (sec:loss_functions), and for the most part, before data can be meaningfully trained in a neural network, some form of data transformation is required (sec:data_transformation).\\E$"
+        },
+        {
+            "rule": "MORFOLOGIK_RULE_EN_US",
+            "sentence": "^\\QThe data format provided by IceCube is not machine learning friendly, so a new solution fixing those shortcomings was built (sec:sqlite).\\E$"
+        },
+        {
+            "rule": "WORD_CONTAINS_UNDERSCORE",
+            "sentence": "^\\QThe story of an interaction in IceCube from physics to analysis proceeds at a very high level as follows: The universe is created with mechanisms that only allow a certain chirality of neutrinos to interact with forces other than gravity (sec:the_weak_interaction).\\E$"
         }
     ]
 }
