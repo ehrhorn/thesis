@@ -2,11 +2,112 @@
 
 \begin{document}
 
+Neutrinos are some of the universe's most interesting and mysterious particles, and offer one of the better paths to researching some still unsolved problems in physics.
+The Large Hadron Collider nailed down the final missing piece of the model, the Higgs boson, but questions still remain; and some of them concern neutrinos.
+
+The masses of the neutrinos themselves is a mystery, but sterile neutrinos may also be a dark matter candidate and the possible CP-violating phase in the PMNS matrix may help explain baryon asymmetry.
+Needless to say, the more we discover about this little particle, the better we know the universe.
+
+The concept of neutrino oscillations has the ability to constrain the previously mentioned CP-violating phase of the neutrino mixing matrix~\autocite{the_t2k_collaboration_constraint_2020} and so the better we are able to measure this, the better the constraint will be.
+
+This chapter will seek to outline the physics behind the interactions that are captured in the IceCube detector, including the concept of Cherenkov radiation, which is of critical importance to the process.
+
+First, we shortly need to touch on what The Standard Model of particle physics is.
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=\textwidth]{./images/particle_physics/Standard_Model_of_Elementary_Particles.pdf}
+    \caption{The fermions and bosons of The Standard Model of particle physics. Image from~\autocite{missmj_standard_2019}}\label{fig:standard_model_overview}
+\end{figure}
+
+\section{The Standard Model}\label{sec:the_standard_model}
+
+The Standard Model (SM) of particle physics is the foundation of modern particle physics research.
+It was patched together during the 20th century by an extreme amount of scientific collaboration and country-level spending.
+
+The theory itself is a gauge quantum field theory, the mathematics of which is not particularly relevant to this thesis.
+However, the theory describes some fundamental interactions, of which the so-called weak one is of importance to the neutrino.
+
+It is possible, and indeed probably quite pedagogical, to discuss the SM through the Dirac equation:
+\begin{equation}\label{eq:dirac_equation_1}
+    \left( \iu \gamma^{\mu} \partial_{\mu} - m \right) \psi = 0,
+\end{equation}
+with \( \mu \in \left\{ 0, 1, 2, 3 \right\} \) and where \( \gamma \) represents the gamma matrices \( \left\{ \gamma^{0}, \gamma^{1}, \gamma^{2}, \gamma^{3} \right\}  \) and \( \partial \) is the partial differential operator.
+This equation governs the fields corresponding to spin-\sfrac{1}{2} particles, of which neutrinos are an example, and the gamma matrices are defined by their anti-commutation relation
+\begin{equation}\label{eg:gamma_matrices_relation}
+    \left\{ \gamma^{\mu}, \gamma^{\nu} \right\} = \gamma^{\mu} \gamma^{\nu} + \gamma^{\nu} \gamma^{\mu} = 2 \eta^{\mu \nu} I_{4},
+\end{equation}
+where \( \eta \) is the Minkowski metric with signature \( \left( + - - -  \right) \) and \( I_{4} \) is the 4 dimensional identity matrix.
+
+\Vref{eq:dirac_equation_1} came about out of needing to reconcile special relativity and quantum mechanics.
+In short, the wave equation needed to be Lorentz invariant.
+The Dirac equation leads to the form of the matrix elements in the different possible interactions, for example the electromagnetic scattering of an electron and tau (seen in~\vref{fig:feynman_e_tau}),
+\begin{equation}\label{eq:qed_interaction}
+    \mathcal{M} = - e^{2} \left[ \bar{u}_{e}(p_{3}) \gamma^{\mu} u_{e}(p_{1}) \right] \frac{g_{\mu \nu}}{q^2} \left[ \bar{u}_{\tau}(p_{4}) \gamma^{\nu} u_{\tau}(p_{2}) \right],
+\end{equation}
+where \( u_{\ell}, \ell \in \left\{ e, \tau \right\} \) represents the spinor of a particle, \( \bar{u}_{\ell}, \ell \in \left\{ e, \tau \right\} \) the anti-spinor and the momenta \( \left\{ q, p_{1}, p_{2}, p_{3}, p_{4} \right\} \) correspond to~\vref{fig:feynman_e_tau}.
+\tikzsetnextfilename{feynman_e_tau}
+\begin{figure}
+    \centering
+    \input{./images/particle_physics/feynman_e_tau.tex}
+    \caption{Feynman diagram showing the \( t \)-channel
+        scattering of an electron and a tau.}\label{fig:feynman_e_tau}
+\end{figure}
+In this case, an electron and a tau lepton scatter by exchanging a photon, with momentum \( q \), which changes the momentum of both the electron and the tau.
+The standard model describes these fundamental interactions of the universe, embodied in Feynman diagrams such as~\vref{fig:feynman_e_tau}, also useful for neutrino physics.
+\Vref{eq:qed_interaction} shows the prominence of the gamma matrices in the fundamental interactions, which is of some importance in the weak interaction, to be discussed in~\vref{sec:the_weak_interaction}.
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=\textwidth]{./images/particle_physics/Elementary_particle_interactions_in_the_Standard_Model.png}
+    \caption{The possible interactions in the SM between fermions and bosons. Image from~\autocite{drexler_elementary_2014}}\label{fig:standard_model_interactions}
+\end{figure}
+
+\Vref{fig:standard_model_overview} shows the standard representation of The Standard Model.
+Charged fermions may participate in the electromagnetic interactions via the photon, while all fermions participate in the weak interaction, and only quarks feel the strong interaction.
+
 \section{The weak interaction}\label{sec:the_weak_interaction}
 
 \section{Neutrino interactions}\label{sec:neutrino_interactions}
 
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=\textwidth]{./images/particle_physics/Figs_all-nu-spectrum-mod.png}
+    \caption{Neutrino spectrum. Image from~\autocite{spiering_towards_2012}.}\label{fig:neutrino_spectrum}
+\end{figure}
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=\textwidth]{./images/particle_physics/FirstNeutrinoEventAnnotated.jpg}
+    \caption{First neutrino seen in a bubble chamber. Image from~\autocite{argonne_national_laboratory_first_1970}.}\label{fig:first_neutrino_event}
+\end{figure}
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=\textwidth]{./images/particle_physics/Neutrino_bubble_chamber_decay_overlay.png}
+    \caption{Bubble chamber neutrino event with annotation. Image from~\autocite{argonne_national_laboratory_neutrino_2012}.}\label{fig:first_neutrino_event_annotated}
+\end{figure}
+
 \section{Neutrino oscillations}\label{sec:neutrino_oscillations}
+
+\[
+    \begin{bmatrix}
+        \nu_{e}   \\
+        \nu_{\mu} \\
+        \nu_{\tau}
+    \end{bmatrix}
+    =
+    \begin{bmatrix}
+        U_{e 1}    & U_{e 2}    & U_{e 3}    \\
+        U_{\mu 1}  & U_{\mu 2}  & U_{\mu 3}  \\
+        U_{\tau 1} & U_{\tau 2} & U_{\tau 3}
+    \end{bmatrix}
+    \begin{bmatrix}
+        \nu_{1} \\
+        \nu_{2} \\
+        \nu_{3}
+    \end{bmatrix}
+\]
 
 \section{Cherenkov radiation}\label{sec:cherenkov_radiation}
 

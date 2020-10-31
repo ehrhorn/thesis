@@ -10,6 +10,7 @@
 \usepackage{mathtools}
 \usepackage{amssymb}
 \usepackage[ISO]{diffcoeff}
+\usepackage{xfrac}
 \usepackage{braket}
 \usepackage{bm}
 \usepackage{siunitx}
@@ -28,10 +29,16 @@
     shrink=10
 ]{microtype}
 
+\usepackage{wrapfig}
 \usepackage{import}
 \usepackage{todonotes}
 \usepackage{standalone}
 \usepackage{subfiles}
+\usepackage[
+    font=small,
+    labelfont=bf,
+    justification=raggedright
+]{caption}
 % To surpress warning
 \usepackage{fvextra}
 \usepackage{csquotes}
@@ -49,7 +56,7 @@
     giveninits=false,
     abbreviate=false,
     doi=false,
-	url=false,
+	url=true,
 	isbn=false,
     block=space,
     backref=true,
@@ -83,3 +90,5 @@
 \def\iu{\ensuremath{\mathrm{i}}}
 % The differential operator.
 \def\du{\ensuremath{\mathrm{d}}}
+% Make hbar upright
+\def\hbaru{\ensuremath{{\mathrm{\hbar}}}}

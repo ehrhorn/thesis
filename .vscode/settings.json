@@ -16,8 +16,10 @@
     "ltex.workspaceFolderDictionary": {
         "en-US": [
             "aether",
+            "Cherenkov",
             "Genevan",
             "IceCube",
+            "icecube",
             "luminiferous",
             "PegLeg",
             "photomultiplier",
@@ -121,6 +123,110 @@
         {
             "rule": "WORD_CONTAINS_UNDERSCORE",
             "sentence": "^\\QThe story of an interaction in IceCube from physics to analysis proceeds at a very high level as follows: The universe is created with mechanisms that only allow a certain chirality of neutrinos to interact with forces other than gravity (sec:the_weak_interaction).\\E$"
+        },
+        {
+            "rule": "MORFOLOGIK_RULE_EN_US",
+            "sentence": "^\\Q[figwidth=]A Standard Model standard figure, showing leptons, quarks etc.\\E$"
+        },
+        {
+            "rule": "MISSING_GENITIVE",
+            "sentence": "^\\QCherenkov radiation.\\E$"
+        },
+        {
+            "rule": "MORFOLOGIK_RULE_EN_US",
+            "sentence": "^\\QThe masses of the neutrinos themselves is a mystery, but sterile neutrinos may also be a dark matter candidate and the possible CP-violating phase in the PMNS matrix may help explain baryon asymmetry.\\E$"
+        },
+        {
+            "rule": "MORFOLOGIK_RULE_EN_US",
+            "sentence": "^\\QThe concept of neutrino oscillations has the ability to constrain the previously mentioned CP-violating phase of the neutrino mixing matrixthe_t2k_collaboration_constraint_2020\\E$"
+        },
+        {
+            "rule": "WORD_CONTAINS_UNDERSCORE",
+            "sentence": "^\\QThe concept of neutrino oscillations has the ability to constrain the previously mentioned CP-violating phase of the neutrino mixing matrixthe_t2k_collaboration_constraint_2020\\E$"
+        },
+        {
+            "rule": "WORD_CONTAINS_UNDERSCORE",
+            "sentence": "^\\QThe concept of neutrino oscillations has the ability to constrain the previously mentioned CP-violating phase of the neutrino mixing matrix the_t2k_collaboration_constraint_2020\\E$"
+        },
+        {
+            "rule": "WORD_CONTAINS_UNDERSCORE",
+            "sentence": "^\\QThe concept of neutrino oscillations has the ability to constrain the previously mentioned CP-violating phase of the neutrino mixing matrix the_t2k_collaboration_constraint_2020 and so the better we are able to measure this, the better the constraint will be.\\E$"
+        },
+        {
+            "rule": "WORD_CONTAINS_UNDERSCORE",
+            "sentence": "^\\QImage from missmj_standard_2019\\E$"
+        },
+        {
+            "rule": "UPPERCASE_SENTENCE_START",
+            "sentence": "^\\Qeq:dirac_equation_1 came about out of needing to reconcile special relativity and quantum mechanics.\\E$"
+        },
+        {
+            "rule": "WORD_CONTAINS_UNDERSCORE",
+            "sentence": "^\\QThe Dirac equation leads to the form of the matrix elements in the different possible interactions, for example the electromagnetic scattering of an electron and tau (seen in fig:feynman_e_tau), \\E(?:Dummy|Ina|Jimmy-)[0-9]+\\Q, where \\E(?:Dummy|Ina|Jimmy-)[0-9]+\\Q represents the spinor of a particle, \\E(?:Dummy|Ina|Jimmy-)[0-9]+\\Q the anti-spinor and the momenta \\E(?:Dummy|Ina|Jimmy-)[0-9]+\\Q correspond to fig:feynman_e_tau.\\E$"
+        },
+        {
+            "rule": "WORD_CONTAINS_UNDERSCORE",
+            "sentence": "^\\Qeq:dirac_equation_1 came about out of needing to reconcile special relativity and quantum mechanics.\\E$"
+        },
+        {
+            "rule": "UPPERCASE_SENTENCE_START",
+            "sentence": "^\\Qfeynman_e_tau Feynman diagram showing the \\E(?:Dummy|Ina|Jimmy-)[0-9]+\\Q-channel scattering of an electron and a tau.\\E$"
+        },
+        {
+            "rule": "WORD_CONTAINS_UNDERSCORE",
+            "sentence": "^\\Qeq:qed_interaction shows the prominence of the gamma matrices in the fundamental interactions, which is of some importance in the weak interaction, to be discussed in sec:the_weak_interaction.\\E$"
+        },
+        {
+            "rule": "UPPERCASE_SENTENCE_START",
+            "sentence": "^\\Qeq:qed_interaction shows the prominence of the gamma matrices in the fundamental interactions, which is of some importance in the weak interaction, to be discussed in sec:the_weak_interaction.\\E$"
+        },
+        {
+            "rule": "WORD_CONTAINS_UNDERSCORE",
+            "sentence": "^\\Qfeynman_e_tau Feynman diagram showing the \\E(?:Dummy|Ina|Jimmy-)[0-9]+\\Q-channel scattering of an electron and a tau.\\E$"
+        },
+        {
+            "rule": "WORD_CONTAINS_UNDERSCORE",
+            "sentence": "^\\QImage from drexler_elementary_2014\\E$"
+        },
+        {
+            "rule": "UPPERCASE_SENTENCE_START",
+            "sentence": "^\\Qfig:standard_model shows the standard representation of The Standard Model.\\E$"
+        },
+        {
+            "rule": "WORD_CONTAINS_UNDERSCORE",
+            "sentence": "^\\Qfig:standard_model shows the standard representation of The Standard Model.\\E$"
+        },
+        {
+            "rule": "DASH_RULE",
+            "sentence": "^\\Q[medium, vertical=a to b] i1 [particle = \\E(?:Dummy|Ina|Jimmy-)[0-9]+\\Q] – [fermion, momentum' = \\E(?:Dummy|Ina|Jimmy-)[0-9]+\\Q] a – [fermion, momentum' = \\E(?:Dummy|Ina|Jimmy-)[0-9]+\\Q] i2 [particle=\\E(?:Dummy|Ina|Jimmy-)[0-9]+\\Q], a – [boson, edge label' = \\E(?:Dummy|Ina|Jimmy-)[0-9]+\\Q, momentum = \\E(?:Dummy|Ina|Jimmy-)[0-9]+\\Q] b, f1 [particle = \\E(?:Dummy|Ina|Jimmy-)[0-9]+\\Q] – [anti fermion, momentum' = \\E(?:Dummy|Ina|Jimmy-)[0-9]+\\Q] b – [anti fermion, momentum' = \\E(?:Dummy|Ina|Jimmy-)[0-9]+\\Q] f2 [particle = \\E(?:Dummy|Ina|Jimmy-)[0-9]+\\Q], ;\\E$"
+        },
+        {
+            "rule": "COMMA_PERIOD",
+            "sentence": "^\\Q[medium, vertical=a to b] i1 [particle = \\E(?:Dummy|Ina|Jimmy-)[0-9]+\\Q] – [fermion, momentum' = \\E(?:Dummy|Ina|Jimmy-)[0-9]+\\Q] a – [fermion, momentum' = \\E(?:Dummy|Ina|Jimmy-)[0-9]+\\Q] i2 [particle=\\E(?:Dummy|Ina|Jimmy-)[0-9]+\\Q], a – [boson, edge label' = \\E(?:Dummy|Ina|Jimmy-)[0-9]+\\Q, momentum = \\E(?:Dummy|Ina|Jimmy-)[0-9]+\\Q] b, f1 [particle = \\E(?:Dummy|Ina|Jimmy-)[0-9]+\\Q] – [anti fermion, momentum' = \\E(?:Dummy|Ina|Jimmy-)[0-9]+\\Q] b – [anti fermion, momentum' = \\E(?:Dummy|Ina|Jimmy-)[0-9]+\\Q] f2 [particle = \\E(?:Dummy|Ina|Jimmy-)[0-9]+\\Q], ;\\E$"
+        },
+        {
+            "rule": "UPPERCASE_SENTENCE_START",
+            "sentence": "^\\Qfig:standard_model_overview shows the standard representation of The Standard Model.\\E$"
+        },
+        {
+            "rule": "WORD_CONTAINS_UNDERSCORE",
+            "sentence": "^\\Qfig:standard_model_overview shows the standard representation of The Standard Model.\\E$"
+        },
+        {
+            "rule": "WORD_CONTAINS_UNDERSCORE",
+            "sentence": "^\\QThe standard model describes these fundamental interactions of the universe, embodied in Feynman diagrams such as fig:feynman_e_tau, also useful for neutrino physics.\\E$"
+        },
+        {
+            "rule": "WORD_CONTAINS_UNDERSCORE",
+            "sentence": "^\\QImage from spiering_towards_2012.\\E$"
+        },
+        {
+            "rule": "WORD_CONTAINS_UNDERSCORE",
+            "sentence": "^\\QImage from argonne_national_laboratory_first_1970.\\E$"
+        },
+        {
+            "rule": "WORD_CONTAINS_UNDERSCORE",
+            "sentence": "^\\QImage from argonne_national_laboratory_neutrino_2012.\\E$"
         }
     ]
 }

@@ -1,0 +1,2 @@
+# Use this to ignore linter errors of a specific error code.
+CmdLine { -n 21 }
