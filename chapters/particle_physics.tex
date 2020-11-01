@@ -14,33 +14,68 @@ This chapter will seek to outline the physics behind the interactions that are c
 
 First, we shortly need to touch on what The Standard Model of particle physics is.
 
-\begin{figure}[ht]
-    \centering
-    \includegraphics[width=\textwidth]{./images/particle_physics/Standard_Model_of_Elementary_Particles.pdf}
-    \caption{The fermions and bosons of The Standard Model of particle physics. Image from~\autocite{missmj_standard_2019}}\label{fig:standard_model_overview}
+\begin{figure}
+     \centering
+     \begin{subfigure}[b]{0.49\textwidth}
+         \centering
+         \includegraphics[width=\textwidth]{./images/particle_physics/Standard_Model_of_Elementary_Particles.pdf}
+         \caption{The fermions and bosons of The Standard Model of particle physics. Image from (ref)}\label{fig:standard_model_overview}
+     \end{subfigure}
+     \hfill
+     \begin{subfigure}[b]{0.49\textwidth}
+         \centering
+         \includegraphics[width=\textwidth]{./images/particle_physics/Elementary_particle_interactions_in_the_Standard_Model.png}
+         \caption{The possible interactions in the SM between fermions and bosons. Image from (ref)}\label{fig:standard_model_interactions}
+     \end{subfigure}
+        \caption{Three simple graphs}
+        \label{fig:standard_model}
 \end{figure}
 
 \section{The Standard Model}\label{sec:the_standard_model}
 
 The Standard Model (SM) of particle physics is the foundation of modern particle physics research.
-It was patched together during the 20th century by an extreme amount of scientific collaboration and country-level spending.
+It was patched together during the 20th century by a significant amount of scientific collaboration, and validated through country-level spending.
 
 The theory itself is a gauge quantum field theory, the mathematics of which is not particularly relevant to this thesis.
-However, the theory describes some fundamental interactions, of which the so-called weak one is of importance to the neutrino.
+It describes three out of the four known fundamental interactions, of which the so-called weak one, as we shall see, is of importance to the neutrino.
 
-It is possible, and indeed probably quite pedagogical, to discuss the SM through the Dirac equation:
+The SM describes two types of particles: fermions and bosons.
+The distinguishing feature between the two sets is the statistics they obey; whereas the fermions follow Fermi-Dirac statistics---as a consequence of their half-integer spin---the bosons adhere to Bose-Einstein statistics.
+Matter in the universe consists of fermions, while the fundamental force mediation is carried out by the bosons.
+
+But what is the Standard Model trying to describe?
+Well, every macroscopic event in our lives (and, indeed, the universe) consists of interactions: the tweeting of a bird, the drizzle falling on cold autumn day, even the keyboard clacking sounds of a graduate student furiously typing up his thesis; all interactions.
+But these are macroscopic, made from relations at a lower level still.
+The bird, spurred on by the invisible and unending power of evolution, forces air through membranes to produce flattering sounds that attract mates.
+Thermodynamics and gravity create conditions in which small water drops fall towards the ground, and the graduate student is compelled by coffee and his supervisor to produce some result or other.
+But this still only explains the phenomenon on a macroscopic level.
+It is possible to keep peeling away abstraction layers, and hopefully arrive at some lowest level that can describe the fundamental forces that conspire to create the universe and life as we know it.
+This is the job of the Standard Model, the most succesful mathematical formulation of fundamentality we have.
+
+The progression from Galilei to Higgs is a remarkable journey.
+It never ceases to amaze the author that Dirac hit upon his equation (\vref{eq:dirac_equation_1}) and discovered that the structure was that of Clifford algebra, discovered 50 years before as a purely mathematical concept.
+The use of group theory, seemingly far removed from everyday life, permeates the Standard Model, and in fact the applicability of abstract mathematics in particle physics is a bewildering thing, contemplated by Wigner~\autocite{Wigner1960}.
+Of course this thesis is not concerned with this philosophical aspect of physics, but the preceding sentences serve as an introduction to the Dirac equation, which will be used as a mathematical introduction to the concepts that need explaining in this chapter.
+
+The Dirac equation reads as
 \begin{equation}\label{eq:dirac_equation_1}
     \left( \iu \gamma^{\mu} \partial_{\mu} - m \right) \psi = 0,
 \end{equation}
-with \( \mu \in \left\{ 0, 1, 2, 3 \right\} \) and where \( \gamma \) represents the gamma matrices \( \left\{ \gamma^{0}, \gamma^{1}, \gamma^{2}, \gamma^{3} \right\}  \) and \( \partial \) is the partial differential operator.
-This equation governs the fields corresponding to spin-\sfrac{1}{2} particles, of which neutrinos are an example, and the gamma matrices are defined by their anti-commutation relation
+with \( \mu \in \left\{ 0, 1, 2, 3 \right\} \) and where \( \gamma^{\mu} \) represents the gamma matrices and \( \partial \) is the partial differential operator.
+The gamma matrices are defined by their anti-commutation relation
 \begin{equation}\label{eg:gamma_matrices_relation}
     \left\{ \gamma^{\mu}, \gamma^{\nu} \right\} = \gamma^{\mu} \gamma^{\nu} + \gamma^{\nu} \gamma^{\mu} = 2 \eta^{\mu \nu} I_{4},
 \end{equation}
 where \( \eta \) is the Minkowski metric with signature \( \left( + - - -  \right) \) and \( I_{4} \) is the 4 dimensional identity matrix.
+\Vref{eg:gamma_matrices_relation} generates the previously mentioned Clifford algebra, and is on its own enough to define the system.
 
-\Vref{eq:dirac_equation_1} came about out of needing to reconcile special relativity and quantum mechanics.
-In short, the wave equation needed to be Lorentz invariant.
+\Vref{eq:dirac_equation_1} came about out of needing to reconcile special relativity and quantum mechanics;
+in short, the wave equation needed to be Lorentz invariant and conform to Einstein's energy-momentum relation, \( E^2 = \left( p c \right)^2 + \left( m c^2 \right)^2 \).
+
+\todo[inline]{Maybe expound a bit on Dirac's journey and a little more on the equation}
+
+\todo[inline]{Todo: Fermi's golden rule and invariant matrix element}
+
 The Dirac equation leads to the form of the matrix elements in the different possible interactions, for example the electromagnetic scattering of an electron and tau (seen in~\vref{fig:feynman_e_tau}),
 \begin{equation}\label{eq:qed_interaction}
     \mathcal{M} = - e^{2} \left[ \bar{u}_{e}(p_{3}) \gamma^{\mu} u_{e}(p_{1}) \right] \frac{g_{\mu \nu}}{q^2} \left[ \bar{u}_{\tau}(p_{4}) \gamma^{\nu} u_{\tau}(p_{2}) \right],
@@ -53,27 +88,56 @@ where \( u_{\ell}, \ell \in \left\{ e, \tau \right\} \) represents the spinor of
     \caption{Feynman diagram showing the \( t \)-channel
         scattering of an electron and a tau.}\label{fig:feynman_e_tau}
 \end{figure}
-In this case, an electron and a tau lepton scatter by exchanging a photon, with momentum \( q \), which changes the momentum of both the electron and the tau.
-The standard model describes these fundamental interactions of the universe, embodied in Feynman diagrams such as~\vref{fig:feynman_e_tau}, also useful for neutrino physics.
+In this case, an electron and a tau lepton scatter by exchanging a photon, with momentum \( q = p_{1} - p_{3}x$ \), which changes the momentum of both the electron and the tau.
+The Standard Model describes these fundamental interactions of the universe, embodied in Feynman diagrams such as~\vref{fig:feynman_e_tau}.
 \Vref{eq:qed_interaction} shows the prominence of the gamma matrices in the fundamental interactions, which is of some importance in the weak interaction, to be discussed in~\vref{sec:the_weak_interaction}.
 
-\begin{figure}[ht]
-    \centering
-    \includegraphics[width=\textwidth]{./images/particle_physics/Elementary_particle_interactions_in_the_Standard_Model.png}
-    \caption{The possible interactions in the SM between fermions and bosons. Image from~\autocite{drexler_elementary_2014}}\label{fig:standard_model_interactions}
-\end{figure}
-
 \Vref{fig:standard_model_overview} shows the standard representation of The Standard Model.
-Charged fermions may participate in the electromagnetic interactions via the photon, while all fermions participate in the weak interaction, and only quarks feel the strong interaction.
+
+\todo[inline]{A little more about Feynman diagrams}
+
+\todo[inline]{The different forces and associated Feynman diagrams}
 
 \section{The weak interaction}\label{sec:the_weak_interaction}
 
 \section{Neutrino interactions}\label{sec:neutrino_interactions}
 
+\begin{figure}
+     \centering
+     \begin{subfigure}[b]{0.3\textwidth}
+         \centering
+         \input{./images/particle_physics/feynman_nc.tex}
+         \caption{Neutral current}
+         \label{fig:feynman_nc}
+     \end{subfigure}
+     \hfill
+     \begin{subfigure}[b]{0.3\textwidth}
+         \centering
+         \input{./images/particle_physics/feynman_cc_wp.tex}
+         \caption{Charged current}
+         \label{fig:feynman_cc_wp}
+     \end{subfigure}
+     \hfill
+     \begin{subfigure}[b]{0.3\textwidth}
+         \centering
+         \input{./images/particle_physics/feynman_cc_wm.tex}
+         \caption{Inverse beta decay}
+         \label{fig:feynman_cc_wm}
+     \end{subfigure}
+        \caption{Feynman diagrams of neutral- and charged current processes}
+        \label{fig:charged_neutral_current}
+\end{figure}
+
 \begin{figure}[ht]
     \centering
     \includegraphics[width=\textwidth]{./images/particle_physics/Figs_all-nu-spectrum-mod.png}
     \caption{Neutrino spectrum. Image from~\autocite{spiering_towards_2012}.}\label{fig:neutrino_spectrum}
+\end{figure}
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=\textwidth]{./images/particle_physics/DGV3K.png}
+    \caption{Stopping power}\label{fig:stopping_power}
 \end{figure}
 
 \begin{figure}[ht]

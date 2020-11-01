@@ -1,0 +1,15 @@
+\documentclass{article}
+
+\begin{document}
+
+\feynmandiagram [vertical=a to b] {
+i1 [particle = \( \nu_{\textup{e}} \)]
+-- [fermion] a -- [fermion]
+i2 [particle=\( \nu_{\textup{e}} \)],
+a -- [boson, edge label' = \( \textup{Z}^{0} \)] b,
+f1 [particle = \( \textup{e}^{-} \)]
+-- [anti fermion] b -- [anti fermion]
+f2 [particle = \( \textup{e}^{-} \)],
+};
+
+\end{document}

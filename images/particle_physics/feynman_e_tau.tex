@@ -2,14 +2,14 @@
 
 \begin{document}
 
-\feynmandiagram[medium, vertical=a to b] {
-i1 [particle = \( \textup{e}^{-} \)]
--- [fermion, momentum' = \( p_{1} \)] a -- [fermion, momentum' = \( p_{3} \)]
-i2 [particle=\( \textup{e}^{-} \)],
-a -- [boson, edge label' = \( \textup{\gamma} \), momentum = \( q \)] b,
-f1 [particle = \( \textup{\tau}^{-} \)]
--- [anti fermion, momentum' = \( p_{2} \)] b -- [anti fermion, momentum' = \( p_{4} \)]
-f2 [particle = \(\textup{\tau}^{-} \)],
+\feynmandiagram[
+    xscale= 1.4,
+    horizontal=e1 to e4,
+    horizontal=e2 to e3,
+  ] {
+    e2 [particle = \( \textup{e}^{-} \)] -- [fermion, momentum'=\( p_{2} \)] v1 [dot] -- [fermion, momentum'=\( p_{3} \)] e3 [particle = \( \textup{e}^{-} \)],
+    e1 [particle = \( \textup{\tau}^{-} \)] -- [fermion, momentum=\( p_{1} \)]  v2 [dot] -- [fermion, momentum=\( p_{4} \)] e4 [particle = \( \textup{\tau}^{-} \)],
+    v1 -- [boson, edge label'=\( \gamma \), momentum=\( q \)] v2,
 };
 
 \end{document}

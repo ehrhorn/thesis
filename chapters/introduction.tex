@@ -3,26 +3,26 @@
 \begin{document}
 
 Deep beneath the Amundsen-Scott station on the geographic South Pole, lurks a telescope in the ice.
-This observatory hunts for some of the most elusive particles in our universe, hoping they may answer foundational questions about nature, and glean insight into new physics that the Genevan collider\,---\,or its potential successors\,---\,may never be able to.
+This observatory hunts for some of the most elusive particles in our universe, hoping they may answer foundational questions about nature, and glean insight into new physics that the Genevan collider---or its potential successors---may never be able to.
 
 The IceCube Neutrino Observatory was built between 2005 and 2010, but its heritage stretches back several decades.
-Spanning one cubic kilometer of Antarctic ice, the telescope consists of some 60 strings, hot water drilled into the ice, with each string containing a number of photomultiplier tubes, capable of detecting photons originating from processes involving neutrinos\,---\,the aforementioned elusive particles.
+Spanning one cubic kilometer of Antarctic ice, the telescope consists of some 60 strings, hot water drilled into the ice, with each string containing a number of photomultiplier tubes, capable of detecting photons originating from processes involving neutrinos---the aforementioned elusive particles.
 
-Measurements of certain neutrino properties may help us understand phenomena such as why the universe is matter-dominated~\autocite{nunokawa_cp_2008} and dark matter~\autocite{baur_dark_2019}.
-IceCube is also capable of searching for point-like sources~\autocite{icecube_collaboration_time-integrated_2020}, and serves in the SuperNova Early Warning System~\autocite{kopke_supernova_2011}.
+Measurements of certain neutrino properties may help us understand phenomena such as why the universe is matter-dominated~\autocite{Nunokawa2008} and dark matter~\autocite{Baur2019}.
+IceCube is also capable of searching for point-like sources~\autocite{Aartsen2020}, and serves in the SuperNova Early Warning System~\autocite{Kopke2011}.
 
 But one thing is the ability to observe derived photons in Antarctic ice; another is reconstruction of this light in order to infer properties of the originating particles.
-To date, classical methods, such as PegLeg~\autocite{leuermann_testing_2018} and Retro Reco\footnote{\url{https://github.com/IceCubeOpenSource/retro}} have mostly been used for this purpose, but the burgeoning proliferation of the use of machine learning (ML) for scientific discovery~\autocite{raghu_survey_2020} inspires the development of new methods for this cause.
+To date, classical methods, such as PegLeg~\autocite{Leuermann2018} and Retro Reco\footnote{\url{https://github.com/IceCubeOpenSource/retro}} have mostly been used for this purpose, but the burgeoning proliferation of the use of machine learning (ML) for scientific discovery~\autocite{Raghu2020} inspires the development of new methods for this cause.
 
 Whereas classical methods require a hypothesis and thus preset logic, ML \enquote{changes these [problems] from logic problems to statistical problems}\footnote{\url{https://www.ben-evans.com/benedictevans/2019/9/6/face-recognition}}.
-That is to say, given a large enough\,---\,or rather, a representative enough\,---\,dataset, an ML algorithm may find statistical similarities in disparate neutrino events sharing similar underlying properties, giving the network an ability to predict these same properties for previously unseen data.
+That is to say, given a large enough---or rather, a representative enough---dataset, an ML algorithm may find statistical similarities in disparate neutrino events sharing similar underlying properties, giving the network an ability to predict these same properties for previously unseen data.
 As a \enquote{machine learning model is almost like a pure function at inference time}\footnote{Brennan Saeta, Software Engineer - TensorFlow, \url{https://www.swiftbysundell.com/podcast/58/}}, owing to the universal approximation theorems, it should be possible to construct an ML reconstruction algorithm that is both faster, preciser, more extensible, captures a wider spectrum and is more future-proof than the current methods.
 
 The intention of this thesis is to explore that proposition, specifically for up-going muon neutrinos in the sub-teraelectronvolt range.
 
 This problem is selected as it is the focus of the oscillations group at IceCube, studying neutrino oscillations.
 The current best reconstruction algorithm for this case, Retro Reco, can take minutes to reconstruct a neutrino, while an ML-based approach can be expected to reconstruct several thousand each second.
-An additional focus will be the IceCube upgrade~\autocite{ishihara_icecube_2019}, which will install additional improved detectors, and for which there is no current functioning reconstruction algorithm.
+An additional focus will be the IceCube upgrade~\autocite{Ishihara2019}, which will install additional improved detectors, and for which there is no current functioning reconstruction algorithm.
 
 \section{Flow}
 
@@ -37,7 +37,7 @@ With the IceCube upgrade this changes (\vref{sec:icecube_upgrade}), and new opti
 The detector is set up with certain triggers in differing levels (\vref{sec:triggers}), to ensure that not just any light is recorded and saved to disk.
 Even further processing is done, as the bandwidth from pole to America is quite low, and so care must be taken in the choice of what to actually send down the wires for analysis.
 When the data arrives for analysis, different level of cleaning takes place to root out noise (\vref{sec:levels}).
-This pipeline also attempts to classify event types, using decision trees, until finally algorithms\,---\,none of them machine learning based\,---\,reconstruct neutrino properties of interest such as energy and direction (\vref{sec:current_reconstruction_methods}), and the events at all levels of cleaning are saved in an IceCube proprietary format, called I3 (\vref{sec:i3_file_format}).
+This pipeline also attempts to classify event types, using decision trees, until finally algorithms---none of them machine learning based---reconstruct neutrino properties of interest such as energy and direction (\vref{sec:current_reconstruction_methods}), and the events at all levels of cleaning are saved in an IceCube proprietary format, called I3 (\vref{sec:i3_file_format}).
 
 With this part done, we turn towards machine learning generalities.
 First the basics of machine learning in general (\vref{sec:ml_basics}), then deep learning in particular (\vref{sec:deep_learning}).
