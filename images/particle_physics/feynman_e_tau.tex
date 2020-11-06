@@ -1,4 +1,9 @@
-\documentclass{article}
+\documentclass[tikz]{standalone}
+
+\usepackage{tikz-feynman}
+\makeatletter
+\tikzfeynmanset{compat=\tikzfeynman@version@major.\tikzfeynman@version@minor.\tikzfeynman@version@patch}
+\makeatother
 
 \begin{document}
 
@@ -7,8 +12,8 @@
     horizontal=e1 to e4,
     horizontal=e2 to e3,
   ] {
-    e2 [particle = \( \textup{e}^{-} \)] -- [fermion, momentum'=\( p_{2} \)] v1 [dot] -- [fermion, momentum'=\( p_{3} \)] e3 [particle = \( \textup{e}^{-} \)],
-    e1 [particle = \( \textup{\tau}^{-} \)] -- [fermion, momentum=\( p_{1} \)]  v2 [dot] -- [fermion, momentum=\( p_{4} \)] e4 [particle = \( \textup{\tau}^{-} \)],
+    e2 [particle = \( \textup{e}^{-} \)] -- [fermion, momentum'=\( p_{1} \)] v1 [dot, label = above:\( \scriptstyle{a \rightarrow c} \)] -- [fermion, momentum'=\( p_{3} \)] e3 [particle = \( \textup{e}^{-} \)],
+    e1 [particle = \( \textup{e}^{-} \)] -- [fermion, momentum=\( p_{2} \)]  v2 [dot, label = below:\( \scriptstyle{b \rightarrow d} \)] -- [fermion, momentum=\( p_{4} \)] e4 [particle = \( \textup{e}^{-} \)],
     v1 -- [boson, edge label'=\( \gamma \), momentum=\( q \)] v2,
 };
 

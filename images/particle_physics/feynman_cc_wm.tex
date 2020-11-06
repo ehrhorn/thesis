@@ -1,15 +1,20 @@
-\documentclass{article}
+\documentclass[tikz]{standalone}
+
+\usepackage{tikz-feynman}
+\makeatletter
+\tikzfeynmanset{compat=\tikzfeynman@version@major.\tikzfeynman@version@minor.\tikzfeynman@version@patch}
+\makeatother
 
 \begin{document}
 
-\feynmandiagram [vertical=a to b] {
-i1 [particle = \( \bar{\nu}_{\textup{e}} \)]
--- [fermion] a -- [fermion]
-i2 [particle=\( \textup{e}^{+} \)],
-a -- [boson, edge label' = \( \textup{W}^{-} \)] b,
-f1 [particle = \( \textup{n} \)]
--- [anti fermion] b -- [anti fermion]
-f2 [particle = \(\textup{p} \)],
+\feynmandiagram[
+    xscale= 1.0,
+    horizontal=e1 to e4,
+    horizontal=e2 to e3,
+  ] {
+    e2 [particle = \( \bar{\nu}_{\textup{e}} \)] -- [fermion] v1 [dot] -- [fermion] e3 [particle = \( \textup{e}^{+} \)],
+    e1 [particle = \( \textup{p} \)] -- [fermion]  v2 [dot] -- [fermion] e4 [particle = \( \textup{n} \)],
+    v1 -- [boson, edge label = \( \textup{W}^{-} \)] v2,
 };
 
 \end{document}

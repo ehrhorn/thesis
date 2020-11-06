@@ -5,10 +5,10 @@
 Neutrinos are some of the universe's most interesting and mysterious particles, and offer one of the better paths to researching some still unsolved problems in physics.
 The Large Hadron Collider nailed down the final missing piece of the model, the Higgs boson, but questions still remain; and some of them concern neutrinos.
 
-The masses of the neutrinos themselves is a mystery, but sterile neutrinos may also be a dark matter candidate and the possible CP-violating phase in the PMNS matrix may help explain baryon asymmetry.
+The masses of the neutrinos themselves is a mystery, while sterile neutrinos is a dark matter candidate and the possible CP-violating phase in the PMNS matrix can help explain baryon asymmetry.
 Needless to say, the more we discover about this little particle, the better we know the universe.
 
-The concept of neutrino oscillations has the ability to constrain the previously mentioned CP-violating phase of the neutrino mixing matrix~\autocite{the_t2k_collaboration_constraint_2020} and so the better we are able to measure this, the better the constraint will be.
+The concept of neutrino oscillations has the ability to constrain the previously mentioned CP-violating phase of the neutrino mixing matrix~\autocite{Abe2019} and so the better we are able to measure this, the better the constraint will be.
 
 This chapter will seek to outline the physics behind the interactions that are captured in the IceCube detector, including the concept of Cherenkov radiation, which is of critical importance to the process.
 
@@ -34,71 +34,164 @@ First, we shortly need to touch on what The Standard Model of particle physics i
 \section{The Standard Model}\label{sec:the_standard_model}
 
 The Standard Model (SM) of particle physics is the foundation of modern particle physics research.
-It was patched together during the 20th century by a significant amount of scientific collaboration, and validated through country-level spending.
+It was patched together during the 20th century by scientific collaboration, and tested through inter-country spending on giant particle accelerators.
 
-The theory itself is a gauge quantum field theory, the mathematics of which is not particularly relevant to this thesis.
-It describes three out of the four known fundamental interactions, of which the so-called weak one, as we shall see, is of importance to the neutrino.
+The theory itself is a gauge quantum field theory, the mathematics of which is not particularly relevant to this thesis, and it describes three out of the four known fundamental interactions.
+Of these, the so-called weak one is of importance to the neutrino, while being a critical clue to why some particles acquire mass.
 
-The SM describes two types of particles: fermions and bosons.
+The SM describes two types of particles: fermions and bosons, as seen in~\vref{fig:standard_model_overview}.
 The distinguishing feature between the two sets is the statistics they obey; whereas the fermions follow Fermi-Dirac statistics---as a consequence of their half-integer spin---the bosons adhere to Bose-Einstein statistics.
-Matter in the universe consists of fermions, while the fundamental force mediation is carried out by the bosons.
+Matter in the universe consists of fermions, while the fundamental forces are mediated by the bosons.
 
-But what is the Standard Model trying to describe?
-Well, every macroscopic event in our lives (and, indeed, the universe) consists of interactions: the tweeting of a bird, the drizzle falling on cold autumn day, even the keyboard clacking sounds of a graduate student furiously typing up his thesis; all interactions.
-But these are macroscopic, made from relations at a lower level still.
-The bird, spurred on by the invisible and unending power of evolution, forces air through membranes to produce flattering sounds that attract mates.
-Thermodynamics and gravity create conditions in which small water drops fall towards the ground, and the graduate student is compelled by coffee and his supervisor to produce some result or other.
-But this still only explains the phenomenon on a macroscopic level.
-It is possible to keep peeling away abstraction layers, and hopefully arrive at some lowest level that can describe the fundamental forces that conspire to create the universe and life as we know it.
-This is the job of the Standard Model, the most succesful mathematical formulation of fundamentality we have.
+The fermions are divided between the quarks and the leptons, differentiated by their participation in the strong interaction, carried by the massless gluon.
+This boson only acts on quarks, and has the peculiar behaviour of creating new particles when quarks are pulled apart, resulting in the fact that it is only possible to observe hadrons (a composite particle made up of two or more quarks); this phenomenon, \enquote{color confinement}, is the progenitor of jets in collider experiments such as the LHC.
 
-The progression from Galilei to Higgs is a remarkable journey.
-It never ceases to amaze the author that Dirac hit upon his equation (\vref{eq:dirac_equation_1}) and discovered that the structure was that of Clifford algebra, discovered 50 years before as a purely mathematical concept.
-The use of group theory, seemingly far removed from everyday life, permeates the Standard Model, and in fact the applicability of abstract mathematics in particle physics is a bewildering thing, contemplated by Wigner~\autocite{Wigner1960}.
-Of course this thesis is not concerned with this philosophical aspect of physics, but the preceding sentences serve as an introduction to the Dirac equation, which will be used as a mathematical introduction to the concepts that need explaining in this chapter.
+Both the charged leptons and the quarks interact electromagnetically and weakly, forces mediated by the photon and the \( \textup{W}^{\pm} \) \& \( \textup{Z}^{0} \) bosons respectively, but the leptons include a second sub-species that only interacts weakly: the neutral leptons, known as the neutrinos; 	see~\vref{fig:standard_model_interactions}.
+Because they do not participate in anything but the weak force, neutrinos hardly ever interact, and are thus difficult (but not impossible!) to observe.
+An \si{\mega\electronvolt} neutrino has a cross section on the order of \SI{1e-44}{\centi\meter\squared}, and a beam of such particles must travel through a light year of lead before half of them is blocked.
 
-The Dirac equation reads as
-\begin{equation}\label{eq:dirac_equation_1}
+
+The experimental particle physicist uses Feynman diagrams to describe potential interactions between particles,
+depending on Fermi's golden rule, the Lorentz-invariant matrix element and for fermions the Dirac equation.
+
+%But what is the Standard Model trying to describe?
+%Well, every macroscopic event in our lives (and, indeed, the universe) consists of interactions: the tweeting of a bird, the drizzle falling on cold autumn day, even the keyboard clacking sounds of a graduate student furiously typing up his thesis; all interactions.
+%But these are macroscopic, made from relations at a lower level still.
+%The bird, spurred on by the invisible and unending power of evolution, forces air through membranes to produce flattering sounds that attract mates.
+%Thermodynamics and gravity create conditions in which small water drops fall towards the ground, and the graduate student is compelled by coffee and his supervisor to produce some result or other.
+%But this still only explains the phenomenon on a macroscopic level.
+%It is possible to keep peeling away abstraction layers, and hopefully arrive at some lowest level that can describe the fundamental forces that conspire to create the universe and life as we know it.
+%This is the job of the Standard Model, the most succesful mathematical formulation of fundamentality we have.
+%
+%The progression from Galilei to Higgs is a remarkable journey.
+%It never ceases to amaze the author that Dirac hit upon his equation (\vref{eq:dirac_equation_1}) and discovered that the structure was that of Clifford algebra, discovered 50 years before as a purely mathematical concept.
+%The use of group theory, seemingly far removed from everyday life, permeates the Standard Model, and in fact the applicability of abstract mathematics in particle physics is a bewildering thing, contemplated by Wigner~\autocite{Wigner1960}.
+%Of course this thesis is not concerned with this philosophical aspect of physics, but the preceding sentences serve as an introduction to the Dirac equation, which will be used as a mathematical introduction to the concepts that need explaining in this chapter.
+
+Paul Dirac and others before him searched for an extension of the Schr\"{o}dinger equation, which incorporated relativity.
+%Because relativity treats space and time on the same footing, both need to appear on equal footing in any governing equation, which is not the case for the famous position space, time-dependent, Schr\"{o}dinger equation,
+%\begin{equation}\label{eq:schrodinger}
+%	\iu \diffp*{\psi(\bm{r}, t)}{t} = \left[ - \frac{1}{2 m} \nabla^2 + V(\bm{r}, t) \right ] \psi(\bm{r}, t).
+%\end{equation}
+%This is first order in time, second order in space.
+%
+%The Klein-Gordon equation, rewriting the Einstein energy-momentum relation as an operator equation,
+%\begin{equation}\label{eq:klein_gordon}
+%	E^2 = \bm{p}^2 + m^2 \Rightarrow \hat{E}^2 \psi = \left( \hat{\bm{p}}^2 + m^2 \right) \psi \iff \left( \diffp*[2]{}{t} - \nabla^2 + m^2 \right) \psi = 0,
+%\end{equation}
+%fixes this problem, but instead causes issues leading to nonsense negative probability densities.
+%Now, physics has swallowed many unintuitive consequences of equations (bending of space-time, \enquote{spooky action at a distance} to name a few), but negative probability is not something we are quite ready to accept.
+%Thus Dirac attempted a fix, trying to bring both space and time to first order,
+%\begin{equation}\label{eq:dirac_equation_1}
+%	\hat{E} \psi = \left( \bm{\alpha} \cdot \hat{\bm{p}} + \beta m \right) \psi,
+%\end{equation}
+%where
+%\begin{equation}
+%	\bm{\alpha} \cdot \hat{\bm{p}} = \begin{bmatrix} \alpha_{x} & \alpha_{y} & \alpha_{z} \end{bmatrix} \begin{bmatrix} \hat{p}_{x} \\ \hat{p}_{y} \\ \hat{p}_{z} \end{bmatrix}
+%\end{equation}
+%This seemingly simple equation actually leads to some rather surprising results, in no small part owing to the objects \( \bm{\alpha} \) and \( \beta \).
+%Constraints on these objects can be placed---because \vref{eq:dirac_equation_1} must satisfy \vref{eq:klein_gordon}, if it is to respect relativity---only allowing them to represent \( 4 \times 4 \) matrices and \( \psi \) thus a four-component wave function.
+%
+%\todo[inline]{Talk about the consequences of four component wave function, e.g. anti-particles}
+%
+%\todo[inline]{Talk about spinors}
+%
+%\Vref{eq:dirac_equation_1} can be rewritten as
+%
+Requiring adherence to the Einstein energy-momentum relation, Dirac found the matrix equation
+\begin{equation}\label{eq:dirac_equation_2}
     \left( \iu \gamma^{\mu} \partial_{\mu} - m \right) \psi = 0,
 \end{equation}
-with \( \mu \in \left\{ 0, 1, 2, 3 \right\} \) and where \( \gamma^{\mu} \) represents the gamma matrices and \( \partial \) is the partial differential operator.
-The gamma matrices are defined by their anti-commutation relation
-\begin{equation}\label{eg:gamma_matrices_relation}
-    \left\{ \gamma^{\mu}, \gamma^{\nu} \right\} = \gamma^{\mu} \gamma^{\nu} + \gamma^{\nu} \gamma^{\mu} = 2 \eta^{\mu \nu} I_{4},
+which requires a four-component wave function (not incidentally explaining spin and anti-particles).
+This is the governing equation of all fermions
+%with \( \mu \in \left\{ 0, 1, 2, 3 \right\} \) and where \( \gamma^{\mu} \) represents the gamma matrices\footnote{\( \gamma^0 \equiv \beta, \quad \gamma^1 \equiv \beta \alpha_{x}, \quad \gamma^2 \equiv \beta \alpha_{y}, \quad \gamma^3 \equiv \beta \alpha_{z},  \)} and \( \partial \) is the partial differential operator.
+%The gamma matrices are defined by their anti-commutation relation
+%\begin{equation}\label{eg:gamma_matrices_relation}
+%    \left\{ \gamma^{\mu}, \gamma^{\nu} \right\} = \gamma^{\mu} \gamma^{\nu} + \gamma^{\nu} \gamma^{\mu} = 2 \eta^{\mu \nu} I_{4},
+%\end{equation}
+%where \( \eta \) is the Minkowski metric with signature \( \left( + - - -  \right) \) and \( I_{4} \) is the 4 dimensional identity matrix.
+%\Vref{eg:gamma_matrices_relation} generates the so-called Clifford algebra, and is on its own enough to define the system.
+
+%\Vref{eq:dirac_equation_1} came about out of needing to reconcile special relativity and quantum mechanics;
+%in short, the wave equation needed to be Lorentz invariant and conform to Einstein's energy-momentum relation, \( E^2 = \left( p c \right)^2 + \left( m c^2 \right)^2 \).
+
+Experiments generally proceeds by calculating expected particle rates, and using either accelerators or passive detectors to compare reality to theory using Fermi's golden rule,
+\begin{equation}\label{eq:fermi_golden_rule}
+	\Gamma_{\text{f} \text{i}} = 2 \pi \left| T_{\text{f} \text{i}} \right|^2 \rho(E_{\text{i}}),
 \end{equation}
-where \( \eta \) is the Minkowski metric with signature \( \left( + - - -  \right) \) and \( I_{4} \) is the 4 dimensional identity matrix.
-\Vref{eg:gamma_matrices_relation} generates the previously mentioned Clifford algebra, and is on its own enough to define the system.
-
-\Vref{eq:dirac_equation_1} came about out of needing to reconcile special relativity and quantum mechanics;
-in short, the wave equation needed to be Lorentz invariant and conform to Einstein's energy-momentum relation, \( E^2 = \left( p c \right)^2 + \left( m c^2 \right)^2 \).
-
-\todo[inline]{Maybe expound a bit on Dirac's journey and a little more on the equation}
-
-\todo[inline]{Todo: Fermi's golden rule and invariant matrix element}
-
-The Dirac equation leads to the form of the matrix elements in the different possible interactions, for example the electromagnetic scattering of an electron and tau (seen in~\vref{fig:feynman_e_tau}),
-\begin{equation}\label{eq:qed_interaction}
-    \mathcal{M} = - e^{2} \left[ \bar{u}_{e}(p_{3}) \gamma^{\mu} u_{e}(p_{1}) \right] \frac{g_{\mu \nu}}{q^2} \left[ \bar{u}_{\tau}(p_{4}) \gamma^{\nu} u_{\tau}(p_{2}) \right],
+describing transition rates from an initial state \( \Ket{i} \) to a final state \( \Ket{f} \).
+The equation depends on the transition matrix \( T_{\text{f} \text{i}} \) from the expansion of the interaction with the perturbation Hamiltonian, \( \rho \) is the energy-dependent density of states.
+\Vref{eq:fermi_golden_rule} can be used to calculate the differential cross section
+\begin{equation}\label{eq:differential_cross_section}
+	\diff{\sigma}{\Omega^{*}} = \frac{1}{64 \pi^2 s} \frac{\mathrm{p}_{\text{f}}^{*}}{\mathrm{p}_{\text{i}}^{*}} \left| \mathcal{M}_{\text{f} \text{i}} \right|^{2},
 \end{equation}
-where \( u_{\ell}, \ell \in \left\{ e, \tau \right\} \) represents the spinor of a particle, \( \bar{u}_{\ell}, \ell \in \left\{ e, \tau \right\} \) the anti-spinor and the momenta \( \left\{ q, p_{1}, p_{2}, p_{3}, p_{4} \right\} \) correspond to~\vref{fig:feynman_e_tau}.
-\tikzsetnextfilename{feynman_e_tau}
-\begin{figure}
-    \centering
-    \input{./images/particle_physics/feynman_e_tau.tex}
-    \caption{Feynman diagram showing the \( t \)-channel
-        scattering of an electron and a tau.}\label{fig:feynman_e_tau}
-\end{figure}
-In this case, an electron and a tau lepton scatter by exchanging a photon, with momentum \( q = p_{1} - p_{3}x$ \), which changes the momentum of both the electron and the tau.
-The Standard Model describes these fundamental interactions of the universe, embodied in Feynman diagrams such as~\vref{fig:feynman_e_tau}.
-\Vref{eq:qed_interaction} shows the prominence of the gamma matrices in the fundamental interactions, which is of some importance in the weak interaction, to be discussed in~\vref{sec:the_weak_interaction}.
+an expression of quantum mechanical probabilities for an interaction to happen, valid in the centre-of-mass frame (COM), indicated by \( * \).
+\( s \) is the squared  COM energy, \( \mathrm{p} \) the particle momenta, and \( \Omega \) the solid angle a particle scatters into.
 
-\Vref{fig:standard_model_overview} shows the standard representation of The Standard Model.
+The SM thus provides observables, as long as one can calculate the Lorentz invariant matrix element \( \mathcal{M} \), which in the fermion case can be done using \vref{eq:dirac_equation_2}.
+This process is much simplified by Feynman diagrams, which allows the theorist to draw processes and using Feynman rules stitch together a matrix element describing the interaction.
+Examples of Feynman diagrams can be seen in \vref{fig:charged_neutral_current}.
+%\begin{equation}\label{eg:fermi_golden_rule}
+%	\Gamma_{\text{f} \text{i}} = \frac{\mathrm{p}^{*}}{32 \pi^2 m^{2}} \int \left| \mathcal{M} \right|^2 \, \mathrm{d} \Omega,
+%\end{equation}
+%where \( \mathrm{p}^{*} \) is the centre-of-mass frame momentum of the final-state particles, \( m \) is the centre-of-mass frame mass of the decaying particle, and \( \mathcal{M} \) is the Lorenz-invariant matrix element.
+%If we know \( \mathrm{p}^{*} \) and \( m \), all we need to calculate is the Lorenz-invariant matrix element.
+%
+%In most cases, cross sections are of most interest to physicists.
+%This deals with the quantum mechanical probabilities of whether an interaction happens, and so is related to the geometric definition of cross sections, but in a probability space.
+%Consider two types of particles, \( a \) and \( b \), moving with velocities \( \bm{v}_{a} \) and \( \bm{v}_{b} \) in opposite directions.
+%The decay rate of Fermi's golden rule, \( \Gamma_{\text{f} \text{i}} \), is then related to the cross section by
+%\begin{equation}
+%	\sigma = \frac{\Gamma_{\text{f} \text{i}}}{v_{a} + v_{b}},
+%\end{equation}
+%where \( v_{i} \), \( i \in \left\{ a, b \right\} \) is the speed of particle \( i \).
+%
+%The cross section for any two-body to two-body interaction can be written as
+%\begin{equation}
+%	\sigma = \frac{1}{64 \pi^2 s} \frac{\mathrm{p}_{\text{f}}^{*}}{\mathrm{p}_{\text{i}}^{*}} \int \left| \mathcal{M}_{\text{f} \text{i}} \right|^2 \, \mathrm{d} \Omega^{*},
+%\end{equation}
+%where \( s \) is the squared centre-of-mass energy, \( \mathrm{p}_{\text{i}}^{*} \) is the initial centre-of-mass momentum, \( \mathrm{p}_{\text{f}}^{*} \) is the final centre-of-mass momentum, and the differential \( \mathrm{d} \Omega^{*} \) refers to the centre-of-mass frame as well.
+%From this we find the differential cross section,
+%\begin{equation}
+%	\diff{\sigma}{\Omega}
+%\end{equation}
 
-\todo[inline]{A little more about Feynman diagrams}
+%To actually calculate the expected cross section, all one needs is the problem-specific matrix element, \( \mathcal{M} \).
+%The mathematics are embodied in Feynman diagrams (such as~\vref{fig:feynman_e_tau}), in two-body to two-body lowest order cases composed of two vertices and a propagator.
+%The Lorenz-invariant matrix element stems from the transition matrix in Fermi's golden rule, and is composed of the interaction strength at each vertex (\( \Braket{\psi_{c} | V | \psi_{a}} \) for the vertex connecting particle \( a \) and particle \( c \), and \( \Braket{\psi_{d} | V | \psi_{b}} \) for the vertex connecting particle \( b \) and particle \( d \); here \( V \) represents a given potential) and a propagator, such that
+%\begin{equation}
+%	\mathcal{M} = \Braket{\psi_{c} | V | \psi_{a}} \frac{1}{q^2 - m_{X}^2} \Braket{\psi_{d} | V | \psi_{b}},
+%\end{equation}
+% deriving from the transition matrix of Fermi's golden rule, which is then all one needs to calculate, assuming the initial and final state particle momenta are known.
+%and the brilliancy of Feynman diagrams lies in the fact that these can be determined using a set of Feynman rules as soon as the diagram is drawn.
+%
+%The Dirac equation leads to the form of the matrix elements in the different possible interactions, for example the electromagnetic M{\o}ller scattering of two electrons (seen in~\vref{fig:feynman_e_tau}),
+%\begin{equation}\label{eq:qed_interaction}
+%    \mathcal{M} = - e^{2} \bar{u}(p_{3}) \gamma^{\mu} u(p_{1}) \frac{g_{\mu \nu}}{q^2} \bar{u}(p_{4}) \gamma^{\nu} u(p_{2}),
+%\end{equation}
+%where \( u_{\ell}, \ell \in \left\{ e, \tau \right\} \) represents the spinor of a particle, \( \bar{u}_{\ell}, \ell \in \left\{ e, \tau \right\} \) the anti-spinor and the momenta \( \left\{ q, p_{1}, p_{2}, p_{3}, p_{4} \right\} \) correspond to~\vref{fig:feynman_e_tau}.
+%
+%\begin{figure}
+%    \centering
+%    \includegraphics[width=0.5\textwidth]{./images/particle_physics/feynman_e_tau.pdf}
+%    \caption{Feynman diagram showing \( t \)-channel M{\o}ller scattering \label{fig:feynman_e_tau}}
+%\end{figure}
+%In this case, two electrons scatter by exchanging a photon, with momentum \( q = p_{1} - p_{3} \), which changes the momentum of both the electrons.
+%
+%The differential cross section can then laboriously be calculated to, in the ultrarelativistic limit, be
+%\begin{equation}
+%	\diff{\sigma}{\Omega} = \frac{\alpha^2}{s \sin^4{\theta}} \left( 3 + \cos^2{\theta} \right)^2,
+%\end{equation}
+%where \( \alpha \) is the fine-structure constant and \( \theta \) the scattering angle.
+%Thus we see that we can validate theoretical deductions by observing scattering experiments.
 
-\todo[inline]{The different forces and associated Feynman diagrams}
+%The Standard Model describes these fundamental interactions of the universe, embodied in Feynman diagrams such as~\vref{fig:feynman_e_tau}, and \vref{eq:qed_interaction} shows the prominence of the gamma matrices in the fundamental interactions, which is of some importance in the weak interaction, to be discussed in~\vref{sec:the_weak_interaction}.
+%
+%\Vref{fig:standard_model_overview} shows the standard representation of The Standard Model.
 
 \section{The weak interaction}\label{sec:the_weak_interaction}
+
+
 
 \section{Neutrino interactions}\label{sec:neutrino_interactions}
 
@@ -106,21 +199,21 @@ The Standard Model describes these fundamental interactions of the universe, emb
      \centering
      \begin{subfigure}[b]{0.3\textwidth}
          \centering
-         \input{./images/particle_physics/feynman_nc.tex}
+         \includegraphics[width=\textwidth]{./images/particle_physics/feynman_nc.pdf}
          \caption{Neutral current}
          \label{fig:feynman_nc}
      \end{subfigure}
      \hfill
      \begin{subfigure}[b]{0.3\textwidth}
          \centering
-         \input{./images/particle_physics/feynman_cc_wp.tex}
+         \includegraphics[width=\textwidth]{./images/particle_physics/feynman_cc_wp.pdf}
          \caption{Charged current}
          \label{fig:feynman_cc_wp}
      \end{subfigure}
      \hfill
      \begin{subfigure}[b]{0.3\textwidth}
          \centering
-         \input{./images/particle_physics/feynman_cc_wm.tex}
+         \includegraphics[width=\textwidth]{./images/particle_physics/feynman_cc_wm.pdf}
          \caption{Inverse beta decay}
          \label{fig:feynman_cc_wm}
      \end{subfigure}
