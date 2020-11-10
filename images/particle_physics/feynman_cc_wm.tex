@@ -9,11 +9,11 @@
 
 \feynmandiagram[
     xscale= 1.0,
-    horizontal=e1 to e4,
-    horizontal=e2 to e3,
+    vertical=e1 to e4,
+    vertical=e2 to e3,
   ] {
-    e2 [particle = \( \bar{\nu}_{\textup{e}} \)] -- [fermion] v1 [dot] -- [fermion] e3 [particle = \( \textup{e}^{+} \)],
-    e1 [particle = \( \textup{p} \)] -- [fermion]  v2 [dot] -- [fermion] e4 [particle = \( \textup{n} \)],
+    e2 [particle = \( \textup{e}^{-} \)] -- [anti fermion] v1 [dot] -- [anti fermion] e3 [particle = \( \bar{\nu}_{\textup{e}} \)],
+    e1 [particle = \( \bar{\nu}_{\textup{e}} \)] -- [anti fermion]  v2 [dot] -- [anti fermion] e4 [particle = \( \textup{e}^{-} \)],
     v1 -- [boson, edge label = \( \textup{W}^{-} \)] v2,
 };
 

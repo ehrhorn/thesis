@@ -1,0 +1,32 @@
+\documentclass[tikz]{standalone}
+
+\usepackage{tikz-feynman}
+\makeatletter
+\tikzfeynmanset{compat=\tikzfeynman@version@major.\tikzfeynman@version@minor.\tikzfeynman@version@patch}
+\makeatother
+
+\begin{document}
+
+\begin{tikzpicture}
+\begin{feynman}
+\vertex (d1) {\( \textup{d} \)}; 
+\vertex[right=5cm of d1] (d2) {\( \textup{d} \)}; 
+\vertex[below=2em of d1] (u1) {\( \textup{u} \)}; 
+\vertex[right=5cm of u1] (u2) {\( \textup{u} \)};
+\vertex[below=2em of u1] (d3) {\( \textup{d} \)}; 
+\vertex[right=5cm of d3] (u3) {\( \textup{u} \)};
+\vertex[dot, below right=1cm and 2.5cm of d3] (v1){};
+\vertex[dot, below right=1cm and 2cm of v1] (v2){};
+\vertex[above right=0.5cm and 1cm of v2] (nu) {\( \bar{\nu}_{\textup{e}} \)};
+\vertex[below right=0.5cm and 1cm of v2] (e) {\( \textup{e}^{-} \)};
+\diagram* { {[edges=fermion]
+(d1) -- (d2),  (u1) -- (u2),
+(d3) -- (v1) -- (u3), (nu) -- (v2) -- (e)},
+(v1) -- [boson, edge label=\( \textup{W}^{-} \)] (v2)
+};
+\draw [decoration={brace}, decorate] (d3.south west) -- (d1.north west) node [pos=0.5, left] {\( \textup{n} \)};
+\draw [decoration={brace}, decorate] (d2.north east) --  (u3.south east) node [pos=0.5, right] {\( \textup{p} \)};
+\end{feynman} 
+\end{tikzpicture}
+
+\end{document}

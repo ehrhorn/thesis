@@ -191,9 +191,45 @@ Examples of Feynman diagrams can be seen in \vref{fig:charged_neutral_current}.
 
 \section{The weak interaction}\label{sec:the_weak_interaction}
 
+In the early 20th century the world of nuclear physics was abuzz.
+A great many experiments were conducted after Becquerel discovered radioactivity in 1896, some of which explored beta decay, an example of which can be seen in \vref{fig:beta_decay}.
+In this process a neutron turns into a proton, emitting an electron and an anti-neutrino.
+This was unexplained without the neutrino, because of two problems:
+First, the energy spectrum seemed continuous (see \vref{fig:beta_spectrum}), unexpected as the energy should be discrete if the electron is one escaping from the atom.
+Second, the electron is a spin-\sfrac{1}{2} particle, while nitrogen-14, which showed beta decay, is a spin-1 particle; so where goes the spin?
 
+Both issues were explained by the \enquote{neutron} (later renamed neutrino by Fermi) proposed by Pauli in 1930.
+The discrete energy spectrum now turns continuous, owing to the neutrino carrying away unseen energy, and the spin can be attributed to it as well, as long as the neutrino is a spin-\sfrac{1}{2} particle.
 
-\section{Neutrino interactions}\label{sec:neutrino_interactions}
+Fermi explained this with his theory of beta decay, proposing a four-fermion contact interaction, a direct interaction between the four particles.
+Although a successful theory, it runs into the same kind of ultraviolet problem that Planck worked on in the late 19th century: because the Fermi interaction cross section goes as \( \sigma \approx G_{\text{F}}^2 E^2 \), where \( G_{\text{F}} \) is the Fermi constant, it grows unbounded, leading to problems at higher energies.
+Additionally the weak interaction was observed in the Wu experiment to violate parity, as beta decay of cobalt-60 showed a preferential decay direction for electrons, a phenomenon not explained by Fermi's theory.
+This was solved by the electroweak theory, introducing bosons that mediate the interaction over small distances after symmetry breaking via the Higgs mechanism; the \( \textup{W} \) and \( \textup{Z} \) bosons.
+The parity violation is explained by the V-A (vector minus axial vector) nature of the weak force, which only permits it to couple with left-handed particles and right-handed antiparticles; this concept is enshrined mathematically by \( \gamma^5 \) of the Dirac matrix family, formed as the product of the gamma matrices in \vref{eq:dirac_equation_2}.
+An intriguing possibility is presented by this violation: as only (anti)neutrinos of one handedness interacts weakly, maybe there is, pardon the pun, a whole universe of non-interacting neutrinos that only participate gravitationally.
+These \enquote{sterile neutrinos} are a candidate for dark matter.
+
+The interaction is termed \enquote{weak} as a consequence of its coupling strength, relative to the electromagnetic- and strong forces.
+This is due to the massive nature of its mediating bosons, giving them a shorter lifetime than they would possess otherwise.
+Furthermore, two of the bosons contain electric charge (the \( \textup{W}^{\pm} \) bosons), while the last one is electrically neutral (the \( \textup{Z}^{0} \) boson), leading to the phenomenon of charged- and neutral currents.
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=0.8\textwidth]{./images/particle_physics/Beta_spectrum_of_RaE.jpg}
+    \caption{Energy spectrum of \( {}^{210}\textup{B} \) beta decay, with \( E_{\text{max}} = \SI{1.16}{\mega\electronvolt} \).
+    Image from \url{https://en.wikipedia.org/wiki/File:Beta_spectrum_of_RaE.jpg} }\label{fig:beta_spectrum}
+\end{figure}
+
+\section{Charged- and neutral currents}\label{sec:charged_and_neutral_currents}
+
+The nature of the weak force allows two fundamental types of interactions: charged- and neutral currents.
+
+The charged current, as the Feynman diagram in \vref{fig:feynman_cc_wp} show, allows a charged lepton to turn into a neutral one.
+By absorbing a \( \textup{W} \) boson, an electron may turn into an electron neutrino, or---as in the case of beta decay, \vref{fig:beta_decay}---a down quark may convert into an up quark, changing a neurino into a proton, with the resulting \( \textup{W}^{-} \) boson decaying into an electron and antielectron neutrino, conserving charge and lepton number.
+
+The neutral current, on the other hand, seen in \vref{fig:feynman_nc}, can deflect two particles, but does not change any of the properties of the interacting particles other than transferring momentum and spin.
+ 
+
 
 \begin{figure}
      \centering
@@ -210,15 +246,21 @@ Examples of Feynman diagrams can be seen in \vref{fig:charged_neutral_current}.
          \caption{Charged current}
          \label{fig:feynman_cc_wp}
      \end{subfigure}
-     \hfill
-     \begin{subfigure}[b]{0.3\textwidth}
-         \centering
-         \includegraphics[width=\textwidth]{./images/particle_physics/feynman_cc_wm.pdf}
-         \caption{Inverse beta decay}
-         \label{fig:feynman_cc_wm}
-     \end{subfigure}
+%     \hfill
+%     \begin{subfigure}[b]{0.3\textwidth}
+%         \centering
+%         \includegraphics[width=\textwidth]{./images/particle_physics/feynman_cc_wm.pdf}
+%         \caption{Inverse beta decay}
+%         \label{fig:feynman_cc_wm}
+%     \end{subfigure}
         \caption{Feynman diagrams of neutral- and charged current processes}
         \label{fig:charged_neutral_current}
+\end{figure}
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=0.5\textwidth]{./images/particle_physics/feynman_beta_decay.pdf}
+    \caption{\( \beta^{-} \) decay}\label{fig:beta_decay}
 \end{figure}
 
 \begin{figure}[ht]
@@ -233,19 +275,83 @@ Examples of Feynman diagrams can be seen in \vref{fig:charged_neutral_current}.
     \caption{Stopping power}\label{fig:stopping_power}
 \end{figure}
 
-\begin{figure}[ht]
-    \centering
-    \includegraphics[width=\textwidth]{./images/particle_physics/FirstNeutrinoEventAnnotated.jpg}
-    \caption{First neutrino seen in a bubble chamber. Image from~\autocite{argonne_national_laboratory_first_1970}.}\label{fig:first_neutrino_event}
-\end{figure}
-
-\begin{figure}[ht]
-    \centering
-    \includegraphics[width=\textwidth]{./images/particle_physics/Neutrino_bubble_chamber_decay_overlay.png}
-    \caption{Bubble chamber neutrino event with annotation. Image from~\autocite{argonne_national_laboratory_neutrino_2012}.}\label{fig:first_neutrino_event_annotated}
+\begin{figure}
+     \centering
+     \begin{subfigure}[b]{0.49\textwidth}
+         \centering
+         \includegraphics[width=\textwidth]{./images/particle_physics/FirstNeutrinoEvent.png}
+         \caption{Neutral current}
+         \label{fig:first_neutrino_event_annotated}
+     \end{subfigure}
+%     \hfill
+     \begin{subfigure}[b]{0.49\textwidth}
+         \centering
+         \includegraphics[width=0.9\textwidth]{./images/particle_physics/Neutrino_bubble_chamber_decay_overlay.png}
+         \caption{Charged current}
+         \label{fig:first_neutrino_event_overlay}
+     \end{subfigure}
+        \caption{Feynman diagrams of neutral- and charged current processes}
+        \label{fig:first_neutrino_event}
 \end{figure}
 
 \section{Neutrino oscillations}\label{sec:neutrino_oscillations}
+
+In the early days, the weak coupling strength of quarks was found to be smaller than that of lepton interactions.
+Not only that, but different quark interactions have different coupling strengths.
+Nicola Cabibbo developed a framework for explaining this discrepancy, wherein so-called weak eigenstates are not the same as mass eigenstates.
+For example, both down- and strange quarks may decay into an up quark, giving a weak eigenstate
+\begin{equation}
+	\textup{d}^{\prime} = V_{\textup{ud}} \textup{d} + V_{\textup{us}} \textup{s},
+\end{equation}
+with \( \left| V_{\textup{ud}} \right|^2 \) the probability of a down quark decaying, and \( \left| V_{\textup{us}} \right|^2 \) the probability of a strange quark decaying.
+\todo[inline]{Remember to mention the different flavours of quarks at some point...}
+The weak eigenstates, a superposition of down and strange quarks, is then the entity actually coupling to the up quark, and extending this to include the decay of charm quarks yields the Cabibbo matrix
+\begin{equation}
+	\begin{bmatrix}
+		\textup{d}^{\prime} \\
+		\textup{s}^{\prime}
+	\end{bmatrix}
+	=
+	\begin{bmatrix}
+		V_{\textup{ud}} & V_{\textup{us}} \\
+		V_{\textup{cd}} & V_{\textup{cs}}
+	\end{bmatrix}
+	\begin{bmatrix}
+		\textup{d} \\
+		\textup{s}
+	\end{bmatrix}
+	=
+	\begin{bmatrix}
+		\cos{\theta_{\textup{c}}} & \sin{\theta_{\textup{c}}} \\
+		-\sin{\theta_{\textup{c}}} & \cos{\theta_{\textup{c}}}
+	\end{bmatrix}
+	\begin{bmatrix}
+		\textup{d} \\
+		\textup{s}
+	\end{bmatrix},
+\end{equation}
+with \( \theta_{\textup{c}} \) the Cabibbo angle.
+
+This concept was extended to neutrino oscillations.
+This Nobel-winning idea was used to explain the apparent failure of the Homestake experiment, also known as the solar neutrino problem.
+
+The Sun fuses protons in the p-p chain, wherein two protons fuse to create deuterium, a positron, an electron neutrino and excess energy:
+\begin{equation}
+	\textup{p} + \textup{p} \rightarrow {}_{1}^{2}\textup{D} + \textup{e}^{+} + \nu_{\textup{e}} + \SI{1.442}{\mega\electronvolt}.
+\end{equation}
+Though other interactions occur, the Standard Solar Model predicts that the Sun only produces electron neutrinos, with the flux predicted to be on the order of \( \SI{7e10}{\per\centi\meter\squared\per\second} \).
+Testing this model should be somewhat straightforward: fill an underground tank with appropriate liquid, wait for neutrino interactions and count how many atoms have changed.
+The tank needs to be underground to shield from cosmic rays other than solar neutrinos, the liquid should be smartly chosen such that it decays into something easily measurable, and the tank needs to be big enough for interactions to happen on a reasonable timescale.
+This describes the Homestake experiment: a tank was made out of a closed underground mine, and filled with perchloroethylene, containing plenty of chlorine.
+The interaction with a neutrino then proceeds as
+\begin{equation}
+	\nu_{\textup{e}} + {}^{37}\textup{Cl} \rightarrow {}^{37}\textup{Ar} + \textup{e}^{-}.
+\end{equation}
+The argon produced by the reaction is radioactive, and can thus be counted.
+
+The experiment, however, saw a deficit of neutrinos.
+This, of course, can have many causes: the calculations may be wrong, the experimental setup may be faulty or the solar model may be wrong.
+Raymond Davis, the experiment-runner, however, stood his ground, and some 40-odd years later the rather shocking fact about neutrinos was confirmed, and validated the experiment: neutrinos change flavour during propagation.
 
 \[
     \begin{bmatrix}
@@ -267,5 +373,35 @@ Examples of Feynman diagrams can be seen in \vref{fig:charged_neutral_current}.
 \]
 
 \section{Cherenkov radiation}\label{sec:cherenkov_radiation}
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=\textwidth]{./images/particle_physics/6-Figure1-1.png}
+    \caption{Glashow resonance. Image from \url{https://www.semanticscholar.org/paper/Glashow-resonance-as-a-window-into-cosmic-neutrino-Barger-Fu/9922dfd291f92a97219a0abbee9c0303ee9fbb36}}\label{fig:glashow_resonance}
+\end{figure}
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=\textwidth]{./images/particle_physics/masses-600x230.jpg}
+    \caption{Particle masses. Image from \url{http://hitoshi.berkeley.edu}}\label{fig:particle_masses}
+\end{figure}
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=\textwidth]{./images/particle_physics/Right_left_helicity.jpg}
+    \caption{Helicity. Image from \url{https://en.wikipedia.org/wiki/File:Right_left_helicity.jpg}}\label{fig:helicity}
+\end{figure}
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=\textwidth]{./images/particle_physics/10052_2018_6369_Fig3_HTML.png}
+    \caption{IceCube ray types. \url{https://link.springer.com/article/10.1140/epjc/s10052-018-6369-9}}
+\end{figure}
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=\textwidth]{./images/particle_physics/Oscillations_electron_long.svg.png}
+    \caption{Oscillations. Image from \url{https://en.wikipedia.org/wiki/File:Oscillations_electron_long.svg}}\label{fig:oscillations}
+\end{figure}
 
 \end{document}
