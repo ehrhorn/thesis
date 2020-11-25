@@ -13,9 +13,21 @@
 \usepackage{braket}
 \usepackage{bm}
 \usepackage{siunitx}
-\usepackage{mathpazo}
-\usepackage[mathpazo]{flexisym}
-\usepackage{breqn}
+\usepackage{mathptmx}
+%\usepackage{mathpazo}
+%\usepackage[mathpazo]{flexisym}
+%\usepackage{breqn}
+
+\usepackage{hepnames}
+\usepackage{xpatch}
+\makeatletter
+\xpatchcmd\@HepConStyle
+ {\edef\@upcode{\updefault}}
+ {\ifdefined\shapedefault\edef\@upcode{\shapedefault}\else\edef\@upcode{\updefault}\fi}
+ {}{}
+\makeatother
+
+\usepackage[version=4]{mhchem}
 
 \usepackage[
     activate={
@@ -63,7 +75,7 @@
     backref=true,
 	backrefstyle=two,
 ]{biblatex}
-\addbibresource{/Users/ehrhorn/work/thesis/refs.bib}
+\addbibresource{/Users/ehrhorn/Developer/thesis/refs.bib}
 
 \usepackage{tikz}
 \usepackage[compat=1.1.0]{tikz-feynman}

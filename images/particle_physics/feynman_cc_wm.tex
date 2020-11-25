@@ -1,5 +1,12 @@
 \documentclass[tikz]{standalone}
-
+\usepackage{hepnames}
+\usepackage{xpatch}
+\makeatletter
+\xpatchcmd\@HepConStyle
+ {\edef\@upcode{\updefault}}
+ {\ifdefined\shapedefault\edef\@upcode{\shapedefault}\else\edef\@upcode{\updefault}\fi}
+ {}{}
+\makeatother
 \usepackage{tikz-feynman}
 \makeatletter
 \tikzfeynmanset{compat=\tikzfeynman@version@major.\tikzfeynman@version@minor.\tikzfeynman@version@patch}
@@ -12,9 +19,9 @@
     vertical=e1 to e4,
     vertical=e2 to e3,
   ] {
-    e2 [particle = \( \textup{e}^{-} \)] -- [anti fermion] v1 [dot] -- [anti fermion] e3 [particle = \( \bar{\nu}_{\textup{e}} \)],
-    e1 [particle = \( \bar{\nu}_{\textup{e}} \)] -- [anti fermion]  v2 [dot] -- [anti fermion] e4 [particle = \( \textup{e}^{-} \)],
-    v1 -- [boson, edge label = \( \textup{W}^{-} \)] v2,
+    e2 [particle = \( \Pelectron \)] -- [anti fermion] v1 [dot] -- [anti fermion] e3 [particle = \( \Pnu_{\Pe} \)],
+    e1 [particle = \( \Pnu_{\Pe} \)] -- [anti fermion]  v2 [dot] -- [anti fermion] e4 [particle = \( \Pelectron \)],
+    v1 -- [boson, edge label = \( \PWminus \)] v2,
 };
 
 \end{document}
