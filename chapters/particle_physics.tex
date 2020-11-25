@@ -379,36 +379,46 @@ Extending the Cabibbo hypothesis to account for this, we have
 		\nu_{2}
 	\end{bmatrix}.
 \end{equation}
-Now the weak eigenstates are described as superpositions of the mass eigenstates \( \nu_{1} \) and \( \nu_{2} \), and a neutrino having travelled \( L \) at time \( T \) will be described as
+Now the weak eigenstates are described as superpositions of the mass eigenstates \( \nu_{1} \) and \( \nu_{2} \), and a muon neutrino produced at time \( t = 0 \) will have the wave function
+\begin{equation}
+	\ket{\psi(0)} = \cos{\theta} \ket{\Pnu_{2}} - \sin{\theta} \ket{\Pnu_{1}}.
+\end{equation}
+Having travelled \( L \) at time \( T \) it will be described as
 \begin{equation}\label{eq:neutrino_wavefunction_1}
-	\Ket{\psi(L, T)} = \cos{\theta} \Ket{\nu_{1}} \exp(-\iu \phi_{1}) + \sin{\theta} \Ket{\nu_{2}} \exp(-\iu \phi_{2}),
+	\ket{\psi(L, T)} = \cos{\theta} \ket{\nu_{2}} \eu^{-\iu \phi_{2}} - \sin{\theta} \ket{\nu_{1}} \eu^{-\iu \phi_{1}},
 \end{equation}
 with the phases \( \phi_{i} = p_{i} \cdot x = E_{i} T - \textup{p}_{i} L \).
 Expressed in terms of the weak eigenstates, \vref{eq:neutrino_wavefunction_1} can be written as
 \begin{equation}\label{eq:neutrino_wavefunction_2}
-	\Ket{\psi(L, T)} = \exp(-\iu \phi_{1}) \left[ \left( \cos^2{\theta} + \exp(\iu \Delta{\phi_{12}}) \sin^2{\theta} \right) \Ket{\Pnu_{\Pe}} - \left( 1 - \exp(\iu \Delta{\phi_{1 2}}) \right) \cos{\theta} \sin{\theta} \Ket{\Pnu_{\Pmu}} \right],
+	\ket{\psi(L, T)} = \eu^{-\iu \phi_{1}} \left[ \left( \eu^{\iu \Delta{\phi_{1 2}}} - 1 \right) \cos{\theta} \sin{\theta} \ket{\Pnu_{\Pe}} - \left( \eu^{\iu \Delta{\phi_{1 2}}} \cos^{2}{\theta} + \sin^{2}{\theta} \right) \ket{\Pnu_{\Pmu}} \right],
 \end{equation}
 where \( \Delta{\phi_{1 2}} = \phi_{1} - \phi_{2} \),
 showing that any non-zero value of \( \Delta{\phi_{1 2}} \) will incur mixing of the weak eigenstates in the wave function of the propagating neutrino.
-If we tidy up \vref{eq:neutrino_wavefunction_2}, we can write it as
+Simplifying \vref{eq:neutrino_wavefunction_2}, we can write it as
 \begin{equation}
 	\ket{\psi(L, T)} = c_{\Pe} \ket{\Pnu_{\Pe}} + c_{\Pmu} \ket{\Pnu_{\Pmu}},
 \end{equation}
-and it is seen that the probability of an electron neutrino turning into a muon neutrino becomes
-\begin{equation}
-	P(\Pnu_{\Pe} \rightarrow \Pnu_{\Pmu}) = \lvert \braket{\Pnu_{\Pe} | \psi(L, T)} \rvert^2 = c_{\Pmu} c_{\Pmu}^{*}.
+and it is seen that the probability of a muon neutrino turning into an electron neutrino becomes
+\begin{equation}\label{eq:neutrino_osc_inner_product_1}
+	P(\Pnu_{\Pmu} \rightarrow \Pnu_{\Pe}) = \lvert \braket{\Pnu_{\Pe} | \psi(L, T)} \rvert^2 = c_{\Pmu} c_{\Pmu}^{*}.
 \end{equation}
 Using \vref{eq:neutrino_wavefunction_2} this becomes
 \begin{equation}
-	P(\Pnu_{\Pe} \rightarrow \Pnu_{\Pmu}) = \sin^2{\left( 2 \theta \right)} \sin^2{\left( \frac{\Delta{\phi_{1 2}}}{2} \right)},
+	P(\Pnu_{\Pmu} \rightarrow \Pnu_{\Pe}) = \sin^2{\left( 2 \theta \right)} \sin^2{\left( \frac{\Delta{\phi_{1 2}}}{2} \right)},
 \end{equation}
 which in the ultra-relativistic limit becomes
 \begin{equation}
-	P(\Pnu_{\Pe} \rightarrow \Pnu_{\Pmu}) = \sin^2{\left( 2 \theta \right)} \sin^2{\left[ \frac{\left( m_{1}^{2} - m_{2}^{2} \right) L}{4 E_{\Pnu}} \right]}.
+	P(\Pnu_{\Pmu} \rightarrow \Pnu_{\Pe}) = \sin^2{\left( 2 \theta \right)} \sin^2{\left[ \frac{\left( m_{1}^{2} - m_{2}^{2} \right) L}{4 E_{\Pnu}} \right]}.
 \end{equation}
-In plain words, then, the probability, or oscillation, depends on 1) the energy of the neutrino and 2) the length it travels.
+In plain words, then, the probability, or oscillation, depends on 1) the mixing angle, 2) the difference of the squared masses of the mass eigenstates, 3) the energy of the neutrino and 4) the length it travels.
 
-The two-flavour treatment is sufficient for many purposes, but nature has bestowed upon us three generations of matter; or at least three generations of light neutrinos.
+In many cases one uses the survival probability, which is
+\begin{equation}\label{eq:survival_probability_1}
+	P(\Pnu_{\Pmu} \rightarrow \Pnu_{\Pmu}) = 1 - P(\Pnu_{\Pmu} \rightarrow \Pnu_{\Pe}),
+\end{equation}
+due to the conservation of probabilities.
+
+The two-flavour treatment is sufficient for many purposes, but nature has bestowed upon us three generations of matter (or, at least, three generations of light neutrinos).
 To accommodate this fact, it is possible to extend \vref{eq:pontecorvo} to
 \begin{equation}\label{eq:pmns}
 	\begin{bmatrix}
@@ -420,7 +430,7 @@ To accommodate this fact, it is possible to extend \vref{eq:pontecorvo} to
 	\begin{bmatrix}
 		U_{\Pe 1} & U_{\Pe 2} & U_{\Pe 3} \\
 		U_{\Pmu 1} & U_{\Pmu 2} & U_{\Pmu 3} \\
-		U_{\Ptau 1} & U_{\Ptau 2} & U_{\Ptau 3} \\
+		U_{\Ptau 1} & U_{\Ptau 2} & U_{\Ptau 3}
 	\end{bmatrix}
 	\begin{bmatrix}
 		\nu_{1} \\
@@ -428,7 +438,36 @@ To accommodate this fact, it is possible to extend \vref{eq:pontecorvo} to
 		\nu_{3}
 	\end{bmatrix}.
 \end{equation}
-
+This unitary matrix can be parameterised as
+\begin{equation}
+	\begin{bmatrix}
+		U_{\Pe 1} & U_{\Pe 2} & U_{\Pe 3} \\
+		U_{\Pmu 1} & U_{\Pmu 2} & U_{\Pmu 3} \\
+		U_{\Ptau 1} & U_{\Ptau 2} & U_{\Ptau 3}
+	\end{bmatrix}
+	=
+	\begin{bmatrix}
+		1 & 0 & 0 \\
+		0 & c_{2 3} & s_{2 3} \\
+		0 & -s_{2 3} & c_{2 3}
+	\end{bmatrix}
+	\begin{bmatrix}
+		c_{1 3} & 0 & s_{1 3} \eu^{-\iu \delta} \\
+		0 & 1 & 0 \\
+		-s_{1 3} \eu^{\iu \delta} & 0 & c_{1 3}
+	\end{bmatrix}
+	\begin{bmatrix}
+		c_{1 2} & s_{1 2} & 0 \\
+		-s_{1 2} & c_{1 2} & 0 \\
+		0 & 0 & 1
+	\end{bmatrix},
+\end{equation}
+where \( c_{i j} = \cos{\theta_{i j}} \), \( s_{i j} = \sin{\theta_{i j}} \) and \( \delta \) is a complex phase owing to the unitarity condition of the matrix\footnote{In fact the matrix requires six complex phases to specify all nine independent parameters. However, five of these can be absorbed into the definitions of the lepton phases.}.
+Moreover, \vref{eq:survival_probability_1} now becomes
+\begin{equation}\label{eq:survival_probability_2}
+	P(\Pnu_{\Pe} \rightarrow \Pnu_{\Pe}) = 1 - 4 \lvert U_{\Pe 1} \rvert^2 \lvert U_{\Pe 2} \rvert^2 \sin^{2}{\Delta_{2 1}} - 4 \lvert U_{\Pe 1} \rvert^2 \lvert U_{\Pe 3} \rvert^2 \sin^{2}{\Delta_{3 1}} - 4 \lvert U_{\Pe 2} \rvert^2 \lvert U_{\Pe 3} \rvert^2 \sin^{2}{\Delta_{3 2}}
+\end{equation}
+This makes it clear that 
 
 \section{Cherenkov radiation}\label{sec:cherenkov_radiation}
 
