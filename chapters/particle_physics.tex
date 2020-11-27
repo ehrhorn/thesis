@@ -193,6 +193,12 @@ Examples of Feynman diagrams can be seen in \vref{fig:charged_neutral_current}.
 
 In the early 20th century the world of nuclear physics was abuzz.
 A great many experiments were conducted after Becquerel discovered radioactivity in 1896, some of which explored beta decay, an example of which can be seen in \vref{fig:beta_decay}.
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=0.8\textwidth]{./images/particle_physics/Beta_spectrum_of_RaE.jpg}
+    \caption{Energy spectrum of \ce{^{210}B} beta decay, with \( E_{\text{max}} = \SI{1.16}{\mega\electronvolt} \).
+    Image from \url{https://en.wikipedia.org/wiki/File:Beta_spectrum_of_RaE.jpg} }\label{fig:beta_spectrum}
+\end{figure}
 In this process a neutron turns into a proton, emitting an electron and an anti-neutrino.
 This was unexplained without the neutrino, because of two problems:
 First, the energy spectrum seemed continuous (see \vref{fig:beta_spectrum}), unexpected as the energy should be discrete if the electron is one escaping from the atom.
@@ -205,92 +211,72 @@ Fermi explained this with his theory of beta decay, proposing a four-fermion con
 Although a successful theory, it runs into the same kind of ultraviolet problem that Planck worked on in the late 19th century: because the Fermi interaction cross section goes as \( \sigma \approx G_{\text{F}}^2 E^2 \), where \( G_{\text{F}} \) is the Fermi constant, it grows unbounded, leading to problems at higher energies.
 Additionally the weak interaction was observed in the Wu experiment to violate parity, as beta decay of cobalt-60 showed a preferential decay direction for electrons, a phenomenon not explained by Fermi's theory.
 This was solved by the electroweak theory, introducing bosons that mediate the interaction over small distances after symmetry breaking via the Higgs mechanism; the \( \PW \) and \( \PZ \) bosons.
-The parity violation is explained by the V-A (vector minus axial vector) nature of the weak force, which only permits it to couple with left-handed particles and right-handed antiparticles; this concept is enshrined mathematically by \( \gamma^5 \) of the Dirac matrix family, formed as the product of the gamma matrices in \vref{eq:dirac_equation_2}.
-An intriguing possibility is presented by this violation: as only (anti)neutrinos of one handedness interacts weakly, maybe there is, pardon the pun, a whole universe of non-interacting neutrinos that only participate gravitationally.
-These \enquote{sterile neutrinos} are a candidate for dark matter.
+The parity violation is explained by the V-A (vector minus axial vector) nature of the weak force, which only permits it to couple with left-handed particles and right-handed antiparticles; this concept is enshrined mathematically by \( \gamma^5 \) of the Dirac matrix family, formed as the product of the gamma matrices in \vref{eq:dirac_equation_2}, which enters in the so-called chiral projection operator.
+Describing this operator is made easier by reference to helicity states, which are more easily grasped conceptually.
+A helicity state is described in terms of a particle's component of spin along its momentum, \( h \equiv \mathbf{S} \cdot \mathbf{p} / \textup{p} \).
+Chirality, on the other hand, is defined as the eigenstates of \( \gamma^{5} = \iu \gamma^{0} \gamma^{1} \gamma^{2} \gamma^{3} \), and in the ultra-relativistic regime, where \( E \gg m \), the domain of neutrinos, helicity and chiral eigenstates are the same.
+This becomes important in the weak interaction, whose vertex factor from the matrix element is given as
+\begin{equation}
+	\frac{\iu g_{\PW}}{\sqrt{2}} \frac{1}{2} \gamma^{\mu} \left( 1 - \gamma^{5} \right),
+\end{equation}
+where \( \sfrac{1}{2} ( 1 - \gamma^{5} ) \) is known as the left-handed chiral projection operator.
+When this operates on a right handed chiral (or helicity, in the high energy limit) state, the result is zero, meaning only right-handed chiral particle states (and left-handed anti-particle states) may participate in the weak current.
+
+An intriguing possibility is presented by this property: as only (anti)neutrinos of one handedness interact weakly, there may be a whole universe of non-interacting neutrinos that only participate gravitationally.
+These \enquote{sterile neutrinos} are candidates for dark matter.
 
 The interaction is termed \enquote{weak} as a consequence of its coupling strength, relative to the electromagnetic- and strong forces.
 This is due to the massive nature of its mediating bosons, giving them a shorter lifetime than they would possess otherwise.
 Furthermore, two of the bosons contain electric charge (the \( \PWpm \) bosons), while the last one is electrically neutral (the \( \PZzero \) boson), leading to the phenomenon of charged- and neutral currents.
 
-\begin{figure}[ht]
-    \centering
-    \includegraphics[width=0.8\textwidth]{./images/particle_physics/Beta_spectrum_of_RaE.jpg}
-    \caption{Energy spectrum of \ce{^{210}B} beta decay, with \( E_{\text{max}} = \SI{1.16}{\mega\electronvolt} \).
-    Image from \url{https://en.wikipedia.org/wiki/File:Beta_spectrum_of_RaE.jpg} }\label{fig:beta_spectrum}
-\end{figure}
-
 \section{Charged- and neutral currents}\label{sec:charged_and_neutral_currents}
+
+\begin{figure}
+	\centering
+	\begin{subfigure}[b]{0.3\textwidth}
+		\centering
+		\includegraphics[width=0.5\textwidth]{./images/particle_physics/feynman_nc.pdf}
+		\caption{Neutral current}\label{fig:feynman_nc}
+	\end{subfigure}
+	\hfill
+	\begin{subfigure}[b]{0.3\textwidth}
+    	\centering
+	    \includegraphics[width=\textwidth]{./images/particle_physics/feynman_beta_decay.pdf}
+	    \caption{\( \beta^{-} \) decay}\label{fig:beta_decay}
+	\end{subfigure}
+	\hfill
+	\begin{subfigure}[b]{0.3\textwidth}
+		\centering
+		\includegraphics[width=0.5\textwidth]{./images/particle_physics/feynman_cc_wp.pdf}
+		\caption{Charged current}\label{fig:feynman_cc_wp}
+	\end{subfigure}
+	\caption{Feynman diagrams of neutral- and charged current processes}\label{fig:charged_neutral_current}
+\end{figure}
 
 The nature of the weak force allows two fundamental types of interactions: charged- and neutral currents.
 
-The charged current, as the Feynman diagram in \vref{fig:feynman_cc_wp} show, allows a charged lepton to turn into a neutral one.
-By absorbing a \( \PW \) boson, an electron may turn into an electron neutrino, or---as in the case of beta decay, \vref{fig:beta_decay}---a down quark may convert into an up quark, changing a neurino into a proton, with the resulting \( \PWminus \) boson decaying into an electron and antielectron neutrino, conserving charge and lepton number.
+The charged current, as the Feynman diagram in \vref{fig:feynman_cc_wp} shows, allows a charged lepton to turn into a neutral one.
+By absorbing a \( \PW \) boson, an electron may turn into an electron neutrino, as seen in \vref{fig:feynman_cc_wp}, or---as in the case of beta decay, \vref{fig:beta_decay}---a down quark may convert into an up quark, changing a neurino into a proton, with the resulting \( \PWminus \) boson decaying into an electron and antielectron neutrino, conserving charge and lepton number.
+A startling real world example of the charged current in action is seen in \vref{fig:first_neutrino_event}, where a neutrino of sufficient energy collides with a proton, creating both a muon and hadronic decay products.
 
 The neutral current, on the other hand, seen in \vref{fig:feynman_nc}, can deflect two particles, but does not change any of the properties of the interacting particles other than transferring momentum and spin.
  
-
-
-\begin{figure}
-     \centering
-     \begin{subfigure}[b]{0.3\textwidth}
-         \centering
-         \includegraphics[width=\textwidth]{./images/particle_physics/feynman_nc.pdf}
-         \caption{Neutral current}
-         \label{fig:feynman_nc}
-     \end{subfigure}
-     \hfill
-     \begin{subfigure}[b]{0.3\textwidth}
-         \centering
-         \includegraphics[width=\textwidth]{./images/particle_physics/feynman_cc_wp.pdf}
-         \caption{Charged current}
-         \label{fig:feynman_cc_wp}
-     \end{subfigure}
-%     \hfill
-%     \begin{subfigure}[b]{0.3\textwidth}
-%         \centering
-%         \includegraphics[width=\textwidth]{./images/particle_physics/feynman_cc_wm.pdf}
-%         \caption{Inverse beta decay}
-%         \label{fig:feynman_cc_wm}
-%     \end{subfigure}
-        \caption{Feynman diagrams of neutral- and charged current processes}
-        \label{fig:charged_neutral_current}
-\end{figure}
-
-\begin{figure}[ht]
-    \centering
-    \includegraphics[width=0.5\textwidth]{./images/particle_physics/feynman_beta_decay.pdf}
-    \caption{\( \beta^{-} \) decay}\label{fig:beta_decay}
-\end{figure}
-
-\begin{figure}[ht]
-    \centering
-    \includegraphics[width=\textwidth]{./images/particle_physics/Figs_all-nu-spectrum-mod.png}
-    \caption{Neutrino spectrum. Image from~\autocite{spiering_towards_2012}.}\label{fig:neutrino_spectrum}
-\end{figure}
-
-\begin{figure}[ht]
-    \centering
-    \includegraphics[width=\textwidth]{./images/particle_physics/DGV3K.png}
-    \caption{Stopping power}\label{fig:stopping_power}
-\end{figure}
+In this way the weak interaction is special among the fundamental forces; it is the only one that is able to change flavours, it is the only one to couple to neutrinos, and it is---as we shall see---the only one that allows us to define left- and right-handedness unambigously.
 
 \begin{figure}
      \centering
      \begin{subfigure}[b]{0.49\textwidth}
          \centering
          \includegraphics[width=\textwidth]{./images/particle_physics/FirstNeutrinoEvent.png}
-         \caption{Neutral current}
-         \label{fig:first_neutrino_event_annotated}
+         \caption{}\label{fig:first_neutrino_event_annotated}
      \end{subfigure}
 %     \hfill
      \begin{subfigure}[b]{0.49\textwidth}
          \centering
          \includegraphics[width=0.9\textwidth]{./images/particle_physics/Neutrino_bubble_chamber_decay_overlay.png}
-         \caption{Charged current}
-         \label{fig:first_neutrino_event_overlay}
+         \caption{}\label{fig:first_neutrino_event_overlay}
      \end{subfigure}
-        \caption{Feynman diagrams of neutral- and charged current processes}
+        \caption{The first observed neutrino event in history, from the Argonne National Laboratory 12-foot bubble chamber, on Friday the 13th of November 1970. It is clearly seen on \vref{fig:first_neutrino_event_annotated} that some unseen particle collides with a proton, and two new particles are created in the process. \Vref{fig:first_neutrino_event_overlay} makes the process clearer using a Feynman diagram: the \PW boson interacts with a quark in the proton. The neutrino has enough energy to create an inelastic scattering, which results in an intermediate state (a Delta baryon), which quickly decays via the strong force into a proton and a pion.}
         \label{fig:first_neutrino_event}
 \end{figure}
 
@@ -303,7 +289,7 @@ For example, both down- and strange quarks may decay into an up quark, giving a 
 \begin{equation}
 	\Pdown^{\prime} = V_{\Pup \Pdown} \Pdown + V_{\Pup \Pstrange} \Pstrange,
 \end{equation}
-with \( \left| V_{\Pup \Pdown} \right|^2 \) the probability of a down quark decaying, and \( \left| V_{\Pup \Pstrange} \right|^2 \) the probability of a strange quark decaying.
+with \( \lvert V_{\Pup \Pdown} \rvert^2 \) the probability of a down quark decaying, and \( \lvert V_{\Pup \Pstrange} \rvert^2 \) the probability of a strange quark decaying.
 \todo[inline]{Remember to mention the different flavours of quarks at some point...}
 The weak eigenstates, a superposition of down and strange quarks, is then the entity actually coupling to the up quark, and extending this to include the decay of charm quarks yields the Cabibbo matrix
 \begin{equation}
@@ -381,7 +367,7 @@ Extending the Cabibbo hypothesis to account for this, we have
 \end{equation}
 Now the weak eigenstates are described as superpositions of the mass eigenstates \( \nu_{1} \) and \( \nu_{2} \), and a muon neutrino produced at time \( t = 0 \) will have the wave function
 \begin{equation}
-	\ket{\psi(0)} = \cos{\theta} \ket{\Pnu_{2}} - \sin{\theta} \ket{\Pnu_{1}}.
+	\ket{\psi(0)} = U_{\Pmu 1} \ket{\Pnu_{1}} + U_{\Pmu 2} \ket{\Pnu_2} =  \cos{\theta} \ket{\Pnu_{2}} - \sin{\theta} \ket{\Pnu_{1}}.
 \end{equation}
 Having travelled \( L \) at time \( T \) it will be described as
 \begin{equation}\label{eq:neutrino_wavefunction_1}
@@ -400,7 +386,7 @@ Simplifying \vref{eq:neutrino_wavefunction_2}, we can write it as
 \end{equation}
 and it is seen that the probability of a muon neutrino turning into an electron neutrino becomes
 \begin{equation}\label{eq:neutrino_osc_inner_product_1}
-	P(\Pnu_{\Pmu} \rightarrow \Pnu_{\Pe}) = \lvert \braket{\Pnu_{\Pe} | \psi(L, T)} \rvert^2 = c_{\Pmu} c_{\Pmu}^{*}.
+	P(\Pnu_{\Pmu} \rightarrow \Pnu_{\Pe}) = \lvert \braket{\Pnu_{\Pe} | \psi(L, T)} \rvert^2 = c_{\Pe} c_{\Pe}^{*}.
 \end{equation}
 Using \vref{eq:neutrino_wavefunction_2} this becomes
 \begin{equation}
@@ -414,9 +400,8 @@ In plain words, then, the probability, or oscillation, depends on 1) the mixing 
 
 In many cases one uses the survival probability, which is
 \begin{equation}\label{eq:survival_probability_1}
-	P(\Pnu_{\Pmu} \rightarrow \Pnu_{\Pmu}) = 1 - P(\Pnu_{\Pmu} \rightarrow \Pnu_{\Pe}),
+	P(\Pnu_{\Pmu} \rightarrow \Pnu_{\Pmu}) = c_{\Pe} c_{\Pe}^{*} = 1 - P(\Pnu_{\Pmu} \rightarrow \Pnu_{\Pe}).
 \end{equation}
-due to the conservation of probabilities.
 
 The two-flavour treatment is sufficient for many purposes, but nature has bestowed upon us three generations of matter (or, at least, three generations of light neutrinos).
 To accommodate this fact, it is possible to extend \vref{eq:pontecorvo} to
@@ -465,9 +450,21 @@ This unitary matrix can be parameterised as
 where \( c_{i j} = \cos{\theta_{i j}} \), \( s_{i j} = \sin{\theta_{i j}} \) and \( \delta \) is a complex phase owing to the unitarity condition of the matrix\footnote{In fact the matrix requires six complex phases to specify all nine independent parameters. However, five of these can be absorbed into the definitions of the lepton phases.}.
 Moreover, \vref{eq:survival_probability_1} now becomes
 \begin{equation}\label{eq:survival_probability_2}
-	P(\Pnu_{\Pe} \rightarrow \Pnu_{\Pe}) = 1 - 4 \lvert U_{\Pe 1} \rvert^2 \lvert U_{\Pe 2} \rvert^2 \sin^{2}{\Delta_{2 1}} - 4 \lvert U_{\Pe 1} \rvert^2 \lvert U_{\Pe 3} \rvert^2 \sin^{2}{\Delta_{3 1}} - 4 \lvert U_{\Pe 2} \rvert^2 \lvert U_{\Pe 3} \rvert^2 \sin^{2}{\Delta_{3 2}}
+	P(\Pnu_{\Pmu} \rightarrow \Pnu_{\Pmu}) = 1 - 4 \lvert U_{\Pmu 1} \rvert^2 \lvert U_{\Pmu 2} \rvert^2 \sin^{2}{\Delta_{2 1}} - 4 \lvert U_{\Pmu 1} \rvert^2 \lvert U_{\Pmu 3} \rvert^2 \sin^{2}{\Delta_{3 1}} - 4 \lvert U_{\Pmu 2} \rvert^2 \lvert U_{\Pmu 3} \rvert^2 \sin^{2}{\Delta_{3 2}},
 \end{equation}
-This makes it clear that 
+showing the possibility of experimentally determining the values of the neutrino mixing matrix, provided one can set up an experiment where enough neutrinos are captured, among other things.
+In the case of IceCube, this survival probability can be approximated as\autocite{Aartsen2016}
+\begin{equation}
+P(\Pnu_{\Pmu} \rightarrow \Pnu_{\Pmu}) \approx 1 - \sin^{2}{\left( 2 \theta_{2 3} \right)} \sin^{2}{\left( 1.27 \frac{\Delta{m_{3 2}^{2}} L}{E} \right)}.
+\end{equation}
+
+Incidentally, the lepton mixing matrix also provides the possibility of CP violation by the weak force.
+In this case, applying a CP transformation on a right-handed anti-neutrino results in a left-handed neutrino, allowed in the matrix element of weak interactions, and the asymmetry in this case is then
+\begin{equation}
+	P(\Pnu_{\Pe} \rightarrow \Pnu_{\Pmu}) - P(\APnu_{\Pe} \rightarrow \APnu_{\Pmu}) = 16 \Im{\left\{ U_{\Pe 1}^{*} U_{\Pmu 1} U_{\Pe 2} U_{\Pmu 2}^{*} \right\}} \sin{\Delta_{1 2}} \sin{\Delta_{1 3}} \sin{\Delta_{2 3}}.
+\end{equation}
+Therefore, if the complex phase \( \delta \) of the PMNS matrix is zero, there will be no CP violation in the weak sector.
+CP violation is required for explaining the baryon asymmetry, and has been ruled out of both the strong- and the electromagnetic interactions, and so it is hoped that neutrino oscillations will provide the answer.
 
 \section{Cherenkov radiation}\label{sec:cherenkov_radiation}
 
@@ -533,6 +530,19 @@ These will pick up Cherenkov cones as seen in \vref{fig:cherenkov_cone}, and fro
     \centering
     \includegraphics[width=\textwidth]{./images/particle_physics/masses-of-particles.jpg}
     \caption{Mass hierarchies. Image from \url{http://universe-review.ca/F15-particle01.htm}}\label{fig:oscillations}
+\end{figure}
+
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=\textwidth]{./images/particle_physics/Figs_all-nu-spectrum-mod.png}
+    \caption{Neutrino spectrum. Image from~\autocite{spiering_towards_2012}.}\label{fig:neutrino_spectrum}
+\end{figure}
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=\textwidth]{./images/particle_physics/DGV3K.png}
+    \caption{Stopping power}\label{fig:stopping_power}
 \end{figure}
 
 \end{document}
