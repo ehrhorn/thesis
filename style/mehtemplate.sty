@@ -1,48 +1,19 @@
 \ProvidesPackage{./style/mehtemplate}
 
-% Silence warnings
-\RequirePackage{silence}
-
 \usepackage[T1]{fontenc}
 \usepackage[USenglish]{babel}
 
 \usepackage{mathtools}
 \usepackage{amssymb}
+\usepackage{newtxtext,newtxmath}
 \usepackage[ISO]{diffcoeff}
 \usepackage{xfrac}
 \usepackage{braket}
 \usepackage{bm}
 \usepackage{siunitx}
-\usepackage{mathptmx}
-%\usepackage{mathpazo}
-%\usepackage[mathpazo]{flexisym}
-%\usepackage{breqn}
-
 \usepackage{hepnames}
-\usepackage{xpatch}
-\makeatletter
-\xpatchcmd\@HepConStyle
- {\edef\@upcode{\updefault}}
- {\ifdefined\shapedefault\edef\@upcode{\shapedefault}\else\edef\@upcode{\updefault}\fi}
- {}{}
-\makeatother
-
 \usepackage[version=4]{mhchem}
 
-\usepackage[
-    activate={
-        true,
-        nocompatibility
-    },
-    final,
-    tracking=true,
-    factor=1100,
-    stretch=10,
-    shrink=10
-]{microtype}
-
-\usepackage{wrapfig}
-\usepackage{import}
 \usepackage[colorinlistoftodos,prependcaption,textsize=tiny]{todonotes}
 \usepackage{standalone}
 \usepackage{subfiles}
@@ -52,12 +23,6 @@
     justification=raggedright
 ]{caption}
 \usepackage{subcaption}
-% To surpress warning
-\usepackage{fvextra}
-\usepackage{csquotes}
-\usepackage[symbol]{footmisc}
-% To surpress warning
-\usepackage{scrhack}
 
 \usepackage[
     backend=biber,
@@ -91,18 +56,18 @@
 \usepackage{hyperref}
 \usepackage{cleveref}
 
-% Smaller url fontsize
-\renewcommand{\UrlFont}{\scriptsize}
-% Replace footnote command
-\renewcommand{\thefootnote}{\fnsymbol{footnote}}
-
-\sisetup{detect-all}
-
-% The number `e'.
-\def\eu{\ensuremath{\mathrm{e}}}
-% The imaginary unit.
-\def\iu{\ensuremath{\mathrm{i}}}
-% The differential operator.
-\def\du{\ensuremath{\mathrm{d}}}
-% Make hbar upright
-\def\hbaru{\ensuremath{{\mathrm{\hbar}}}}
+%% Smaller url fontsize
+%\renewcommand{\UrlFont}{\scriptsize}
+%% Replace footnote command
+%\renewcommand{\thefootnote}{\fnsymbol{footnote}}
+%
+%\sisetup{detect-all}
+%
+%% The number `e'.
+%\def\eu{\ensuremath{\mathrm{e}}}
+%% The imaginary unit.
+%\def\iu{\ensuremath{\mathrm{i}}}
+%% The differential operator.
+%\def\du{\ensuremath{\mathrm{d}}}
+%% Make hbar upright
+%\def\hbaru{\ensuremath{{\mathrm{\hbar}}}}

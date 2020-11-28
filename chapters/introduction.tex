@@ -8,7 +8,7 @@ This observatory hunts for some of the most elusive particles in our universe, h
 The IceCube Neutrino Observatory was built between 2005 and 2010, but its heritage stretches back several decades.
 Spanning one cubic kilometer of Antarctic ice, the telescope consists of some 60 strings, hot water drilled into the ice, with each string containing a number of photomultiplier tubes, capable of detecting photons originating from processes involving neutrinos---the aforementioned elusive particles.
 
-Measurements of certain neutrino properties may help us understand phenomena such as why the universe is matter-dominated~\autocite{Nunokawa2008} and dark matter~\autocite{Baur2019}.
+Measurements of certain neutrino properties may help us understand phenomena such as why the universe is matter-dominated~\autocite{Chatterjee2013} and dark matter~\autocite{Baur2019}.
 IceCube is also capable of searching for point-like sources~\autocite{Aartsen2020}, and serves in the SuperNova Early Warning System~\autocite{Kopke2011}.
 
 But one thing is the ability to observe derived photons in Antarctic ice; another is reconstruction of this light in order to infer properties of the originating particles.
@@ -30,7 +30,7 @@ To weave a common thread through this document, and ensure the reader is informe
 
 The story of an interaction in IceCube from physics to analysis proceeds at a very high level as follows:
 The universe is created with mechanisms that only allow a certain chirality of neutrinos to interact with forces other than gravity (\vref{sec:the_weak_interaction}).
-At some point an interaction will create such a particle (\vref{sec:neutrino_interactions}), which oscillates between different flavors (\vref{sec:neutrino_oscillations}).
+At some point an interaction will create such a particle (\vref{sec:charged_and_neutral_currents}), which oscillates between different flavors (\vref{sec:neutrino_oscillations}).
 As chance allows some neutrinos to interact in or around the instrumented ice, new particles are created that in turn send out a specific form of light (\vref{sec:cherenkov_radiation}) which the photomultiplier tubes (\vref{sec:doms}) can detect.
 Today each in-ice digital optical module contains one photomultiplier tube.
 With the IceCube upgrade this changes (\vref{sec:icecube_upgrade}), and new optical modules will be fitted with additional photomultiplier tubes which should help with determining the direction of neutrinos.
@@ -47,6 +47,6 @@ Because loss functions are such an important part of any deep learning project, 
 The last part of the thesis concerns the work by the author.
 The data format provided by IceCube is not machine learning friendly, so a new solution fixing those shortcomings was built (\vref{sec:sqlite}).
 So that the reader is on the same page as the author, plots and metrics used for comparison are explained.
-The opponent algorithm is detailed (\vref{sec:opponents}), before the structure of the data itself used in training is explained (\vref{sec:data_structure}) and the algorithm laid out (\vref{sec:algorithm}).
+The opponent algorithm is detailed (\vref{sec:current_reconstruction_methods}), before the algorithm is laid out (\vref{sec:algorithm}).
 
 \end{document}

@@ -4,7 +4,103 @@
 
 \section{Detector}\label{sec:detector}
 
+As we have seen, the neutrino only participates weakly in the Standard Model.
+This makes the neutrino a very elusive particle, able to generally travel very far before interacting.
+The rate of neutrino interactions is a function of the flux \( \phi \), the cross section \( \sigma \),  and the number of target particles \( N_{\text{target}} \), i.e.
+\begin{equation}
+	N_{\Pnu} \propto \phi \times \sigma \times N_{\text{target}},
+\end{equation}
+which means that if your flux is \SI{2e38}{\per\second}, and the cross section \SI{1e-44}{\centi\meter\squared}, you, to paraphrase Roy Schneider, are gonna need a bigger boat.
+But if one thing is a big enough detector, containing a sufficient number of target particles, another is background noise: you generally want to ensure that the only thing interacting within your detector volume is by-products of neutrinos.
+In many cases these secondary particles are muons, but those are plentiful in nature from other sources, and your detector will thus require screening from the outside world.
+
+There are generally two ways of solving this.
+One is to build a container and fill it up with whatever substance suits the purpose, and then finding somewhere to stow it away such that it is shielded from outside charged leptons, typically done by positioning the container inside an abandoned mine deep underground.
+The other way is to utilise nature to its fullest, and find somewhere that both provides the interaction substance \textit{and} shields from unwanted particles.
+
+The Homestake experiment, mentioned in \vref{sec:neutrino_oscillations}, made use of the first type of detector in the late 1960s.
+Many others---such as the Kamioka Observatory in Japan, and the Sudbury Neutrino Observatory in Canada---followed this path, but a race of sorts was soon on to build a detector of the second variety; detailed in~\autocite{Bowen2017}.
+Starting with DUMAND in the 70s, one set of scientists were focused on water Cherenkov detectors.
+In this case on suspends strings of detectors in deep water to observe Cherenkov radiation by charged particles travelling faster than \( c \) through the water.
+DUMAND was never successfully completed, but another team---led by Francis Halzen---was inspired to use ice instead of water, and in 1996, a year after DUMAND's cancellation, set up AMANDA on the South Pole.
+When this proved a succes, funding for the IceCube Neutrino Observatory was approved, and construction completed in 2010.
+
+The IceCube instigators recognised that the Antarctic ice provides an excellent source of neutrino interaction material, and the Earth provides a near perfect shield from background muons.
+\begin{figure}
+     \centering
+     \begin{subfigure}[b]{0.49\textwidth}
+         \centering
+		    \includegraphics[width=\textwidth]{./images/icecube/Icecube-architecture-diagram2009.PNG}
+		    \caption{Image from \url{https://commons.wikimedia.org/wiki/File:Icecube-architecture-diagram2009.PNG}}\label{fig:icecube_detector}
+     \end{subfigure}
+     \hfill
+     \begin{subfigure}[b]{0.4\textwidth}
+         \centering
+		    \includegraphics[width=\textwidth]{./images/icecube/e88_1.png}
+		    \caption{Image from \url{https://physics.aps.org/articles/v7/88}}\label{fig:icecube_event_1}
+     \end{subfigure}
+        \caption{\Vref{fig:icecube_detector} shows an artist rendition of the IceCube detector as a scale comparison to the Eiffel Tower. \Vref{fig:icecube_event_1} shows a neutrino event in IceCube. This is a high energy track-like event, for which angular reconstruction is possible even by eye.}
+        \label{fig:icecube}
+\end{figure}
+The detector is built by using hot water to drill holes in the Antarctic ice \SI{2.5}{\kilo\meter} deep, and lowering down long strings on which are situated the actual Cherenkov light detectors.
+Each string consists of 60 of these detectors, called digital optical modules (DOMs), and each DOM consists of assorted electronics, a photomultiplier tube that does the actual light detection, and shielding from the environment.
+The DOM is further detailed in \vref{sec:doms}.
+
+IceCube is split into the in-ice array, i.e. the stringed DOMs, and an IceTop array.
+This consists of detectors on the surface, housing water Cherenkov detectors that may act as a useful veto on particles: if they were seen by IceTop, they were probably down-going particles.
+
+IceCube records data based on certain triggers (\vref{sec:triggers}), and sends interesting data to the Northern Hemisphere by satellite, with larger datasets sent by sneakernet\footnote{That is, data transported by sneakers, i.e. shipped via physical media rather than the internet.}.
+The surface also hosts the IceCube Lab, containing supporting electronics such as computers and communication systems.
+The whole detector is located near, and supported by, the Amundsen-Scott South Pole station, situated at the Geographic South Pole and administered by the US National Science Foundation.
+
+\begin{figure}
+     \centering
+     \begin{subfigure}[b]{0.4\textwidth}
+         \centering
+		    \includegraphics[width=\textwidth]{./images/particle_physics/10052_2018_6369_Fig3_HTML.png}
+		    \caption{Image from \autocite{Ahlers2018}}\label{fig:ray_types}
+     \end{subfigure}
+     \hfill
+     \begin{subfigure}[b]{0.4\textwidth}
+         \centering
+		    \includegraphics[width=\textwidth]{./images/particle_physics/Figs_all-nu-spectrum-mod.png}
+		    \caption{Image from \autocite{Spiering2012}}\label{fig:neutrino_spectrum}
+     \end{subfigure}
+        \caption{\Vref{fig:ray_types} shows the types of rays relevant to IceCube, \vref{fig:neutrino_spectrum} shows the energy spectrum of neutrinos from different sources.}
+        \label{fig:upgrade_doms}
+\end{figure}
+
+The observatory detects secondary particles from both charged- and neutral current neutrino interactions,
+with the large volume of ice providing a plentiful basin of potentially interacting ice molecules.
+In the case of neutral current interactions, the event signature is that of a cascade: the neutrino scatters of a charged lepton, escaping the detector again, with the deposited energy resulting in electromagnetic and hadronic cascades; hence the name.
+These cascades can be contained fully within the detector, meaning the energy can be easily inferred, but it is difficult to reconstruct a track that points to the origin of the neutrino.
+Charged current interactions, on the other hand, present the possibility of track-like signals, which make for a much better pointing resolution.
+However, the flavour of the neutrino in this case determines the signature:
+\begin{itemize}
+	\item An electron neutrino will produce an electron, which will create an electromagnetic shower, as the electron instigates pair production, and is slowed down by bremsstrahlung. This looks like a cascade signature
+	\item A tau lepton will live very shortly (on the order of \SI{1e-13}{\second}) owing to its massive nature, and decays again creating a cascade
+	\item Muons are special: they do not decay immediately, as taus, and are less affected by the processes stopping electrons. They are thus able to leave long tracks in the detector, a track-like signature
+\end{itemize}
+In the case of a tau neutrino, there is the possibility of another (as of now unseen) signature: the double-bang.
+
 \section{DOMs}\label{sec:doms}
+
+\begin{figure}
+     \centering
+     \begin{subfigure}[b]{0.4\textwidth}
+         \centering
+		    \includegraphics[width=\textwidth]{./images/icecube/ICECUBE_dom_taklampa.jpg}
+		    \caption{Image from \url{https://commons.wikimedia.org/wiki/File:ICECUBE_dom_taklampa.jpg}}\label{fig:dom_pic}
+     \end{subfigure}
+     \hfill
+     \begin{subfigure}[b]{0.4\textwidth}
+         \centering
+		    \includegraphics[width=\textwidth]{./images/icecube/5-DOM-Picture.png}
+		    \caption{Image from \url{https://icecube.wisc.edu/gallery/view/140}}\label{fig:dom_schematic}
+     \end{subfigure}
+        \caption{\Vref{fig:dom_pic} shows a picture of a DOM, \vref{fig:dom_schematic} shows a schematic of a DOM.}
+        \label{fig:doms}
+\end{figure}
 
 \section{Triggers}\label{sec:triggers}
 
@@ -18,6 +114,33 @@
 
 \section{IceCube upgrade}\label{sec:icecube_upgrade}
 
+\begin{figure}
+     \centering
+     \begin{subfigure}[b]{0.4\textwidth}
+         \centering
+		    \includegraphics[width=\textwidth]{./images/icecube/UpG_OpticalSensors_SensorsOnly_v2.png}
+		    \caption{Image from \url{https://www.nbi.ku.dk/english/research/experimental-particle-physics/icecube/billeder/UpG_OpticalSensors_SensorsOnly_v2.png}}\label{fig:upgrade_all_doms}
+     \end{subfigure}
+     \hfill
+     \begin{subfigure}[b]{0.4\textwidth}
+         \centering
+		    \includegraphics[width=\textwidth]{./images/icecube/mDOM_exploded_view-2.pdf.png}
+		    \caption{Image from \url{https://www.sense-pro.org/portraits/experiments/icecube}}\label{fig:mdom_schematic}
+     \end{subfigure}
+        \caption{\Vref{fig:upgrade_all_doms} shows DOMs installed with the IceCube upgrade, \vref{fig:mdom_schematic} shows an exploded view of an mDOM.}
+        \label{fig:upgrade_doms}
+\end{figure}
 
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=\textwidth]{./images/particle_physics/DGV3K.png}
+    \caption{Stopping power}\label{fig:stopping_power}
+\end{figure}
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=\textwidth]{./images/particle_physics/6-Figure1-1.png}
+    \caption{Glashow resonance. Image from \url{https://www.semanticscholar.org/paper/Glashow-resonance-as-a-window-into-cosmic-neutrino-Barger-Fu/9922dfd291f92a97219a0abbee9c0303ee9fbb36}}\label{fig:glashow_resonance}
+\end{figure}
 
 \end{document}
