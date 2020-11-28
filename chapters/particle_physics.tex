@@ -397,6 +397,24 @@ which in the ultra-relativistic limit becomes
 	P(\Pnu_{\Pmu} \rightarrow \Pnu_{\Pe}) = \sin^2{\left( 2 \theta \right)} \sin^2{\left[ \frac{\left( m_{1}^{2} - m_{2}^{2} \right) L}{4 E_{\Pnu}} \right]}.
 \end{equation}
 In plain words, then, the probability, or oscillation, depends on 1) the mixing angle, 2) the difference of the squared masses of the mass eigenstates, 3) the energy of the neutrino and 4) the length it travels.
+An example
+
+\begin{figure}
+     \centering
+     \begin{subfigure}[b]{0.49\textwidth}
+         \centering
+		    \includegraphics[width=\textwidth]{./images/particle_physics/Oscillations_electron_long.svg.png}
+		    \caption{Image from \url{https://da.m.wikipedia.org/wiki/Fil:Cherenkov_Wavefront.svg}}\label{fig:long_oscillations}
+     \end{subfigure}
+     \hfill
+     \begin{subfigure}[b]{0.4\textwidth}
+         \centering
+		    \includegraphics[width=\textwidth]{./images/particle_physics/nutauappearonly.png}
+		    \caption{Image from \url{https://www.nbi.ku.dk/english/research/experimental-particle-physics/icecube/neutrino-oscillation/}}\label{fig:icecube_oscillations}
+     \end{subfigure}
+        \caption{\Vref{fig:long_oscillations} shows the theoretical calculation of neutrino oscillations on the long baseline. Here, an electron neutrino is created (black line), and has some probability of turning into a muon neutrino (blue line) and tau neutrino (red line). \Vref{fig:icecube_oscillations} shows the muon neutrino to tau neutrino probability in IceCube, a function of both energy and pathlength (parameterised by the cosine of the zenith angle of the neutrino). Here one can see the effects of neutrinos interacting with matter, the MSW effect, changing the energy levels of the mass eigenstates during propagation on interactions with electrons in the dense core of the Earth. This changes the oscillation profile, seen for upgoing neutrinos at energies below \SI{10}{\giga\electronvolt}.}
+        \label{fig:ocsillations}
+\end{figure}
 
 In many cases one uses the survival probability, which is
 \begin{equation}\label{eq:survival_probability_1}
@@ -466,6 +484,35 @@ In this case, applying a CP transformation on a right-handed anti-neutrino resul
 Therefore, if the complex phase \( \delta \) of the PMNS matrix is zero, there will be no CP violation in the weak sector.
 CP violation is required for explaining the baryon asymmetry, and has been ruled out of both the strong- and the electromagnetic interactions, and so it is hoped that neutrino oscillations will provide the answer.
 
+This of course also means that if we observe neutrino oscillations, it cannot be a massless particle.
+However, the observable in oscillation probabilities is the difference of the squared masses, meaning it is the only thing we can experimentally say anything about.
+As of this writing, the best fit values from \url{nu-fit.org} is on the order of
+\begin{align}
+	\Delta{m_{2 1}^{2}} & \approx \SI{7.4e-5}{\electronvolt\squared} \\
+	\lvert \Delta{m_{3 2}^{2}} \lvert & \approx \SI{2.5e-3}{\electronvolt\squared}.
+\end{align}
+
+The absolute mass scale is constrained by the density of relic neutrinos from The Big Bang to be~\autocite{Thomson2013}
+\begin{equation}
+	\sum_{i = 1}^{3} m_{\Pnu_{i}} \lesssim \SI{1}{\electronvolt}.
+\end{equation}
+Because we only know the mass differences, it is not a priori possible to say in which order the mass hierarchy goes.
+All we can say currently, is that the difference between \( \Pnu_{1} \) and \( \Pnu_{2} \) is much less than the difference between \( \Pnu_{3} \) and \( \Pnu_{2} \), but we do not know if \( \Pnu_{3} \) is heavier than the other two flavours.
+The mass ordering problem can tested using IceCube~\autocite{Leuermann2018}.
+
+This should be cause for some consternation, or---perhaps more---excitement.
+First of all, the Standard Model does not automatically describe neutrino mass, and if it is introduced into the Lagrangian it requires that right-handed chiral neutrinos exist.
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=0.7\textwidth]{./images/particle_physics/masses-600x230.jpg}
+    \caption{Particle mass scales. The neutrinos are a million times lighter than the electron, the lightest charged lepton. The top quark also stands out in the hierarchy as a very heavy particle. Image from \url{http://hitoshi.berkeley.edu}}\label{fig:particle_masses}
+\end{figure}
+Even so, the masses of the neutrinos are on the order of \num{10e6} smaller than the electron (see \vref{fig:particle_masses}, and so something else than the Higgs mechanism could be the cause of their mass---this is exciting!
+Suggestions, such as the seesaw mechanism, attempt to explain this, by introducing a heavy neutrino partner to each one of the lighter types.
+Additionally, neutrinos and anti-neutrinos may be the same particle, a so-called Majorana particle.
+
+All this to say that the study of neutrinos provide plenty of exciting avenues of physics beyond the Standard Model, and IceCube is in an excellent position to provide answers, and as such the quality of the reconstruction of the incident neutrinos, especially the energy and the zenith angle, is of the highest importance.
+
 \section{Cherenkov radiation}\label{sec:cherenkov_radiation}
 
 Light, in a vacuum, moves at the universally constant speed of \( c \)
@@ -508,12 +555,6 @@ These will pick up Cherenkov cones as seen in \vref{fig:cherenkov_cone}, and fro
 
 \begin{figure}[ht]
     \centering
-    \includegraphics[width=\textwidth]{./images/particle_physics/masses-600x230.jpg}
-    \caption{Particle masses. Image from \url{http://hitoshi.berkeley.edu}}\label{fig:particle_masses}
-\end{figure}
-
-\begin{figure}[ht]
-    \centering
     \includegraphics[width=\textwidth]{./images/particle_physics/Right_left_helicity.jpg}
     \caption{Helicity. Image from \url{https://en.wikipedia.org/wiki/File:Right_left_helicity.jpg}}\label{fig:helicity}
 \end{figure}
@@ -523,19 +564,6 @@ These will pick up Cherenkov cones as seen in \vref{fig:cherenkov_cone}, and fro
     \includegraphics[width=\textwidth]{./images/particle_physics/10052_2018_6369_Fig3_HTML.png}
     \caption{IceCube ray types. \url{https://link.springer.com/article/10.1140/epjc/s10052-018-6369-9}}
 \end{figure}
-
-\begin{figure}[ht]
-    \centering
-    \includegraphics[width=\textwidth]{./images/particle_physics/Oscillations_electron_long.svg.png}
-    \caption{Oscillations. Image from \url{https://en.wikipedia.org/wiki/File:Oscillations_electron_long.svg}}\label{fig:oscillations}
-\end{figure}
-
-\begin{figure}[ht]
-    \centering
-    \includegraphics[width=\textwidth]{./images/particle_physics/masses-of-particles.jpg}
-    \caption{Mass hierarchies. Image from \url{http://universe-review.ca/F15-particle01.htm}}\label{fig:oscillations}
-\end{figure}
-
 
 \begin{figure}[ht]
     \centering
