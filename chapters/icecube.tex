@@ -57,13 +57,13 @@ The whole detector is located near, and supported by, the Amundsen-Scott South P
      \centering
      \begin{subfigure}[b]{0.4\textwidth}
          \centering
-		    \includegraphics[width=\textwidth]{./images/particle_physics/10052_2018_6369_Fig3_HTML.png}
+		    \includegraphics[width=\textwidth]{./images/icecube/10052_2018_6369_Fig3_HTML.png}
 		    \caption{Image from \autocite{Ahlers2018}}\label{fig:ray_types}
      \end{subfigure}
      \hfill
      \begin{subfigure}[b]{0.4\textwidth}
          \centering
-		    \includegraphics[width=\textwidth]{./images/particle_physics/Figs_all-nu-spectrum-mod.png}
+		    \includegraphics[width=\textwidth]{./images/icecube/Figs_all-nu-spectrum-mod.png}
 		    \caption{Image from \autocite{Spiering2012}}\label{fig:neutrino_spectrum}
      \end{subfigure}
         \caption{\Vref{fig:ray_types} shows the types of rays relevant to IceCube, \vref{fig:neutrino_spectrum} shows the energy spectrum of neutrinos from different sources.}
@@ -81,9 +81,29 @@ However, the flavour of the neutrino in this case determines the signature:
 	\item A tau lepton will live very shortly (on the order of \SI{1e-13}{\second}) owing to its massive nature, and decays again creating a cascade
 	\item Muons are special: they do not decay immediately, as taus, and are less affected by the processes stopping electrons. They are thus able to leave long tracks in the detector, a track-like signature
 \end{itemize}
-In the case of a tau neutrino, there is the possibility of another (as of now unseen) signature: the double-bang.
+All three flavours create a hadronic cascade at the interaction vertex, from \( X \) in \( \Pnu_{\alpha} + N \rightarrow \Plepton_{\alpha} + X \).
+\todo[inline]{Gotta explain e-m and hadronic cascades at some point}
+In the case of a tau neutrino, there is the possibility of another (as of yet unseen) signature: the double-bang.
+A tau will have a decay length of \SI{50}{\meter\per\peta\electronvolt}~\autocite{Ahlers2018}, so very high energy tau neutrinos may interact and first create a hadronic cascade, then a track from a high energy tau, which then decays \SI{50}{\meter} or more away.
+\todo[inline]{Maybe expound on double-bangs and what they're good for? Maybe not.}
+The signatures can be seen in ~\vref{fig:event_signatures}.
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=\textwidth]{./images/icecube/Typical-event-signatures-observed-by-IceCube-a-track-like-event-left-a-showerlike.png}
+    \caption{Three IceCube event signatures. The size of each coloured sphere is proportional to the charge of the pulse detected by the PMT, and the colour is related to the timing of the signal; red hits are earlier than blue. The left figure shows a track-like muon event, while the signature in the middle is a cascade. On the right is shown a double-bang event, where two cascades and a track is seen. The two left-most events are real, the double-bang is simulated. Image from~\autocite{Meagher2016}.}\label{fig:event_signatures}
+\end{figure}
 
 \section{DOMs}\label{sec:doms}
+
+The DOMs are essentially in-ice, high quality digital cameras, capable of detecting single photons~\autocite{Aartsen2017}.
+They are self-contained in the sense that all recording capabilities are on-device, and according to pre-set triggers (\vref{sec:triggers}) will record and save a pulse and transmit it via cabling to IceCube Lab.
+When a photon is detected, the DOM starts a recording, which lasts for \SI{6.4}{\micro\second} such that later arriving photons are included in the \enquote{hit}~\autocite{Aartsen2017}.
+This operation is independent, and as such each DOM does not know what other DOMs are seeing.
+However, the PMT hit rate is recorded in millisecond intervals, because an overall increase in hits might indicate a cosmic event, which must be acted upon promptly, and a separate local coincidence wiring---connecting closest DOMs---ensures quick recognition of (near)simultaneous hits~\autocite{Aartsen2017}.
+
+The PMT waveforms are digitised by two circuits, ATWD (Analog Transient Waveform Digitiser) and fADC (fast Analog to Digital Converter).
+These differ in their sampling time, \SI{427}{\nano\second} for ATWD, \SI{6.4}{\micro\second} for fADC.
+\todo[inline]{Expound on digitisers.}
 
 \begin{figure}
      \centering
@@ -133,13 +153,13 @@ In the case of a tau neutrino, there is the possibility of another (as of now un
 
 \begin{figure}[ht]
     \centering
-    \includegraphics[width=\textwidth]{./images/particle_physics/DGV3K.png}
+    \includegraphics[width=\textwidth]{./images/icecube/DGV3K.png}
     \caption{Stopping power}\label{fig:stopping_power}
 \end{figure}
 
 \begin{figure}[ht]
     \centering
-    \includegraphics[width=\textwidth]{./images/particle_physics/6-Figure1-1.png}
+    \includegraphics[width=\textwidth]{./images/icecube/6-Figure1-1.png}
     \caption{Glashow resonance. Image from \url{https://www.semanticscholar.org/paper/Glashow-resonance-as-a-window-into-cosmic-neutrino-Barger-Fu/9922dfd291f92a97219a0abbee9c0303ee9fbb36}}\label{fig:glashow_resonance}
 \end{figure}
 
