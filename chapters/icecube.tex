@@ -159,7 +159,7 @@ The reconstruction is important as a filter, because the largest source of noise
 Using earth-filtering is the easiest way of determining whether a muon is atmospheric or caused by a neutrino, as the ground stops all of the former, but allows passage of the latter, but this does present a challenge: if one wants to determine (approximately) whence a muon came, one needs to assemble the disparate hits in the detector into something resembling a line.
 As several thousand events are read out each second, the algorithm must be fast, and fast on the available hardware (which tends not to be replaced often, seeing as how it is situated at one of the hardest to reach locations on Earth).
 The servers at the IceCube Lab perform first a quick reconstruction, \enquote{linefit}~\autocite{Aartsen2014}---a minimizer using a Huber penalty---used as a seed for the \enquote{Single-Photo-Electron-Fit}, a maximum likelihood estimation~\autocite{Ahrens2004}.
-This reconstruction has a median angular resolution (the arc-distance between reconstruction and the true track) on Monte Carlo data of \( \theta_{\text{med}} = \SI{4.211}{\degree} \)~\autocite{Aartsen2014}.
+This reconstruction has a median angular resolution (the arc-distance between reconstruction and the true track) on Monte Carlo (MC, \vref{sec:monte_carlo_simulation}) data of \( \theta_{\text{med}} = \SI{4.211}{\degree} \)~\autocite{Aartsen2014}.
 
 \section{Post processing}\label{sec:post_processing}
 
@@ -178,6 +178,17 @@ L2 is run on files received from the Pole.
 It first passes finds events passing the SMT3 trigger, meaning the SMT described in \vref{sec:triggers} with \( N = 3 \).
 Next, a Seeded Radius-Time (SRT) cleaning algorithm is run, which relies on the fact that Cherenkov photons will be clustered in space and time, while noise is random.
 The SRT algorithm uses this on the LC hits, which are used as seeds, with non-LC hits outside some pre-set space-time volume discarded, while those inside are kept and used as seeds for further iteration.
+Lastly, a DeepCore fiducial volume, and a DeepCore veto volume are defined, and using a center of gravity calculation using hits in the fiducial volume, hits from the veto region are discarded based on their derived velocity, on the basis that such a hit might be related to a crossing muon.
+
+\subsection{L3}\label{sec:l3}
+
+At level 3, a number of cuts are made on several derived variables, described in~\autocite{Blot2020}.
+The main point of this level is to bring the data into agreement with MC, the discrepancies mainly stemming from processes for which there is no simulation.
+\todo[inline]{More about L3}
+
+L3 removes around \SI{95}{\percent} of the background muon events, \SI{99}{\percent} of pure noise and keeps \SI{60}{\percent} of atmospheric neutrino events relative to level 2, such that the event rate is below \SI{1}{\hertz}~\autocite{Blot2020}.
+
+\subsection{L4}\label{sec:l4}
 
 \section{Current reconstruction methods}\label{sec:current_reconstruction_methods}
 
