@@ -2,6 +2,10 @@
 
 \begin{document}
 
+IceCube's raison d'être is the study of neutrinos, its singular tool the conversion of light pulses into particle properties.
+This is not an easy task, inasmuch as nature rarely exhibits the simplicity of its governing equations.
+IceCube consists of two primary detectors, IceCube and DeepCore, with a third, \enquote{the Upgrade}, expected to be installed in the next few years.
+
 \section{Detector}\label{sec:detector}
 
 As we have seen, the neutrino only participates weakly in the Standard Model.
@@ -45,32 +49,35 @@ The IceCube instigators recognised that the Antarctic ice provides an excellent 
 The detector is built by using hot water to drill holes in the Antarctic ice \SI{2.5}{\kilo\meter} deep, and lowering down long strings on which are situated the actual Cherenkov light detectors.
 Each string consists of 60 of these detectors, called digital optical modules (DOMs), and each DOM consists of assorted electronics, a photomultiplier tube that does the actual light detection, and shielding from the environment.
 The DOM is further detailed in \vref{sec:doms}.
-
-IceCube is split into the in-ice array, i.e. the stringed DOMs, and an IceTop array.
-This consists of detectors on the surface, housing water Cherenkov detectors that may act as a useful veto on particles: if they were seen by IceTop, they were probably down-going particles.
-
-IceCube records data based on certain triggers (\vref{sec:triggers}), and sends interesting data to the Northern Hemisphere by satellite, with larger datasets sent by sneakernet\footnote{That is, data transported by sneakers, i.e. shipped via physical media rather than the internet.}.
-The surface also hosts the IceCube Lab, containing supporting electronics such as computers and communication systems.
-The whole detector is located near, and supported by, the Amundsen-Scott South Pole station, situated at the Geographic South Pole and administered by the US National Science Foundation.
-
 \begin{figure}
      \centering
-     \begin{subfigure}[b]{0.4\textwidth}
+     \begin{subfigure}[b]{0.45\textwidth}
          \centering
 		    \includegraphics[width=\textwidth]{./images/icecube/10052_2018_6369_Fig3_HTML.png}
-		    \caption{Image from \autocite{Ahlers2018}}\label{fig:ray_types}
+		    \caption{}\label{fig:ray_types}
      \end{subfigure}
      \hfill
-     \begin{subfigure}[b]{0.4\textwidth}
+     \begin{subfigure}[b]{0.45\textwidth}
          \centering
 		    \includegraphics[width=\textwidth]{./images/icecube/Figs_all-nu-spectrum-mod.png}
-		    \caption{Image from \autocite{Spiering2012}}\label{fig:neutrino_spectrum}
+		    \caption{}\label{fig:neutrino_spectrum}
      \end{subfigure}
-        \caption{\Vref{fig:ray_types} shows the types of rays relevant to IceCube, \vref{fig:neutrino_spectrum} shows the energy spectrum of neutrinos from different sources.}
-        \label{fig:upgrade_doms}
+        \caption{\Vref{fig:ray_types}~\autocite{Ahlers2018} shows the types of rays relevant to IceCube, defining up- and down-going muons. Neutrinos---created by atmospheric interaction with cosmic rays or in cosmic processes---interact either in the atmosphere (creating background muons), or in the Earth (creating up-going muons). \Vref{fig:neutrino_spectrum}~\autocite{Spiering2012} shows the energy spectrum of neutrinos from different sources. Atmospheric neutrinos dominate in the energy region supported by IceCube.}
+        \label{fig:rays_and_spectrum}
 \end{figure}
+IceCube is split into the in-ice array, i.e. the stringed DOMs, and an IceTop array.
+This consists of detectors on the surface, housing water Cherenkov detectors that may act as a useful veto on particles: if they were seen by IceTop, they were probably down-going particles, and thus noise, while the neutrino events present as up-going particles created via interactions in the Earth, where only neutrinos penetrate; see \vref{fig:ray_types}.
+The detector is tuned to particles in the \si{\giga\electronvolt} to \si{\peta\electronvolt} range, where atmospheric neutrinos dominate, as seen in \vref{fig:neutrino_spectrum}.
 
-The observatory detects secondary particles from both charged- and neutral current neutrino interactions,
+IceCube records data based on certain triggers (\vref{sec:triggers}), and sends filtered data to the Northern Hemisphere by satellite (about \SI{100}{\giga\byte\per\day}~\autocite{Kelley2014}), with the raw data sent by sneakernet\footnote{That is, data transported by sneakers, i.e. shipped via physical media rather than the internet.} (about \SI{1}{\tera\byte\per\day}~\autocite{Kelley2014}).
+The surface also hosts the IceCube Lab, containing supporting electronics such as computers and communication systems.
+The whole detector is located near, and supported by, the Amundsen-Scott South Pole station, situated at the Geographic South Pole and administered by the US National Science Foundation.
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=0.7\textwidth]{./images/icecube/cherenkov_icecube.png}
+    \caption{Detection modes of the AMANDA detector (built following the same principles as IceCube). This makes clear that the Cherenkov light is what is actually observed, from a muon in the left figure, and a cascade in the right. The track-like signatures are detected from Cherenkov cones, while the cascades present as Cherenkov spheres. Image from~\autocite{Ahrens2004}.}\label{fig:cherenkov_icecube}
+\end{figure}
+The observatory detects Cherenkov light from secondary particles---visualised in \vref{fig:cherenkov_icecube}---from both charged- and neutral current neutrino interactions,
 with the large volume of ice providing a plentiful basin of potentially interacting ice molecules.
 In the case of neutral current interactions, the event signature is that of a cascade: the neutrino scatters of a charged lepton, escaping the detector again, with the deposited energy resulting in electromagnetic and hadronic cascades; hence the name.
 These cascades can be contained fully within the detector, meaning the energy can be easily inferred, but it is difficult to reconstruct a track that points to the origin of the neutrino.
@@ -81,7 +88,7 @@ However, the flavour of the neutrino in this case determines the signature:
 	\item A tau lepton will live very shortly (on the order of \SI{1e-13}{\second}) owing to its massive nature, and decays again creating a cascade
 	\item Muons are special: they do not decay immediately, as taus, and are less affected by the processes stopping electrons. They are thus able to leave long tracks in the detector, a track-like signature
 \end{itemize}
-All three flavours create a hadronic cascade at the interaction vertex, from \( X \) in \( \Pnu_{\alpha} + N \rightarrow \Plepton_{\alpha} + X \).
+All three flavours create a hadronic cascade at the interaction vertex, \( X \) in \( \Pnu_{\alpha} + N \rightarrow \Plepton_{\alpha} + X \) with \( N \) a nucleon, \( \Pnu_{\alpha} \) a neutrino and \( \Plepton_{\alpha} \) a lepton, both of flavour \( \alpha \).
 \todo[inline]{Gotta explain e-m and hadronic cascades at some point}
 In the case of a tau neutrino, there is the possibility of another (as of yet unseen) signature: the double-bang.
 A tau will have a decay length of \SI{50}{\meter\per\peta\electronvolt}~\autocite{Ahlers2018}, so very high energy tau neutrinos may interact and first create a hadronic cascade, then a track from a high energy tau, which then decays \SI{50}{\meter} or more away.
@@ -95,15 +102,29 @@ The signatures can be seen in ~\vref{fig:event_signatures}.
 
 \section{DOMs}\label{sec:doms}
 
-The DOMs are essentially in-ice, high quality digital cameras, capable of detecting single photons~\autocite{Aartsen2017}.
-They are self-contained in the sense that all recording capabilities are on-device, and according to pre-set triggers (\vref{sec:triggers}) will record and save a pulse and transmit it via cabling to IceCube Lab.
-When a photon is detected, the DOM starts a recording, which lasts for \SI{6.4}{\micro\second} such that later arriving photons are included in the \enquote{hit}~\autocite{Aartsen2017}.
+The DOMs are situated on \SI{2.5}{\kilo\meter} long strings, spaced \SI{17}{\meter} apart (\SI{7}{\meter} for DeepCore, \SI{2.4}{\meter} for Upgrade).
+They are essentially in-ice, high quality digital cameras, capable of detecting single photons~\autocite{Aartsen2017}.
+Being self-contained in the sense that all recording capabilities are on-device, and according to pre-set triggers (\vref{sec:triggers}), they will record and save pulses and transmit them via cabling to IceCube Lab on the surface.
+When a photon is detected, the DOM starts a recording, lasting for up to \SI{6.4}{\micro\second}, such that later arriving photons are included in the \enquote{hit}~\autocite{Aartsen2017}.
 This operation is independent, and as such each DOM does not know what other DOMs are seeing.
 However, the PMT hit rate is recorded in millisecond intervals, because an overall increase in hits might indicate a cosmic event, which must be acted upon promptly, and a separate local coincidence wiring---connecting closest DOMs---ensures quick recognition of (near)simultaneous hits~\autocite{Aartsen2017}.
 
 The PMT waveforms are digitised by two circuits, ATWD (Analog Transient Waveform Digitiser) and fADC (fast Analog to Digital Converter).
 These differ in their sampling time, \SI{427}{\nano\second} for ATWD, \SI{6.4}{\micro\second} for fADC.
 \todo[inline]{Expound on digitisers.}
+
+The DOMs also contain \enquote{flasher boards} outfitted with LEDs, used for calibration purposes such as measuring their positions and the optical properties of the ice.
+
+It should be noted that the DOMs are pretty reliable; by 2016 87 DOMs were not operational~\autocite{Aartsen2017}; this is rather fortuitous, inasmuch as they are non-repairable (at least they're impossible to retrieve from the ice).
+
+The location of the detector, in the dark ice deep beneath the Antarctic, leads to the majority of noise in the PMTs being \enquote{dark noise}, that is quantum effects such as thermal emission, radioactive decays and the luminescence of the glass; these effects have no outside sources, but have a rate of \SIrange{560}{780}{\hertz}~\autocite{Aartsen2017}.
+The background muons, for comparison, are at a rate of \SIrange{5}{25}{\hertz}~\autocite{Aartsen2017}.
+
+Interestingly, the noise rate decreases after installation, as the DOMs \enquote{freeze in}~\autocite{Aartsen2017}.
+
+As can be seen in \vref{fig:dom_schematic}, the entire southern hemisphere of the DOMs is taken up by the PMT.
+Accordingly, all DOMs point downwards, a design choice changed in the Upgrade (\vref{sec:icecube_upgrade}).
+Communication and power is handled by the cabling---clearly seen in \vref{fig:dom_pic}---, connecting all DOMs on a string, terminating on the surface in the IceCube Lab.
 
 \begin{figure}
      \centering
@@ -116,21 +137,53 @@ These differ in their sampling time, \SI{427}{\nano\second} for ATWD, \SI{6.4}{\
      \begin{subfigure}[b]{0.4\textwidth}
          \centering
 		    \includegraphics[width=\textwidth]{./images/icecube/5-DOM-Picture.png}
-		    \caption{Image from \url{https://icecube.wisc.edu/gallery/view/140}}\label{fig:dom_schematic}
+		    \caption{}\label{fig:dom_schematic}
      \end{subfigure}
-        \caption{\Vref{fig:dom_pic} shows a picture of a DOM, \vref{fig:dom_schematic} shows a schematic of a DOM.}
+        \caption{\Vref{fig:dom_pic} shows a picture of a DOM, \vref{fig:dom_schematic}~\autocite{Abbasi2009} shows a schematic of a DOM.}
         \label{fig:doms}
 \end{figure}
 
-\section{Triggers}\label{sec:triggers}
+\section{Triggers and on-pole reconstruction}\label{sec:triggers}
+
+As any other particle detector, IceCube employs triggers to maintain the otherwise unmanageable data levels at a reasonable size.
+The raw data rate, after triggers have been applied, is \SI{1}{\tera\byte\per\day}, which is whittled down to around \SI{100}{\giga\byte} by event selections performed by the on-Pole servers, appropriate for transfer via satellite to the Northern Hemisphere~\autocite{Kelley2014}, where events can be analysed further.
+There are several triggers at work, with different functionalities in mind; one trigger, the \enquote{Single Multiplicity Trigger} (SMT), uses the local coincidence wiring and acts when \( N \) or more locally coincident hits (LC) are detected within a sliding window \( n \) \si{\micro\second}, extended until the local coincidence condition is no longer satisfied.
+With \( N = 8 \) and \( n = 5 \) the hit rate of this particular trigger is \SI{2100}{\hertz}~\autocite{Kelley2014}.
+Another is the string trigger, looking for a certain number of hits along a string, useful for slow-moving, completely up-going, muons.
+In general, the triggers rely on the speed of light in ice to figure out whether hits are causally connected, or appear to be noise.
+Additionally, because an event may fulfil the conditions set out in several triggers, hit-merging is performed, ensuring that unique hits are not present in several events.
+On the other extreme, events can be coincident, needing algorithms to split events from each other.
+
+When triggers have been activated, detector data is sent to IceCube Lab, which uses on-premise servers to perform fast event selection and preliminary reconstruction to determine a) if a muon is up- or down-going and b) whether several muons are present in one event.
+The reconstruction is important as a filter, because the largest source of noise in the detector comes from background atmospheric muons.
+Using earth-filtering is the easiest way of determining whether a muon is atmospheric or caused by a neutrino, as the ground stops all of the former, but allows passage of the latter, but this does present a challenge: if one wants to determine (approximately) whence a muon came, one needs to assemble the disparate hits in the detector into something resembling a line.
+As several thousand events are read out each second, the algorithm must be fast, and fast on the available hardware (which tends not to be replaced often, seeing as how it is situated at one of the hardest to reach locations on Earth).
+The servers at the IceCube Lab perform first a quick reconstruction, \enquote{linefit}~\autocite{Aartsen2014}---a minimizer using a Huber penalty---used as a seed for the \enquote{Single-Photo-Electron-Fit}, a maximum likelihood estimation~\autocite{Ahrens2004}.
+This reconstruction has a median angular resolution (the arc-distance between reconstruction and the true track) on Monte Carlo data of \( \theta_{\text{med}} = \SI{4.211}{\degree} \)~\autocite{Aartsen2014}.
 
 \section{Post processing}\label{sec:post_processing}
 
-\section{Levels}\label{sec:levels}
+%\section{Levels}\label{sec:levels}
+
+When data arrives from the Pole, different analysis groups apply different post-processing measures.
+In the following we shall focus on the methods applied by the oscillation working group, a suite of processing software termed \enquote{oscNext}, documented in~\autocite{Blot2020}.
+Six levels are used, each removing different types of noise and muons using several different methods (some of which are machine learning based).
+The muon and noise is reduced by a factor \( \mathcal{O}(10^{5}) \) by the post-processing, and at the final level a neutrino rate of \( \mathcal{O}(\SI{1}{\milli\hertz}) \) survives with a few \% background muons and almost no noise.
+
+The post-processing levels are shortly touched on in the following.
+
+\subsection{L2}\label{sec:l2}
+
+L2 is run on files received from the Pole.
+It first passes finds events passing the SMT3 trigger, meaning the SMT described in \vref{sec:triggers} with \( N = 3 \).
+Next, a Seeded Radius-Time (SRT) cleaning algorithm is run, which relies on the fact that Cherenkov photons will be clustered in space and time, while noise is random.
+The SRT algorithm uses this on the LC hits, which are used as seeds, with non-LC hits outside some pre-set space-time volume discarded, while those inside are kept and used as seeds for further iteration.
 
 \section{Current reconstruction methods}\label{sec:current_reconstruction_methods}
 
 \section{I3 file format}\label{sec:i3_file_format}
+
+\section{DeepCore}\label{sec:deepcore}
 
 \section{IceCube upgrade}\label{sec:icecube_upgrade}
 
@@ -139,16 +192,47 @@ These differ in their sampling time, \SI{427}{\nano\second} for ATWD, \SI{6.4}{\
      \begin{subfigure}[b]{0.4\textwidth}
          \centering
 		    \includegraphics[width=\textwidth]{./images/icecube/UpG_OpticalSensors_SensorsOnly_v2.png}
-		    \caption{Image from \url{https://www.nbi.ku.dk/english/research/experimental-particle-physics/icecube/billeder/UpG_OpticalSensors_SensorsOnly_v2.png}}\label{fig:upgrade_all_doms}
+		    \caption{}\label{fig:upgrade_all_doms}
      \end{subfigure}
      \hfill
      \begin{subfigure}[b]{0.4\textwidth}
          \centering
-		    \includegraphics[width=\textwidth]{./images/icecube/mDOM_exploded_view-2.pdf.png}
-		    \caption{Image from \url{https://www.sense-pro.org/portraits/experiments/icecube}}\label{fig:mdom_schematic}
+		    \includegraphics[width=0.5\textwidth]{./images/icecube/mDOM_exploded_view-2.pdf.png}
+		    \caption{}\label{fig:mdom_schematic}
      \end{subfigure}
-        \caption{\Vref{fig:upgrade_all_doms} shows DOMs installed with the IceCube upgrade, \vref{fig:mdom_schematic} shows an exploded view of an mDOM.}
-        \label{fig:upgrade_doms}
+        \caption{\Vref{fig:upgrade_all_doms} shows DOMs installed with the IceCube upgrade, \vref{fig:mdom_schematic}~\autocite{Classen2018} shows an exploded view of an mDOM.
+        \Vref{fig:upgrade_all_doms} is from the IceCube Collaboration, fetched from \url{https://icecube.wisc.edu/gallery/press/view/2328}}\label{fig:upgrade_doms}
+\end{figure}
+
+\begin{figure}
+	\begin{subfigure}{\linewidth}
+		\centering
+		\includegraphics[width=0.5\linewidth]{./images/icecube/UpG_OpticalSensors_SensorsOnly_v2.png}
+		\caption{}\label{fig:upgrade_all_doms}
+	\end{subfigure}\\[1ex]
+	\begin{subfigure}{\linewidth}
+		\centering
+		\includegraphics[width=0.5\linewidth]{./images/icecube/comparison_updated.JPG}
+		\caption{}\label{fig:improved_event_upgrade}
+	\end{subfigure}
+	\caption{\Vref{fig:upgrade_all_doms} shows new DOM types installed with the IceCube upgrade. \Vref{fig:improved_event_upgrade} shows a simulated \SI{3.8}{\giga\electronvolt} track-like event and its Cherenkov cone. More DOMs light up in the Upgrade configuration, giving more information for track reconstruction. Figures are from the IceCube Collaboration, \url{https://icecube.wisc.edu/gallery/press/view/2328}}\label{fig:upgrade_doms}
+\end{figure}
+
+\begin{figure}
+     \centering
+     \begin{subfigure}[b]{0.4\textwidth}
+         \centering
+		    \includegraphics[width=\textwidth]{./images/icecube/4-VetoView2_labeledStringswIcetops.jpg}
+		    \caption{Image from \url{https://icecube.wisc.edu/gallery/view/140}}\label{fig:icecube_string_pattern}
+     \end{subfigure}
+     \hfill
+     \begin{subfigure}[b]{0.4\textwidth}
+         \centering
+		    \includegraphics[width=\textwidth]{./images/icecube/Upgrade_Spacing.jpg}
+		    \caption{Image from \url{https://icecube.wisc.edu/news/view/605}}\label{fig:upgrade_string_pattern}
+     \end{subfigure}
+        \caption{\Vref{fig:icecube_string_pattern} shows the string pattern of IceCube and DeepCore, \vref{fig:upgrade_string_pattern} shows the proposed upgrade.}
+        \label{fig:string_patterns}
 \end{figure}
 
 \begin{figure}[ht]
