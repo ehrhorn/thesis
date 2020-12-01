@@ -177,7 +177,7 @@ The post-processing levels are shortly touched on in the following.
 L2 is run on files received from the Pole.
 It first passes finds events passing the SMT3 trigger, meaning the SMT described in \vref{sec:triggers} with \( N = 3 \).
 Next, a Seeded Radius-Time (SRT) cleaning algorithm is run, which relies on the fact that Cherenkov photons will be clustered in space and time, while noise is random.
-The SRT algorithm uses this on the LC hits, which are used as seeds, with non-LC hits outside some pre-set space-time volume discarded, while those inside are kept and used as seeds for further iteration.
+The SRT algorithm uses this on the LC hits, used as seeds, with non-LC hits outside some pre-set space-time volume discarded, while those inside are kept and used as seeds for further iteration.
 Lastly, a DeepCore fiducial volume, and a DeepCore veto volume are defined, and using a center of gravity calculation using hits in the fiducial volume, hits from the veto region are discarded based on their derived velocity, on the basis that such a hit might be related to a crossing muon.
 
 \subsection{L3}\label{sec:l3}
@@ -190,13 +190,73 @@ L3 removes around \SI{95}{\percent} of the background muon events, \SI{99}{\perc
 
 \subsection{L4}\label{sec:l4}
 
-\section{Current reconstruction methods}\label{sec:current_reconstruction_methods}
+By level 4 there is good agreement between MC and data, important because at this step machine learning algorithms for classification are introduced.
+Two classifiers are used, both Boosted Decision Trees (BDT) LightGBM models: one for pure noise, another for background (atmospheric) muons, both trained on a number of derived variables, and the background sample for the muon classifier being real detector data.
+The pure noise rate is reduced at L4 from \SI{36.6}{\milli\hertz} to under \SI{0.3}{\milli\hertz} with \( \approx \SI{96}{\percent} \) of actual neutrino events intact, while \SI{94}{\percent} background muons are removed, keeping \SI{87}{\percent} of neutrinos.
 
-\section{I3 file format}\label{sec:i3_file_format}
+Relative to L3, \SI{99}{\percent} of pure noise and over \SI{94}{\percent} of atmospheric muons events are removed, while \SI{80}{\percent} of neutrinos are kept, resulting in a \( 100 : 10 : 1 \) (muon : neutrino : noise) ratio.
+
+\subsection{L5}\label{sec:l5}
+
+Level 5's main function is removing so-called sneaky muons.
+These are particles that \enquote{sneak in} to DeepCore, without hitting any IceCube strings, a possibility caused by the hexagonal pattern of the detector.
+This is done by calculating the COG of an event, finding the closest DeepCore string to that, and if a set number of DOMs along some previously defined poorly instrumented corridors, within some volume cylinder and time, are hit, the event is dropped.
+Further, SPE is run on the event, and the calculated direction compared to the corridors; if it does not line up with any corridor, the event is kept.
+A starting containment cut is also employed, cutting events beginning outside, or close to the edge of, DeepCore.
+
+After L5, the rates are \SI{2.16}{\milli\hertz} for neutrinos, \SI{0.93}{\milli\hertz} for atmospheric muons and \SI{0.07}{\milli\hertz} for pure noise.
+
+
+\subsection{L6}\label{sec:l6}
+
+L6 splits the remaining data into two sets, verification and high statistics.
+One algorithm (or, rather, two: SANTA/LEERA) is run on the verification set, while another is run on the high statistics set (RetroReco).
+SANTA is a direction reconstruction algorithm, while LEERA does energy, and they are simpler, although less efficient, than RetroReco, but less impacted by detector uncertainties.
+They are fast, but require only unscattered photons, and are intended to be used for checking data/MC agreement.
+
+RetroReco, on the other hand, uses a likelihood function, employing table based lookups which simulate photon propagation from PMTs, under the assumption that scattering and absorption are time symmetric processes.
+The tables take up \( \approx \SI{1}{\tera\byte} \), but due to this being extremely impractical RAM-wise, some clever tricks are employed to lower memory consumption (which is still significant when compared to older reconstruction algorithms).
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=0.5\textwidth]{./images/icecube/retro_pegleg_comp.png}
+    \caption{Reconstruction comparisons between PegLeg (the previous reconstruction algorithm) and RetroReco (the current). Reconstructions are measured in seconds per event.}\label{fig:reco_comp}
+\end{figure}
+
+Additionally, reconstructions are measured in seconds (see \vref{fig:reco_comp}), which makes it seem like an obvious candidate for improvements using machine learning; exactly the point of this thesis, using GENIE-MC generated muon neutrinos, with RetroReco reconstruction, numbering \num{7280939} events in total.
+
+%\section{Current reconstruction methods}\label{sec:current_reconstruction_methods}
+
+\section{I3File format}\label{sec:i3_file_format}
+
+All the following information was retrieved from the IceCube documentation server, at \url{https://docs.icecube.aq/icerec/V05-01-04/projects/dataio/portable_binary_archive.html}.
+The author does not know of any scientific paper detailing the I3File format.
+
+The IceCube data, be it from the detector or MC generated, is kept in a portable binary archive format called \verb|I3Files|.
+A binary file stands in contrast to text files, which include known formats such as XML and JSON.
+There are pros and cons of this choice: first, binary files tend to be much smaller than text files.
+This is simply because storing e.g. a 64-bit integer in a text file is done using some form of character encoding (e.g. ASCII) which can take up over 20 bytes, whilst the same number can be stored in a binary format using exactly 8 bytes.
+Secondly, binary files tend to be much quicker to read, because the information does not need to be decoded.
+The portability is achieved by being built on the Boost C++ library's archive format, widely available on all major platforms, although I3Files have diverged since, and require an old Boost version.
+
+The files basically consist of so-called I3Frames, which may hold either primitives (such as ints, floats, etc.) or objects.
+The I3Frames are serialised, and so anything contained within them must be serialisable.
+
+An event can be contained within an I3Frame, and will contain information such as pulses and their associated DOMs, indexed by keys, which can then be looked up in a complementary GCD file, containing the geometry of the detector.
+Reading the files can conveniently be done through a Python interface called IceTray, enabling the user to use a modern language for processing and analysis.
+
+The format has stood the test of time, and has been in use since its creation in 2006, but there are a couple of issues with it: first (and most minor) of all, it requires the installation of IceCube software on the target machine.
+This is a minor annoyance, as one can build this in relatively short time, but it does not to be compiled and is not available easily e.g. via PyPi (and with good reasons, as it contains many dependencies).
+The second issue---which is rather large for machine learning applications---is I3Files inability to seek in frames.
+In other words, the file format is sequential, and you have to loop through the frames to find the one you are interested in.
+
+This is unusable for machine learning applications, where it is a requirement that your sets are defined in advance, \textit{and} are easily retrievable on demand, as your training will probably include randomisation each epoch.
+
+This was addressed in this project by using SQLite; see \vref{sec:sqlite}.
 
 \section{DeepCore}\label{sec:deepcore}
 
-\section{IceCube upgrade}\label{sec:icecube_upgrade}
+\section{IceCube Upgrade}\label{sec:icecube_upgrade}
 
 \begin{figure}
      \centering
