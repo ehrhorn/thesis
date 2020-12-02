@@ -289,7 +289,8 @@ DeepCore has made possible precision measurements of neutrino oscillations, and 
 
 The IceCube Upgrade, a prelude to the humongous \SI{8}{\cubic\kilo\meter} IceCube-Gen2, aims to repeat DeepCore's success, and add an extra trick: new DOM designs.
 The Upgrade features two new types of DOMs, the mDOM and the D-Egg; see~\vref{fig:upgrade_doms}.
-
+Whereas IceCube and DeepCore features DOMs whose PMTs only point downward, Upgrade's new DOM types feature instead PMTs that point otherwise.
+In the simplest case, D-Egg\footnote{Dual optical sensors in an Ellipsoid Glass for Gen2, a somewhat contrived acronym}, one PMT points up, the other down, while the mDOM\footnote{multi-PMT Digital Optical Module} possesses 24 PMTs arranged in a spherical fashion.
 \begin{figure}
 	\begin{subfigure}{\linewidth}
 		\centering
@@ -303,17 +304,27 @@ The Upgrade features two new types of DOMs, the mDOM and the D-Egg; see~\vref{fi
 	\end{subfigure}
 	\caption{\Vref{fig:upgrade_all_doms} shows new DOM types installed with the IceCube upgrade. \Vref{fig:improved_event_upgrade} shows a simulated \SI{3.8}{\giga\electronvolt} track-like event and its Cherenkov cone. More DOMs light up in the Upgrade configuration, giving more information for track reconstruction. Figures are from the IceCube Collaboration, \url{https://icecube.wisc.edu/gallery/press/view/2328}}\label{fig:upgrade_doms}
 \end{figure}
+The seven new Upgrade strings will be deployed in the same clear-ice region as DeepCore, and will feature even closer DOMs that are \SI{3}{\meter} apart, and an inter-string spacing of around \SI{20}{\meter}.
+This will enhance
 
+The low energy capabilities of Upgrade are important to \( \Pnu_{\Ptau} \) oscillation studies, because the muon to tau oscillation,
+\begin{equation}
+    P(\Pnu_{\Pmu} \rightarrow \Pnu_{\Ptau}) \approx \sin^{2}{\left( 2 \theta_{2 3} \right)} \cos^{4}{\left( \theta_{1 3} \right)} \sin^{2}{\left( \frac{\Delta{m_{3 1}^{2}} L}{4 E} \right)},
+\end{equation}
+has an oscillation maximum for \( \Pnu_{\Ptau} \) at \SI{25}{\giga\electronvolt}, with \( L \) equal to Earth's diameter\cite{Ishihara2019}; the directionality of the new DOMs provide a better pointing resolution, which of course is crucial to determine the zenith angle as a proxy for \( L \).
 \begin{figure}[ht]
     \centering
-    \includegraphics[width=\textwidth]{./images/icecube/DGV3K.png}
-    \caption{Stopping power}\label{fig:stopping_power}
+    \includegraphics[width=\textwidth]{./images/icecube/upgrade_neutrinos.png}
+    \caption{The fully contained atmospheric \( \Pnu_{\Pmu} \) and \( \Pnu_{\Ptau} \) rates from charged current interactions in a cylindrical volume with a \SI{50}{\meter} radius and a height of \SI{275}{\meter} (\enquote{inner fiducial}; red lines) or a \SI{145}{\meter} and same height (\enquote{outer fiducial}; blue lines), both centered on DeepCore, for DeepCore (dotted lines) and Upgrade (solid lines).
+    A significant enhancement in rates is seen around the interesting energy range of \( \approx \SI{30}{\giga\electronvolt} \).
+    Image from~\cite{Ishihara2019}.}\label{fig:upgrade_rates}
 \end{figure}
+\Vref{fig:upgrade_rates} shows the Upgrade's improvement in muon- and tau neutrino rates.
+Upgrade will aim to test the unitarity of the PMNS matrix, which is rather exciting because non-unitarity always points to new physics, seeing as how it is related to the normalization of probabilities.
 
-\begin{figure}[ht]
-    \centering
-    \includegraphics[width=\textwidth]{./images/icecube/6-Figure1-1.png}
-    \caption{Glashow resonance. Image from \url{https://www.semanticscholar.org/paper/Glashow-resonance-as-a-window-into-cosmic-neutrino-Barger-Fu/9922dfd291f92a97219a0abbee9c0303ee9fbb36}}\label{fig:glashow_resonance}
-\end{figure}
+Furthermore, the Upgrade will contain various calibration equipment which will measure certain properties of the ice.
+These measurement can be applied retroactively, and will hopefully enhance all IceCube/DeepCore datasets.
+
+The Upgrade is to be installed during the austral summer of 2022--23, but as of this writing there is no known reconstruction algorithm working for \( \Pnu_{\Pmu} \), but seeing as the additional information contained in the new DOMs is simply new features for a machine learning algorithm, the work in this thesis is applied to Upgrade MC muon neutrinos.
 
 \end{document}
