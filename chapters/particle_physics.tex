@@ -1,3 +1,4 @@
+%!TEX root = ../main.tex
 \documentclass[../main.tex]{subfiles}
 
 \begin{document}
@@ -8,7 +9,7 @@ The Large Hadron Collider nailed down the final missing piece of the model, the 
 The masses of the neutrinos themselves is a mystery, while sterile neutrinos is a dark matter candidate and the possible CP-violating phase in the PMNS matrix can help explain baryon asymmetry.
 Needless to say, the more we discover about this little particle, the better we know the universe.
 
-The concept of neutrino oscillations has the ability to constrain the previously mentioned CP-violating phase of the neutrino mixing matrix~\autocite{Abe2019} and so the better we are able to measure this, the better the constraint will be.
+The concept of neutrino oscillations has the ability to constrain the previously mentioned CP-violating phase of the neutrino mixing matrix~\cite{Abe2019} and so the better we are able to measure this, the better the constraint will be.
 
 This chapter will seek to outline the physics behind the interactions that are captured in the IceCube detector, including the concept of Cherenkov radiation, which is of critical importance to the process.
 
@@ -27,8 +28,7 @@ First, we shortly need to touch on what The Standard Model of particle physics i
          \includegraphics[width=\textwidth]{./images/particle_physics/Elementary_particle_interactions_in_the_Standard_Model.png}
          \caption{The possible interactions in the SM between fermions and bosons. Image from (ref)}\label{fig:standard_model_interactions}
      \end{subfigure}
-        \caption{Three simple graphs}
-        \label{fig:standard_model}
+        \caption{Three simple graphs}\label{fig:standard_model}
 \end{figure}
 
 \section{The Standard Model}\label{sec:the_standard_model}
@@ -44,7 +44,7 @@ The distinguishing feature between the two sets is the statistics they obey; whe
 Matter in the universe consists of fermions, while the fundamental forces are mediated by the bosons.
 
 The fermions are divided between the quarks and the leptons, differentiated by their participation in the strong interaction, carried by the massless gluon.
-This boson only acts on quarks, and has the peculiar behaviour of creating new particles when quarks are pulled apart, resulting in the fact that it is only possible to observe hadrons (a composite particle made up of two or more quarks); this phenomenon, \enquote{color confinement}, is the progenitor of jets in collider experiments such as the LHC.
+This boson only acts on quarks, and has the peculiar behavior of creating new particles when quarks are pulled apart, resulting in the fact that it is only possible to observe hadrons (a composite particle made up of two or more quarks); this phenomenon, \enquote{color confinement}, is the progenitor of jets in collider experiments such as the LHC.\@
 
 Both the charged leptons and the quarks interact electromagnetically and weakly, forces mediated by the photon and the \( \PWpm \) \& \( \PZzero \) bosons respectively, but the leptons include a second sub-species that only interacts weakly: the neutral leptons, known as the neutrinos; 	see~\vref{fig:standard_model_interactions}.
 Because they do not participate in anything but the weak force, neutrinos hardly ever interact, and are thus difficult (but not impossible!) to observe.
@@ -65,7 +65,7 @@ depending on Fermi's golden rule, the Lorentz-invariant matrix element and for f
 %
 %The progression from Galilei to Higgs is a remarkable journey.
 %It never ceases to amaze the author that Dirac hit upon his equation (\vref{eq:dirac_equation_1}) and discovered that the structure was that of Clifford algebra, discovered 50 years before as a purely mathematical concept.
-%The use of group theory, seemingly far removed from everyday life, permeates the Standard Model, and in fact the applicability of abstract mathematics in particle physics is a bewildering thing, contemplated by Wigner~\autocite{Wigner1960}.
+%The use of group theory, seemingly far removed from everyday life, permeates the Standard Model, and in fact the applicability of abstract mathematics in particle physics is a bewildering thing, contemplated by Wigner~\cite{Wigner1960}.
 %Of course this thesis is not concerned with this philosophical aspect of physics, but the preceding sentences serve as an introduction to the Dirac equation, which will be used as a mathematical introduction to the concepts that need explaining in this chapter.
 
 Paul Dirac and others before him searched for an extension of the Schr\"{o}dinger equation, which incorporated relativity.
@@ -125,12 +125,12 @@ The equation depends on the transition matrix \( T_{f i} \) from the expansion o
 \begin{equation}\label{eq:differential_cross_section}
 	\diff{\sigma}{\Omega^{*}} = \frac{1}{64 \pi^2 s} \frac{\mathrm{p}_{f}^{*}}{\mathrm{p}_{i}^{*}} \left| \mathcal{M}_{f i} \right|^{2},
 \end{equation}
-an expression of quantum mechanical probabilities for an interaction to happen, valid in the centre-of-mass frame (COM), indicated by \( * \).
+an expression of quantum mechanical probabilities for an interaction to happen, valid in the center-of-mass frame (COM), indicated by \( * \).
 \( s \) is the squared  COM energy, \( \mathrm{p} \) the particle momenta, and \( \Omega \) the solid angle a particle scatters into.
 
-The SM thus provides observables, as long as one can calculate the Lorentz invariant matrix element \( \mathcal{M} \), which in the fermion case can be done using \vref{eq:dirac_equation_2}.
+The SM thus provides observables, as long as one can calculate the Lorentz invariant matrix element \( \mathcal{M} \), which in the fermion case can be done using~\vref{eq:dirac_equation_2}.
 This process is much simplified by Feynman diagrams, allowing the theorist to draw processes and using Feynman rules stitch together a matrix element describing the interaction.
-Examples of Feynman diagrams can be seen in \vref{fig:charged_neutral_current}.
+Examples of Feynman diagrams can be seen in~\vref{fig:charged_neutral_current}.
 %\begin{equation}\label{eg:fermi_golden_rule}
 %	\Gamma_{\text{f} \text{i}} = \frac{\mathrm{p}^{*}}{32 \pi^2 m^{2}} \int \left| \mathcal{M} \right|^2 \, \mathrm{d} \Omega,
 %\end{equation}
@@ -192,7 +192,7 @@ Examples of Feynman diagrams can be seen in \vref{fig:charged_neutral_current}.
 \section{The weak interaction}\label{sec:the_weak_interaction}
 
 In the early 20th century the world of nuclear physics was abuzz.
-A great many experiments were conducted after Becquerel discovered radioactivity in 1896, some of which explored beta decay, an example of which can be seen in \vref{fig:beta_decay}.
+A great many experiments were conducted after Becquerel discovered radioactivity in 1896, some of which explored beta decay, an example of which can be seen in~\vref{fig:beta_decay}.
 \begin{figure}[ht]
     \centering
     \includegraphics[width=0.8\textwidth]{./images/particle_physics/Beta_spectrum_of_RaE.jpg}
@@ -201,7 +201,7 @@ A great many experiments were conducted after Becquerel discovered radioactivity
 \end{figure}
 In this process a neutron turns into a proton, emitting an electron and an anti-neutrino.
 This was unexplained without the neutrino, because of two problems:
-First, the energy spectrum seemed continuous (see \vref{fig:beta_spectrum}), unexpected as the energy should be discrete if the electron is one escaping from the atom.
+First, the energy spectrum seemed continuous (see~\vref{fig:beta_spectrum}), unexpected as the energy should be discrete if the electron is one escaping from the atom.
 Second, the electron is a spin-\sfrac{1}{2} particle, while nitrogen-14, which showed beta decay, is a spin-1 particle; so where goes the spin?
 
 Both issues were explained by the \enquote{neutron} (later renamed neutrino by Fermi) proposed by Pauli in 1930.
@@ -211,14 +211,14 @@ Fermi explained this with his theory of beta decay, proposing a four-fermion con
 Although a successful theory, it runs into the same kind of ultraviolet problem that Planck worked on in the late 19th century: because the Fermi interaction cross section goes as \( \sigma \approx G_{\text{F}}^2 E^2 \), where \( G_{\text{F}} \) is the Fermi constant, it grows unbounded, leading to problems at higher energies.
 Additionally the weak interaction was observed in the Wu experiment to violate parity, as beta decay of cobalt-60 showed a preferential decay direction for electrons, a phenomenon not explained by Fermi's theory.
 This was solved by the electroweak theory, introducing bosons that mediate the interaction over small distances after symmetry breaking via the Higgs mechanism; the \( \PW \) and \( \PZ \) bosons.
-The parity violation is explained by the V-A (vector minus axial vector) nature of the weak force, which only permits it to couple with left-handed particles and right-handed antiparticles; this concept is enshrined mathematically by \( \gamma^5 \) of the Dirac matrix family, formed as the product of the gamma matrices in \vref{eq:dirac_equation_2}, which enters in the so-called chiral projection operator.
+The parity violation is explained by the V-A (vector minus axial vector) nature of the weak force, which only permits it to couple with left-handed particles and right-handed antiparticles; this concept is enshrined mathematically by \( \gamma^5 \) of the Dirac matrix family, formed as the product of the gamma matrices in~\vref{eq:dirac_equation_2}, which enters in the so-called chiral projection operator.
 \begin{figure}[ht]
     \centering
     \includegraphics[width=0.5\textwidth]{./images/particle_physics/Right_left_helicity.jpg}
     \caption{Helicity. Image from \url{https://en.wikipedia.org/wiki/File:Right_left_helicity.jpg}}\label{fig:helicity}
 \end{figure}
 Describing this operator is made easier by reference to helicity states, which are more easily grasped conceptually.
-A helicity state is described in terms of a particle's component of spin along its momentum, \( h \equiv \mathbf{S} \cdot \mathbf{p} / \textup{p} \); see \vref{fig:helicity}.
+A helicity state is described in terms of a particle's component of spin along its momentum, \( h \equiv \mathbf{S} \cdot \mathbf{p} / \textup{p} \); see~\vref{fig:helicity}.
 Chirality, on the other hand, is defined as the eigenstates of \( \gamma^{5} = i \gamma^{0} \gamma^{1} \gamma^{2} \gamma^{3} \), and in the ultra-relativistic regime, where \( E \gg m \), the domain of neutrinos, helicity and chiral eigenstates are the same.
 This becomes important in the weak interaction, whose vertex factor from the matrix element is given as
 \begin{equation}
@@ -227,7 +227,7 @@ This becomes important in the weak interaction, whose vertex factor from the mat
 where \( \sfrac{1}{2} ( 1 - \gamma^{5} ) \) is known as the left-handed chiral projection operator.
 When this operates on a right handed chiral (or helicity, in the high energy limit) state, the result is zero, meaning only left-handed chiral particle states (and right-handed anti-particle states) may participate in the weak current.
 
-An intriguing possibility is presented by this property: as only (anti)neutrinos of one handedness interact weakly, there may be a whole universe of non-interacting neutrinos that only participate gravitationally.
+An intriguing possibility is presented by this property: as only (anti) neutrinos of one handedness interact weakly, there may be a whole universe of non-interacting neutrinos that only participate gravitationally.
 These \enquote{sterile neutrinos} are candidates for dark matter.
 
 The interaction is termed \enquote{weak} as a consequence of its coupling strength, relative to the electromagnetic- and strong forces.
@@ -260,13 +260,13 @@ Furthermore, two of the bosons contain electric charge (the \( \PWpm \) bosons),
 
 The nature of the weak force allows two fundamental types of interactions: charged- and neutral currents.
 
-The charged current, as the Feynman diagram in \vref{fig:feynman_cc_wp} shows, allows a charged lepton to turn into a neutral one.
-By absorbing a \( \PW \) boson, an electron may turn into an electron neutrino, as seen in \vref{fig:feynman_cc_wp}, or---as in the case of beta decay, \vref{fig:beta_decay}---a down quark may convert into an up quark, changing a neurino into a proton, with the resulting \( \PWminus \) boson decaying into an electron and antielectron neutrino, conserving charge and lepton number.
-A startling real world example of the charged current in action is seen in \vref{fig:first_neutrino_event}, where a neutrino of sufficient energy collides with a proton, creating both a muon and hadronic decay products.
+The charged current, as the Feynman diagram in~\vref{fig:feynman_cc_wp} shows, allows a charged lepton to turn into a neutral one.
+By absorbing a \( \PW \) boson, an electron may turn into an electron neutrino, as seen in~\vref{fig:feynman_cc_wp}, or---as in the case of beta decay,~\vref{fig:beta_decay}---a down quark may convert into an up quark, changing a neutrino into a proton, with the resulting \( \PWminus \) boson decaying into an electron and antielectron neutrino, conserving charge and lepton number.
+A startling real world example of the charged current in action is seen in~\vref{fig:first_neutrino_event}, where a neutrino of sufficient energy collides with a proton, creating both a muon and hadronic decay products.
 
-The neutral current, on the other hand, seen in \vref{fig:feynman_nc}, can deflect two particles, but does not change any of the properties of the interacting particles other than transferring momentum and spin.
+The neutral current, on the other hand, seen in~\vref{fig:feynman_nc}, can deflect two particles, but does not change any of the properties of the interacting particles other than transferring momentum and spin.
  
-In this way the weak interaction is special among the fundamental forces; it is the only one that is able to change flavours, it is the only one to couple to neutrinos, and it is---as we shall see---the only one that allows us to define left- and right-handedness unambigously.
+In this way the weak interaction is special among the fundamental forces; it is the only one that is able to change flavors, it is the only one to couple to neutrinos, and it is---as we shall see---the only one that allows us to define left- and right-handedness unambiguously.
 
 \begin{figure}
      \centering
@@ -281,8 +281,7 @@ In this way the weak interaction is special among the fundamental forces; it is 
          \includegraphics[width=0.9\textwidth]{./images/particle_physics/Neutrino_bubble_chamber_decay_overlay.png}
          \caption{}\label{fig:first_neutrino_event_overlay}
      \end{subfigure}
-        \caption{The first observed neutrino event in history, from the Argonne National Laboratory 12-foot bubble chamber, on Friday the 13th of November 1970. It is clearly seen on \vref{fig:first_neutrino_event_annotated} that some unseen particle collides with a proton, and two new particles are created in the process. \Vref{fig:first_neutrino_event_overlay} makes the process clearer using a Feynman diagram: the \PW boson interacts with a quark in the proton. The neutrino has enough energy to create an inelastic scattering, which results in an intermediate state (a Delta baryon), which quickly decays via the strong force into a proton and a pion.}
-        \label{fig:first_neutrino_event}
+        \caption{The first observed neutrino event in history, from the Argonne National Laboratory 12-foot bubble chamber, on Friday the 13th of November 1970. It is clearly seen on~\vref{fig:first_neutrino_event_annotated} that some unseen particle collides with a proton, and two new particles are created in the process. \Vref{fig:first_neutrino_event_overlay} makes the process clearer using a Feynman diagram: the \PW{} boson interacts with a quark in the proton. The neutrino has enough energy to create an inelastic scattering, which results in an intermediate state (a Delta baryon), which quickly decays via the strong force into a proton and a pion.}\label{fig:first_neutrino_event}
 \end{figure}
 
 \section{Neutrino oscillations}\label{sec:neutrino_oscillations}
@@ -330,7 +329,7 @@ The Sun burns hydrogen via many processes, primarily in the pp cycle, wherein tw
 \begin{equation}
 	\ce{{\Pproton} + {\Pproton} -> \Pnu_{\Pe} + \SI{1.442}{\mega\electronvolt}}.
 \end{equation}
-Other interactions occur, some (such as the \( \beta \)-decay of boron-8) producing neutrinos of energies sufficient to be detected on Earth, but the Standard Solar Model predicts that the Sun only produces electron neutrinos, the flux predicted to be on the order of \( \SI{2e38}{\per\second} \)~\autocite{Thomson2013}.
+Other interactions occur, some (such as the \( \beta \)-decay of boron-8) producing neutrinos of energies sufficient to be detected on Earth, but the Standard Solar Model predicts that the Sun only produces electron neutrinos, the flux predicted to be on the order of \( \SI{2e38}{\per\second} \)~\cite{Thomson2013}.
 Testing this model should be somewhat straightforward: fill an underground tank with appropriate liquid, wait for neutrino interactions and count how many atoms have changed.
 The tank needs to be underground to shield from cosmic rays other than solar neutrinos, the liquid should be smartly chosen such that it decays into something easily measurable, and the tank needs to be big enough for interactions to happen on a reasonable timescale.
 This describes the Homestake experiment: a tank was made out of a closed underground mine, and filled with perchloroethylene, containing plenty of chlorine.
@@ -343,7 +342,7 @@ The argon produced by the reaction is radioactive, and can thus be counted.
 The experiment, however, saw a deficit of neutrinos.
 This, of course, can have many causes: the calculations may be wrong, the experimental setup may be faulty or theories involved may be wrong.
 Raymond Davis, the experiment-runner, stood his ground and vouched for the correctness of the experimental setup, and some 30-odd years later the SNO experiment found that the \textit{total} flux of neutrinos from the Sun (that is, the electron, muon and tau variants) was on the order of the predicted electron neutrino flux.
-It would thus seem that something had to give: either the Standard Solar Model is wrong, or neutrinos change flavour during propagation from the Sun to the Earth.
+It would thus seem that something had to give: either the Standard Solar Model is wrong, or neutrinos change flavor during propagation from the Sun to the Earth.
 
 Extending the Cabibbo hypothesis to account for this, we have
 \begin{equation}\label{eq:pontecorvo}
@@ -374,18 +373,18 @@ Now the weak eigenstates are described as superpositions of the mass eigenstates
 \begin{equation}
 	\ket{\psi(0)} = U_{\Pmu 1} \ket{\Pnu_{1}} + U_{\Pmu 2} \ket{\Pnu_2} =  \cos{\theta} \ket{\Pnu_{2}} - \sin{\theta} \ket{\Pnu_{1}}.
 \end{equation}
-Having travelled \( L \) at time \( T \) it will be described as
+Having traveled \( L \) at time \( T \) it will be described as
 \begin{equation}\label{eq:neutrino_wavefunction_1}
 %	\ket{\psi(L, T)} = \cos{\theta} \ket{\nu_{2}} e^{-i \phi_{2}} - \sin{\theta} \ket{\nu_{1}} e^{-i \phi_{1}},
 \end{equation}
 with the phases \( \phi_{i} = p_{i} \cdot x = E_{i} T - \textup{p}_{i} L \).
-Expressed in terms of the weak eigenstates, \vref{eq:neutrino_wavefunction_1} can be written as
+Expressed in terms of the weak eigenstates,~\vref{eq:neutrino_wavefunction_1} can be written as
 \begin{equation}\label{eq:neutrino_wavefunction_2}
 	\ket{\psi(L, T)} = e^{-i \phi_{1}} \left[ \left( e^{i \Delta{\phi_{1 2}}} - 1 \right) \cos{\theta} \sin{\theta} \ket{\Pnu_{\Pe}} - \left( e^{i \Delta{\phi_{1 2}}} \cos^{2}{\theta} + \sin^{2}{\theta} \right) \ket{\Pnu_{\Pmu}} \right],
 \end{equation}
 where \( \Delta{\phi_{1 2}} = \phi_{1} - \phi_{2} \),
 showing that any non-zero value of \( \Delta{\phi_{1 2}} \) will incur mixing of the weak eigenstates in the wave function of the propagating neutrino.
-Simplifying \vref{eq:neutrino_wavefunction_2}, we can write it as
+Simplifying~\vref{eq:neutrino_wavefunction_2}, we can write it as
 \begin{equation}
 	\ket{\psi(L, T)} = c_{\Pe} \ket{\Pnu_{\Pe}} + c_{\Pmu} \ket{\Pnu_{\Pmu}},
 \end{equation}
@@ -393,7 +392,7 @@ and it is seen that the probability of a muon neutrino turning into an electron 
 \begin{equation}\label{eq:neutrino_osc_inner_product_1}
 	P(\Pnu_{\Pmu} \rightarrow \Pnu_{\Pe}) = \lvert \braket{\Pnu_{\Pe} | \psi(L, T)} \rvert^2 = c_{\Pe} c_{\Pe}^{*}.
 \end{equation}
-Using \vref{eq:neutrino_wavefunction_2} this becomes
+Using~\vref{eq:neutrino_wavefunction_2} this becomes
 \begin{equation}
 	P(\Pnu_{\Pmu} \rightarrow \Pnu_{\Pe}) = \sin^2{\left( 2 \theta \right)} \sin^2{\left( \frac{\Delta{\phi_{1 2}}}{2} \right)},
 \end{equation}
@@ -401,8 +400,8 @@ which in the ultra-relativistic limit becomes
 \begin{equation}
 	P(\Pnu_{\Pmu} \rightarrow \Pnu_{\Pe}) = \sin^2{\left( 2 \theta \right)} \sin^2{\left[ \frac{\left( m_{1}^{2} - m_{2}^{2} \right) L}{4 E_{\Pnu}} \right]}.
 \end{equation}
-In plain words, then, the probability, or oscillation, depends on 1) the mixing angle, 2) the difference of the squared masses of the mass eigenstates, 3) the energy of the neutrino and 4) the length it travels.
-An example of oscillation patterns can be seen in \vref{fig:ocsillations}.
+In plain words, then, the probability, or oscillation, depends firstly on the mixing angle, secondly the difference of the squared masses of the mass eigenstates, thirdly the energy of the neutrino and lastly the length it travels.
+An example of oscillation patterns can be seen in~\vref{fig:ocsillations}.
 
 \begin{figure}
      \centering
@@ -417,7 +416,7 @@ An example of oscillation patterns can be seen in \vref{fig:ocsillations}.
 		    \includegraphics[width=\textwidth]{./images/particle_physics/nutauappearonly.png}
 		    \caption{Image from \url{https://www.nbi.ku.dk/english/research/experimental-particle-physics/icecube/neutrino-oscillation/}}\label{fig:icecube_oscillations}
      \end{subfigure}
-        \caption{\Vref{fig:long_oscillations} shows the theoretical calculation of neutrino oscillations on the long baseline. Here, an electron neutrino is created (black line), and has some probability of turning into a muon neutrino (blue line) and tau neutrino (red line). \Vref{fig:icecube_oscillations} shows the muon neutrino to tau neutrino probability in IceCube, a function of both energy and pathlength (parameterised by the cosine of the zenith angle of the neutrino). Here one can see the effects of neutrinos interacting with matter, the MSW effect, changing the energy levels of the mass eigenstates during propagation on interactions with electrons in the dense core of the Earth. This changes the oscillation profile, seen for upgoing neutrinos at energies below \SI{10}{\giga\electronvolt}.}\label{fig:ocsillations}
+        \caption{\Vref{fig:long_oscillations} shows the theoretical calculation of neutrino oscillations on the long baseline. Here, an electron neutrino is created (black line), and has some probability of turning into a muon neutrino (blue line) and tau neutrino (red line). \Vref{fig:icecube_oscillations} shows the muon neutrino to tau neutrino probability in IceCube, a function of both energy and pathlength (parameterized by the cosine of the zenith angle of the neutrino). Here one can see the effects of neutrinos interacting with matter, the MSW effect, changing the energy levels of the mass eigenstates during propagation on interactions with electrons in the dense core of the Earth. This changes the oscillation profile, seen for up-going neutrinos at energies below \SI{10}{\giga\electronvolt}.}\label{fig:ocsillations}
 \end{figure}
 
 In many cases one uses the survival probability, which is
@@ -425,8 +424,8 @@ In many cases one uses the survival probability, which is
 	P(\Pnu_{\Pmu} \rightarrow \Pnu_{\Pmu}) = c_{\Pe} c_{\Pe}^{*} = 1 - P(\Pnu_{\Pmu} \rightarrow \Pnu_{\Pe}).
 \end{equation}
 
-The two-flavour treatment is sufficient for many purposes, but nature has bestowed upon us three generations of matter (or, at least, three generations of light neutrinos).
-To accommodate this fact, it is possible to extend \vref{eq:pontecorvo} to
+The two-flavor treatment is sufficient for many purposes, but nature has bestowed upon us three generations of matter (or, at least, three generations of light neutrinos).
+To accommodate this fact, it is possible to extend~\vref{eq:pontecorvo} to
 \begin{equation}\label{eq:pmns}
 	\begin{bmatrix}
 		\nu_{\Pe} \\
@@ -445,7 +444,7 @@ To accommodate this fact, it is possible to extend \vref{eq:pontecorvo} to
 		\nu_{3}
 	\end{bmatrix}.
 \end{equation}
-This unitary matrix can be parameterised as
+This unitary matrix can be parameterized as
 \begin{equation}
 	\begin{bmatrix}
 		U_{\Pe 1} & U_{\Pe 2} & U_{\Pe 3} \\
@@ -470,12 +469,12 @@ This unitary matrix can be parameterised as
 	\end{bmatrix},
 \end{equation}
 where \( c_{i j} = \cos{\theta_{i j}} \), \( s_{i j} = \sin{\theta_{i j}} \) and \( \delta \) is a complex phase owing to the unitarity condition of the matrix\footnote{In fact the matrix requires six complex phases to specify all nine independent parameters. However, five of these can be absorbed into the definitions of the lepton phases.}.
-Moreover, \vref{eq:survival_probability_1} now becomes
+Moreover,~\vref{eq:survival_probability_1} now becomes
 \begin{equation}\label{eq:survival_probability_2}
 	P(\Pnu_{\Pmu} \rightarrow \Pnu_{\Pmu}) = 1 - 4 \lvert U_{\Pmu 1} \rvert^2 \lvert U_{\Pmu 2} \rvert^2 \sin^{2}{\Delta_{2 1}} - 4 \lvert U_{\Pmu 1} \rvert^2 \lvert U_{\Pmu 3} \rvert^2 \sin^{2}{\Delta_{3 1}} - 4 \lvert U_{\Pmu 2} \rvert^2 \lvert U_{\Pmu 3} \rvert^2 \sin^{2}{\Delta_{3 2}},
 \end{equation}
 showing the possibility of experimentally determining the values of the neutrino mixing matrix, provided one can set up an experiment where enough neutrinos are captured, among other things.
-In the case of IceCube, this survival probability can be approximated as\autocite{Aartsen2016}
+In the case of IceCube, this survival probability can be approximated as\cite{Aartsen2016}
 \begin{equation}
 P(\Pnu_{\Pmu} \rightarrow \Pnu_{\Pmu}) \approx 1 - \sin^{2}{\left( 2 \theta_{2 3} \right)} \sin^{2}{\left( 1.27 \frac{\Delta{m_{3 2}^{2}} L}{E} \right)}.
 \end{equation}
@@ -495,13 +494,13 @@ As of this writing, the best fit values from \url{nu-fit.org} is on the order of
 	\Delta{m_{2 1}^{2}} & \approx \SI{7.4e-5}{\electronvolt\squared} \\
 	\lvert \Delta{m_{3 2}^{2}} \lvert & \approx \SI{2.5e-3}{\electronvolt\squared}.
 \end{align}
-The absolute mass scale is constrained by the density of relic neutrinos from The Big Bang to be~\autocite{Thomson2013}
+The absolute mass scale is constrained by the density of relic neutrinos from The Big Bang to be~\cite{Thomson2013}
 \begin{equation}
 	\sum_{i = 1}^{3} m_{\Pnu_{i}} \lesssim \SI{1}{\electronvolt}.
 \end{equation}
 Because we only know the mass differences, it is not a priori possible to say in which order the mass hierarchy goes.
-All we can say currently, is that the difference between \( \Pnu_{1} \) and \( \Pnu_{2} \) is much less than the difference between \( \Pnu_{3} \) and \( \Pnu_{2} \), but we do not know if \( \Pnu_{3} \) is heavier than the other two flavours.
-The mass ordering problem can tested using IceCube~\autocite{Leuermann2018}.
+All we can say currently, is that the difference between \( \Pnu_{1} \) and \( \Pnu_{2} \) is much less than the difference between \( \Pnu_{3} \) and \( \Pnu_{2} \), but we do not know if \( \Pnu_{3} \) is heavier than the other two flavors.
+The mass ordering problem can tested using IceCube~\cite{Leuermann2018}.
 
 This should be cause for some consternation, or---perhaps more---excitement.
 First of all, the Standard Model does not automatically describe neutrino mass, and if it is introduced into the Lagrangian it requires that right-handed chiral neutrinos exist.
@@ -510,7 +509,7 @@ First of all, the Standard Model does not automatically describe neutrino mass, 
     \includegraphics[width=0.7\textwidth]{./images/particle_physics/masses-600x230.jpg}
     \caption{Particle mass scales. The neutrinos are a million times lighter than the electron, the lightest charged lepton. The top quark also stands out in the hierarchy as a very heavy particle. Image from \url{http://hitoshi.berkeley.edu}}\label{fig:particle_masses}
 \end{figure}
-Even so, the masses of the neutrinos are on the order of \num{10e6} smaller than the electron (see \vref{fig:particle_masses}, and so something else than the Higgs mechanism could be the cause of their mass---this is exciting!
+Even so, the masses of the neutrinos are on the order of \num{10e6} smaller than the electron (see~\vref{fig:particle_masses}, and so something else than the Higgs mechanism could be the cause of their mass---this is exciting!
 Suggestions, such as the seesaw mechanism, attempt to explain this, by introducing a heavy neutrino partner to each one of the lighter types.
 Additionally, neutrinos and anti-neutrinos may be the same particle, a so-called Majorana particle.
 
@@ -519,14 +518,14 @@ All this to say that the study of neutrinos provide plenty of exciting avenues o
 \section{Cherenkov radiation}\label{sec:cherenkov_radiation}
 
 Light, in a vacuum, moves at the universally constant speed of \( c \)
-When travelling through a medium, the refractive index \( n = c / v \) (where \( v \) is the phase velocity of light in the medium) determines the phase velocity of the photons due to constructive interference with the atoms of the material.
-In a dielectric medium, a charged particle may travel faster than light, and will in its path polarise the molecules of the material.
-After the passage, the material relaxes into an unpolarised state, sending out photons in the process, and because these travel at the refracted speed of light they conspire to create light at an angle with the particle where constructive interference occurs; see \vref{fig:cherenkov_radiation}.
-Here, a particle travelling at \( v_{\text{p}} \approx c \) emits Cherenkov radiation at an angle \( \sin{\alpha} = r / s = v / v_{\text{p}} \), and so the angle depends on the index of refraction and the speed of the charged particle.
+When traveling through a medium, the refractive index \( n = c / v \) (where \( v \) is the phase velocity of light in the medium) determines the phase velocity of the photons due to constructive interference with the atoms of the material.
+In a dielectric medium, a charged particle may travel faster than light, and will in its path polarize the molecules of the material.
+After the passage, the material relaxes into an unpolarized state, sending out photons in the process, and because these travel at the refracted speed of light they conspire to create light at an angle with the particle where constructive interference occurs; see~\vref{fig:cherenkov_radiation}.
+Here, a particle traveling at \( v_{\text{p}} \approx c \) emits Cherenkov radiation at an angle \( \sin{\alpha} = r / s = v / v_{\text{p}} \), and so the angle depends on the index of refraction and the speed of the charged particle.
 
 Of course the angle produces a cone in three dimensional space.
 This is used in particle detectors such as Super-Kamiokande where a tank of liquid is surrounded by an array of photomultiplier tubes.
-These will pick up Cherenkov cones as seen in \vref{fig:cherenkov_cone}, and from the shapes particle properties can be inferred which in turn may shed light on properties of the neutrinos that originated the interaction; not unlike IceCube, where the Cherenkov light is what is actually observed by the photomultiplier tubes.
+These will pick up Cherenkov cones as seen in~\vref{fig:cherenkov_cone}, and from the shapes particle properties can be inferred which in turn may shed light on properties of the neutrinos that originated the interaction; not unlike IceCube, where the Cherenkov light is what is actually observed by the photomultiplier tubes.
 
 \begin{figure}
      \centering
@@ -541,11 +540,10 @@ These will pick up Cherenkov cones as seen in \vref{fig:cherenkov_cone}, and fro
 		    \includegraphics[width=\textwidth]{./images/particle_physics/cherenkov.jpg}
 		    \caption{Cherenkov cone. Image from \url{http://physicsopenlab.org/2016/04/24/diy-cherenkov-detector/}}\label{fig:cherenkov_cone}
      \end{subfigure}
-        \caption{Feynman diagrams of neutral- and charged current processes}
-        \label{fig:cherenkov_figure}
+        \caption{Feynman diagrams of neutral- and charged current processes}\label{fig:cherenkov_figure}
 \end{figure}
 
-\todo[inline]{Remember to mention the different flavours of quarks at some point...}
+\todo[inline]{Remember to mention the different flavors of quarks at some point...}
 \todo[inline]{Must talk about spin}
 \todo[inline]{Should expound on Feynman diagrams}
 \todo[inline]{Must talk about sterile neutrinos in IceCube}
