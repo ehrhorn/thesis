@@ -67,7 +67,7 @@ The DOM is further detailed in \vref{sec:doms}.
 \end{figure}
 IceCube is split into the in-ice array, i.e. the stringed DOMs, and an IceTop array.
 This consists of detectors on the surface, housing water Cherenkov detectors that may act as a useful veto on particles: if they were seen by IceTop, they were probably down-going particles, and thus noise, while the neutrino events present as up-going particles created via interactions in the Earth, where only neutrinos penetrate; see \vref{fig:ray_types}.
-The detector is tuned to particles in the \si{\giga\electronvolt} to \si{\peta\electronvolt} range, where atmospheric neutrinos dominate, as seen in \vref{fig:neutrino_spectrum}.
+The detector is tuned to particles in the \si{\giga\electronvolt} to \si{\peta\electronvolt} range, where atmospheric neutrinos dominate, as seen in \vref{fig:neutrino_spectrum}.
 
 IceCube records data based on certain triggers (\vref{sec:triggers}), and sends filtered data to the Northern Hemisphere by satellite (about \SI{100}{\giga\byte\per\day}~\autocite{Kelley2014}), with the raw data sent by sneakernet\footnote{That is, data transported by sneakers, i.e. shipped via physical media rather than the internet.} (about \SI{1}{\tera\byte\per\day}~\autocite{Kelley2014}).
 The surface also hosts the IceCube Lab, containing supporting electronics such as computers and communication systems.
@@ -256,24 +256,27 @@ This was addressed in this project by using SQLite; see \vref{sec:sqlite}.
 
 \section{DeepCore}\label{sec:deepcore}
 
+Before all of IceCube's strings were even deployed---a laborious task only possible during the short austral summer months---it was recognised that the energy range of the detector might not be sufficient for certain analysis purposes.
+
+
 \section{IceCube Upgrade}\label{sec:icecube_upgrade}
 
-\begin{figure}
-     \centering
-     \begin{subfigure}[b]{0.4\textwidth}
-         \centering
-		    \includegraphics[width=\textwidth]{./images/icecube/UpG_OpticalSensors_SensorsOnly_v2.png}
-		    \caption{}\label{fig:upgrade_all_doms}
-     \end{subfigure}
-     \hfill
-     \begin{subfigure}[b]{0.4\textwidth}
-         \centering
-		    \includegraphics[width=0.5\textwidth]{./images/icecube/mDOM_exploded_view-2.pdf.png}
-		    \caption{}\label{fig:mdom_schematic}
-     \end{subfigure}
-        \caption{\Vref{fig:upgrade_all_doms} shows DOMs installed with the IceCube upgrade, \vref{fig:mdom_schematic}~\autocite{Classen2018} shows an exploded view of an mDOM.
-        \Vref{fig:upgrade_all_doms} is from the IceCube Collaboration, fetched from \url{https://icecube.wisc.edu/gallery/press/view/2328}}\label{fig:upgrade_doms}
-\end{figure}
+%\begin{figure}
+%     \centering
+%     \begin{subfigure}[b]{0.4\textwidth}
+%         \centering
+%		    \includegraphics[width=\textwidth]{./images/icecube/UpG_OpticalSensors_SensorsOnly_v2.png}
+%		    \caption{}\label{fig:upgrade_all_doms}
+%     \end{subfigure}
+%     \hfill
+%     \begin{subfigure}[b]{0.4\textwidth}
+%         \centering
+%		    \includegraphics[width=0.5\textwidth]{./images/icecube/mDOM_exploded_view-2.pdf.png}
+%		    \caption{}\label{fig:mdom_schematic}
+%     \end{subfigure}
+%        \caption{\Vref{fig:upgrade_all_doms} shows DOMs installed with the IceCube upgrade, \vref{fig:mdom_schematic}~\autocite{Classen2018} shows an exploded view of an mDOM.
+%        \Vref{fig:upgrade_all_doms} is from the IceCube Collaboration, fetched from \url{https://icecube.wisc.edu/gallery/press/view/2328}}\label{fig:upgrade_doms}
+%\end{figure}
 
 \begin{figure}
 	\begin{subfigure}{\linewidth}

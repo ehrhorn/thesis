@@ -15,7 +15,16 @@
 	range-units=single,
 	binary-units
 ]{siunitx}
+
 \usepackage{hepnames}
+\usepackage{xpatch}
+\makeatletter
+\xpatchcmd\@HepConStyle
+{\edef\@upcode{\updefault}}
+{\ifdefined\shapedefault\edef\@upcode{\shapedefault}\else\edef\@upcode{\updefault}\fi}
+{}{}
+\makeatother
+
 \usepackage[version=4]{mhchem}
 
 \usepackage[colorinlistoftodos,prependcaption,textsize=tiny]{todonotes}
@@ -29,25 +38,25 @@
 \usepackage{subcaption}
 
 \usepackage[
-    backend=biber,
-    natbib=true,
-    maxbibnames=9,
-    maxcitenames=5,
-    style=phys,
-    biblabel=brackets,
-    giveninits=false,
-    abbreviate=false,
-    doi=false,
+   backend=biber,
+   natbib=true,
+   maxbibnames=9,
+   maxcitenames=5,
+   style=phys,
+   biblabel=brackets,
+   giveninits=false,
+   abbreviate=false,
+   doi=false,
 	url=true,
 	isbn=false,
-    block=space,
-    backref=true,
+   block=space,
+   backref=true,
 	backrefstyle=two,
 ]{biblatex}
+\usepackage{biblatex}
 \addbibresource{/Users/ehrhorn/Developer/thesis/refs.bib}
 
 \usepackage{tikz}
-\usepackage[compat=1.1.0]{tikz-feynman}
 \usetikzlibrary{external}
 \usepackage{pgf}
 
@@ -59,19 +68,3 @@
 \usepackage{varioref}
 \usepackage{hyperref}
 \usepackage{cleveref}
-
-%% Smaller url fontsize
-%\renewcommand{\UrlFont}{\scriptsize}
-%% Replace footnote command
-%\renewcommand{\thefootnote}{\fnsymbol{footnote}}
-%
-%\sisetup{detect-all}
-%
-%% The number `e'.
-%\def\eu{\ensuremath{\mathrm{e}}}
-%% The imaginary unit.
-%\def\iu{\ensuremath{\mathrm{i}}}
-%% The differential operator.
-%\def\du{\ensuremath{\mathrm{d}}}
-%% Make hbar upright
-%\def\hbaru{\ensuremath{{\mathrm{\hbar}}}}
