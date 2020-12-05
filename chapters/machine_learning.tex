@@ -3,9 +3,103 @@
 
 \begin{document}
 
+Contrary to public expectation these days, machine learning (ML) is neither sexy nor particularly exciting.
+The misnomer \enquote{AI} is often applied to ML, evoking expectations of some general computer intelligence that might rise up and replace humans as the Earth's (and soon, the galaxy!) dominant species.
+
+ML is a varied field, with many different subgenres, of which Deep Learning (DL) is the one that this thesis is concerned with.
+
+However, it might be beneficial to first describe what ML as a field is, before delving into the specifics of DL.\@
+
+% All ML is, is good, old, boring, dependable statistics, calculus and linear algebra.
+% You need calculus to figure out which way weights must be adjusted, and you need linear algebra to apply computations quickly.
+
 \section{ML basics}\label{sec:ml_basics}
 
-\section{Deep learning}\label{sec:deep_learning}
+The fundamental schism between traditional programming and ML is this: programs apply logic to inputs, and produce outputs, while ML uses outputs on inputs to produce logic.
+
+Machine learning generally comes in three flavors: supervised learning, unsupervised learning and reinforcement learning.
+As supervised learning is the tool used in this thesis, it is the only flavor that we shall discuss.
+
+Generally, supervised machine learning entails having a way to map inputs to outputs (e.g.\ decision trees in tree based ML, artificial neurons in deep learning), access to some labelled dataset and for each data point the ability to calculate an error.
+This error is encapsulated in a loss functions, which takes as input the model's guess for the data point value and the true value (the \enquote{label}) and returns a real number, the \enquote{loss}.
+The name of the game is then the minimization of this loss, as an error of zero would mean a perfect estimation of the label value.
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=0.5\textwidth]{./images/machine_learning/Ea9GZUbXsAEORIb.jpeg}
+    \caption{The \enquote{Face-Depixelizer}~\cite{Menon2020} takes a blurred image of a person, and generates an image from it. However, the model was trained on primarily white people, and so reconstructs an obviously blurred image of Barack Obama as a white male. Image from \url{https://twitter.com/Chicken3gg/status/1274314622447820801}}\label{fig:algorithmic_bias}
+\end{figure}
+The input/output data is referred to as \enquote{training data}, and it is in essence what decides the logic of the model; thus care must be taken with regards to it, as inherent biases in the training data will propagate to the decisions the model makes.
+This is a continuation of the old programmer's adage, \enquote{garbage in, garbage out}, because an ML algorithm will only give back what is fed to it; it is not sentient.
+This is a very active area of discussion at the time of writing, and the summer of 2020 gave a very good example of the issue; see~\vref{fig:algorithmic_bias}.
+
+Training data is not necessarily easy to come by---and may, for some companies, present an impenetrable moat, if the competition does not have access to the same dataset---but particle physics is special in this regard as Monte Carlo data (\vref{sec:monte_carlo_simulation}) is typically plentiful; however, it should be noted that Monte Carlo data itself is simulated, based on assumptions the laws of physics, and thus represents an inherently biased version of how the universe works.
+
+\todo[inline]{More about ML basics...}
+
+\section{Artificial neural networks}\label{sec:artificial_neural_networks}
+
+Artificial neural networks (ANN) have a much longer story than would probably be thought, seeing as they currently stand as pillars of futurism.
+ANNs can be said to draw inspiration from nature as the simplest version, a feedforward neural network, uses artificial neurons, modeled on the neurons of a brain, first proposed in the forties.
+
+The artificial neuron takes \( m + 1 \) inputs, consisting of values \( x_{j} \) weighted by \( w_{k m} \) and applies some \enquote{activation function} \( \phi \) to their sum, such that
+\begin{equation}
+	y_{k} = \phi \left( \sum_{j = 0}^{m} w_{k j} x_{j} \right).
+\end{equation}
+The activation function is non-linear, typically a sigmoid
+\begin{equation}
+	S(x) = \frac{e^{x}}{e^{x} + 1},
+\end{equation}
+or, the popular choice these days, a rectifier
+\begin{equation}
+	f(x) = \max{\left( 0, x \right)}.
+\end{equation}
+\begin{figure}[ht]
+    \centering
+    \input{./images/machine_learning/activation_functions.pgf}
+    \caption{Two activation functions, a sigmoid and a rectifier. Both \enquote{activate} an input, rather like a Heaviside step function.}\label{fig:activation_functions}
+\end{figure}
+To explain how ANNs work, a simple example using simple linear regression is illuminating.
+
+In linear regression, a 200 year old technique, a linear relationship between \( n \) dependent variables, \( y_{k} \), and input variables \( \bm{x}_{k} \), is assumed, such that the output can be approximated as
+\begin{equation}
+    y_{k} \approx w_{0} x_{k 0} + w_{1} x_{k 1} + \cdots + w_{m} x_{k m} = \sum_{i = 0}^{m} x_{k i} = \bm{x}_{k}^{\intercal} \bm{w},
+\end{equation}
+where \( x_{k 0} = 1 \) such that \( w_{0} \) is the bias.
+\begin{figure}[ht]
+    \centering
+    \includegraphics{./images/machine_learning/perceptron.pdf}
+    \caption{The linear perceptron.}\label{fig:perceptron}
+\end{figure}
+This is a linear perceptron, an artificial neuron with a linear activation function; see~\vref{fig:perceptron}, modeled as a directed acyclic graph.
+Regression then proceeds by minimizing the error, e.g.\ the sum of squared residuals
+\begin{equation}
+    E(\bm{w}) = \sum_{k = 1}^{n} {\left( y_{k} - \bm{x}_{k}^{\intercal} \bm{w} \right)}^2,
+\end{equation}
+a function of the weights.
+We are then able to ascertain, by using the derivative of the error function with respect to the weights, 
+\begin{equation}
+    \diffp{E}{w_{i}} = - 2 \sum_{k = 1}^{n} {\left( y_{k} - \bm{x}_{k}^{\intercal} \bm{w} \right)} x_{k i},
+\end{equation}
+the relationship between the minimum of the loss function and the weight \( w_{i} \).
+The loss function, then, needs to be differentiable, in which case the minimum can be reached via the backpropagation algorithm, employing the chain rule, and adjust the weights by moving opposite to the gradient,
+\begin{equation}
+    w_{i} \Rightarrow w_{i} - \alpha \diffp{E}{w_{i}},
+\end{equation}
+with \( \alpha \) the learning rate.
+This application of backpropagation is called gradient descent.
+The learning rate is a hyperparameter, meaning it needs to be adjusted by means outside the neural network, and can ensure that the steps taken do not overshoot the local minimum; on the other hand, a too small learning rate will result in training taking longer than necessary, as more steps must be taken than needed.
+
+The backpropagation algorithm has been implemented in certain frameworks, most noteworthy TensorFlow and PyTorch, as differentiable programming by automatic differentiation, which allows the chain rule to be easily (and quickly!) employed.
+This is either done by building a static graph of the network, compiled before running the program, and containing derivative information at all nodes\footnote{This is how TensorFlow 1.x works}, or operator overloading which defines derivatives of functions/tensors in the language itself\footnote{This is how PyTorch and TensorFlow 2.x works by default}.
+This is the true enabling technology of the two frameworks, and some languages---such as Swift---even aim to include automatic differentiation as a first-class language feature giving users a type-safe way of running machine learning; it is an exciting time for ML.\@
+
+While automatic differentiation enables the popular frameworks to run backpropagation efficiently, another key technology has helped neural networks (and ML in general) achieve a breakthrough in to 2010s: graphical processing units (GPUs).
+These were first introduced to the mass market in the 1990s to accelerate and improve graphics performance of desktop computers, but their parallel nature has meant it is suited well for neural networks that require matrix multiplication, as we have seen.
+GPUs are designed such that they are efficient at a small number of specific operations, in contrast to the more generalist nature of CPUs, and tend to have an enormous amount of computing cores relative to CPUs; a new Apple MacBook may have \num{8} CPU cores, whereas the latest desktop GPU from Nvidia sports \num{8704}.
+Nvidia also provides an API for doing tensor calculations with its cores, CUDA, which is what PyTorch and TensorFlow interfaces with, such that the common data scientist can operate in familiar languages such as Python, instead of using C++ and CUDA, but it does mean that Nvidia at the moment has a near-monopoly on machine learning acceleration.
+
+The toy linear regression example will converge to the best linear fit, but it is only useful for linear dependencies.
+The real power of neural networks comes into effect when non-linearities are introduced, which is done using activation functions, because if we were to stack linear perceptrons the output will simply be a linear transformation of the input, unable to model complex real-world non-linear relationships.
 
 \section{Temporal convolutional neural networks}\label{sec:temporal_convolutional_neural_networks}
 

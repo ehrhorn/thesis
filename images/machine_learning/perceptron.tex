@@ -1,0 +1,35 @@
+\documentclass{article}
+\usepackage[pdftex,active,tightpage]{preview}
+\usepackage{newtxtext,newtxmath}
+\setlength\PreviewBorder{2mm}
+
+\usepackage{amsmath}
+\usepackage{tikz}
+\usepackage{bm}
+\usetikzlibrary{shapes, calc, shapes, arrows}
+
+\tikzstyle{input}=[draw,circle,minimum size=20pt,inner sep=0pt]
+\tikzstyle{hidden}=[draw,circle,minimum size=20pt,inner sep=0pt]
+\tikzstyle{output}=[draw,circle,minimum size=20pt,inner sep=0pt]
+\tikzstyle{bias}=[draw,dashed,fill=gray!50,circle,minimum size=20pt,inner sep=0pt]
+
+\tikzstyle{stateTransition}=[->, thick]
+\DeclareMathOperator{\xor}{XOR}
+\begin{document}
+\begin{preview}
+\begin{tikzpicture}[scale=2]
+    \node (x)[input] at (0,1) {\( x_{0} \)};
+    \node (y)[input] at (0,0) {\( x_{1} \)};
+    \node (z)[input] at (0,-1) {\( x_{2} \)};
+    \node (o)[output] at (1,0.0) {\( \Sigma \)};
+
+    \draw[stateTransition,] (x) -- (o) node [midway,above=-0.06cm, rotate=325,anchor=south] {\( w_{0} \)};
+    \draw[stateTransition] (y) -- (o) node [midway,above=-0.06cm] {\( w_{1} \)};
+    \draw[stateTransition] (z) -- (o) node [midway,above=-0.06cm, rotate=45,anchor=north] {\( w_{2} \)};
+
+
+    \draw[stateTransition] (o) -- (2,0.0) node [midway,above=0.0cm] {\( \bm{x}^{\intercal} \bm{w} \)};
+
+\end{tikzpicture}
+\end{preview}
+\end{document}

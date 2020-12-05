@@ -59,11 +59,17 @@
 \usetikzlibrary{external}
 \usepackage{pgf}
 
-%\usepackage{plex-mono}
-%\usepackage{minted}
-%\renewcommand{\MintedPygmentize}{/Users/ehrhorn/.local/bin/pygmentize}
+% \usepackage{plex-mono}
+% \usepackage{minted}
+% \renewcommand{\MintedPygmentize}{/Users/ehrhorn/.local/bin/pygmentize}
+
+\usepackage{layouts}
 
 \usepackage{url}
 \usepackage{varioref}
 \usepackage{hyperref}
 \usepackage{cleveref}
+
+\makeatletter
+\newcommand\thefontsize{The current font size is: \f@size pt}
+\makeatother

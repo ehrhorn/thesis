@@ -1,4 +1,5 @@
-% !TeX program = lualatex
+% !TEX options=--shell-escape
+% !TEX program=lualatex
 \documentclass[
 	nobind,
 	sftitles,
@@ -11,6 +12,8 @@
 \listoftodos[Notes]
 
 \tableofcontents
+
+% textwidth in inches: \printinunitsof{in}\prntlen{\textwidth}
 
 \chapter{Introduction}\label{chap:introduction}
 \subfile{./chapters/introduction}
