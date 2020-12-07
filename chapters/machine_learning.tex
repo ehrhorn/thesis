@@ -38,20 +38,20 @@ Training data is not necessarily easy to come by---and may, for some companies, 
 
 \section{Artificial neural networks}\label{sec:artificial_neural_networks}
 
-Artificial neural networks (ANN) have a much longer story than would probably be thought, seeing as they currently stand as pillars of futurism.
+Artificial neural networks (ANN) have a much longer story than would probably be thought, seeing how they currently stand as pillars of futurism.
 ANNs can be said to draw inspiration from nature as the simplest version, a feedforward neural network, uses artificial neurons, modeled on the neurons of a brain, first proposed in the forties.
 
 The artificial neuron takes \( m + 1 \) inputs, consisting of values \( x_{j} \) weighted by \( w_{k m} \) and applies some \enquote{activation function} \( \phi \) to their sum, such that
 \begin{equation}
 	y_{k} = \phi \left( \sum_{j = 0}^{m} w_{k j} x_{j} \right).
 \end{equation}
-The activation function is non-linear, typically a sigmoid
+The activation function is typically non-linear, e.g.\ a sigmoid
 \begin{equation}
 	S(x) = \frac{e^{x}}{e^{x} + 1},
 \end{equation}
 or, the popular choice these days, a rectifier
 \begin{equation}
-	f(x) = \max{\left( 0, x \right)}.
+	f(x) = x^{+} = \max{\left( 0, x \right)}.
 \end{equation}
 \begin{figure}[ht]
     \centering
@@ -81,25 +81,44 @@ We are then able to ascertain, by using the derivative of the error function wit
     \diffp{E}{w_{i}} = - 2 \sum_{k = 1}^{n} {\left( y_{k} - \bm{x}_{k}^{\intercal} \bm{w} \right)} x_{k i},
 \end{equation}
 the relationship between the minimum of the loss function and the weight \( w_{i} \).
-The loss function, then, needs to be differentiable, in which case the minimum can be reached via the backpropagation algorithm, employing the chain rule, and adjust the weights by moving opposite to the gradient,
+The loss function, then, needs to be differentiable, in which case the minimum can be reached via the backpropagation algorithm.
+This algorithm employs the chain rule to calculate the gradient of the loss function with respect to the weights---a layer at a time, iterating backwards---and another algorithm, such as gradient descent, adjusts the weights by moving opposite to the gradient iteratively, such that the weight at iteration \( t + 1 \) is
 \begin{equation}
-    w_{i} \Rightarrow w_{i} - \alpha \diffp{E}{w_{i}},
+    w_{i, t + 1} = w_{i, t} - \alpha \diffp{E}{w_{i}},
 \end{equation}
 with \( \alpha \) the learning rate.
-This application of backpropagation is called gradient descent.
-The learning rate is a hyperparameter, meaning it needs to be adjusted by means outside the neural network, and can ensure that the steps taken do not overshoot the local minimum; on the other hand, a too small learning rate will result in training taking longer than necessary, as more steps must be taken than needed.
+The learning rate is a hyperparameter, meaning it needs to be adjusted by means outside the neural network, and ensures that the steps taken do not overshoot the minimum; on the other hand, a too small learning rate will result in training taking longer than necessary, as more steps must be taken than needed.
+The algorithm terminates at some point when the absolute value of the gradient is less than some preset tolerance.
+
+Because neural networks these days tend to involve very large datasets, the application of gradient descent can be a slow process owing to the summing of the gradients of all training examples.
+This burden can be reduced by applying stochastic gradient descent which calculates an approximation of the true gradient by sampling a subset of the training data at each iteration, done on batches of training samples, incidentally allowing application of parallelization techniques.
+
+The problem of choosing the correct learning rate is solved by optimizers such as Adam~\cite{Kingma2014}, employing adaptive learning rates for each weight in the network and calculating the average of the first- and second moments of the gradient at each iteration.
+These are then controlled using two hyperparameters as decay rates, \( \beta_{1} \) and \( \beta_{2} \), typically set at \( \beta_{1} = 0.9 \) and \( \beta_{2} = 0.99 \).
 
 The backpropagation algorithm has been implemented in certain frameworks, most noteworthy TensorFlow and PyTorch, as differentiable programming by automatic differentiation, which allows the chain rule to be easily (and quickly!) employed.
-This is either done by building a static graph of the network, compiled before running the program, and containing derivative information at all nodes\footnote{This is how TensorFlow 1.x works}, or operator overloading which defines derivatives of functions/tensors in the language itself\footnote{This is how PyTorch and TensorFlow 2.x works by default}.
+This is either done by building a static graph of the network, compiled before running the program, and containing derivative information at all nodes\footnote{This is how TensorFlow 1.x works}, or operator overloading which defines derivatives of functions/tensors in the language itself\footnote{This is how PyTorch and TensorFlow 2.x work by default}.
 This is the true enabling technology of the two frameworks, and some languages---such as Swift---even aim to include automatic differentiation as a first-class language feature giving users a type-safe way of running machine learning; it is an exciting time for ML.\@
 
 While automatic differentiation enables the popular frameworks to run backpropagation efficiently, another key technology has helped neural networks (and ML in general) achieve a breakthrough in to 2010s: graphical processing units (GPUs).
 These were first introduced to the mass market in the 1990s to accelerate and improve graphics performance of desktop computers, but their parallel nature has meant it is suited well for neural networks that require matrix multiplication, as we have seen.
 GPUs are designed such that they are efficient at a small number of specific operations, in contrast to the more generalist nature of CPUs, and tend to have an enormous amount of computing cores relative to CPUs; a new Apple MacBook may have \num{8} CPU cores, whereas the latest desktop GPU from Nvidia sports \num{8704}.
-Nvidia also provides an API for doing tensor calculations with its cores, CUDA, which is what PyTorch and TensorFlow interfaces with, such that the common data scientist can operate in familiar languages such as Python, instead of using C++ and CUDA, but it does mean that Nvidia at the moment has a near-monopoly on machine learning acceleration.
+Nvidia also provides an API for doing tensor calculations with its cores, CUDA, which is what PyTorch and TensorFlow interfaces with, such that the common data scientist can operate in familiar languages such as Python, instead of using C++ and CUDA, but it does mean that Nvidia, for the moment, has a near-monopoly on machine learning acceleration.
 
-The toy linear regression example will converge to the best linear fit, but it is only useful for linear dependencies.
-The real power of neural networks comes into effect when non-linearities are introduced, which is done using activation functions, because if we were to stack linear perceptrons the output will simply be a linear transformation of the input, unable to model complex real-world non-linear relationships.
+The toy linear regression example will converge to the best linear fit, but it is only useful for problems that are linearly separable; by its linear nature, it is only capable of linear transformations.
+This rather limits the application of a perceptron, inasmuch as many real-world problems are non-linear with respect to the input variables, and this observation leads to the introduction of non-linear activation functions into the network.
+Doing so actually allows a single layer neural network to approximate any continuous function, as shown in~\cite{Cybenko1989,Hornik1989}.
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=0.3\textwidth]{./images/machine_learning/approximation_function.png}
+    \caption{Example of a wide neural network approximating the function \( f(x) = 0.2 + 0.4 x^{2} + 0.3 x \sin{\left( 15 x \right) + 0.05 \cos{\left( 50 x \right)}} \), taken from \url{http://neuralnetworksanddeeplearning.com/chap4.html}.}\label{fig:approximation_function}
+\end{figure}
+The results refer to \enquote{sigmoidal}, or \enquote{squashing}, functions, examples of which are the sigmoid and the rectifier shown in~\vref{fig:activation_functions}.
+The result can be graphically understood by inspection of~\vref{fig:approximation_function}:
+the composition of the activation functions by each neuron allows us to approximate the value of any continuous function, provided the network is wide enough; the result holds as well for multivariate functions.
+
+The question then becomes, why are the networks of today \textit{deep} instead of \textit{wide}?
+The answer is that universality has also been proved for deep networks~\cite{Lu2017}, and these types of network exhibit extremely useful properties that we can benefit from.
 
 \section{Temporal convolutional neural networks}\label{sec:temporal_convolutional_neural_networks}
 
