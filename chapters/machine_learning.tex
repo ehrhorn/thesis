@@ -117,10 +117,25 @@ The results refer to \enquote{sigmoidal}, or \enquote{squashing}, functions, exa
 The result can be graphically understood by inspection of~\vref{fig:approximation_function}:
 the composition of the activation functions by each neuron allows us to approximate the value of any continuous function, provided the network is wide enough; the result holds as well for multivariate functions.
 
+Thus we end up with \enquote{multi-layer feedforward networks} which can approximate almost any function, which consist of a vector of inputs multiplied by a matrix (the weights connected to a neuron) with a bias added (all of which is an affine transformation) passed through a non-linear activation function.
+
 The question then becomes, why are the networks of today \textit{deep} instead of \textit{wide}?
 The answer is that universality has also been proved for deep networks~\cite{Lu2017}, and these types of network exhibit extremely useful properties that we can benefit from.
 
 \section{Temporal convolutional neural networks}\label{sec:temporal_convolutional_neural_networks}
+
+A problem arises, however, when we want to apply neural networks to images, something that is easily recognized as extremely useful (both for good and objectively bad purposes).
+Say we flatten a \( 100 \times 100 \) image into a vector of length \num{10000}, and feed it to a multi-layer feedforward network; each neuron in the first layer will now have \num{10000} weights that need to be learned!
+Additionally, the internal structure of the image is disregarded, in that there can be meaning to the height, width and channel axes.
+
+This is remedied by introducing a linear transformation preserving the structure of the input: a convolution.
+\enquote{Convolutional neural networks} create feature maps by employing discrete convolutions via kernels that \enquote{slide} over the input and aggregate information in the receptive field.
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=0.7\textwidth]{./images/machine_learning/convolution.png}
+    \caption{An example of discrete convolutions. The dark blue \( 3 \times 3 \) kernel slides over the input, and sums the product of the weights and inputs (an inner product in all but name) forming a feature map (green matrix) in the process.
+    Image from~\cite{Dumoulin2016}.}\label{fig:convolution}
+\end{figure}
 
 \section{Loss functions}\label{sec:loss_functions}
 
