@@ -129,12 +129,61 @@ Say we flatten a \( 100 \times 100 \) image into a vector of length \num{10000},
 Additionally, the internal structure of the image is disregarded, in that there can be meaning to the height, width and channel axes.
 
 This is remedied by introducing a linear transformation preserving the structure of the input: a convolution.
-\enquote{Convolutional neural networks} create feature maps by employing discrete convolutions via kernels that \enquote{slide} over the input and aggregate information in the receptive field.
+\enquote{Convolutional neural networks} (CNNs) create feature maps by employing discrete convolutions via kernels that slide over the input and aggregate information in the receptive field; see~\vref{fig:convolution}.
 \begin{figure}[ht]
     \centering
     \includegraphics[width=0.7\textwidth]{./images/machine_learning/convolution.png}
-    \caption{An example of discrete convolutions. The dark blue \( 3 \times 3 \) kernel slides over the input, and sums the product of the weights and inputs (an inner product in all but name) forming a feature map (green matrix) in the process.
+    \caption{An example of discrete convolutions. The dark blue \( 3 \times 3 \) kernel slides over the input, and sums the product of the weights and inputs forming a feature map (green matrix) in the process.
     Image from~\cite{Dumoulin2016}.}\label{fig:convolution}
+\end{figure}
+CNNs first came to prominence in the realm of image recognition primarily because they impose a sense of locality on the network which meshes well with images: there are probably local features that are important for the output, which could not be taken into account if the structure was lost by applying simple fully connected layers directly to the input; it is also wasteful, as the local information can probably be pooled and share weights.
+Not incidentally, pooling layers are the second feature of CNNs that made them world famous.
+These down-sample the output of a convolutional layer by (typically) taking the max value of some subset of values of the image\footnote{Pooling layers can also work by taking averages or some other metric.}, discarding information but serving to reduce parameter size.
+% \begin{figure}
+%      \centering
+%      \begin{subfigure}[b]{0.4\textwidth}
+%          \centering
+%             \includegraphics[width=\textwidth]{./images/machine_learning/Conv_layer.png}
+%             \caption{}\label{fig:conv_layer}
+%      \end{subfigure}
+%      \hfill
+%      \begin{subfigure}[b]{0.4\textwidth}
+%          \centering
+%             \includegraphics[width=\textwidth]{./images/machine_learning/Max_pooling.png}
+%             \caption{}\label{fig:max_pooling}
+%      \end{subfigure}
+%         \caption{First image from \url{https://en.wikipedia.org/wiki/File:Conv_layer.png}, second from \url{https://upload.wikimedia.org/wikipedia/commons/e/e9/Max_pooling.png}}\label{fig:conv_and_pool}
+% \end{figure}
+
+Standard CNNs have enjoyed enormous success over the past ten years, and many image applications were built using these.
+Another type of networks, \enquote{recurrent neural networks} (RNNs), though, took the machine translation, speech recognition and time series prediction world with storm.
+RNNs have storage, internal states that can be used for memory in series where connected events may happen at different intervals.
+\todo[inline]{More about RNNs?}
+
+Recently, however, it has been shown that a new type of CNN, \enquote{temporal convolutional networks} (TCNs)~\cite{Bai2018}, perform better in a wide variety of tasks once dominated by RNNs.
+The million-dollar idea of TCNs are dilated convolutions, used to great effect in~\cite{Oord2016}.
+Whereas discrete convolution is defined as
+\begin{equation}
+    F(s) = \left( \bm{x} * f \right)(s) = \sum_{i = 0}^{k - 1} f(i) \cdot \bm{x}_{s - i},
+\end{equation}
+where \( \bm{x} \in \mathbb{R}^{n} \) is an input sequence and \( f: \{ 0, \ldots, k - 1 \} \rightarrow \mathbb{R} \) a filter, the dilated convolution operator is defined as
+\begin{equation}
+    F(s) = \left( \bm{x} *_{d} f \right)(s) = \sum_{i = 0}^{k - 1} f(i) \cdot \bm{x}_{s - d \cdot i}.
+\end{equation}
+This, then, inserts steps of size \( d \) into the filter, and reduces to a regular convolution for \( d = 1 \).
+The brilliance of dilated convolutions lies in the fact that it enables the receptive field to grow exponentially in size, while the parameters only grow linearly.
+This is done by increasing the stride, \( d \), in subsequent layers, as shown in~\vref{fig:strides}: in (a) \( F_{1} \) is produced from \( F_{0} \), and each element has a receptive field of \( 3 \times 3 \).
+In (b) \( F_{2} \) is produced from \( F_{1} \), and each element now has a receptive field of \( 7 \times 7 \).
+Lastly, in (c), \( F_{3} \) is produced from \( F_{2} \), and each element has a receptive field of \( 15 \times 15 \).
+However, \( F_{1} \) through \( F_{3} \) have the same number of parameters.
+Thus when we use a larger dilation, an output at the top level can represent a wider range of inputs~\cite{Bai2018}.
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=0.7\textwidth]{./images/machine_learning/strides.png}
+    \caption{(a): \( F_{1} \) is produced from \( F_{0} \), and each element has a receptive field of \( 3 \times 3 \).
+    (b): \( F_{2} \) is produced from \( F_{1} \), and each element has a receptive field of \( 7 \times 7 \).
+    (c): \( F_{3} \) is produced from \( F_{2} \), and each element has a receptive field of \( 15 \times 15 \).
+    Image from~\cite{Yu2015}.}\label{fig:strides}
 \end{figure}
 
 \section{Loss functions}\label{sec:loss_functions}
