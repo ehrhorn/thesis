@@ -73,18 +73,18 @@ where \( x_{k 0} = 1 \) such that \( w_{0} \) is the bias.
 This is a linear perceptron, an artificial neuron with a linear activation function; see~\vref{fig:perceptron}, modeled as a directed acyclic graph.
 Regression then proceeds by minimizing the error, e.g.\ the sum of squared residuals
 \begin{equation}
-    E(\bm{w}) = \sum_{k = 1}^{n} {\left( y_{k} - \bm{x}_{k}^{\intercal} \bm{w} \right)}^2,
+    \mathcal{L}(\bm{w}) = \sum_{k = 1}^{n} {\left( y_{k} - \bm{x}_{k}^{\intercal} \bm{w} \right)}^2,
 \end{equation}
 a function of the weights.
-We are then able to ascertain, by using the derivative of the error function with respect to the weights, 
+We are then able to ascertain, by using the derivative of the loss function with respect to the weights, 
 \begin{equation}
-    \diffp{E}{w_{i}} = - 2 \sum_{k = 1}^{n} {\left( y_{k} - \bm{x}_{k}^{\intercal} \bm{w} \right)} x_{k i},
+    \diffp{\mathcal{L}}{w_{i}} = - 2 \sum_{k = 1}^{n} {\left( y_{k} - \bm{x}_{k}^{\intercal} \bm{w} \right)} x_{k i},
 \end{equation}
 the relationship between the minimum of the loss function and the weight \( w_{i} \).
 The loss function, then, needs to be differentiable, in which case the minimum can be reached via the backpropagation algorithm.
 This algorithm employs the chain rule to calculate the gradient of the loss function with respect to the weights---a layer at a time, iterating backwards---and another algorithm, such as gradient descent, adjusts the weights by moving opposite to the gradient iteratively, such that the weight at iteration \( t + 1 \) is
 \begin{equation}
-    w_{i, t + 1} = w_{i, t} - \alpha \diffp{E}{w_{i}},
+    w_{i, t + 1} = w_{i, t} - \alpha \diffp{\mathcal{L}}{w_{i}},
 \end{equation}
 with \( \alpha \) the learning rate.
 The learning rate is a hyperparameter, meaning it needs to be adjusted by means outside the neural network, and ensures that the steps taken do not overshoot the minimum; on the other hand, a too small learning rate will result in training taking longer than necessary, as more steps must be taken than needed.
@@ -171,7 +171,7 @@ where \( \bm{x} \in \mathbb{R}^{n} \) is an input sequence and \( f: \{ 0, \ldot
     F(s) = \left( \bm{x} *_{d} f \right)(s) = \sum_{i = 0}^{k - 1} f(i) \cdot \bm{x}_{s - d \cdot i}.
 \end{equation}
 This, then, inserts steps of size \( d \) into the filter, and reduces to a regular convolution for \( d = 1 \).
-The brilliance of dilated convolutions lies in the fact that it enables the receptive field to grow exponentially in size, while the parameters only grow linearly.
+The brilliance of dilated convolutions lies in the fact that it enables the receptive field---the locations in the input array higher level layers are connected to---to grow exponentially in size, while the parameters only grow linearly.
 This is done by increasing the stride, \( d \), in subsequent layers, as shown in~\vref{fig:strides}: in (a) \( F_{1} \) is produced from \( F_{0} \), and each element has a receptive field of \( 3 \times 3 \).
 In (b) \( F_{2} \) is produced from \( F_{1} \), and each element now has a receptive field of \( 7 \times 7 \).
 Lastly, in (c), \( F_{3} \) is produced from \( F_{2} \), and each element has a receptive field of \( 15 \times 15 \).
@@ -186,8 +186,78 @@ Thus when we use a larger dilation, an output at the top level can represent a w
     Image from~\cite{Yu2015}.}\label{fig:strides}
 \end{figure}
 
+TCNs are introduced as a new tool for sequence modelling tasks, and are built on Fully Convolutional Networks~\cite{Long2015}, distinguished by having all hidden layers be the same size of the input, employing zero padding of kernel size - 1 to ensure the correct output shape.
+TCNs go a step further by only convolving with inputs from time \( t \) and earlier to ensure a sense of causality in the network; there is no leakage from the future into the past.
+It is simple to tweak the convolutions, such that this causality is violated, and the network may use inputs from all time steps.
+To aid deep network stability, residual connections~\cite{He2016} have been used.
+These make the output dependent on the addition of the convolution to the identity, i.e.
+\begin{equation}
+    o = \sigma{\left[ \bm{x} + \mathcal{F}(\bm{x}) \right]},
+\end{equation}
+with \( \sigma \) the activation function, \( \bm{x} \) some input and \( \mathcal{F} \) the network transformation; now, the network learns a modification to the identity mapping.
+It should be noted that the residual connection for a TCN is not directly added to the output, as this would have shape implications.
+Instead, a \( 1 \times 1 \) convolution is applied, to ensure the correct size of the residual.
+The TCN residual block consists of two dilated convolutions, a weight normalization~\cite{Salimans2016}---which parameterizes the weights in the network to facilitate faster learning---layer (not used in this work; batch normalization, explained shortly, was used instead) followed by a ReLU (Rectified Linear Unit) layer and a dropout layer.
+The architecture can be seen in~\vref{fig:tcn}.
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=1.0\textwidth]{./images/machine_learning/tcn.png}
+    \caption{(a): a demonstration of dilated convolutions with dilation factor \( d \in \{ 1, 2, 4\} \) and filter size 3.
+    The output is easily able to cover a large receptive field.
+    (b): The TCN residual block, with two dilated convolutions each followed by normalization and activation.
+    (c): The residual connection from input to output.
+    Image from~\cite{Bai2018}.}\label{fig:tcn}
+\end{figure}
+Batch normalization~\cite{Ioffe2015} is applied in order to reduce dependence on the careful selection of correct learning rate, because in a deep network the input to any layer is dependent on previous layers, and so changes to any parameter balloons through the network.
+Thus some sense of normalization that preserves the important structure but suppresses the scale is beneficial.
+
+Batch normalization relies on the gradient of batches, briefly touched on earlier in the discussion on stochastic gradient descent.
+One calculates the approximate gradient,
+\begin{equation}
+    \frac{1}{m} \diffp*{\mathcal{L}(\bm{x}_{i}, \Theta)}{\Theta},
+\end{equation}
+where \( m \) is the size of the batch, \( \bm{x}_{i} \) is the \( i \)'th training sample and \( \Theta \) the network parameters that will minimize the loss function \( \mathcal{L} \).
+To normalize the output of a layer we calculate the mean and variance of the values of the mini-batch and normalize to those.
+Furthermore, the values are shifted and scaled by the learnable parameters \( \gamma \) and \( \beta \).
+
+The values are passed through a ReLU, a Rectified Linear Unit, shown in~\vref{fig:activation_functions}.
+\todo[inline]{Remember to explain dropout}
+In this thesis a TCN is employed, and a regular 1D convolutional network as well.
+In a 1D CNN the kernel slides in only one direction, but is otherwise similar to image convolution networks.
+
 \section{Loss functions}\label{sec:loss_functions}
 
-\section{Data transformation}\label{sec:data_transformation}
+The choice of loss function influences the performance of the network.
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=0.7\textwidth]{./images/machine_learning/loss.png}
+    \caption{A complicated neural net loss landscape.
+    Image from~\cite{Li2018}.}\label{fig:loss_landscape}
+\end{figure}
+Of course, the function needs to be differentiable, or backpropagation will fail.
+\todo[inline]{Loss functions... what clever thing to say?}
+
+\section{Pre-processing}\label{sec:data_transformation}
+
+Pre-processing is ever important in the data science space.
+Often datasets will contain missing, garbled or even complete nonsense values, and these must be pruned.
+This step can be said for, the IceCube problem, to be handled by the processing levels described in~\vref{sec:post_processing} which cleans noise and events that do not look like data, but the pre-processing work does not stop there in neural network settings.
+Because backpropagation relies on gradients, it is necessary these do not explode, or else training can proceed no further.
+To manage the scale of the inputs, then, the trick employed by many is to simple re-scale the distributions.
+This can of course be done by removing the mean and scale according to the variance, such that
+\begin{equation}
+    \text{transformed}(x_{i}) = \frac{x_{i} - \mu}{\sigma},
+\end{equation}
+with \( \mu \) the mean, \( \sigma \) the standard deviation and \( x_{i} \) the input feature of the \( i \)'th sample.
+However, this method is sensitive to outliers in the data, which will skew both the mean and the standard deviation, so instead robust scaling can be employed which uses the median and the interquartile range (IQR) instead.
+The IQR is the difference between the third and first quartiles of a dataset, that is the middle number between the minimum and the median, and the middle value between the median and the maximum respectively.
+The robust scaler is then defined as
+\begin{equation}
+    \text{transformed}(x_{i}) = \frac{x_{i} - \text{median}}{\text{IQR}},
+\end{equation}
+and is implemented as such in e.g. \verb|scikit-learn|.
+If the dataset is skewed it may be beneficial to first log transform it, before applying scaling, but there are also other non-linear methods, such as a quantile transformation, which transforms the data into a new distribution (e.g. Gaussian or uniform), robust to outliers.
+However, as this is a non-linear transformation, it distorts any linear relationships between variables.
+
 
 \end{document}
