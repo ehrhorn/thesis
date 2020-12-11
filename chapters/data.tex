@@ -5,10 +5,76 @@
 
 \section{Monte Carlo simulation}\label{sec:monte_carlo_simulation}
 
+Because the nature of quantum mechanics is probabilistic, simple, analytical calculations rarely suffice for theoretical predictions in high energy physics (HEP).
+In order to develop a reconstruction algorithm, one needs to be able to test the algorithm on labelled data; should the algorithm be of the machine learning variety, this data is even integral to the development of the algorithm, as we have seen.
+
+The HEP community relies on the Monte Carlo (MC) method for this.
+The canonical introduction to MC is that of the calculation---or, more correctly, the approximation---of \( \pi \):
+draw a circle inside a square, uniformly scatter points on the square, take the ratio of points inside the circle to total number of points scattered (and multiply by four).
+\begin{figure}[ht]
+    \centering
+    \input{./images/data/mc_pi.pgf}
+    \caption{Two runs of the \( \pi \) MC algorithm with \num{100} samples on the left, \num{5000} samples on the right.
+    The points outside the circle are colored red, while the points inside are colored blue.
+    The shape of the circle is easily seen on the right, where the error in calculating \( \pi \) is around \( \SI{0.025}{\percent} \).}\label{fig:mc_pi}
+\end{figure}
+The requirement of uniformity is important, as else the distribution will be skewed and the calculation wrong.
+As seen in~\vref{fig:mc_pi} the number of points also plays a role; the more points, the better the approximation, which seems intuitive enough.
+This translates to particle physics rather well.
+Generally, observables in particle physics take the form of~\cite{Weinzierl2000}
+\begin{equation}
+	O = \int \dl \Phi_{n}{\left( p_{a} + p_{b}, p_{1}, \ldots, p_{n} \right)} \frac{\lvert \mathcal{M} \rvert^2}{8 K(s)} \Theta{\left( O, p_{1}, \ldots, p_{n} \right)},
+\end{equation}
+with \( n \) outgoing particles from a collision between \( a \) and \( b \), where \( \dl \Phi_{n} \) is the Lorentz invariant phase space, \( \sfrac{1}{8 K(s)} \) is a kinematical factor, \( \mathcal{M} \) is the familiar matrix element and \( \Theta \) is a function defining the observable and experimental cuts.
+The matrix element can be calculated, as discussed in~\vref{sec:the_standard_model}\footnote{There are complications as there are higher-order Feynman diagrams; some can be calculated perturbatively, others cannot and must be solved in different ways.}, and the phase space is then up to MC methods to solve.
+% This can be done by re-expressing the phase space as sequential two-body decays; without delving into the algebra, outlined in~\cite{Weinzierl2000}, the phase space becomes
+% \begin{equation}
+% 	\dl \Phi_{2} = \frac{1}{\left( 2 \pi \right)^2} \frac{\sqrt{\lambda{(q_{i}^2, q_{i - 1}^2, m_{i}^2)}}}{8 q_{i}^2} \dl \phi_{i} \dl \left( \cos{\theta_{i}} \right)
+% \end{equation}
+The nuts and bolts are not important for this short discussion, but the long and short of it is that the final state momenta from the collision can be generated from re-expressing the phase space and inserting uniformly randomly generated numbers; rather like the approximation of \( \pi \).
+\todo[inline]{Ugh, more... this is hard!}
+% Generates Events for Neutrino Interaction Experiments (GENIE)
+
+% There exists a surprising number of different MC generators: PYTHIA, HERWIG, ISAJET, SHERPA etc.
+
 \section{Distributions and selections}\label{sec:distributions_and_selections}
 
 \section{OscNext}\label{sec:oscnext}
 
 \section{SQLite}\label{sec:sqlite}
+
+As laid out in~\vref{sec:i3_file_format}, the IceCube native file format is not appropriate for machine learning applications.
+Thus another format had to be used for the occasion.
+First HDF5 was used.
+HDF5 is a hierarchical data format, containing \enquote{Datasets} and \enquote{Groups}.
+Datasets are arrays, similar to those of NumPy, containing data of a single type and a rectangular shape, and Groups are containers whereby the file is organized.
+The format seems to be very popular in the scientific setting, but lacks a truly native Python library (i.e.\ a library that does not need to be externally installed), and does not seem to have a simple query language attached to it.
+Furthermore, performance issues were encountered when more than 6 features were to be extracted at a time, and so alternatives were explored rather early in the process.
+
+The choice soon felt on \verb|pickle| files, with the inspiration coming from typical ML image applications.
+Here, it is typical to organize image files in folders: in a classification task, where an algorithm must learn to classify cats and dogs, the images may be organized as follows:
+\dirtree{%
+.1 training.
+.2 cat.
+.2 dog.
+.1 test.
+.2 cat.
+.2 dog.
+}
+\begin{listing}[ht]
+	\inputminted{python}{./images/data/pickle_example.py}
+	\caption{An example of an event in Python dictionary form.
+	The data has been transformed by a robust scaler, as detailed in~\vref{sec:data_transformation}.}\label{listing:pickle_example}
+\end{listing}
+This was extended to the problem at hand, with each event being saved as Python dictionaries in \verb|pickle| files, named by event number, such that one event might look as in~\vref{listing:pickle_example}.
+\verb|pickle| is Pythons format for serializing objects, meaning one can save any Python object to disk with it.
+This proved to be a very efficient solution in training, as opening pickle files is an embarrassingly parallel problem, and it can be done very quickly even in Python.
+
+However, the structure presented a problem: dealing with millions of events means dealing with millions of files, and performance degraded significantly on other tasks.
+As an example, the datasets were created on an HPC cluster with no access to GPUs.
+Therefore, the sets had to be transferred to an external machine containing GPUs, and this was not easily done using standard tools such as \verb|rsync|.
+\verb|tar| was employed, but the act of taring and untaring was tedious, and would become a problem if new datasets were to be created.
+
+Next \verb|shelve| was employed.
 
 \end{document}
