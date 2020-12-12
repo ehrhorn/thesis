@@ -39,7 +39,18 @@ The nuts and bolts are not important for this short discussion, but the long and
 
 \section{Distributions and selections}\label{sec:distributions_and_selections}
 
-\section{OscNext}\label{sec:oscnext}
+The source of the data used is I3 files, as detailed in~\vref{sec:i3_file_format}, and moved to SQLite (\vref{sec:sqlite}) for training.
+It is structured in features and truth, where the features represent detector data (simulated for MC) and the truth is the truth variables from the MC generator.
+\todo[inline]{No feature engineering, cite Bjumse}
+The detector data contains 20 distinct features, extracted from the I3 files, while the truth contains 14.
+\todo[inline]{Table with features/truth and explanations}
+
+\subsection{oscNext}\label{sec:oscnext}
+\todo[inline]{Some oscNext distribution plots}
+
+\subsection{Upgrade}\label{sec:upgrade}
+\todo[inline]{Some upgrade distribution plots}
+
 
 \section{SQLite}\label{sec:sqlite}
 
@@ -73,8 +84,56 @@ This proved to be a very efficient solution in training, as opening pickle files
 However, the structure presented a problem: dealing with millions of events means dealing with millions of files, and performance degraded significantly on other tasks.
 As an example, the datasets were created on an HPC cluster with no access to GPUs.
 Therefore, the sets had to be transferred to an external machine containing GPUs, and this was not easily done using standard tools such as \verb|rsync|.
-\verb|tar| was employed, but the act of taring and untaring was tedious, and would become a problem if new datasets were to be created.
+\verb|tar| was employed, but the act of taring, transferring, and untaring was tedious, and would become a problem if new datasets were to be created as it hindered fast application of new ideas.
 
-Next \verb|shelve| was employed.
+The dataset was then converted into \verb|shelve|, a Python native persistent database which can hold as values arbitrary Python objects, such as dictionaries.
+Each key was then an event number, and its value event information; as in~\vref{listing:pickle_example}.
+Performance was unfortunately found to be so bad as to be unusable, and so finally SQLite was discussed.
+
+SQL (Structured Query Language) is a language for querying relational databases, invented in 1974.
+Its use is very common in the private sector, and SQLite specifically claims to be the most prevalent database in use at the moment\footnote{\url{https://www.sqlite.org/mostdeployed.html}}.
+The reason for this seems to be the fact that most---if not all---languages have baked-in support, and whereas most other relational databases work in a client-server fashion, SQLite is file-oriented.
+This means it is easy, if not downright trivial, to package a database in e.g.\ a mobile application.
+
+It does not seem to this author that SQLite has gained any traction in the ML community.
+Indeed, most example regression tasks found on the internet contains data in CSV files, or maybe in the NPY format, but as datasets get bigger, both of these are bad choices.
+Besides the fact that CSV is a text file, and so suffers from the problems laid out in~\vref{sec:i3_file_format}, both formats need to be loaded completely into memory on reading, and this can quickly run into memory capacity issues.
+SQLite, on the other hand, is opened with a connection, and data is not fetched until a query is actually run.
+This allows the dataset contained in the SQLite file to be of arbitrary size (limited by file system and other externalities) with no memory impact; you simply fetch the training events you want at runtime.
+This is aided by the fact that SQLite uses B-trees to index its rows: a relational database, SQLite included, organizes the data in two-dimensional tables, and optimizes the search time by employing unique indices.
+In lieu of an index, a search in a table would run in linear time, because the program would have to search through each row until the wanted index is found.
+Binary search algorithms changes this to logarithmic time, \( \mathcal{O}(\log{n}) \) (with \( n \) the number of entries), by sorting the index and checking the middle element; if this element is not equal to the wanted index, the half where the index cannot be found is discarded, and the algorithm run again.
+B-trees is a general structure that can implement binary search efficiently, and thus allows SQLite to fetch indices in logarithmic time.
+
+However, the IceCube data does not immediately lend itself to this structure.
+As can be seen from~\vref{listing:pickle_example} the features are of shape \( M \times N \) where \( M \) is the length of the event and \( N \) the number of features, while the truth labels are of size \( 1 \times P \) with \( P \) the number of labels.
+The natural database would accommodate this, and there exists solutions that, called NoSQL, which hold data in a JSON-like format.
+However, no widespread format was found that is file-oriented instead of client-server, a requirement for portability; thus SQLite was settled on.
+Each row in the truth table has a unique event number as its primary key, while each event (spread over several rows) in the features table has the same event number.
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=0.5\textwidth]{./images/data/diagram.png}
+    \caption{The structure of a dataset, with the features table holding (MC) detector data from events, and the truth table holding the (MC) particle truth variables.}\label{fig:sql_diagram_1}
+\end{figure}
+The structure can be seen in SQL diagram form in~\vref{fig:sql_diagram_1}.
+
+More intangible benefits derive from using SQLite.
+First of all, SQLite supports SQL.\@
+This means that one is able to search easily in databases using clauses to narrow the search, and this aids tremendously in analyzing the data and making cuts, for example.
+For example, \mint{sql}|select event_no from truth where energy_log10 between 1.0 and 2.0| would give all event numbers where \( \log_{10}{\left( E_{\text{truth}} \right)} \) is between 1 and 2.
+Another thing, which is not immediately obvious, is the fact that SQL databases enjoy extremely wide app support.
+This means that there's a large selection of apps (free and otherwise) that allow querying and visualization of the database, an extremely nice feature.
+
+Because IceCube has an abundance of data and MC files, from different analysis groups, and different generators, it was infeasible to gather all data in one SQLite dataset.
+Therefore, a solution was implemented by the author, wherein one database contains meta info from all available IceCube files.
+This has many advantages.
+Firstly, it provides one central repository for everyone doing machine learning on IceCube.
+This means there is one source of truth for event numbers, meaning everyone can agree on what data is used for training, and what is to be blinded and used for test.
+Secondly, it facilitates quick iteration, by allowing the user to create different sets quickly with different cuts, without the size of the database being to large to be portable.
+
+Code for this, called \enquote{CubeDB}, can be found on Github at \url{https://github.com/ehrhorn/cubedb}, created by the author.
+This code relies on the I3 files being available, but should otherwise be able to run on all machines that have Docker or Singularity installed, facilitated by a compiled Docker image that includes all IceCube software necessary to fetch data from I3 files.
+CubeDB takes a SQL query as an argument, and uses this to select events from I3 files and builds a SQLite dataset from it.
+It also contains scripts for building a meta database, and thus is ready to be implemented should a group wish to do so\footnote{The solution does need documenting and tests, however}, and the software is already in use at the Niels Bohr Institute by at least one other person pursuing IceCube machine learning.
 
 \end{document}
