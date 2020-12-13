@@ -45,12 +45,69 @@ It is structured in features and truth, where the features represent detector da
 The detector data contains 20 distinct features, extracted from the I3 files, while the truth contains 14.
 \todo[inline]{Table with features/truth and explanations}
 
+\begin{table}
+    \centering
+    \caption{Features used in the dataset with datatype.
+    Each entry represents an activated PMT, having recorded a light pulse.}\label{tab:features}
+    \begin{tabular}{@{}lll@{}} \toprule
+        Name & Description & Type \\ \midrule
+        \verb|string| & String number of activated PMT & \verb|int| \\
+        \verb|dom| & DOM number of activated PMT & \verb|int| \\ 
+        \verb|pmt| & PMT number of activated PMT & \verb|int| \\ \midrule
+        \verb|dom_x| & \( x \) location of activated PMT (IceCube coord.\ system) & \verb|float| \\
+        \verb|dom_y| & \( y \) location of activated PMT (IceCube coord.\ system) & \verb|float| \\
+        \verb|dom_z| & \( z \) location of activated PMT (IceCube coord.\ system) & \verb|float| \\
+        \verb|time| & Relative time coordinate of hit & \verb|int| \\
+        \verb|charge_log10| & The charge recorded in the pulse in \( \log_{10} \) & \verb|float| \\ \midrule
+        \verb|pmt_x| & \( x \) component of the PMT pointing unit vector & \verb|float| \\
+        \verb|pmt_y| & \( y \) component of the PMT pointing unit vector & \verb|float| \\
+        \verb|pmt_z| & \( z \) component of the PMT pointing unit vector & \verb|float| \\
+        \verb|pmt_area| & The surface area of the PMT that recorded the light pulse & \verb|float| \\
+        \verb|pmt_type| & Type of PMT (IceCube, mDOM, D-Egg) & \verb|int| \\ \midrule
+        \verb|lc| & Local coincidence trigger & \verb|bool| \\
+        \verb|pulse_width| & Pulse width, DAC-dependent & \verb|int| \\ \midrule
+        \verb|SplitInIcePulses| & Pulse included in \verb|SplitInIcePulses| cleaning & \verb|bool| \\
+        \verb|SRTInIcePulses| & Pulse included in \verb|SRTInIcePulses| cleaning & \verb|bool| \\ \bottomrule
+    \end{tabular}
+\end{table}
+\begin{table}
+    \centering
+    \caption{Truth labels used in the dataset with datatype.
+    Each entry represents an MC generated particle.}\label{tab:truth}
+    \begin{tabular}{@{}lll@{}} \toprule
+        Name & Description & Type \\ \midrule
+        \verb|energy_log10| & Energy of particle in \( \log_{10} \) & \verb|float| \\
+        \verb|time| & Relative interaction time of the particle & \verb|float| \\ \midrule 
+        \verb|position_x| & \( x \)-component of interaction position & \verb|float| \\ 
+        \verb|position_y| & \( y \)-component of interaction position & \verb|float| \\
+        \verb|position_z| & \( z \)-component of interaction position & \verb|float| \\ \midrule
+        \verb|direction_x| & \( x \)-component of particle pointing vector (going to) & \verb|float| \\
+        \verb|direction_y| & \( y \)-component of particle pointing vector (going to) & \verb|float| \\
+        \verb|direction_z| & \( z \)-component of particle pointing vector (going to) & \verb|float| \\ \midrule
+        \verb|azimuth| & Azimuthal direction of particle (coming from) & \verb|float| \\
+        \verb|zenith| & Polar direction of particle (coming from) & \verb|float| \\ \midrule
+        \verb|pid| & Particle ID & \verb|int| \\
+        \verb|interaction_type| & Current type (neutral/charged) of interaction & \verb|int| \\ \bottomrule
+    \end{tabular}
+\end{table}
+
 \subsection{oscNext}\label{sec:oscnext}
 \todo[inline]{Some oscNext distribution plots}
+
+\begin{figure}[h]
+    \centering
+    \input{./images/data/deepcore_truth_distributions.pgf}
+    \caption{}\label{fig:deepcore_truth_distributions}
+\end{figure}
 
 \subsection{Upgrade}\label{sec:upgrade}
 \todo[inline]{Some upgrade distribution plots}
 
+\begin{figure}[h]
+    \centering
+    \input{./images/data/upgrade_truth_distributions.pgf}
+    \caption{}\label{fig:upgrade_truth_distributions}
+\end{figure}
 
 \section{SQLite}\label{sec:sqlite}
 
@@ -135,5 +192,9 @@ Code for this, called \enquote{CubeDB}, can be found on Github at \url{https://g
 This code relies on the I3 files being available, but should otherwise be able to run on all machines that have Docker or Singularity installed, facilitated by a compiled Docker image that includes all IceCube software necessary to fetch data from I3 files.
 CubeDB takes a SQL query as an argument, and uses this to select events from I3 files and builds a SQLite dataset from it.
 It also contains scripts for building a meta database, and thus is ready to be implemented should a group wish to do so\footnote{The solution does need documenting and tests, however}, and the software is already in use at the Niels Bohr Institute by at least one other person pursuing IceCube machine learning.
+
+It is not hard to imagine a \enquote{professional} workflow for the implementation of this solution; the meta database could run on a true SQL server, accessible via (protected) API calls, while the dataset creation tool CubeDB could run on a generic web server with access to all I3 files contained in the meta database.
+A GUI for CubeDB can be built using web technology, which would allow IceCube ML researchers to easily \enquote{order} the creation of a new dataset to be delivered to some shared disk location.
+In any case, much of the development of this thesis centered on CubeDB, because there is no default solution in IceCube for this, meaning \textit{any} solution would be of immense benefit to new students starting an ML project; a central source of truth on event numbers and training samples/test samples would also be very valuable, and both can be provided by CubeDB.\@
 
 \end{document}
