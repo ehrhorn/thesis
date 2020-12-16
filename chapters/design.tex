@@ -5,6 +5,59 @@
 
 \section{Defining the problems(s)}\label{sec:defining_the_problems}
 
+The problem to solve is that of neutrino reconstruction based on input IceCube detector data using neural networks.
+This of course requires finding an appropriate architecture, but before that is possible, one needs the pipeline up and running, because training cannot proceed without the data structures defined and built, and evaluation cannot proceed without calculating the metrics and comparing one run to another.
+
+While CubeDB was built for the creation of datasets, CubeFlow (\url{https://gitlab.com/ehrhorn/cubeflow}) served as the code for training and metric calculation.
+Early on in the process, it was discovered that IceCube's event viewer, Steamshovel, while extremely powerful was difficult (and in fact, impossible on the author's available machine(s)) to compile and run, it was decided to build an event viewer by using modern frameworks which supported data in the SQLite format from CubeDB.
+The software was named Powershovel, a play on IceCube's native Steamshovel event viewer\footnote{A steam shovel is a power shovel; steam shovels were replaced by diesel-powered shovels in the 1930s}, and the source code is found at \url{https://gitlab.com/ehrhorn/powershovel}.
+It was soon realized that more visualization tasks were needed, in addition to event viewing, and Powershovel was thus amended to contain two more sections, Distributions and Runs.
+
+Distributions shows dataset variable histograms, calculated when a new set is created.
+This is important for visual inspection of the variable distributions, to ensure nothing went wrong in the creation, to test if training and validation samples are similar, and to confirm that distributions are not changed by the transformations described in \vref{sec:data_transformation}; a screenshot of the distribution screen, showing the variable \verb|energy_log10|, can be seen in~\vref{fig:powershovel_1}.
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=1.0\textwidth]{./images/design/powershovel_1.png}
+    \caption{The true energy distribution of a DeepCore dataset shown in Powershovel.
+    Note the ability to chose transformation (raw or scaled), table (features or truth) and variable.}\label{fig:powershovel_1}
+\end{figure}
+The histograms are calculated and saved in \verb|pickle| files during dataset creation such that the tool is actually responsive and useful, and can load a new dataset---and a new variable---in milliseconds.
+Powershovel is made using Python, Streamlit and Plotly to ensure wide support, modern web technologies and ease of use.
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=1.0\textwidth]{./images/design/powershovel_2.png}
+    \caption{The Powershovel event viewer page.
+    Each light pulse is indicated by the colored sphere, superimposed on the black DOMs.
+    The size of the pulse is proportional to its charge, while the color is decided by the relative time offset of the pulse.
+    The user can see relevant reconstructions, such as direction or vertex position, if any are available for the dataset, while the events are binned in energy.
+    The user may also filter on reconstruction metrics; as shown in the screenshot, this view has been filtered on showing events where the absolute value of the zenith reconstruction error is \SIrange{18.97}{40.6}{\degree}.}\label{fig:powershovel_2}
+\end{figure}
+
+\Vref{fig:powershovel_2} shows the event viewer page where a user may inspect events from different SQLite datasets.
+This uses a subset of events from the true dataset database, in order to load quickly, an issue because all events need to be loaded up front, such that the user may filter on e.g.\ true energy of the event.
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=1.0\textwidth]{./images/design/powershovel_3.png}
+    \caption{}\label{fig:powershovel_3}
+\end{figure}
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=1.0\textwidth]{./images/design/powershovel_4.png}
+    \caption{}\label{fig:powershovel_4}
+\end{figure}
+The Runs page shows the result of a training run.
+After training, CubeFlow runs reconstructions on a given dataset, saves them to a SQLite database, calculates errors and metrics (see~\vref{sec:metrics}), makes histograms, and stores them in \verb|pickle| files for fast retrieval.
+The runs have a common naming convention, which includes certain key indicators of the algorithm (e.g. maximum event length, loss function, etc.) which is then used for filtering purposes such that the user can quickly see all algorithms using for example an MSE loss function.
+Multiple filters can be applied simultaneously.
+
+The page has a two-column layout, which accommodates side-by-side comparison of two runs.
+This is crucial, as there is no single figure of merit\footnote{Resolution is used for evaluating different algorithms, but it is not a scalar. See~\vref{sec:metrics}} summarizing the performance in one number.
+Most figures have a subfigure below it, showing the data basis for calculating that figure.
+As figures are binned in energy, and a slider allows the user to choose what energy bin this subfigure should show data from; this can be seen in~\vref{fig:powershovel_4}.
+
+\section{Metrics}\label{sec:metrics}
+
 \section{Algorithm}\label{sec:algorithm}
 
 \end{document}
