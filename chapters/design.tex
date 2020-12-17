@@ -9,7 +9,7 @@ The problem to solve is that of neutrino reconstruction based on input IceCube d
 This of course requires finding an appropriate architecture, but before that is possible, one needs the pipeline up and running, because training cannot proceed without the data structures defined and built, and evaluation cannot proceed without calculating the metrics and comparing one run to another.
 
 While CubeDB was built for the creation of datasets, CubeFlow (\url{https://gitlab.com/ehrhorn/cubeflow}) served as the code for training and metric calculation.
-Early on in the process, it was discovered that IceCube's event viewer, Steamshovel, while extremely powerful was difficult (and in fact, impossible on the author's available machine(s)) to compile and run, it was decided to build an event viewer by using modern frameworks which supported data in the SQLite format from CubeDB.
+Early on in the process, it was discovered that IceCube's event viewer, Steamshovel, while extremely powerful was difficult (and in fact, impossible on the author's available machines) to compile and run, it was decided to build an event viewer by using modern frameworks which supported data in the SQLite format from CubeDB.\@
 The software was named Powershovel, a play on IceCube's native Steamshovel event viewer\footnote{A steam shovel is a power shovel; steam shovels were replaced by diesel-powered shovels in the 1930s}, and the source code is found at \url{https://gitlab.com/ehrhorn/powershovel}.
 It was soon realized that more visualization tasks were needed, in addition to event viewing, and Powershovel was thus amended to contain two more sections, Distributions and Runs.
 
@@ -35,26 +35,41 @@ Powershovel is made using Python, Streamlit and Plotly to ensure wide support, m
 
 \Vref{fig:powershovel_2} shows the event viewer page where a user may inspect events from different SQLite datasets.
 This uses a subset of events from the true dataset database, in order to load quickly, an issue because all events need to be loaded up front, such that the user may filter on e.g.\ true energy of the event.
+The event view is static, with the time dimension instead indicated by color, but the 3D plot is interactive such that the user may pan and zoom to view the event from different angles.
+This page was also adapted so that it is possible to upload I3 files for viewing; it was spurred on by the IceCube group at The Niels Bohr Institute having trouble with Steamshovel, and so Powershovel was amended and sent to them for evaluation.
 
-\begin{figure}[ht]
-    \centering
-    \includegraphics[width=1.0\textwidth]{./images/design/powershovel_3.png}
-    \caption{}\label{fig:powershovel_3}
-\end{figure}
 \begin{figure}[h]
     \centering
-    \includegraphics[width=1.0\textwidth]{./images/design/powershovel_4.png}
-    \caption{}\label{fig:powershovel_4}
+    \includegraphics[width=1.0\textwidth]{./images/design/powershovel_3.png}
+    \caption{The Runs page showing two different runs, side by side.
+    This shows the zenith resolution, as detailed in~\vref{sec:metrics}.
+    Notice the relative improvement in the bottom of each figure, showing the relative change in performance between the two runs.}\label{fig:powershovel_3}
 \end{figure}
+
 The Runs page shows the result of a training run.
 After training, CubeFlow runs reconstructions on a given dataset, saves them to a SQLite database, calculates errors and metrics (see~\vref{sec:metrics}), makes histograms, and stores them in \verb|pickle| files for fast retrieval.
 The runs have a common naming convention, which includes certain key indicators of the algorithm (e.g. maximum event length, loss function, etc.) which is then used for filtering purposes such that the user can quickly see all algorithms using for example an MSE loss function.
 Multiple filters can be applied simultaneously.
 
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=1.0\textwidth]{./images/design/powershovel_4.png}
+    \caption{The Runs screen, further down the page than shown in~\vref{fig:powershovel_3}.
+    Two 2D histogram plots are shown, true zenith vs. the reconstructed zenith.
+    The energy bin selection is shown in the bottom left corner, and below the 2D histograms 1D histograms showing the distribution of zenith predictions in the selected energy bin can be seen.
+    Furthermore, to highlight the interactive nature of Plotly (the framework drawing all plots in Powershovel) extra info is visible the left 2D histogram, a consequence of the cursor hovering over it.
+    This allows the user to see values for every point in the histogram.
+    Zooming and panning is also possible.}\label{fig:powershovel_4}
+\end{figure}
+
 The page has a two-column layout, which accommodates side-by-side comparison of two runs.
 This is crucial, as there is no single figure of merit\footnote{Resolution is used for evaluating different algorithms, but it is not a scalar. See~\vref{sec:metrics}} summarizing the performance in one number.
-Most figures have a subfigure below it, showing the data basis for calculating that figure.
-As figures are binned in energy, and a slider allows the user to choose what energy bin this subfigure should show data from; this can be seen in~\vref{fig:powershovel_4}.
+Most figures have a subfigure below it, showing the data basis for calculating that figure;
+and because figures are binned in energy, a slider allows the user to choose what energy bin this subfigure should show data from.
+This can be seen in~\vref{fig:powershovel_4}.
+
+The creation of this tool and CubeDB represents a large part of the man-hours of this project, but the tool was used extensively during development of the machine learning algorithm, detailed in~\vref{sec:algorithm}.
+Although not written by a computer science graduate, nor a professional programmer, the code is shared freely in the hope that any idea is taken up and implemented by IceCube.
 
 \section{Metrics}\label{sec:metrics}
 
