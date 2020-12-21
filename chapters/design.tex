@@ -3,7 +3,7 @@
 
 \begin{document}
 
-\section{Defining the problems(s)}\label{sec:defining_the_problems}
+\section{Defining the problem}\label{sec:defining_the_problems}
 
 The problem to solve is that of neutrino reconstruction based on input IceCube detector data using neural networks.
 This of course requires finding an appropriate architecture, but before that is possible, one needs the pipeline up and running, because training cannot proceed without the data structures defined and built, and evaluation cannot proceed without calculating the metrics and comparing one run to another.
@@ -14,8 +14,8 @@ The software was named Powershovel, a play on IceCube's native Steamshovel event
 It was soon realized that more visualization tasks were needed, in addition to event viewing, and Powershovel was thus amended to contain two more sections, Distributions and Runs.
 
 Distributions shows dataset variable histograms, calculated when a new set is created.
-This is important for visual inspection of the variable distributions, to ensure nothing went wrong in the creation, to test if training and validation samples are similar, and to confirm that distributions are not changed by the transformations described in \vref{sec:data_transformation}; a screenshot of the distribution screen, showing the variable \verb|energy_log10|, can be seen in~\vref{fig:powershovel_1}.
-\begin{figure}[ht]
+This is important for visual inspection of the variable distributions, to ensure nothing went wrong in the creation, to test if training and validation samples are similar, and to confirm that distributions are not changed by the transformations described in~\vref{sec:data_transformation}; a screenshot of the distribution screen, showing the variable \verb|energy_log10|, can be seen in~\vref{fig:powershovel_1}.
+\begin{figure} [ht]
     \centering
     \includegraphics[width=1.0\textwidth]{./images/design/powershovel_1.png}
     \caption{The true energy distribution of a DeepCore dataset shown in Powershovel.
@@ -43,19 +43,19 @@ This page was also adapted so that it is possible to upload I3 files for viewing
     \includegraphics[width=1.0\textwidth]{./images/design/powershovel_3.png}
     \caption{The Runs page showing two different runs, side by side.
     This shows the zenith resolution, as detailed in~\vref{sec:metrics}.
-    Notice the relative improvement in the bottom of each figure, showing the relative change in performance between the two runs.}\label{fig:powershovel_3}
+    Notice the \enquote{Rel.\ imp.} in the bottom of each figure, showing the relative change in performance between the two runs.}\label{fig:powershovel_3}
 \end{figure}
 
 The Runs page shows the result of a training run.
 After training, CubeFlow runs reconstructions on a given dataset, saves them to a SQLite database, calculates errors and metrics (see~\vref{sec:metrics}), makes histograms, and stores them in \verb|pickle| files for fast retrieval.
-The runs have a common naming convention, which includes certain key indicators of the algorithm (e.g. maximum event length, loss function, etc.) which is then used for filtering purposes such that the user can quickly see all algorithms using for example an MSE loss function.
+The runs have a common naming convention, which includes certain key indicators of the algorithm (e.g.\ maximum event length, loss function, etc.) which is then used for filtering purposes such that the user can quickly see all algorithms using for example an MSE loss function.
 Multiple filters can be applied simultaneously.
 
 \begin{figure}[h]
     \centering
     \includegraphics[width=1.0\textwidth]{./images/design/powershovel_4.png}
     \caption{The Runs screen, further down the page than shown in~\vref{fig:powershovel_3}.
-    Two 2D histogram plots are shown, true zenith vs. the reconstructed zenith.
+    Two 2D histogram plots are shown, true zenith vs.\ the reconstructed zenith.
     The energy bin selection is shown in the bottom left corner, and below the 2D histograms 1D histograms showing the distribution of zenith predictions in the selected energy bin can be seen.
     Furthermore, to highlight the interactive nature of Plotly (the framework drawing all plots in Powershovel) extra info is visible the left 2D histogram, a consequence of the cursor hovering over it.
     This allows the user to see values for every point in the histogram.
@@ -72,7 +72,57 @@ The creation of this tool and CubeDB represents a large part of the man-hours of
 Although not written by a computer science graduate, nor a professional programmer, the code is shared freely in the hope that any idea is taken up and implemented by IceCube.
 
 \section{Metrics}\label{sec:metrics}
+\begin{figure}[h]
+    \centering
+    \input{./images/design/error_distribution.pgf}
+    \caption{Error resolution in energy bins.
+    Top row shows the error distribution in energy bins [1.0, 1.2) (left) and [1.7, 1.8) }\label{fig:error_resolution_1}
+\end{figure}
+To define the performance of an algorithm the resolution is chosen.
+The resolution is here defined as the normalized interquartile range of the error distribution in a certain energy bin, i.e.
+\begin{equation}
+    w \approx \frac{\text{IQR}}{1.349},
+\end{equation}
+an example of which is shown in the top row of~\vref{fig:error_resolution_1}.
+The normalization is chosen because for a normal distribution
+\begin{equation}
+    \text{IQR} \approx 1.349 \sigma,
+\end{equation}
+meaning that for a normal distribution \( w \) would be \( \sigma \).
+
+The error distribution is different for different metrics, but represents how well the algorithm reconstructs a neutrino; it is zero for perfect reconstruction.
+
+For error distributions that are bounded, the 68th percentile is used instead, also shown in~\vref{fig:error_resolution_1}.
+
+To give some sort of error estimate on \( w \) bootstrapping is employed with the BCa method~\cite{Efron1987} to give a \SI{90}{\percent} confidence interval.
+The IQR reported by energy bin and its confidence interval can be seen in e.g.~\vref{fig:powershovel_4}.
 
 \section{Algorithm}\label{sec:algorithm}
+
+The best algorithm is chosen by essentially running experiments of different neural network designs.
+Early experiments used a simple 1D CNN, which slides a kernel across the data in one direction (hence the name), followed by fully connected layers.
+Later experiments employed TCNs, as these were seen to much improve the performance even with fewer parameters.
+
+Because the inner workings of a neural network is somewhat opaque, it can be difficult to reason about the design with supreme confidence, and so for new tasks\footnote{Staples of machine learning, such as the MNIST task, have years of experimentation behind it; in that sense it is an old task, contrary to the one in this thesis} experimenting is the only way to reason about the most effective design.
+
+There is also the case of hyperparameters.
+Not only must one choose an appropriate loss function, general values such as the learning rate need also be tuned, and even the shape of the scheduler that controls the change of learning rate over time.
+Furthermore problem specific parameters may arise, such as the maximum length of an event in the case of IceCube reconstruction, necessary because tensors going into the neural network must have the same shape, meaning zero-padding to some common value is required\footnote{Even the nature of the zero-padding must be decided; do you zero-pad the end of the arrays, or maybe both ends (with the detector data in the middle)?}.
+
+The data itself also comes in different flavors, in a sense; one may choose the collection of pulses in an event where SRT cleaning (used in level 2 cleaning, but can be implemented at any stage; see~\vref{sec:l2}) has been applied, which removes light that is not causally connected to the event, and must thus be considered noise.
+
+Experiments were run on smaller sets (around \num{200000} events) to facilitate quick turnaround under the assumption that adding more data will improve performance linearly.
+The choice of learning rate was done via a learning rate finder, or \enquote{the Learning Rate Range Test} (LRRT)~\cite{Smith2017}, an attempt at automating the process.
+\begin{figure}
+    \centering
+    \includegraphics[width=1.0\textwidth]{./images/design/lr_finder.png}
+    \caption{An example of an LRRT run.
+    At first, the learning rate is too low, and the loss is plateauing.
+    In the optimal range, the loss descends, until the loss becomes unstable and eventually explodes.
+    Figure from \url{https://www.jeremyjordan.me/nn-learning-rate/}.}\label{fig:lrrt}
+\end{figure}
+LRRT runs a learning rate scan---between two values chosen manually by the user---over one epoch, increasing the learning rate between each mini-batch, the training loss is recorded at each step.
+When the rate is too low, the training loss will plateau, then descent and finally---when the learning rate is too high---explode; the user should then choose the learning rate to be where the training loss is descendant, as that represents the most optimal range of learning rates.
+An example is shown in~\vref{fig:lrrt}.
 
 \end{document}
