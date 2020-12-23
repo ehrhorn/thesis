@@ -125,4 +125,90 @@ LRRT runs a learning rate scan---between two values chosen manually by the user-
 When the rate is too low, the training loss will plateau, then descent and finally---when the learning rate is too high---explode; the user should then choose the learning rate to be where the training loss is descendant, as that represents the most optimal range of learning rates.
 An example is shown in~\vref{fig:lrrt}.
 
+\section{Loss function}
+
+\begin{figure}
+    \centering
+    \input{./images/design/zenith_performance_loss.pgf}
+    \caption{The zenith resolution over \num{18} energy bins from \SIrange{1}{1000}{\giga\electronvolt}.
+    The lines serve to guide the eye, as the plot becomes too busy as a scatter plot with more than two groups.
+    Zenith performance on small DeepCore dataset with three different loss functions, MSE, MAE and logcosh.
+    Logcosh consistently performs worse than MSE, while MSE and MAE are similar at energies above \SI{10}{\giga\electronvolt}.
+    However, MSE seems to perform best at very low energy.}\label{fig:zenith_performance_loss}
+\end{figure}
+
+\begin{figure}
+    \centering
+    \input{./images/design/loss_functions.pgf}
+    \caption{Loss functions MSE, MAE and logcosh.
+    The outsize weight assignment of MSE is seen at values over \( x = 1 \), while the linear fashion and kink at \( x = \) is visible for MAE.
+    Logcosh is smooth and does not assign outsize weight to outliers.}\label{fig:loss_functions}
+\end{figure}
+
+The choice of loss function has an impact on the performance of a model.
+A handful were tested, with the usual suspects Mean Squared Error (MSE), Mean Absolute Error (MAE) and the logarithm of the hyperbolic cosine (\( \log[\cosh(x)] \), termed simply logcosh) performing the best, as shown in~\vref{fig:zenith_performance_loss} using the zenith regression task as an example.
+
+The three loss functions---MSE, MAE and logcosh---are staples of machine learning, but perform their duties differently.
+MSE,
+\begin{equation}
+    \text{MSE} = \frac{1}{n} \sum_{i = 1}^{n} \left( y_{\text{true}} - y_{\text{reco}} \right)^2,
+\end{equation}
+assigns loss quadratically, which means that outliers are assigned an outsize weight.
+Here, \( n \) is the number of samples in a mini-batch, \( y_{\text{true}} \) the true value and \( y_{\text{reco}} \) the reconstructed value.
+MAE,
+\begin{equation}
+    \text{MAE} = \frac{1}{n} \sum_{i = 1}^{n} \lvert y_{\text{true}} - y_{\text{reco}} \rvert,
+\end{equation}
+is an attempt to remedy this by assigning a linear weight.
+It has a constant derivative almost everywhere, but is non-differentiable at \( y_{\text{true}} = y_{\text{reco}} \), so must be approximated by a smooth function at that point.
+
+Logcosh loss,
+\begin{equation}
+    \text{logcosh} = \sum_{i = 1}^{n} \log[\cosh(y_{\text{true}} - y_{\text{reco}})],
+\end{equation}
+is differentiable everywhere, and not as sensitive to outliers, because \( \text{logcosh} \approx x^2 / 2 \) for small \( x \) and \( \text{logcosh} \approx \lvert x \rvert - \log(2) \) for large \( x \), avoiding the problems of MSE.\@
+
+\section{Prediction type}
+
+The prediction of angles\footnote{Or, rather, zenith, which is the quantity of importance for oscillation studies} can proceed in several ways.
+
+Because the azimuthal angle wraps around at \( 2 \pi \), it introduces problems for the neural network because it cannot understand that e.g.\ \SI{6.27}{\radian} and \SI{0.01}{\radian} are points close to each other on the circle.
+This may be remedied by predicting the \( x \), \( y \) and \( z \) components of the directional vector associated with an event, which has the benefit of not relying on circular statistics.
+The loss function may even contain a penalty term ensuring that the network attempts to predict unit vectors.
+This was implemented, but was not found to make a significant difference.
+\begin{figure}
+    \centering
+    \input{./images/design/zenith_performance_prediction_type.pgf}
+    \caption{Zenith resolution performance for different prediction types.
+    Only predicting the zenith coordinate of the neutrino is seen to perform best over the largest range of energies, while the prediction of unit vectors outperforms it at higher energies (\SI{100}{\giga\electronvolt} and above).}\label{fig:prediction_types}
+\end{figure}
+Another avenue is to only predict the zenith angle, which does not suffer from circular wraparound, as it is restricted to \( \left[ \SI{0}{\degree}, \SI{180}{\degree} \right] \).
+This leads to another issue: is it possible to input the raw detector data---which contains Cartesian input coordinates for the DOM positions---and expect the neural network to be able to map it to a spherical coordinate system?
+\begin{figure}
+    \centering
+    \input{./images/design/zenith_performance_input_type.pgf}
+    \caption{The difference between inputting the original detector data, in Cartesian coordinates, to the network, or doing a spherical transform beforehand, when predicting the neutrino's zenith directional coordinate.
+    The performance is similar.}\label{fig:input_types}
+\end{figure}
+This was tested, as the thesis was that converting the coordinates beforehand might lessen the burden on the neural network, and the result can be seen in~\vref{fig:input_types}.
+The performance is similar, and goes to show the power of a universal approximator: the network will discover the correlations itself, even between coordinate transformations.
+
+Lastly, it is possible to predict \textit{both} the azimuthal and polar angle in the same network; this was, however, seen to lead to a slight decrease in zenith resolution, as seen in~\vref{fig:prediction_types}.
+
+\section{Cleaning}
+
+\begin{figure}
+    \centering
+    \input{./images/design/zenith_performance_cleaning_type.pgf}
+    \caption{Impact of cleaning on zenith performance.
+    SplitInIcePulses indicates events with no extra pulses removed by SRT cleaning, whilst SRTInIcePulses is the opposite.
+    There is a clear difference in performance, which should be expected as the SRT cleaning removes unphysical pulses.}\label{fig:cleaning_type}
+\end{figure}
+
+\begin{figure}
+    \centering
+    \input{./images/design/zenith_performance_length.pgf}
+    \caption{}\label{fig:length}
+\end{figure}
+
 \end{document}
