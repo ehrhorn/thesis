@@ -198,6 +198,26 @@ Lastly, it is possible to predict \textit{both} the azimuthal and polar angle in
 \section{Cleaning}
 
 \begin{figure}
+     \centering
+     \begin{subfigure}[b]{0.49\textwidth}
+         \centering
+            \includegraphics[width=\textwidth]{./images/design/uncleaned_event.png}
+            \caption{}\label{fig:uncleaned_powershovel_event}
+     \end{subfigure}
+     \hfill
+     \begin{subfigure}[b]{0.49\textwidth}
+         \centering
+            \includegraphics[width=\textwidth]{./images/design/cleaned_event.png}
+            \caption{}\label{fig:cleaned_powershovel_event}
+     \end{subfigure}
+        \caption{Event ID 124492073, a \SI{35.8}{\giga\electronvolt} event shown in Powershovel with no SRT cleaning (\vref{fig:uncleaned_powershovel_event}) and with (\vref{fig:cleaned_powershovel_event}).
+        This is a track-like muon neutrino event, the neutrino path indicated by the blue line.
+        Each black dot represents a DOM, and the pulses are colored according to the \enquote{plasma} color map with yellower pulses being later in time than bluer pulses.
+        The size of the pulse is proportional to its charge.
+        As is evident, SRT cleaning removes a large amount of pulses in this example, and the cleaned event leaves a sense of direction in the pulse which can be inferred by a human eye, and surely is easier to infer for a neural network.}\label{fig:two_powershovel_events}
+\end{figure}
+
+\begin{figure}
     \centering
     \input{./images/design/zenith_performance_cleaning_type.pgf}
     \caption{Impact of cleaning on zenith performance.
@@ -205,10 +225,21 @@ Lastly, it is possible to predict \textit{both} the azimuthal and polar angle in
     There is a clear difference in performance, which should be expected as the SRT cleaning removes unphysical pulses.}\label{fig:cleaning_type}
 \end{figure}
 
+Every event includes extra SRT cleaning, which removes any pulses that are unphysical (see~\vref{sec:l2}).
+SRT cleaning tends to remove a large amount of pulses, as is shown in~\vref{fig:two_powershovel_events} which is only noise, and should thus tend to aid neural networks in training.
+Networks were trained with/without SRT cleaning, and it was found to be indeed so; an example is shown in~\vref{fig:cleaning_type}.
+As low energy events do not tend to leave long, finely articulated tracks in DeepCore, this cleaning improves the resolution as the network does not need to pay attention to noise.
+
 \begin{figure}
     \centering
     \input{./images/design/zenith_performance_length.pgf}
     \caption{}\label{fig:length}
+\end{figure}
+
+\begin{figure}
+    \centering
+    \input{./images/design/zenith_performance_padding.pgf}
+    \caption{}\label{fig:padding}
 \end{figure}
 
 \end{document}
