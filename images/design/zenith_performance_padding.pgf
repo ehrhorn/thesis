@@ -1479,7 +1479,7 @@
 \definecolor{textcolor}{rgb}{0.000000,0.000000,0.000000}%
 \pgfsetstrokecolor{textcolor}%
 \pgfsetfillcolor{textcolor}%
-\pgftext[x=0.572918in,y=2.732667in,left,base]{\color{textcolor}\rmfamily\fontsize{12.000000}{14.400000}\selectfont Zenith performance}%
+\pgftext[x=0.572918in,y=2.732667in,left,base]{\color{textcolor}\rmfamily\fontsize{12.000000}{14.400000}\selectfont Zenith performance, padding type}%
 \end{pgfscope}%
 \begin{pgfscope}%
 \pgfsetbuttcap%

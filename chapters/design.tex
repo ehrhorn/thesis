@@ -5,8 +5,43 @@
 
 \section{Defining the problem}\label{sec:defining_the_problems}
 
-The problem to solve is that of neutrino reconstruction based on input IceCube detector data using neural networks.
-This of course requires finding an appropriate architecture, but before that is possible, one needs the pipeline up and running, because training cannot proceed without the data structures defined and built, and evaluation cannot proceed without calculating the metrics and comparing one run to another.
+With the given dataset, it is possible to train a neural network to predict the following properties of an incoming neutrino: energy, interaction vertex, interaction time and direction.
+As the oscillation studies---as described in~\vref{sec:neutrino_oscillations}---depend on the energy and the polar angle (as a proxy for the length traveled through the Earth), these two variables are the ones examined in this work.
+
+The algorithm will be measured on its resolution width in 18 energy bins in the range \SIrange{1}{1000}{\giga\electronvolt} of simulated charged current muon neutrinos \enquote{detected} in DeepCore, 6 bins per order of magnitude.
+To gauge the performance the algorithm will be tested against the current best DeepCore reconstruction algorithm, Retro Reco (\vref{sec:l6}).
+
+In the following sections first the custom made tooling used to solve the problem is described, whereafter hyperparameter- and model experiments are performed.
+
+The full DeepCore, charged current muon neutrino dataset (\vref{sec:distributions_and_selections}) where Retro Reco reconstruction is available contains \num{7280939} events in total, where \num{2050125} are blinded, set aside as a test set, leaving \num{5230814} for training.
+Of these \num{1046163} are used for validation, which means \num{4184651} are trainable.
+To save time, most experiments were run on a set containing around \num{400000} events, and all experiments employ early stopping.
+\begin{figure}
+     \centering
+     \begin{subfigure}[b]{0.49\textwidth}
+         \centering
+         \input{./images/design/run_loss.pgf}
+         \caption{}\label{fig:run_loss}
+     \end{subfigure}
+     \hfill
+     \begin{subfigure}[b]{0.49\textwidth}
+         \centering
+         \includegraphics[width=0.85\textwidth]{./images/design/1200px-Overfitting.svg.png}
+         \caption{}\label{fig:overfitting}
+     \end{subfigure}
+        \caption{\Vref{fig:run_loss} shows an actual example of the training and validation loss values during an experiment.
+        The two diverge before the 10th epoch with the validation loss staying somewhat flat, and the training loss decreasing.
+        This indicates that the network has begun overfitting to the training data, an example of which is shown by the green line in~\vref{fig:overfitting}.
+        This will lead to a decreased inference capacity of the network because it is unable to generalize to unseen data.
+        \Vref{fig:overfitting} from \url{https://commons.wikimedia.org/wiki/File:Overfitting.svg}.}\label{fig:loss_and_overfitting}
+\end{figure}
+Early stopping runs an inference pass on the validation step at the end of each epoch, and records the loss function value.
+When the loss is seen to improve on the training set, but not the validation set, it is a sign of overfitting to the training data, because the network is no longer able to infer well on unseen data.
+
+\section{Tooling}\label{sec:tooling}
+
+Having defined the problem, solving it requires finding an appropriate architecture.
+Before that is possible, one needs the pipeline up and running, because training cannot proceed without the data structures defined and built, and evaluation cannot proceed without calculating the metrics and comparing one run to another.
 
 While CubeDB was built for the creation of datasets, CubeFlow (\url{https://gitlab.com/ehrhorn/cubeflow}) served as the code for training and metric calculation.
 Early on in the process, it was discovered that IceCube's event viewer, Steamshovel, while extremely powerful was difficult (and in fact, impossible on the author's available machines) to compile and run, it was decided to build an event viewer by using modern frameworks which supported data in the SQLite format from CubeDB.\@
@@ -101,9 +136,11 @@ The IQR reported by energy bin and its confidence interval can be seen in e.g.~\
 
 The best algorithm is chosen by essentially running experiments of different neural network designs.
 Early experiments used a simple 1D CNN, which slides a kernel across the data in one direction (hence the name), followed by fully connected layers.
-Later experiments employed TCNs, as these were seen to much improve the performance even with fewer parameters.
+Later experiments employed TCNs, as these were seen to much improve the performance with a similar amount of parameters.
 
 Because the inner workings of a neural network is somewhat opaque, it can be difficult to reason about the design with supreme confidence, and so for new tasks\footnote{Staples of machine learning, such as the MNIST task, have years of experimentation behind it; in that sense it is an old task, contrary to the one in this thesis} experimenting is the only way to reason about the most effective design.
+
+\subsection{Hyperparameters}
 
 There is also the case of hyperparameters.
 Not only must one choose an appropriate loss function, general values such as the learning rate need also be tuned, and even the shape of the scheduler that controls the change of learning rate over time.
@@ -125,7 +162,7 @@ LRRT runs a learning rate scan---between two values chosen manually by the user-
 When the rate is too low, the training loss will plateau, then descent and finally---when the learning rate is too high---explode; the user should then choose the learning rate to be where the training loss is descendant, as that represents the most optimal range of learning rates.
 An example is shown in~\vref{fig:lrrt}.
 
-\section{Loss function}
+\subsection{Loss function}
 
 \begin{figure}
     \centering
@@ -141,7 +178,7 @@ An example is shown in~\vref{fig:lrrt}.
     \centering
     \input{./images/design/loss_functions.pgf}
     \caption{Loss functions MSE, MAE and logcosh.
-    The outsize weight assignment of MSE is seen at values over \( x = 1 \), while the linear fashion and kink at \( x = \) is visible for MAE.
+    The outsize weight assignment of MSE is seen at values over \( x = 1 \), while the linear fashion and kink at \( x = \) is visible for MAE.\@
     Logcosh is smooth and does not assign outsize weight to outliers.}\label{fig:loss_functions}
 \end{figure}
 
@@ -151,7 +188,7 @@ A handful were tested, with the usual suspects Mean Squared Error (MSE), Mean Ab
 The three loss functions---MSE, MAE and logcosh---are staples of machine learning, but perform their duties differently.
 MSE,
 \begin{equation}
-    \text{MSE} = \frac{1}{n} \sum_{i = 1}^{n} \left( y_{\text{true}} - y_{\text{reco}} \right)^2,
+    \text{MSE} = \frac{1}{n} \sum_{i = 1}^{n} {\left( y_{\text{true}} - y_{\text{reco}} \right)}^2,
 \end{equation}
 assigns loss quadratically, which means that outliers are assigned an outsize weight.
 Here, \( n \) is the number of samples in a mini-batch, \( y_{\text{true}} \) the true value and \( y_{\text{reco}} \) the reconstructed value.
@@ -168,7 +205,7 @@ Logcosh loss,
 \end{equation}
 is differentiable everywhere, and not as sensitive to outliers, because \( \text{logcosh} \approx x^2 / 2 \) for small \( x \) and \( \text{logcosh} \approx \lvert x \rvert - \log(2) \) for large \( x \), avoiding the problems of MSE.\@
 
-\section{Prediction type}
+\subsection{Prediction type}
 
 The prediction of angles\footnote{Or, rather, zenith, which is the quantity of importance for oscillation studies} can proceed in several ways.
 
@@ -195,7 +232,7 @@ The performance is similar, and goes to show the power of a universal approximat
 
 Lastly, it is possible to predict \textit{both} the azimuthal and polar angle in the same network; this was, however, seen to lead to a slight decrease in zenith resolution, as seen in~\vref{fig:prediction_types}.
 
-\section{Cleaning}
+\subsection{Cleaning}
 
 \begin{figure}
      \centering
@@ -226,20 +263,98 @@ Lastly, it is possible to predict \textit{both} the azimuthal and polar angle in
 \end{figure}
 
 Every event includes extra SRT cleaning, which removes any pulses that are unphysical (see~\vref{sec:l2}).
-SRT cleaning tends to remove a large amount of pulses, as is shown in~\vref{fig:two_powershovel_events} which is only noise, and should thus tend to aid neural networks in training.
+SRT cleaning tends to remove a large amount of pulses---as is shown in~\vref{fig:two_powershovel_events}---which is only noise, and should thus tend to aid neural networks in training.
 Networks were trained with/without SRT cleaning, and it was found to be indeed so; an example is shown in~\vref{fig:cleaning_type}.
 As low energy events do not tend to leave long, finely articulated tracks in DeepCore, this cleaning improves the resolution as the network does not need to pay attention to noise.
 
+\subsection{Maximum event length}
 \begin{figure}
-    \centering
-    \input{./images/design/zenith_performance_length.pgf}
-    \caption{}\label{fig:length}
+     \centering
+     \begin{subfigure}[b]{0.49\textwidth}
+         \centering
+         \input{./images/design/event_length.pgf}
+         \caption{}\label{fig:event_length}
+     \end{subfigure}
+     \hfill
+     \begin{subfigure}[b]{0.49\textwidth}
+         \centering
+         \input{./images/design/zenith_performance_length.pgf}
+         \caption{}\label{fig:performance_length}
+     \end{subfigure}
+        \caption{The distributions of event lengths with/without SRT cleaning (Raw/Cleaned) as KDEs are shown in~\vref{fig:event_length}.
+        \Vref{fig:performance_length} shows the effect of different maximum event length on the performance of the network.
+    For 200 and 400 the performance is similar, while somewhat decreased for 100.
+    This may be caused by the limitation of a maximum length of 100 \enquote{throws away} too much event information.
+    This is reinforced by the fact that at the highest energy bin the performance of 200 decreases, probably because higher energy events are typically longer, while the performances are very similar at low energies.}\label{fig:length}
 \end{figure}
+The tensors that are input into the neural network need to be of the same shape, and thus some padding is necessary.
+All tensors are therefore padded up to some pre-set maximum length, and events that are longer than this limit are instead composed of a random subsample of the total event.
 
+The median length of a raw event is 50 and 17 for SRT cleaned ones.
+200 was chosen as the best performant maximum length, when training time, memory usage and resolution performance was taken into account; see~\vref{fig:length}.
+
+\subsection{Array padding}
 \begin{figure}
     \centering
     \input{./images/design/zenith_performance_padding.pgf}
-    \caption{}\label{fig:padding}
+    \caption{Network performance with different padding types.
+    Because all input tensors are required to have the same shape, each event is zero-padded up to the maximum event length.
+    \enquote{End} padding pads the end of the array, while the poorly named \enquote{middle} places the event in the middle, and pads both ends.
+    The performance is similar for both.}\label{fig:padding}
 \end{figure}
+The style of zero-padding was also varied, although with no discernible effect as shown in~\vref{fig:padding}.
+Either the event was padded with zeros after the last entry and up to the maximum length, or the event was put into the middle of the array, with both ends then padded.
+The network, however, seems to understand that zeros indicate no pulse, as the performance is very similar between the two.
+
+\subsection{Weighting}
+\begin{figure}
+     \centering
+     \begin{subfigure}[b]{0.49\textwidth}
+         \centering
+         \input{./images/design/dev_genie_numu_cc_train_retro_005_weighted_distribution.pgf}
+         \caption{}\label{fig:weighted_distribution}
+     \end{subfigure}
+     \hfill
+     \begin{subfigure}[b]{0.49\textwidth}
+         \centering
+         \input{./images/design/zenith_performance_weight.pgf}
+         \caption{}\label{fig:weighting_performance}
+     \end{subfigure}
+        \caption{\Vref{fig:weighted_distribution} shows the energy distribution of the largest DeepCore muon neutrino dataset.
+        Superimposed is the weighted distribution, where each entry counts with the value of its weight instead of 1.
+        The distribution has been weighted to a uniform distribution.
+        \Vref{fig:weighting_performance} shows performance with/without re-weighting by energy bins.
+    The tails naturally improve their performance, while the bulk performs worse.}\label{fig:weighting}
+\end{figure}
+It is common practice in both machine learning and high energy physics to re-weight a distribution.
+In the case of machine learning, it is often done such that distribution imbalances are evened out,
+and for IceCube most neutrinos are around the \SIrange{10}{100}{\giga\electronvolt} mark, as seen in~\vref{fig:weighted_distribution}.
+Thus re-weighting to a uniform distribution is very useful for extremely low energy events, under \SI{10}{\giga\electronvolt}, although performance suffers most everywhere else; see~\vref{fig:weighting}.
+
+\subsection{Model architecture}
+\begin{figure}
+    \centering
+    \input{./images/design/zenith_performance_models.pgf}
+    \caption{Performance of four different networks.
+    The low-parameter TCN 1.0 performs promising vs. CNNs with orders of magnitude more parameters, but fails at higher energies; this is remedied by TCN 2.0, which trades low amount of parameters for performance.}\label{fig:models}
+\end{figure}
+The preceding discussion holds as well for zenith prediction as for energy prediction (bar prediction type and input type, which are not energy relevant).
+The same goes for the design of the network; where performance increased on zenith prediction, performance increased on energy prediction.
+
+Several designs have been tested out, both of the CNN and TCN variety.
+The first working version, \enquote{CNN 1.0}, consists of five convolutional layers (kernel size 5), each doubling the number of filters starting with 32, using ReLUs, max pool and batch normalization in each block.
+This is then fed through four fully connected layers until terminating in an output layer.
+
+The network was found to much improve by removing most convolutional layers, with \enquote{CNN 2.0} only containing two of these, with two fully connected layers afterwards.
+The difference in performance, seen in~\vref{fig:models}, is rather striking everywhere but the lowest energy bins.
+
+CNN 1.0 is a large network, containing \num{5735009} trainable parameters, cut down to \num{1718241} in CNN 2.0.
+
+\enquote{TCN 1.0} is a temporal convolutional network with one stack of 64 filters (kernel size 2), dilations (1, 2, 4, 8, 16, 32), ReLUs and causal padding.
+It only has \num{92161} trainable parameters, yet performs as well as CNN 2.0 until around \SI{100}{\giga\electronvolt}.
+Upping the filters to 256, the number of stacks to 2, and adding batch normalization results in \num{3038209} trainable parameters for \enquote{TCN 2.0}\footnote{More---many more!---network designs were trialed than two CNNs and two TCNs; for reasons of brevity, they are not discussed here.}, the winning network of the bunch.
+
+These models are compared visually in~\vref{fig:models}.
+With the best network---architecture and hyperparameters---in hand, the next task is to compare it to IceCube's current reconstruction algorithm, Retro Reco.
 
 \end{document}
