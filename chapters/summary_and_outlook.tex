@@ -3,4 +3,11 @@
 
 \begin{document}
 
+If the neural network approach only performed as well, or better than Retro Reco, it would be a contender to replace it.
+This is firstly because the inference speed, at \num{15000} events per second, is vastly improved compared to the minutes it takes Retro Reco to reconstruct an event.
+Secondly, a neural network has less trouble generalizing to new detector states: whereas Retro Reco relies on some hypothesis and accompanying tables, the neural network simply needs data.
+Thus where the old-school algorithm is simply unable to work on Upgrade data without a re-write, CubeFlow would only need training on Upgrade MC data; a feat that can be accomplished in weeks if not days, if the code and hardware infrastructure is already in place.
+Even though a bespoke, old-school physics-based algorithm might work better, a neural network ally might get the collaboration up and running quickly, while the algorithm is worked out.
+As such, there is no reason \textit{not} to use neural networks in IceCube.
+
 \end{document}

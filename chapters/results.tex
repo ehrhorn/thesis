@@ -3,46 +3,110 @@
 
 \begin{document}
 
-\begin{figure}
-    \centering
-    \input{./images/results/zenith_bins.pgf}
-    \caption{}\label{fig:models}
-\end{figure}
+And now, with the board set and the pieces moved, we come to it at last: the results.
+
+The following results were trained on the full muon neutrino charged current dataset, and tested on the corresponding test set using the aforementioned TCN 2.0 network.
+The network performs very well on low energy events, up to around \SI{50}{\giga\electronvolt}, whereafter it performs worse than Retro Reco, in the zenith case by a significant amount.
 
 \begin{figure}
     \centering
     \input{./images/results/energy_bins.pgf}
-    \caption{}\label{fig:models}
+    \caption{Energy error distribution in certain selected bins, representative of the overall performance difference.
+    At low energy CubeFlow performs better, seen by a narrower distribution than that of Retro Reco.
+    It is evident that both algorithms have an inherent bias: at low energy they tend to overshoot the energy, while at higher energies they undershoot.
+    In the case of the neural network, this is probably caused by the relative lack of training data in the tails.}\label{fig:energy_bins}
 \end{figure}
+\begin{figure}
+    \centering
+    \input{./images/results/zenith_bins.pgf}
+    \caption{Zenith error distribution in certain selected bins, representative of the overall performance difference.
+    Contrary to the energy case, there is no large inherent bias in zenith reconstruction, at least as a function of true energy.
+    The width of the CubeFlow error distribution can be seen to be narrower than the Retro Reco case.}\label{fig:zenith_bins}
+\end{figure}
+
+\Vref{fig:energy_bins,fig:zenith_bins} shows error distributions from selected bins, covering where CubeFlow performs best, and where Retro Reco does; it is at once comforting and amazing to see how similar the errors are distributed by energy.
+Comforting because the two wildly different algorithms seem to face the same challenges, amazing because one algorithm (Retro Reco) a priori knows physics, while the other (CubeFlow) entirely does not, but infers it based on the truth.
+
+In the energy case, both algorithms skew at low and high energies, predicting too high values at low energy, too low at high.
+One might surmise that CubeFlow suffers there because of the lack of training data in these ranges, but the similar performance of Retro Reco suggests that might not be the whole story, and maybe the problem is endemic to the detector.
+
+This bias is also clearly seen in~\vref{fig:energy_2d}, both the top and bottom histograms.
+CubeFlow, while biased similarly, is less so at the most populated energy range around \SIrange{10}{50}{\giga\electronvolt}.
 
 \begin{figure}
     \centering
-    \includegraphics[width=\textwidth]{./images/results/energy_2d.pdf}
-    \caption{}\label{fig:energy_2d}
+    \input{./images/results/energy_2d.pgf}
+    \caption{Energy prediction (top row) and error (bottom row) 2D histograms for CubeFlow (left column) and Retro Reco (right column).
+    In the energy case, these two types of histograms are basically the same, only shifted.
+    However, for consistency both are provided, and the top histograms are in a sense unprocessed (we calculate no error metric), so any issues with the error calculation would show up here; thus they are good to have.
+    The bias can, as expected, be seen in both types of histograms, and the top row makes it very clear that CubeFlow lies along the diagonal line more than Retro Reco, indicating less bias.
+    The black dots on the top row histograms show the median in the bin defined by what would typically be the \( x \) error bars.
+    The \( y \) error bars show the IQR in that same bin, while the dotted red diagonal line traces out \( y = x \), where perfect reconstructions lie.
+    For the error histograms (bottom row) the solid red line shows the median, while the dotted red lines are \( 1 \sigma \).
+    The grey dotted line lies along \( y = 0 \), where the reconstruction is error-free.}\label{fig:energy_2d}
 \end{figure}
+
+\Vref{fig:zenith_2d} shows the zenith angle reconstruction and error histograms.
+These are not biased at lower energies, although performance of course suffers there because low energy events do not leave a long track-like signature.
+However, they are biased at as a function of the true polar angle.
+This effect is most pronounced for CubeFlow, and may be caused by the fact that the dataset is mostly composed of up-going neutrinos, leaving less training data for down-going (low zenith value) events.
+Relatively fewer neutrinos are coming straight up (as seen in~\vref{fig:deepcore_truth_distributions}) explaining the worse performance at high zenith values.
 
 \begin{figure}
     \centering
-    \includegraphics[width=\textwidth]{./images/results/zenith_2d.pdf}
-    \caption{}\label{fig:zenith_2d}
+    \input{./images/results/zenith_2d.pgf}
+    \caption{Zenith prediction (top row) and error (bottom row) 2D histograms for CubeFlow (left column) and Retro Reco (right column).
+    The top row histograms clearly show a bias at low and high zenith values, most pronounced for CubeFlow.
+    Bottom row histograms show no bias as a function of energy, while the resolution is seen to narrow with higher energy.
+    The black dots on the top row histograms show the median in the bin defined by what would typically be the \( x \) error bars.
+    The \( y \) error bars show the IQR in that same bin, while the dotted red diagonal line traces out \( y = x \), where perfect reconstructions lie.
+    For the error histograms (bottom row) the solid red line shows the median, while the dotted red lines are \( 1 \sigma \).
+    The grey dotted line lies along \( y = 0 \), where the reconstruction is error-free.}\label{fig:zenith_2d}
 \end{figure}
+
+It should be noted that the lower histograms in~\vref{fig:energy_2d,fig:zenith_2d} is basically a two dimensional view of the data summarized in~\vref{fig:energy_comparison,fig:zenith_comparison} and all other figures in that vein.
 
 \begin{figure}
     \centering
     \input{./images/results/energy_resolution_comparison.pgf}
-    \caption{}\label{fig:energy_comparison}
+    \caption{The resolution performance of CubeFlow (red) and Retro Reco (black) for energy reconstruction.
+    CubeFlow performs much better at low energies, while Retro Reco wins at higher energies.
+    The amount of training events in each energy bin is superimposed (using a log scale) with grey bars.
+    The lower plot shows the improvement of CubeFlow relative to Retro Reco, constrained between \SI{-100}{\percent} and \SI{100}{\percent}.}\label{fig:energy_comparison}
 \end{figure}
 
 \begin{figure}
     \centering
     \input{./images/results/zenith_resolution_comparison.pgf}
-    \caption{}\label{fig:zenith_comparison}
+    \caption{The resolution performance of CubeFlow (red) and Retro Reco (black) for zenith reconstruction.
+    CubeFlow performs better at low energies, while Retro Reco wins at higher energies.
+    The amount of training events in each energy bin is superimposed (using a log scale) with grey bars.
+    The lower plot shows the improvement of CubeFlow relative to Retro Reco, constrained between \SI{-100}{\percent} and \SI{100}{\percent}.}\label{fig:zenith_comparison}
 \end{figure}
 
 \begin{figure}
     \centering
     \input{./images/results/permutation_importance.pgf}
-    \caption{}\label{fig:perm_imp}
+    \caption{Permutation importance for zenith reconstruction (left) and energy reconstruction (right).
+    At no great surprise the zenith reconstruction relies heavily on the \( z \)-coordinate of the activated DOMs, with the relative DOM activation time second-most important.
+    Both the \( z \)- and the \( y \)-coordinates are important in the energy case, with time continuing to be important.
+    Pulse width is critical to the performance of the network as well.}\label{fig:perm_imp}
 \end{figure}
+
+To gauge the contribution of features, permutation importance has been employed.
+The straight-forward way of doing this would be to train a model with/without a certain feature, and compare the loss values between the two runs.
+Permutation importance works by running \( n + 1 \) inference passes with a trained model, where \( n \) is the number of features.
+One run is a normal inference, and represents the baseline while all following inference passes shuffle the values of one feature which becomes random noise for the network.
+In this way one may see the value of a feature; if the loss does not change, the feature does not contribute to the networks inference capabilities.
+If, however, the loss suffers, the network relies on the feature being present, and the degree to which it does can be quantified as the permuted loss value divided by the baseline---a high permutation importance value thus represents an important feature.
+
+\Vref{fig:perm_imp} shows the application of permutation importance to this problem.
+It is unsurprising that the \( z \)-coordinate of the activated DOMs plays a significant role in determining the zenith value of a neutrino, owing to the fact that \( z = \cos{\theta} \).
+Relative DOM activation times is similarly important, also not surprising as it gives the order in which the pulses arrive.
+
+The energy reconstruction also uses the \( y \)-coordinate to a larger degree than the zenith reconstruction.
+This may be because the length of the track is important, for which only one coordinate is insufficient.
+
+In both cases pulse width seems to be important, which might be a surprise, because the pulse width simply records what ADC is used for recording the pulse.
 
 \end{document}

@@ -2912,7 +2912,7 @@
 \definecolor{textcolor}{rgb}{0.000000,0.000000,0.000000}%
 \pgfsetstrokecolor{textcolor}%
 \pgfsetfillcolor{textcolor}%
-\pgftext[x=0.416712in, y=0.515225in, left, base]{\color{textcolor}\rmfamily\fontsize{8.000000}{9.600000}\selectfont \(\displaystyle {−1}\)}%
+\pgftext[x=0.416668in, y=0.515225in, left, base]{\color{textcolor}\rmfamily\fontsize{8.000000}{9.600000}\selectfont \(\displaystyle {-1}\)}%
 \end{pgfscope}%
 \begin{pgfscope}%
 \pgfsetbuttcap%
@@ -2968,7 +2968,7 @@
 \definecolor{textcolor}{rgb}{0.000000,0.000000,0.000000}%
 \pgfsetstrokecolor{textcolor}%
 \pgfsetfillcolor{textcolor}%
-\pgftext[x=0.361157in,y=0.847067in,,bottom,rotate=90.000000]{\color{textcolor}\rmfamily\fontsize{10.950000}{13.140000}\selectfont Rel. imp.}%
+\pgftext[x=0.361112in,y=0.847067in,,bottom,rotate=90.000000]{\color{textcolor}\rmfamily\fontsize{10.950000}{13.140000}\selectfont Rel. imp.}%
 \end{pgfscope}%
 \begin{pgfscope}%
 \pgfpathrectangle{\pgfqpoint{0.664741in}{0.553781in}}{\pgfqpoint{4.922705in}{0.586572in}}%
