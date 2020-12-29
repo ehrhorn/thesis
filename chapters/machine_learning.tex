@@ -4,7 +4,7 @@
 \begin{document}
 
 Contrary to public expectation these days, machine learning (ML) is neither sexy nor particularly exciting.
-The misnomer \enquote{AI} is often applied to ML, evoking expectations of some general computer intelligence that might rise up and replace humans as the Earth's (and soon, the galaxy!) dominant species.
+The misnomer \enquote{AI} is often applied to ML, evoking expectations of some general computer intelligence of the science fiction variety.
 
 ML is a varied field, with many different subgenres, of which Deep Learning (DL) is the one that this thesis is concerned with.
 
@@ -23,23 +23,26 @@ As supervised learning is the tool used in this thesis, it is the only flavor th
 Generally, supervised machine learning entails having a way to map inputs to outputs (e.g.\ decision trees in tree based ML, artificial neurons in deep learning), access to some labelled dataset and for each data point the ability to calculate an error.
 This error is encapsulated in a loss functions, which takes as input the model's guess for the data point value and the true value (the \enquote{label}) and returns a real number, the \enquote{loss}.
 The name of the game is then the minimization of this loss, as an error of zero would mean a perfect estimation of the label value.
+
 \begin{figure}[ht]
     \centering
     \includegraphics[width=0.5\textwidth]{./images/machine_learning/Ea9GZUbXsAEORIb.jpeg}
     \caption{The \enquote{Face-Depixelizer}~\cite{Menon2020} takes a blurred image of a person, and generates an image from it. However, the model was trained on primarily white people, and so reconstructs an obviously blurred image of Barack Obama as a white male. Image from \url{https://twitter.com/Chicken3gg/status/1274314622447820801}}\label{fig:algorithmic_bias}
 \end{figure}
+
 The input/output data is referred to as \enquote{training data}, and it is in essence what decides the logic of the model; thus care must be taken with regards to it, as inherent biases in the training data will propagate to the decisions the model makes.
 This is a continuation of the old programmer's adage, \enquote{garbage in, garbage out}, because an ML algorithm will only give back what is fed to it; it is not sentient.
 This is a very active area of discussion at the time of writing, and the summer of 2020 gave a very good example of the issue; see~\vref{fig:algorithmic_bias}.
 
 Training data is not necessarily easy to come by---and may, for some companies, present an impenetrable moat, if the competition does not have access to the same dataset---but particle physics is special in this regard as Monte Carlo data (\vref{sec:monte_carlo_simulation}) is typically plentiful; however, it should be noted that Monte Carlo data itself is simulated, based on assumptions the laws of physics, and thus represents an inherently biased version of how the universe works.
 
-\todo[inline]{More about ML basics...}
+While the laws of physics used are typically very well known, the physical system in which they are simulated is almost an approximation.
+In the case of IceCube, the ice properties, the dust layers, PMT efficiencies and signal response as a function of signal type and angle are not precisely known, leading to differences between simulation and real data. 
 
 \section{Artificial neural networks}\label{sec:artificial_neural_networks}
 
 Artificial neural networks (ANN) have a much longer story than would probably be thought, seeing how they currently stand as pillars of futurism.
-ANNs can be said to draw inspiration from nature as the simplest version, a feedforward neural network, uses artificial neurons, modeled on the neurons of a brain, first proposed in the forties.
+ANNs can be said to draw inspiration from nature as the simplest version, a feedforward neural network, uses artificial neurons, modeled on the neurons of a brain, first proposed in the forties~\cite{McCulloch1943}.
 
 The artificial neuron takes \( m + 1 \) inputs, consisting of values \( x_{j} \) weighted by \( w_{k m} \) and applies some \enquote{activation function} \( \phi \) to their sum, such that
 \begin{equation}
@@ -98,7 +101,7 @@ These are then controlled using two hyperparameters as decay rates, \( \beta_{1}
 
 The backpropagation algorithm has been implemented in certain frameworks, most noteworthy TensorFlow and PyTorch, as differentiable programming by automatic differentiation, which allows the chain rule to be easily (and quickly!) employed.
 This is either done by building a static graph of the network, compiled before running the program, and containing derivative information at all nodes\footnote{This is how TensorFlow 1.x works}, or operator overloading which defines derivatives of functions/tensors in the language itself\footnote{This is how PyTorch and TensorFlow 2.x work by default}.
-This is the true enabling technology of the two frameworks, and some languages---such as Swift---even aim to include automatic differentiation as a first-class language feature giving users a type-safe way of running machine learning; it is an exciting time for ML.\@
+This is the true enabling technology of the two frameworks, and some languages---such as Swift---even aim to include automatic differentiation as a first-class language feature~\cite{SwiftDifferentiableProgramming} giving users a type-safe way of running machine learning; it is an exciting time for ML.\@
 
 While automatic differentiation enables the popular frameworks to run backpropagation efficiently, another key technology has helped neural networks (and ML in general) achieve a breakthrough in to 2010s: graphical processing units (GPUs).
 These were first introduced to the mass market in the 1990s to accelerate and improve graphics performance of desktop computers, but their parallel nature has meant it is suited well for neural networks that require matrix multiplication, as we have seen.
@@ -108,11 +111,13 @@ Nvidia also provides an API for doing tensor calculations with its cores, CUDA, 
 The toy linear regression example will converge to the best linear fit, but it is only useful for problems that are linearly separable; by its linear nature, it is only capable of linear transformations.
 This rather limits the application of a perceptron, inasmuch as many real-world problems are non-linear with respect to the input variables, and this observation leads to the introduction of non-linear activation functions into the network.
 Doing so actually allows a single layer neural network to approximate any continuous function, as shown in~\cite{Cybenko1989,Hornik1989}.
+
 \begin{figure}[ht]
     \centering
     \includegraphics[width=0.3\textwidth]{./images/machine_learning/approximation_function.png}
-    \caption{Example of a wide neural network approximating the function \( f(x) = 0.2 + 0.4 x^{2} + 0.3 x \sin{\left( 15 x \right) + 0.05 \cos{\left( 50 x \right)}} \), taken from \url{http://neuralnetworksanddeeplearning.com/chap4.html}.}\label{fig:approximation_function}
+    \caption{Example of a wide neural network approximating the function \( f(x) = 0.2 + 0.4 x^{2} + 0.3 x \sin{\left( 15 x \right) + 0.05 \cos{\left( 50 x \right)}} \), taken from the excellent~\cite{NeuralNetworksandDeepLearning}.}\label{fig:approximation_function}
 \end{figure}
+
 The results refer to \enquote{sigmoidal}, or \enquote{squashing}, functions, examples of which are the sigmoid and the rectifier shown in~\vref{fig:activation_functions}.
 The result can be graphically understood by inspection of~\vref{fig:approximation_function}:
 the composition of the activation functions by each neuron allows us to approximate the value of any continuous function, provided the network is wide enough; the result holds as well for multivariate functions.
@@ -120,7 +125,7 @@ the composition of the activation functions by each neuron allows us to approxim
 Thus we end up with \enquote{multi-layer feedforward networks} which can approximate almost any function, which consist of a vector of inputs multiplied by a matrix (the weights connected to a neuron) with a bias added (all of which is an affine transformation) passed through a non-linear activation function.
 
 The question then becomes, why are the networks of today \textit{deep} instead of \textit{wide}?
-The answer is that universality has also been proved for deep networks~\cite{Lu2017}, and these types of network exhibit extremely useful properties that we can benefit from.
+The answer is that universality has also been proved for deep networks~\cite{Lu2017}, and these types of network exhibit extremely useful properties, explained in~\vref{sec:temporal_convolutional_neural_networks}, that we can benefit from.
 
 \section{Temporal convolutional neural networks}\label{sec:temporal_convolutional_neural_networks}
 
@@ -130,12 +135,14 @@ Additionally, the internal structure of the image is disregarded, in that there 
 
 This is remedied by introducing a linear transformation preserving the structure of the input: a convolution.
 \enquote{Convolutional neural networks} (CNNs) create feature maps by employing discrete convolutions via kernels that slide over the input and aggregate information in the receptive field; see~\vref{fig:convolution}.
+
 \begin{figure}[ht]
     \centering
     \includegraphics[width=0.7\textwidth]{./images/machine_learning/convolution.png}
     \caption{An example of discrete convolutions. The dark blue \( 3 \times 3 \) kernel slides over the input, and sums the product of the weights and inputs forming a feature map (green matrix) in the process.
     Image from~\cite{Dumoulin2016}.}\label{fig:convolution}
 \end{figure}
+
 CNNs first came to prominence in the realm of image recognition primarily because they impose a sense of locality on the network which meshes well with images: there are probably local features that are important for the output, which could not be taken into account if the structure was lost by applying simple fully connected layers directly to the input; it is also wasteful, as the local information can probably be pooled and share weights.
 Not incidentally, pooling layers are the second feature of CNNs that made them world famous.
 These down-sample the output of a convolutional layer by (typically) taking the max value of some subset of values of the image\footnote{Pooling layers can also work by taking averages or some other metric.}, discarding information but serving to reduce parameter size.
@@ -158,7 +165,7 @@ These down-sample the output of a convolutional layer by (typically) taking the 
 Standard CNNs have enjoyed enormous success over the past ten years, and many image applications were built using these.
 Another type of networks, \enquote{recurrent neural networks} (RNNs), though, took the machine translation, speech recognition and time series prediction world with storm.
 RNNs have storage, internal states that can be used for memory in series where connected events may happen at different intervals.
-\todo[inline]{More about RNNs?}
+\todo[inline]{More about RNNs!}
 
 Recently, however, it has been shown that a new type of CNN, \enquote{temporal convolutional networks} (TCNs)~\cite{Bai2018}, perform better in a wide variety of tasks once dominated by RNNs.
 The million-dollar idea of TCNs are dilated convolutions, used to great effect in~\cite{Oord2016}.
@@ -220,10 +227,11 @@ where \( m \) is the size of the batch, \( \bm{x}_{i} \) is the \( i \)'th train
 To normalize the output of a layer we calculate the mean and variance of the values of the mini-batch and normalize to those.
 Furthermore, the values are shifted and scaled by the learnable parameters \( \gamma \) and \( \beta \).
 
-The values are passed through a ReLU, a Rectified Linear Unit, shown in~\vref{fig:activation_functions}.
+The values are passed through a ReLU, shown in~\vref{fig:activation_functions}.
 \todo[inline]{Remember to explain dropout}
 In this thesis a TCN is employed, and a regular 1D convolutional network as well.
 In a 1D CNN the kernel slides in only one direction, but is otherwise similar to image convolution networks.
+\todo{Need a little more on classic CNN used}
 
 \section{Loss functions}\label{sec:loss_functions}
 
@@ -235,7 +243,7 @@ The choice of loss function influences the performance of the network.
     Image from~\cite{Li2018}.}\label{fig:loss_landscape}
 \end{figure}
 Of course, the function needs to be differentiable, or backpropagation will fail.
-\todo[inline]{Loss functions... what clever thing to say?}
+\todo[inline]{Loss functions\ldots what clever thing to say? From Troels: Lots! Difference between Loss for classification and regression, and MAE vs. RMS for regression. Mention the problems with loss for multiple regression, with three solutions (make model for each output, transforming each term to contribute similarly, or transforming all variables), and which you chose and why. Also the problem with angular Loss (vanishing gradient), and that different loss function trainings can be combined in ensemble.}
 
 \section{Pre-processing}\label{sec:data_transformation}
 
@@ -255,9 +263,11 @@ The robust scaler is then defined as
 \begin{equation}
     \text{transformed}(x_{i}) = \frac{x_{i} - \text{median}}{\text{IQR}},
 \end{equation}
-and is implemented as such in e.g. \verb|scikit-learn|.
+and is implemented as such in e.g. \verb|scikit-learn|~\cite{ScikitLearnRobustScaler}.
 If the dataset is skewed it may be beneficial to first log transform it, before applying scaling, but there are also other non-linear methods, such as a quantile transformation, which transforms the data into a new distribution (e.g. Gaussian or uniform), robust to outliers.
 However, as this is a non-linear transformation, it distorts any linear relationships between variables.
+
+It should be noted that the energy and charge truth variables (see~\vref{chap:data}) are transformed to \( \log_{10} \).
 
 
 \end{document}
