@@ -20,15 +20,16 @@ First, we shortly need to touch on what The Standard Model of particle physics i
      \begin{subfigure}[b]{0.49\textwidth}
          \centering
          \includegraphics[width=\textwidth]{./images/particle_physics/Standard_Model_of_Elementary_Particles.pdf}
-         \caption{The fermions and bosons of The Standard Model of particle physics. Image from (ref)}\label{fig:standard_model_overview}
+         \caption{}\label{fig:standard_model_overview}
      \end{subfigure}
      \hfill
      \begin{subfigure}[b]{0.49\textwidth}
          \centering
          \includegraphics[width=\textwidth]{./images/particle_physics/Elementary_particle_interactions_in_the_Standard_Model.png}
-         \caption{The possible interactions in the SM between fermions and bosons. Image from (ref)}\label{fig:standard_model_interactions}
+         \caption{}\label{fig:standard_model_interactions}
      \end{subfigure}
-        \caption{Three simple graphs}\label{fig:standard_model}
+        \caption{(a), from~\cite{WikiSM1}, shows the fermions and bosons of The Standard Model of particle physics.
+        (b), from~\cite{WikiSM2}, shows the possible interactions in the SM between fermions and bosons.}\label{fig:standard_model}
 \end{figure}
 
 \section{The Standard Model}\label{sec:the_standard_model}
@@ -197,11 +198,11 @@ A great many experiments were conducted after Becquerel discovered radioactivity
     \centering
     \includegraphics[width=0.8\textwidth]{./images/particle_physics/Beta_spectrum_of_RaE.jpg}
     \caption{Energy spectrum of \ce{^{210}B} beta decay, with \( E_{\text{max}} = \SI{1.16}{\mega\electronvolt} \).
-    Image from \url{https://en.wikipedia.org/wiki/File:Beta_spectrum_of_RaE.jpg} }\label{fig:beta_spectrum}
+    Image from~\cite{WikiBetaDecayEnergySpectrum}.}\label{fig:beta_spectrum}
 \end{figure}
 In this process a neutron turns into a proton, emitting an electron and an anti-neutrino.
 This was unexplained without the neutrino, because of two problems:
-First, the energy spectrum seemed continuous (see~\vref{fig:beta_spectrum}), unexpected as the energy should be discrete if the electron is one escaping from the atom.
+First, the energy spectrum seemed continuous (see~\vref{fig:beta_spectrum}), unexpected as the energy should be mono-energetic if only the electron is emitted from the atom.
 Second, the electron is a spin-\sfrac{1}{2} particle, while nitrogen-14, which showed beta decay, is a spin-1 particle; so where goes the spin?
 
 Both issues were explained by the \enquote{neutron} (later renamed neutrino by Fermi) proposed by Pauli in 1930.
@@ -209,13 +210,13 @@ The discrete energy spectrum now turns continuous, owing to the neutrino carryin
 
 Fermi explained this with his theory of beta decay, proposing a four-fermion contact interaction, a direct interaction between the four particles.
 Although a successful theory, it runs into the same kind of ultraviolet problem that Planck worked on in the late 19th century: because the Fermi interaction cross section goes as \( \sigma \approx G_{\text{F}}^2 E^2 \), where \( G_{\text{F}} \) is the Fermi constant, it grows unbounded, leading to problems at higher energies.
-Additionally the weak interaction was observed in the Wu experiment to violate parity, as beta decay of cobalt-60 showed a preferential decay direction for electrons, a phenomenon not explained by Fermi's theory.
+Additionally the weak interaction was observed in the Wu experiment~\cite{Wu1957} to violate parity, as beta decay of cobalt-60 showed a preferential decay direction for electrons, a phenomenon not explained by Fermi's theory.
 This was solved by the electroweak theory, introducing bosons that mediate the interaction over small distances after symmetry breaking via the Higgs mechanism; the \( \PW \) and \( \PZ \) bosons.
 The parity violation is explained by the V-A (vector minus axial vector) nature of the weak force, which only permits it to couple with left-handed particles and right-handed antiparticles; this concept is enshrined mathematically by \( \gamma^5 \) of the Dirac matrix family, formed as the product of the gamma matrices in~\vref{eq:dirac_equation_2}, which enters in the so-called chiral projection operator.
 \begin{figure}[ht]
     \centering
     \includegraphics[width=0.5\textwidth]{./images/particle_physics/Right_left_helicity.jpg}
-    \caption{Helicity. Image from \url{https://en.wikipedia.org/wiki/File:Right_left_helicity.jpg}}\label{fig:helicity}
+    \caption{Helicity. Image from~\cite{WikiHelicity}.}\label{fig:helicity}
 \end{figure}
 Describing this operator is made easier by reference to helicity states, which are more easily grasped conceptually.
 A helicity state is described in terms of a particle's component of spin along its momentum, \( h \equiv \mathbf{S} \cdot \mathbf{p} / \textup{p} \); see~\vref{fig:helicity}.
@@ -228,7 +229,7 @@ where \( \sfrac{1}{2} ( 1 - \gamma^{5} ) \) is known as the left-handed chiral p
 When this operates on a right handed chiral (or helicity, in the high energy limit) state, the result is zero, meaning only left-handed chiral particle states (and right-handed anti-particle states) may participate in the weak current.
 
 An intriguing possibility is presented by this property: as only (anti) neutrinos of one handedness interact weakly, there may be a whole universe of non-interacting neutrinos that only participate gravitationally.
-These \enquote{sterile neutrinos} are candidates for dark matter.
+These \enquote{sterile neutrinos} are candidates for dark matter~\cite{Boyarsky2019}.
 
 The interaction is termed \enquote{weak} as a consequence of its coupling strength, relative to the electromagnetic- and strong forces.
 This is due to the massive nature of its mediating bosons, giving them a shorter lifetime than they would possess otherwise.
@@ -288,7 +289,7 @@ In this way the weak interaction is special among the fundamental forces; it is 
 
 In the early days, the weak coupling strength of quarks was found to be smaller than that of lepton interactions.
 Not only that, but different quark interactions have different coupling strengths.
-Nicola Cabibbo developed a framework for explaining this discrepancy, wherein so-called weak eigenstates are distinct from the mass eigenstates that describe the quarks outside of weak interactions.
+Nicola Cabibbo developed a framework for explaining this discrepancy, wherein so-called weak eigenstates are distinct from the mass eigenstates that describe the quarks outside of weak interactions~\cite{Thomson2013}.
 For example, both down- and strange quarks may decay into an up quark, giving a weak eigenstate
 \begin{equation}
 	\Pdown^{\prime} = V_{\Pup \Pdown} \Pdown + V_{\Pup \Pstrange} \Pstrange,
@@ -323,7 +324,7 @@ The weak eigenstates, a superposition of down and strange quarks, is then the en
 with \( \theta_{\Pcharm} \) the Cabibbo angle.
 
 The concept was extended to neutrino oscillations.
-This Nobel-winning idea was used to explain the apparent failure of the Homestake experiment, also known as the solar neutrino problem, described shortly in the following.
+This Nobel-winning idea was used to explain the apparent failure of the Homestake experiment, also known as the solar neutrino problem, described shortly in the following~\cite{Thomson2013}.
 
 The Sun burns hydrogen via many processes, primarily in the pp cycle, wherein two protons fuse to create deuterium, a positron, an electron neutrino and excess energy:
 \begin{equation}
@@ -375,7 +376,7 @@ Now the weak eigenstates are described as superpositions of the mass eigenstates
 \end{equation}
 Having traveled \( L \) at time \( T \) it will be described as
 \begin{equation}\label{eq:neutrino_wavefunction_1}
-%	\ket{\psi(L, T)} = \cos{\theta} \ket{\nu_{2}} e^{-i \phi_{2}} - \sin{\theta} \ket{\nu_{1}} e^{-i \phi_{1}},
+	\ket{\psi(L, T)} = \cos{\theta} \ket{\nu_{2}} e^{-i \phi_{2}} - \sin{\theta} \ket{\nu_{1}} e^{-i \phi_{1}},
 \end{equation}
 with the phases \( \phi_{i} = p_{i} \cdot x = E_{i} T - \textup{p}_{i} L \).
 Expressed in terms of the weak eigenstates,~\vref{eq:neutrino_wavefunction_1} can be written as
@@ -408,15 +409,15 @@ An example of oscillation patterns can be seen in~\vref{fig:ocsillations}.
      \begin{subfigure}[b]{0.49\textwidth}
          \centering
 		    \includegraphics[width=\textwidth]{./images/particle_physics/Oscillations_electron_long.svg.png}
-		    \caption{Image from \url{https://da.m.wikipedia.org/wiki/Fil:Cherenkov_Wavefront.svg}}\label{fig:long_oscillations}
+		    \caption{}
      \end{subfigure}
      \hfill
      \begin{subfigure}[b]{0.4\textwidth}
          \centering
 		    \includegraphics[width=\textwidth]{./images/particle_physics/nutauappearonly.png}
-		    \caption{Image from \url{https://www.nbi.ku.dk/english/research/experimental-particle-physics/icecube/neutrino-oscillation/}}\label{fig:icecube_oscillations}
+		    \caption{}\label{fig:icecube_oscillations}
      \end{subfigure}
-        \caption{\Vref{fig:long_oscillations} shows the theoretical calculation of neutrino oscillations on the long baseline. Here, an electron neutrino is created (black line), and has some probability of turning into a muon neutrino (blue line) and tau neutrino (red line). \Vref{fig:icecube_oscillations} shows the muon neutrino to tau neutrino probability in IceCube, a function of both energy and pathlength (parameterized by the cosine of the zenith angle of the neutrino). Here one can see the effects of neutrinos interacting with matter, the MSW effect, changing the energy levels of the mass eigenstates during propagation on interactions with electrons in the dense core of the Earth. This changes the oscillation profile, seen for up-going neutrinos at energies below \SI{10}{\giga\electronvolt}.}\label{fig:ocsillations}
+        \caption{(a), from~\cite{WikiOscillation}, shows the theoretical calculation of neutrino oscillations on the long baseline. Here, an electron neutrino is created (black line), and has some probability of turning into a muon neutrino (blue line) and tau neutrino (red line). (b), from~\cite{NBIMSW}, shows the muon neutrino to tau neutrino probability in IceCube, a function of both energy and pathlength (parameterized by the cosine of the zenith angle of the neutrino). Here one can see the effects of neutrinos interacting with matter, the Mikheyev–Smirnov–Wolfenstein (MSW) effect, changing the energy levels of the mass eigenstates during propagation on interactions with electrons in the dense core of the Earth. This changes the oscillation profile, seen for up-going neutrinos at energies below \SI{10}{\giga\electronvolt}.}\label{fig:ocsillations}
 \end{figure}
 
 In many cases one uses the survival probability, which is
@@ -484,12 +485,12 @@ In this case, applying a CP transformation on a right-handed anti-neutrino resul
 \begin{equation}
 	P(\Pnu_{\Pe} \rightarrow \Pnu_{\Pmu}) - P(\APnu_{\Pe} \rightarrow \APnu_{\Pmu}) = 16 \Im{\left\{ U_{\Pe 1}^{*} U_{\Pmu 1} U_{\Pe 2} U_{\Pmu 2}^{*} \right\}} \sin{\Delta_{1 2}} \sin{\Delta_{1 3}} \sin{\Delta_{2 3}}.
 \end{equation}
-Therefore, if the complex phase \( \delta \) of the PMNS matrix is zero, there will be no CP violation in the weak sector.
+Therefore, if the complex phase \( \delta \) of the PMNS matrix is zero, there will be no CP violation in the neutrino sector.
 CP violation is required for explaining the baryon asymmetry, and has been ruled out of both the strong- and the electromagnetic interactions, and so it is hoped that neutrino oscillations will provide the answer.
 
 This of course also means that if we observe neutrino oscillations, it cannot be a massless particle.
 However, the observable in oscillation probabilities is the difference of the squared masses, meaning it is the only thing we can experimentally say anything about.
-As of this writing, the best fit values from \url{nu-fit.org} is on the order of
+As of this writing, the best fit values, from~\cite{nufit}, is on the order of
 \begin{align}
 	\Delta{m_{2 1}^{2}} & \approx \SI{7.4e-5}{\electronvolt\squared} \\
 	\lvert \Delta{m_{3 2}^{2}} \lvert & \approx \SI{2.5e-3}{\electronvolt\squared}.
@@ -507,10 +508,10 @@ First of all, the Standard Model does not automatically describe neutrino mass, 
 \begin{figure}[ht]
     \centering
     \includegraphics[width=0.7\textwidth]{./images/particle_physics/masses-600x230.jpg}
-    \caption{Particle mass scales. The neutrinos are a million times lighter than the electron, the lightest charged lepton. The top quark also stands out in the hierarchy as a very heavy particle. Image from \url{http://hitoshi.berkeley.edu}}\label{fig:particle_masses}
+    \caption{Particle mass scales. The neutrinos are a million times lighter than the electron, the lightest charged lepton. The top quark also stands out in the hierarchy as a very heavy particle. Image from~\cite{HitoshiWebpage}.}\label{fig:particle_masses}
 \end{figure}
-Even so, the masses of the neutrinos are on the order of \num{10e6} smaller than the electron (see~\vref{fig:particle_masses}, and so something else than the Higgs mechanism could be the cause of their mass---this is exciting!
-Suggestions, such as the seesaw mechanism, attempt to explain this, by introducing a heavy neutrino partner to each one of the lighter types.
+Even so, the masses of the neutrinos are on the order of \num{10e6} smaller than the electron (see~\vref{fig:particle_masses}), and so something else than the Higgs mechanism could be the cause of their mass---this is exciting!
+Suggestions, such as the seesaw mechanism~\cite{Thomson2013}, attempt to explain this, by introducing a heavy neutrino partner to each one of the lighter types.
 Additionally, neutrinos and anti-neutrinos may be the same particle, a so-called Majorana particle.
 
 All this to say that the study of neutrinos provide plenty of exciting avenues of physics beyond the Standard Model, and IceCube is in an excellent position to provide answers, and as such the quality of the reconstruction of the incident neutrinos, especially the energy and the zenith angle, is of the highest importance.
@@ -532,22 +533,21 @@ These will pick up Cherenkov cones as seen in~\vref{fig:cherenkov_cone}, and fro
      \begin{subfigure}[b]{0.49\textwidth}
          \centering
 		    \includegraphics[width=\textwidth]{./images/particle_physics/1061px-Cherenkov_Wavefront.svg.png}
-		    \caption{Cherenkov radiation. Image from \url{https://da.m.wikipedia.org/wiki/Fil:Cherenkov_Wavefront.svg}}\label{fig:cherenkov_radiation}
+		    \caption{}\label{fig:cherenkov_radiation}
      \end{subfigure}
 %     \hfill
      \begin{subfigure}[b]{0.49\textwidth}
          \centering
 		    \includegraphics[width=\textwidth]{./images/particle_physics/cherenkov.jpg}
-		    \caption{Cherenkov cone. Image from \url{http://physicsopenlab.org/2016/04/24/diy-cherenkov-detector/}}\label{fig:cherenkov_cone}
+		    \caption{}\label{fig:cherenkov_cone}
      \end{subfigure}
-        \caption{Feynman diagrams of neutral- and charged current processes}\label{fig:cherenkov_figure}
+        \caption{(a), from~\cite{WikiCherenkov}, shows the geometry involved in Cherenkov radiation.
+        (b), from~\cite{PhysicsOpenLabCherenkovDetector}, shows how a Cherenkov detector uses this radiation to infer particle properties.
+        }\label{fig:cherenkov_figure}
 \end{figure}
 
-\todo[inline]{Remember to mention the different flavors of quarks at some point...}
-\todo[inline]{Must talk about spin}
-\todo[inline]{Should expound on Feynman diagrams}
-\todo[inline]{Must talk about sterile neutrinos in IceCube}
-\todo[inline]{Update figure captions}
+\todo[inline]{Mention flavors of quarks and CKM matrix}
+\todo[inline]{Mention that Feynman diagrams can be used for calculations}
 \todo[inline]{Mention long/short baselines + oscillation wavelength}
 
 \end{document}
