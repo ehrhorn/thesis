@@ -4,7 +4,7 @@
 
 \begin{document}
 
-IceCube's raison d'être is the study of neutrinos, its singular tool the conversion of light pulses into particle properties.
+One of IceCube's raison d'êtres is the study of neutrinos, its primary tool the conversion of light pulses into particle properties.
 This is not an easy task, inasmuch as nature rarely exhibits the simplicity of its governing equations.
 IceCube consists of two primary detectors, IceCube and DeepCore, with a third, \enquote{the Upgrade}, expected to be installed in the next few years.
 
@@ -37,15 +37,17 @@ The IceCube instigators recognized that the Antarctic ice provides an excellent 
      \begin{subfigure}[b]{0.49\textwidth}
          \centering
 		    \includegraphics[width=\textwidth]{./images/icecube/Icecube-architecture-diagram2009.PNG}
-		    \caption{Image from \url{https://commons.wikimedia.org/wiki/File:Icecube-architecture-diagram2009.PNG}}\label{fig:icecube_detector}
+		    \caption{}\label{fig:icecube_detector}
      \end{subfigure}
      \hfill
      \begin{subfigure}[b]{0.4\textwidth}
          \centering
 		    \includegraphics[width=\textwidth]{./images/icecube/e88_1.png}
-		    \caption{Image from \url{https://physics.aps.org/articles/v7/88}}\label{fig:icecube_event_1}
+		    \caption{}\label{fig:icecube_event_1}
      \end{subfigure}
-        \caption{\Vref{fig:icecube_detector} shows an artist rendition of the IceCube detector as a scale comparison to the Eiffel Tower. \Vref{fig:icecube_event_1} shows a neutrino event in IceCube. This is a high energy track-like event, for which angular reconstruction is possible even by eye.}\label{fig:icecube}
+        \caption{(a), from~\cite{WikiIcecube1}, shows an artist rendition of the IceCube detector as a scale comparison to the Eiffel Tower.
+        (b), from~\cite{IcecubeNeutrinoSpectrum}, shows a neutrino event in IceCube.
+        This is a high energy track-like event, for which angular reconstruction is possible even by eye.}\label{fig:icecube}
 \end{figure}
 The detector is built by using hot water to drill holes in the Antarctic ice \SI{2.5}{\kilo\meter} deep, and lowering down long strings on which are situated the actual Cherenkov light detectors.
 Each string consists of 60 of these detectors, called digital optical modules (DOMs), and each DOM consists of assorted electronics, a photomultiplier tube that does the actual light detection, and shielding from the environment.
@@ -66,7 +68,7 @@ The DOM is further detailed in~\vref{sec:doms}.
         \caption{\Vref{fig:ray_types}~\cite{Ahlers2018} shows the types of rays relevant to IceCube, defining up- and down-going muons. Neutrinos---created by atmospheric interaction with cosmic rays or in cosmic processes---interact either in the atmosphere (creating background muons), or in the Earth (creating up-going muons). \Vref{fig:neutrino_spectrum}~\cite{Spiering2012} shows the energy spectrum of neutrinos from different sources. Atmospheric neutrinos dominate in the energy region supported by IceCube.}\label{fig:rays_and_spectrum}
 \end{figure}
 IceCube is split into the in-ice array, i.e.\ the stringed DOMs, and an IceTop array.
-This consists of detectors on the surface, housing water Cherenkov detectors that may act as a useful veto on particles: if they were seen by IceTop, they were probably down-going particles, and thus noise, while the neutrino events present as up-going particles created via interactions in the Earth, where only neutrinos penetrate; see~\vref{fig:ray_types}.
+This consists of detectors on the surface, housing water Cherenkov detectors that may act as a useful veto on particles: if they were seen by IceTop, they were probably down-going particles, and thus background, while the neutrino events present as up-going particles created via interactions in the Earth, where only neutrinos penetrate; see~\vref{fig:ray_types}.
 The detector is tuned to particles in the \si{\giga\electronvolt} to \si{\peta\electronvolt} range, where atmospheric neutrinos dominate, as seen in~\vref{fig:neutrino_spectrum}.
 
 IceCube records data based on certain triggers (\vref{sec:triggers}), and sends filtered data to the Northern Hemisphere by satellite (about \SI{100}{\giga\byte\per\day}~\cite{Kelley2014}), with the raw data sent by sneakernet\footnote{That is, data transported by sneakers, i.e.\ shipped via physical media rather than the internet.} (about \SI{1}{\tera\byte\per\day}~\cite{Kelley2014}).
@@ -81,19 +83,19 @@ The observatory detects Cherenkov light from secondary particles---visualized in
 with the large volume of ice providing a plentiful basin of potentially interacting ice molecules.
 In the case of neutral current interactions, the event signature is that of a cascade: the neutrino scatters of a charged lepton, escaping the detector again, with the deposited energy resulting in electromagnetic and hadronic cascades; hence the name.
 These cascades can be contained fully within the detector, meaning the energy can be easily inferred, but it is difficult to reconstruct a track that points to the origin of the neutrino.
-Charged current interactions, on the other hand, present the possibility of track-like signals, which make for a much better pointing resolution.
+Charged current (CC) interactions, on the other hand, present the possibility of track-like signals, which make for a much better pointing resolution.
 However, the flavor of the neutrino in this case determines the signature:
 \begin{itemize}
-	\item An electron neutrino will produce an electron, which will create an electromagnetic shower, as the electron instigates pair production, and is slowed down by bremsstrahlung. This looks like a cascade signature
-	\item A tau lepton will live very shortly (on the order of \SI{1e-13}{\second}) owing to its massive nature, and decays again creating a cascade
-	\item Muons are special: they do not decay immediately, as taus, and are less affected by the processes stopping electrons. They are thus able to leave long tracks in the detector, a track-like signature
+	\item An electron neutrino CC interaction will produce an electron, which will create an electromagnetic shower, as the electron instigates pair production, and is slowed down by bremsstrahlung. This looks like a cascade signature
+	\item A tau lepton will live very shortly (on the order of \SI{1e-13}{\second}) owing to its massive nature, and decays again creating a cascade\todo{From Troels: \ldots or a muon track (20 percent). Explain\ldots}
+	\item Muons are special: they do not decay immediately, as taus, and are less affected by the processes stopping electrons. They are thus able to leave long tracks in the detector, a track-like signature\todo{From Troels: You need to explain why muons don't loose much energy in matter (like electrons)}
 \end{itemize}
 All three flavors create a hadronic cascade at the interaction vertex, \( X \) in \( \Pnu_{\alpha} + N \rightarrow \Plepton_{\alpha} + X \) with \( N \) a nucleon, \( \Pnu_{\alpha} \) a neutrino and \( \Plepton_{\alpha} \) a lepton, both of flavor \( \alpha \).
-\todo[inline]{Gotta explain e-m and hadronic cascades at some point}
+\todo[inline]{Gotta explain e-m and hadronic cascades}
 In the case of a tau neutrino, there is the possibility of another (as of yet unseen) signature: the double-bang.
 A tau will have a decay length of \SI{50}{\meter\per\peta\electronvolt}~\cite{Ahlers2018}, so very high energy tau neutrinos may interact and first create a hadronic cascade, then a track from a high energy tau, which then decays \SI{50}{\meter} or more away.
-\todo[inline]{Maybe expound on double-bangs and what they're good for? Maybe not.}
 The signatures can be seen in~\vref{fig:event_signatures}.
+
 \begin{figure}[ht]
     \centering
     \includegraphics[width=\textwidth]{./images/icecube/Typical-event-signatures-observed-by-IceCube-a-track-like-event-left-a-showerlike.png}
@@ -103,7 +105,7 @@ The signatures can be seen in~\vref{fig:event_signatures}.
 \section{DOMs}\label{sec:doms}
 
 The DOMs are situated on \SI{2.5}{\kilo\meter} long strings, spaced \SI{17}{\meter} apart (\SI{7}{\meter} for DeepCore, \SI{2.4}{\meter} for Upgrade).
-They are essentially in-ice, high quality digital cameras, capable of detecting single photons~\cite{Aartsen2017}.
+They are essentially in-ice, high quality light detectors, capable of detecting single photons~\cite{Aartsen2017}.
 Being self-contained in the sense that all recording capabilities are on-device, and according to pre-set triggers (\vref{sec:triggers}), they will record and save pulses and transmit them via cabling to IceCube Lab on the surface.
 When a photon is detected, the DOM starts a recording, lasting for up to \SI{6.4}{\micro\second}, such that later arriving photons are included in the \enquote{hit}~\cite{Aartsen2017}.
 This operation is independent, and as such each DOM does not know what other DOMs are seeing.
@@ -111,11 +113,11 @@ However, the PMT hit rate is recorded in millisecond intervals, because an overa
 
 The PMT waveforms are digitized by two circuits, ATWD (Analog Transient Waveform Digitizer) and fADC (fast Analog to Digital Converter).
 These differ in their sampling time, \SI{427}{\nano\second} for ATWD, \SI{6.4}{\micro\second} for fADC.\@
-\todo[inline]{Expound on digitizers.}
+\todo[inline]{Expound on shortly digitizers; explain the resulting difference in \( \sigma(t) \).}
 
 The DOMs also contain \enquote{flasher boards} outfitted with LEDs, used for calibration purposes such as measuring their positions and the optical properties of the ice.
 
-It should be noted that the DOMs are pretty reliable; by 2016 87 DOMs were not operational~\cite{Aartsen2017}; this is rather fortuitous, inasmuch as they are non-repairable (at least they're impossible to retrieve from the ice).
+It should be noted that the DOMs are pretty reliable; by 2016 87 DOMs out of \num{5160} were not operational~\cite{Aartsen2017}; this is rather fortuitous, inasmuch as they are non-repairable (at least they're impossible to retrieve from the ice).
 
 The location of the detector, in the dark ice deep beneath the Antarctic, leads to the majority of noise in the PMTs being \enquote{dark noise}, that is quantum effects such as thermal emission, radioactive decays and the luminescence of the glass; these effects have no outside sources, but have a rate of \SIrange{560}{780}{\hertz}~\cite{Aartsen2017}.
 The background muons, for comparison, are at a rate of \SIrange{5}{25}{\hertz}~\cite{Aartsen2017}.
@@ -139,7 +141,7 @@ Communication and power is handled by the cabling---clearly seen in~\vref{fig:do
 		    \includegraphics[width=\textwidth]{./images/icecube/5-DOM-Picture.png}
 		    \caption{}\label{fig:dom_schematic}
      \end{subfigure}
-        \caption{\Vref{fig:dom_pic} shows a picture of a DOM,~\vref{fig:dom_schematic}~\cite{Abbasi2009} shows a schematic of a DOM.}\label{fig:doms}
+        \caption{(a), from~\cite{WikiDOM}, shows a picture of a DOM, (b)~\cite{Abbasi2009} shows a schematic of a DOM.}\label{fig:doms}
 \end{figure}
 
 \section{Triggers and on-pole reconstruction}\label{sec:triggers}
@@ -158,7 +160,9 @@ The reconstruction is important as a filter, because the largest source of noise
 Using earth-filtering is the easiest way of determining whether a muon is atmospheric or caused by a neutrino, as the ground stops all of the former, but allows passage of the latter, but this does present a challenge: if one wants to determine (approximately) whence a muon came, one needs to assemble the disparate hits in the detector into something resembling a line.
 As several thousand events are read out each second, the algorithm must be fast, and fast on the available hardware (which tends not to be replaced often, seeing as how it is situated at one of the hardest to reach locations on Earth).
 The servers at the IceCube Lab perform first a quick reconstruction, \enquote{linefit}~\cite{Aartsen2014}---a minimizer using a Huber penalty---used as a seed for the \enquote{Single-Photo-Electron-Fit}, a maximum likelihood estimation~\cite{Ahrens2004}.
-This reconstruction has a median angular resolution (the arc-distance between reconstruction and the true track) on Monte Carlo (MC,~\vref{sec:monte_carlo_simulation}) data of \( \theta_{\text{med}} = \SI{4.211}{\degree} \)~\cite{Aartsen2014}.
+This reconstruction has a median angular resolution (the arc-distance between reconstruction and the true track) on Monte Carlo (MC,~\vref{sec:monte_carlo_simulation}) data of \( \theta_{\text{med}} = \SI{4.2}{\degree} \)~\cite{Aartsen2014}.
+
+\todo[inline]{From Troels: It would be fitting to list the sources of noise/background and their rates. Noise: from DOMs, background: from particles (cosmic muons).}
 
 \section{Post processing}\label{sec:post_processing}
 
@@ -168,6 +172,8 @@ When data arrives from the Pole, different analysis groups apply different post-
 In the following we shall focus on the methods applied by the oscillation working group, a suite of processing software termed \enquote{oscNext}, documented in~\cite{Blot2020}.
 Six levels are used, each removing different types of noise and muons using several different methods (some of which are machine learning based).
 The muon and noise is reduced by a factor \( \mathcal{O}(10^{5}) \) by the post-processing, and at the final level a neutrino rate of \( \mathcal{O}(\SI{1}{\milli\hertz}) \) survives with a few \% background muons and almost no noise.
+
+\todo[inline]{From Troels: What is the neutrino efficiency?!?}
 
 The post-processing levels are shortly touched on in the following.
 
@@ -183,7 +189,7 @@ Lastly, a DeepCore fiducial volume, and a DeepCore veto volume are defined, and 
 
 At level 3, a number of cuts are made on several derived variables, described in~\cite{Blot2020}.
 The main point of this level is to bring the data into agreement with MC, the discrepancies mainly stemming from processes for which there is no simulation.
-\todo[inline]{More about L3}
+\todo[inline]{More about L3; which processes, cuts, derived variables?}
 
 L3 removes around \SI{95}{\percent} of the background muon events, \SI{99}{\percent} of pure noise and keeps \SI{60}{\percent} of atmospheric neutrino events relative to level 2, such that the event rate is below \SI{1}{\hertz}~\cite{Blot2020}.
 
@@ -193,7 +199,7 @@ By level 4 there is good agreement between MC and data, important because at thi
 Two classifiers are used, both Boosted Decision Trees (BDT) LightGBM models: one for pure noise, another for background (atmospheric) muons, both trained on a number of derived variables, and the background sample for the muon classifier being real detector data.
 The pure noise rate is reduced at L4 from \SI{36.6}{\milli\hertz} to under \SI{0.3}{\milli\hertz} with \( \approx \SI{96}{\percent} \) of actual neutrino events intact, while \SI{94}{\percent} background muons are removed, keeping \SI{87}{\percent} of neutrinos.
 
-Relative to L3, \SI{99}{\percent} of pure noise and over \SI{94}{\percent} of atmospheric muons events are removed, while \SI{80}{\percent} of neutrinos are kept, resulting in a \( 100 : 10 : 1 \) (muon : neutrino : noise) ratio.
+Relative to L3, \SI{99}{\percent} of pure noise and over \SI{94}{\percent} of atmospheric muons events are removed, while \SI{80}{\percent} of neutrinos are kept, resulting in roughly a \( 100 : 10 : 1 \) (muon : neutrino : noise) ratio.
 
 \subsection{L5}\label{sec:l5}
 
@@ -201,6 +207,7 @@ Level 5's main function is removing so-called sneaky muons.
 These are particles that \enquote{sneak in} to DeepCore, without hitting any IceCube strings, a possibility caused by the hexagonal pattern of the detector.
 This is done by calculating the COG of an event, finding the closest DeepCore string to that, and if a set number of DOMs along some previously defined poorly instrumented corridors, within some volume cylinder and time, are hit, the event is dropped.
 Further, SPE is run on the event, and the calculated direction compared to the corridors; if it does not line up with any corridor, the event is kept.
+\todo[inline]{Whoops! What's SPE?}
 A starting containment cut is also employed, cutting events beginning outside, or close to the edge of, DeepCore.
 
 After L5, the rates are \SI{2.16}{\milli\hertz} for neutrinos, \SI{0.93}{\milli\hertz} for atmospheric muons and \SI{0.07}{\milli\hertz} for pure noise.
@@ -241,11 +248,11 @@ The portability is achieved by being built on the Boost C++ library's archive fo
 The files basically consist of so-called I3Frames, which may hold either primitives (such as integers, floats, etc.) or objects.
 The I3Frames are serialized, and so anything contained within them must be serializable.
 
-An event can be contained within an I3Frame, and will contain information such as pulses and their associated DOMs, indexed by keys, which can then be looked up in a complementary GCD file, containing the geometry of the detector.
+An event can be contained within an I3Frame, and will contain information such as pulses and their associated DOMs, indexed by keys, which can then be looked up in a complementary geometry file.
 Reading the files can conveniently be done through a Python interface called IceTray, enabling the user to use a modern language for processing and analysis.
 
 The format has stood the test of time, and has been in use since its creation in 2006, but there are a couple of issues with it: first (and most minor) of all, it requires the installation of IceCube software on the target machine.
-This is a minor annoyance, as one can build this in relatively short time, but it does not to be compiled and is not available easily e.g.\ via PyPi (and with good reasons, as it contains many dependencies).
+This is a minor annoyance, as one can build this in relatively short time, but it does not have to be compiled and is not available easily e.g.\ via PyPi (and with good reasons, as it contains many dependencies).
 The second issue---which is rather large for machine learning applications---is I3Files inability to seek in frames.
 In other words, the file format is sequential, and you have to loop through the frames to find the one you are interested in.
 
@@ -257,19 +264,19 @@ This was addressed in this project by using SQLite; see~\vref{sec:sqlite}.
 
 \begin{figure}
      \centering
-     \begin{subfigure}[b]{0.4\textwidth}
+     \begin{subfigure}[b]{0.49\textwidth}
          \centering
             \includegraphics[width=\textwidth]{./images/icecube/4-VetoView2_labeledStringswIcetops.jpg}
             \caption{}\label{fig:deepcore_string_pattern}
      \end{subfigure}
      \hfill
-     \begin{subfigure}[b]{0.4\textwidth}
+     \begin{subfigure}[b]{0.49\textwidth}
          \centering
             \includegraphics[width=\textwidth]{./images/icecube/Upgrade_Spacing.jpg}
             \caption{}\label{fig:upgrade_string_pattern}
      \end{subfigure}
         \caption{\Vref{fig:deepcore_string_pattern} shows the string pattern of IceCube and DeepCore,~\vref{fig:upgrade_string_pattern}~\cite{Ishihara2019} shows the proposed upgrade.
-        Both images are courtesy IceCube,~\vref{fig:deepcore_string_pattern} is from \url{https://icecube.wisc.edu/gallery/view/140}.}\label{fig:string_patterns}
+        Both images are courtesy IceCube,~\vref{fig:deepcore_string_pattern} is from~\cite{IcecubeDOM1}.}\label{fig:string_patterns}
 \end{figure}
 
 Before all of IceCube's strings were even deployed---a laborious task only possible during the short austral summer months---it was recognized that the energy range of the detector might not be sufficient for certain analysis purposes.
@@ -283,7 +290,7 @@ The top-down geometry can be seen in~\vref{fig:deepcore_string_pattern}
 
 DeepCore has made possible precision measurements of neutrino oscillations, and has also been used in the hunt for WIMPs\footnote{Weakly interacting massive particles, a dark matter candidate}.
 
-\todo[inline]{Hmm, need more about DeepCore. But what???}
+\todo[inline]{Hmm, need more about DeepCore. Maybe the depth, the number of DOMs, volume, lowered energy reach.}
 
 \section{IceCube Upgrade}\label{sec:icecube_upgrade}
 
@@ -302,10 +309,11 @@ In the simplest case, D-Egg\footnote{Dual optical sensors in an Ellipsoid Glass 
 		\includegraphics[width=0.5\linewidth]{./images/icecube/comparison_updated.JPG}
 		\caption{}\label{fig:improved_event_upgrade}
 	\end{subfigure}
-	\caption{\Vref{fig:upgrade_all_doms} shows new DOM types installed with the IceCube upgrade. \Vref{fig:improved_event_upgrade} shows a simulated \SI{3.8}{\giga\electronvolt} track-like event and its Cherenkov cone. More DOMs light up in the Upgrade configuration, giving more information for track reconstruction. Figures are from the IceCube Collaboration, \url{https://icecube.wisc.edu/gallery/press/view/2328}}\label{fig:upgrade_doms}
+	\caption{(a) shows new DOM types installed with the IceCube upgrade. \Vref{fig:improved_event_upgrade} shows a simulated \SI{3.8}{\giga\electronvolt} track-like event and its Cherenkov cone. More DOMs light up in the Upgrade configuration, giving more information for track reconstruction. Figures are from the IceCube Collaboration~\cite{IcecubeUpgrade1}.}\label{fig:upgrade_doms}
 \end{figure}
 The seven new Upgrade strings will be deployed in the same clear-ice region as DeepCore, and will feature even closer DOMs that are \SI{3}{\meter} apart, and an inter-string spacing of around \SI{20}{\meter}.
-This will enhance
+This will enhance the physics potential by enabling an even lower energy threshold, a significantly improved directional precision, more precise energy estimates, and possibly the potential to see double bang events or just statistically identify tau events.
+Finally, the installation (centered around IceCube string 36) may serve to improve the overall string calibration of IceCube.
 
 The low energy capabilities of Upgrade are important to \( \Pnu_{\Ptau} \) oscillation studies, because the muon to tau oscillation,
 \begin{equation}
@@ -315,7 +323,7 @@ has an oscillation maximum for \( \Pnu_{\Ptau} \) at \SI{25}{\giga\electronvolt}
 \begin{figure}[ht]
     \centering
     \includegraphics[width=\textwidth]{./images/icecube/upgrade_neutrinos.png}
-    \caption{The fully contained atmospheric \( \Pnu_{\Pmu} \) and \( \Pnu_{\Ptau} \) rates from charged current interactions in a cylindrical volume with a \SI{50}{\meter} radius and a height of \SI{275}{\meter} (\enquote{inner fiducial}; red lines) or a \SI{145}{\meter} and same height (\enquote{outer fiducial}; blue lines), both centered on DeepCore, for DeepCore (dotted lines) and Upgrade (solid lines).
+    \caption{The fully contained atmospheric \( \Pnu_{\Pmu} \) and \( \Pnu_{\Ptau} \) rates from charged current interactions in a cylindrical volume with a \SI{50}{\meter} radius and a height of \SI{275}{\meter} (\enquote{inner fiducial}; red lines) or a \SI{145}{\meter} radius and same height (\enquote{outer fiducial}; blue lines), both centered on DeepCore, for DeepCore (dotted lines) and Upgrade (solid lines).
     A significant enhancement in rates is seen around the interesting energy range of \( \approx \SI{30}{\giga\electronvolt} \).
     Image from~\cite{Ishihara2019}.}\label{fig:upgrade_rates}
 \end{figure}
