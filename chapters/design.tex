@@ -8,7 +8,7 @@
 With the given dataset, it is possible to train a neural network to predict the following properties of an incoming neutrino: energy, interaction vertex, interaction time and direction.
 As the oscillation studies---as described in~\vref{sec:neutrino_oscillations}---depend on the energy and the polar angle (as a proxy for the length traveled through the Earth), these two variables are the ones examined in this work.
 
-The algorithm will be measured on its resolution width in 18 energy bins in the range \SIrange{1}{1000}{\giga\electronvolt} of simulated charged current muon neutrinos \enquote{detected} in DeepCore, 6 bins per order of magnitude.
+The algorithm performance will be evaluated based on \( \log_{10}(E) \) and \( \theta \) resolution in 18 energy bins in the range \SIrange{1}{1000}{\giga\electronvolt} of simulated charged current muon neutrinos \enquote{detected} in DeepCore, 6 bins per order of magnitude.
 To gauge the performance the algorithm will be tested against the current best DeepCore reconstruction algorithm, Retro Reco (\vref{sec:l6}).
 
 In the following sections first the custom made tooling used to solve the problem is described, whereafter hyperparameter- and model experiments are performed.
@@ -16,6 +16,7 @@ In the following sections first the custom made tooling used to solve the proble
 The full DeepCore, charged current muon neutrino dataset (\vref{sec:distributions_and_selections}) where Retro Reco reconstruction is available contains \num{7280939} events in total, where \num{2050125} are blinded, set aside as a test set, leaving \num{5230814} for training.
 Of these \num{1046163} are used for validation, which means \num{4184651} are trainable.
 To save time, most experiments were run on a set containing around \num{400000} events, and all experiments employ early stopping.
+
 \begin{figure}
      \centering
      \begin{subfigure}[b]{0.49\textwidth}
@@ -29,12 +30,12 @@ To save time, most experiments were run on a set containing around \num{400000} 
          \includegraphics[width=0.85\textwidth]{./images/design/1200px-Overfitting.svg.png}
          \caption{}\label{fig:overfitting}
      \end{subfigure}
-        \caption{\Vref{fig:run_loss} shows an actual example of the training and validation loss values during an experiment.
+        \caption{(a) shows an actual example of the training and validation loss values during an experiment.
         The two diverge before the 10th epoch with the validation loss staying somewhat flat, and the training loss decreasing.
-        This indicates that the network has begun overfitting to the training data, an example of which is shown by the green line in~\vref{fig:overfitting}.
-        This will lead to a decreased inference capacity of the network because it is unable to generalize to unseen data.
-        \Vref{fig:overfitting} from \url{https://commons.wikimedia.org/wiki/File:Overfitting.svg}.}\label{fig:loss_and_overfitting}
+        This indicates that the network has begun overfitting to the training data, an example of which is shown by the green line in (b) (from~\cite{WikiOverfitting}).
+        This will lead to a decreased inference capacity of the network because it is unable to generalize to unseen data.}\label{fig:loss_and_overfitting}
 \end{figure}
+
 Early stopping runs an inference pass on the validation step at the end of each epoch, and records the loss function value.
 When the loss is seen to improve on the training set, but not the validation set, it is a sign of overfitting to the training data, because the network is no longer able to infer well on unseen data.
 
@@ -50,15 +51,18 @@ It was soon realized that more visualization tasks were needed, in addition to e
 
 Distributions shows dataset variable histograms, calculated when a new set is created.
 This is important for visual inspection of the variable distributions, to ensure nothing went wrong in the creation, to test if training and validation samples are similar, and to confirm that distributions are not changed by the transformations described in~\vref{sec:data_transformation}; a screenshot of the distribution screen, showing the variable \verb|energy_log10|, can be seen in~\vref{fig:powershovel_1}.
-\begin{figure} [ht]
+
+\begin{figure}
     \centering
     \includegraphics[width=1.0\textwidth]{./images/design/powershovel_1.png}
     \caption{The true energy distribution of a DeepCore dataset shown in Powershovel.
     Note the ability to chose transformation (raw or scaled), table (features or truth) and variable.}\label{fig:powershovel_1}
 \end{figure}
+
 The histograms are calculated and saved in \verb|pickle| files during dataset creation such that the tool is actually responsive and useful, and can load a new dataset---and a new variable---in milliseconds.
 Powershovel is made using Python, Streamlit and Plotly to ensure wide support, modern web technologies and ease of use.
-\begin{figure}[ht]
+
+\begin{figure}
     \centering
     \includegraphics[width=1.0\textwidth]{./images/design/powershovel_2.png}
     \caption{The Powershovel event viewer page.
@@ -73,7 +77,7 @@ This uses a subset of events from the true dataset database, in order to load qu
 The event view is static, with the time dimension instead indicated by color, but the 3D plot is interactive such that the user may pan and zoom to view the event from different angles.
 This page was also adapted so that it is possible to upload I3 files for viewing; it was spurred on by the IceCube group at The Niels Bohr Institute having trouble with Steamshovel, and so Powershovel was amended and sent to them for evaluation.
 
-\begin{figure}[h]
+\begin{figure}
     \centering
     \includegraphics[width=1.0\textwidth]{./images/design/powershovel_3.png}
     \caption{The Runs page showing two different runs, side by side.
@@ -86,7 +90,7 @@ After training, CubeFlow runs reconstructions on a given dataset, saves them to 
 The runs have a common naming convention, which includes certain key indicators of the algorithm (e.g.\ maximum event length, loss function, etc.) which is then used for filtering purposes such that the user can quickly see all algorithms using for example an MSE loss function.
 Multiple filters can be applied simultaneously.
 
-\begin{figure}[h]
+\begin{figure}
     \centering
     \includegraphics[width=1.0\textwidth]{./images/design/powershovel_4.png}
     \caption{The Runs screen, further down the page than shown in~\vref{fig:powershovel_3}.
@@ -107,12 +111,14 @@ The creation of this tool and CubeDB represents a large part of the man-hours of
 Although not written by a computer science graduate, nor a professional programmer, the code is shared freely in the hope that any idea is taken up and implemented by IceCube.
 
 \section{Metrics}\label{sec:metrics}
-\begin{figure}[h]
+
+\begin{figure}
     \centering
     \input{./images/design/error_distribution.pgf}
     \caption{Error resolution in energy bins.
     Top row shows the error distribution in energy bins [1.0, 1.2) (left) and [1.7, 1.8) }\label{fig:error_resolution_1}
 \end{figure}
+
 To define the performance of an algorithm the resolution is chosen.
 The resolution is here defined as the normalized interquartile range of the error distribution in a certain energy bin, i.e.
 \begin{equation}
@@ -136,7 +142,7 @@ The IQR reported by energy bin and its confidence interval can be seen in e.g.~\
 
 The best algorithm is chosen by essentially running experiments of different neural network designs.
 Early experiments used a simple 1D CNN, which slides a kernel across the data in one direction (hence the name), followed by fully connected layers.
-Later experiments employed TCNs, as these were seen to much improve the performance with a similar amount of parameters.
+Later experiments employed TCNs, as these were seen to much improve the performance with a similar amount of parameters and similar performance with much fewer parameters.
 
 Because the inner workings of a neural network is somewhat opaque, it can be difficult to reason about the design with supreme confidence, and so for new tasks\footnote{Staples of machine learning, such as the MNIST task, have years of experimentation behind it; in that sense it is an old task, contrary to the one in this thesis} experimenting is the only way to reason about the most effective design.
 
@@ -148,16 +154,18 @@ Furthermore problem specific parameters may arise, such as the maximum length of
 
 The data itself also comes in different flavors, in a sense; one may choose the collection of pulses in an event where SRT cleaning (used in level 2 cleaning, but can be implemented at any stage; see~\vref{sec:l2}) has been applied, which removes light that is not causally connected to the event, and must thus be considered noise.
 
-Experiments were run on smaller sets (around \num{200000} events) to facilitate quick turnaround under the assumption that adding more data will improve performance linearly.
+Experiments were run on smaller sets (around \num{200000} events) to facilitate quick turnaround under the assumption that adding more data will improve performance incrementally.
 The choice of learning rate was done via a learning rate finder, or \enquote{the Learning Rate Range Test} (LRRT)~\cite{Smith2017}, an attempt at automating the process.
+
 \begin{figure}
     \centering
     \includegraphics[width=1.0\textwidth]{./images/design/lr_finder.png}
     \caption{An example of an LRRT run.
     At first, the learning rate is too low, and the loss is plateauing.
     In the optimal range, the loss descends, until the loss becomes unstable and eventually explodes.
-    Figure from \url{https://www.jeremyjordan.me/nn-learning-rate/}.}\label{fig:lrrt}
+    Figure from~\cite{LearningRateScan}.}\label{fig:lrrt}
 \end{figure}
+
 LRRT runs a learning rate scan---between two values chosen manually by the user---over one epoch, increasing the learning rate between each mini-batch, the training loss is recorded at each step.
 When the rate is too low, the training loss will plateau, then descent and finally---when the learning rate is too high---explode; the user should then choose the learning rate to be where the training loss is descendant, as that represents the most optimal range of learning rates.
 An example is shown in~\vref{fig:lrrt}.
@@ -212,21 +220,25 @@ The prediction of angles\footnote{Or, rather, zenith, which is the quantity of i
 Because the azimuthal angle wraps around at \( 2 \pi \), it introduces problems for the neural network because it cannot understand that e.g.\ \SI{6.27}{\radian} and \SI{0.01}{\radian} are points close to each other on the circle.
 This may be remedied by predicting the \( x \), \( y \) and \( z \) components of the directional vector associated with an event, which has the benefit of not relying on circular statistics.
 The loss function may even contain a penalty term ensuring that the network attempts to predict unit vectors.
-This was implemented, but was not found to make a significant difference.
+This was implemented, but was not found to make a significant difference compared to no penalty.
+
 \begin{figure}
     \centering
     \input{./images/design/zenith_performance_prediction_type.pgf}
     \caption{Zenith resolution performance for different prediction types.
     Only predicting the zenith coordinate of the neutrino is seen to perform best over the largest range of energies, while the prediction of unit vectors outperforms it at higher energies (\SI{100}{\giga\electronvolt} and above).}\label{fig:prediction_types}
 \end{figure}
+
 Another avenue is to only predict the zenith angle, which does not suffer from circular wraparound, as it is restricted to \( \left[ \SI{0}{\degree}, \SI{180}{\degree} \right] \).
 This leads to another issue: is it possible to input the raw detector data---which contains Cartesian input coordinates for the DOM positions---and expect the neural network to be able to map it to a spherical coordinate system?
+
 \begin{figure}
     \centering
     \input{./images/design/zenith_performance_input_type.pgf}
     \caption{The difference between inputting the original detector data, in Cartesian coordinates, to the network, or doing a spherical transform beforehand, when predicting the neutrino's zenith directional coordinate.
     The performance is similar.}\label{fig:input_types}
 \end{figure}
+
 This was tested, as the thesis was that converting the coordinates beforehand might lessen the burden on the neural network, and the result can be seen in~\vref{fig:input_types}.
 The performance is similar, and goes to show the power of a universal approximator: the network will discover the correlations itself, even between coordinate transformations.
 
@@ -251,7 +263,8 @@ Lastly, it is possible to predict \textit{both} the azimuthal and polar angle in
         This is a track-like muon neutrino event, the neutrino path indicated by the blue line.
         Each black dot represents a DOM, and the pulses are colored according to the \enquote{plasma} color map with yellower pulses being later in time than bluer pulses.
         The size of the pulse is proportional to its charge.
-        As is evident, SRT cleaning removes a large amount of pulses in this example, and the cleaned event leaves a sense of direction in the pulse which can be inferred by a human eye, and surely is easier to infer for a neural network.}\label{fig:two_powershovel_events}
+        As is evident, SRT cleaning removes a large amount of pulses in this example, and the cleaned event leaves a sense of direction in the pulse which can be inferred by a human eye, and surely is easier to infer for a neural network.
+        Note that the color scale is different on the two plots; this is caused by a missing feature not yet implemented in Powershovel.}\label{fig:two_powershovel_events}
 \end{figure}
 
 \begin{figure}
@@ -268,6 +281,7 @@ Networks were trained with/without SRT cleaning, and it was found to be indeed s
 As low energy events do not tend to leave long, finely articulated tracks in DeepCore, this cleaning improves the resolution as the network does not need to pay attention to noise.
 
 \subsection{Maximum event length}
+
 \begin{figure}
      \centering
      \begin{subfigure}[b]{0.49\textwidth}
@@ -287,6 +301,7 @@ As low energy events do not tend to leave long, finely articulated tracks in Dee
     This may be caused by the limitation of a maximum length of 100 \enquote{throws away} too much event information.
     This is reinforced by the fact that at the highest energy bin the performance of 200 decreases, probably because higher energy events are typically longer, while the performances are very similar at low energies.}\label{fig:length}
 \end{figure}
+
 The tensors that are input into the neural network need to be of the same shape, and thus some padding is necessary.
 All tensors are therefore padded up to some pre-set maximum length, and events that are longer than this limit are instead composed of a random subsample of the total event.
 
@@ -294,6 +309,7 @@ The median length of a raw event is 50 and 17 for SRT cleaned ones.
 200 was chosen as the best performant maximum length, when training time, memory usage and resolution performance was taken into account; see~\vref{fig:length}.
 
 \subsection{Array padding}
+
 \begin{figure}
     \centering
     \input{./images/design/zenith_performance_padding.pgf}
@@ -302,11 +318,13 @@ The median length of a raw event is 50 and 17 for SRT cleaned ones.
     \enquote{End} padding pads the end of the array, while the poorly named \enquote{middle} places the event in the middle, and pads both ends.
     The performance is similar for both.}\label{fig:padding}
 \end{figure}
+
 The style of zero-padding was also varied, although with no discernible effect as shown in~\vref{fig:padding}.
 Either the event was padded with zeros after the last entry and up to the maximum length, or the event was put into the middle of the array, with both ends then padded.
 The network, however, seems to understand that zeros indicate no pulse, as the performance is very similar between the two.
 
 \subsection{Weighting}
+
 \begin{figure}
      \centering
      \begin{subfigure}[b]{0.49\textwidth}
@@ -326,18 +344,21 @@ The network, however, seems to understand that zeros indicate no pulse, as the p
         \Vref{fig:weighting_performance} shows performance with/without re-weighting by energy bins.
     The tails naturally improve their performance, while the bulk performs worse.}\label{fig:weighting}
 \end{figure}
+
 It is common practice in both machine learning and high energy physics to re-weight a distribution.
 In the case of machine learning, it is often done such that distribution imbalances are evened out,
 and for IceCube most neutrinos are around the \SIrange{10}{100}{\giga\electronvolt} mark, as seen in~\vref{fig:weighted_distribution}.
 Thus re-weighting to a uniform distribution is very useful for extremely low energy events, under \SI{10}{\giga\electronvolt}, although performance suffers most everywhere else; see~\vref{fig:weighting}.
 
 \subsection{Model architecture}
+
 \begin{figure}
     \centering
     \input{./images/design/zenith_performance_models.pgf}
     \caption{Performance of four different networks.
     The low-parameter TCN 1.0 performs promising vs. CNNs with orders of magnitude more parameters, but fails at higher energies; this is remedied by TCN 2.0, which trades low amount of parameters for performance.}\label{fig:models}
 \end{figure}
+
 The preceding discussion holds as well for zenith prediction as for energy prediction (bar prediction type and input type, which are not energy relevant).
 The same goes for the design of the network; where performance increased on zenith prediction, performance increased on energy prediction.
 

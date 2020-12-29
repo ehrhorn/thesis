@@ -24,10 +24,10 @@ Generally, supervised machine learning entails having a way to map inputs to out
 This error is encapsulated in a loss functions, which takes as input the model's guess for the data point value and the true value (the \enquote{label}) and returns a real number, the \enquote{loss}.
 The name of the game is then the minimization of this loss, as an error of zero would mean a perfect estimation of the label value.
 
-\begin{figure}[ht]
+\begin{figure}
     \centering
     \includegraphics[width=0.5\textwidth]{./images/machine_learning/Ea9GZUbXsAEORIb.jpeg}
-    \caption{The \enquote{Face-Depixelizer}~\cite{Menon2020} takes a blurred image of a person, and generates an image from it. However, the model was trained on primarily white people, and so reconstructs an obviously blurred image of Barack Obama as a white male. Image from \url{https://twitter.com/Chicken3gg/status/1274314622447820801}}\label{fig:algorithmic_bias}
+    \caption{The \enquote{Face-Depixelizer}~\cite{Menon2020} takes a blurred image of a person, and generates an image from it. However, the model was trained on primarily white people, and so reconstructs an obviously blurred image of Barack Obama as a white male. Image from~\cite{Chicken3ggTwitter}.}\label{fig:algorithmic_bias}
 \end{figure}
 
 The input/output data is referred to as \enquote{training data}, and it is in essence what decides the logic of the model; thus care must be taken with regards to it, as inherent biases in the training data will propagate to the decisions the model makes.
@@ -56,11 +56,13 @@ or, the popular choice these days, a rectifier
 \begin{equation}
 	f(x) = x^{+} = \max{\left( 0, x \right)}.
 \end{equation}
-\begin{figure}[ht]
+
+\begin{figure}
     \centering
     \input{./images/machine_learning/activation_functions.pgf}
     \caption{Two activation functions, a sigmoid and a rectifier. Both \enquote{activate} an input, rather like a Heaviside step function.}\label{fig:activation_functions}
 \end{figure}
+
 To explain how ANNs work, a simple example using simple linear regression is illuminating.
 
 In linear regression, a 200 year old technique, a linear relationship between \( n \) dependent variables, \( y_{k} \), and input variables \( \bm{x}_{k} \), is assumed, such that the output can be approximated as
@@ -68,11 +70,13 @@ In linear regression, a 200 year old technique, a linear relationship between \(
     y_{k} \approx w_{0} x_{k 0} + w_{1} x_{k 1} + \cdots + w_{m} x_{k m} = \sum_{i = 0}^{m} x_{k i} = \bm{x}_{k}^{\intercal} \bm{w},
 \end{equation}
 where \( x_{k 0} = 1 \) such that \( w_{0} \) is the bias.
-\begin{figure}[ht]
+
+\begin{figure}
     \centering
     \includegraphics{./images/machine_learning/perceptron.pdf}
     \caption{The linear perceptron.}\label{fig:perceptron}
 \end{figure}
+
 This is a linear perceptron, an artificial neuron with a linear activation function; see~\vref{fig:perceptron}, modeled as a directed acyclic graph.
 Regression then proceeds by minimizing the error, e.g.\ the sum of squared residuals
 \begin{equation}
@@ -112,7 +116,7 @@ The toy linear regression example will converge to the best linear fit, but it i
 This rather limits the application of a perceptron, inasmuch as many real-world problems are non-linear with respect to the input variables, and this observation leads to the introduction of non-linear activation functions into the network.
 Doing so actually allows a single layer neural network to approximate any continuous function, as shown in~\cite{Cybenko1989,Hornik1989}.
 
-\begin{figure}[ht]
+\begin{figure}
     \centering
     \includegraphics[width=0.3\textwidth]{./images/machine_learning/approximation_function.png}
     \caption{Example of a wide neural network approximating the function \( f(x) = 0.2 + 0.4 x^{2} + 0.3 x \sin{\left( 15 x \right) + 0.05 \cos{\left( 50 x \right)}} \), taken from the excellent~\cite{NeuralNetworksandDeepLearning}.}\label{fig:approximation_function}
@@ -136,7 +140,7 @@ Additionally, the internal structure of the image is disregarded, in that there 
 This is remedied by introducing a linear transformation preserving the structure of the input: a convolution.
 \enquote{Convolutional neural networks} (CNNs) create feature maps by employing discrete convolutions via kernels that slide over the input and aggregate information in the receptive field; see~\vref{fig:convolution}.
 
-\begin{figure}[ht]
+\begin{figure}
     \centering
     \includegraphics[width=0.7\textwidth]{./images/machine_learning/convolution.png}
     \caption{An example of discrete convolutions. The dark blue \( 3 \times 3 \) kernel slides over the input, and sums the product of the weights and inputs forming a feature map (green matrix) in the process.
@@ -184,7 +188,8 @@ In (b) \( F_{2} \) is produced from \( F_{1} \), and each element now has a rece
 Lastly, in (c), \( F_{3} \) is produced from \( F_{2} \), and each element has a receptive field of \( 15 \times 15 \).
 However, \( F_{1} \) through \( F_{3} \) have the same number of parameters.
 Thus when we use a larger dilation, an output at the top level can represent a wider range of inputs~\cite{Bai2018}.
-\begin{figure}[ht]
+
+\begin{figure}
     \centering
     \includegraphics[width=0.7\textwidth]{./images/machine_learning/strides.png}
     \caption{(a): \( F_{1} \) is produced from \( F_{0} \), and each element has a receptive field of \( 3 \times 3 \).
@@ -206,7 +211,8 @@ It should be noted that the residual connection for a TCN is not directly added 
 Instead, a \( 1 \times 1 \) convolution is applied, to ensure the correct size of the residual.
 The TCN residual block consists of two dilated convolutions, a weight normalization~\cite{Salimans2016}---which parameterizes the weights in the network to facilitate faster learning---layer (not used in this work; batch normalization, explained shortly, was used instead) followed by a ReLU (Rectified Linear Unit) layer and a dropout layer.
 The architecture can be seen in~\vref{fig:tcn}.
-\begin{figure}[ht]
+
+\begin{figure}
     \centering
     \includegraphics[width=1.0\textwidth]{./images/machine_learning/tcn.png}
     \caption{(a): a demonstration of dilated convolutions with dilation factor \( d \in \{ 1, 2, 4\} \) and filter size 3.
@@ -215,6 +221,7 @@ The architecture can be seen in~\vref{fig:tcn}.
     (c): The residual connection from input to output.
     Image from~\cite{Bai2018}.}\label{fig:tcn}
 \end{figure}
+
 Batch normalization~\cite{Ioffe2015} is applied in order to reduce dependence on the careful selection of correct learning rate, because in a deep network the input to any layer is dependent on previous layers, and so changes to any parameter balloons through the network.
 Thus some sense of normalization that preserves the important structure but suppresses the scale is beneficial.
 
@@ -236,12 +243,14 @@ In a 1D CNN the kernel slides in only one direction, but is otherwise similar to
 \section{Loss functions}\label{sec:loss_functions}
 
 The choice of loss function influences the performance of the network.
-\begin{figure}[ht]
+
+\begin{figure}
     \centering
     \includegraphics[width=0.7\textwidth]{./images/machine_learning/loss.png}
     \caption{A complicated neural net loss landscape.
     Image from~\cite{Li2018}.}\label{fig:loss_landscape}
 \end{figure}
+
 Of course, the function needs to be differentiable, or backpropagation will fail.
 \todo[inline]{Loss functions\ldots what clever thing to say? From Troels: Lots! Difference between Loss for classification and regression, and MAE vs. RMS for regression. Mention the problems with loss for multiple regression, with three solutions (make model for each output, transforming each term to contribute similarly, or transforming all variables), and which you chose and why. Also the problem with angular Loss (vanishing gradient), and that different loss function trainings can be combined in ensemble.}
 

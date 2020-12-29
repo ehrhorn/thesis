@@ -11,13 +11,15 @@ In order to develop a reconstruction algorithm, one needs to be able to test the
 The HEP community relies on the Monte Carlo (MC) method for this.
 The canonical introduction to MC is that of the calculation---or, more correctly, the approximation---of \( \pi \):
 draw a circle inside a square, uniformly scatter points on the square, take the ratio of points inside the circle to total number of points scattered (and multiply by four).
-\begin{figure}[ht]
+
+\begin{figure}
     \centering
     \input{./images/data/mc_pi.pgf}
     \caption{Two runs of the \( \pi \) MC algorithm with \num{100} samples on the left, \num{5000} samples on the right.
     The points outside the circle are colored red, while the points inside are colored blue.
     The shape of the circle is easily seen on the right, where the error in calculating \( \pi \) is around \( \SI{0.025}{\percent} \).}\label{fig:mc_pi}
 \end{figure}
+
 The requirement of uniformity is important, as else the distribution will be skewed and the calculation wrong.
 As seen in~\vref{fig:mc_pi} the number of points also plays a role; the more points, the better the approximation, which seems intuitive enough.
 This translates to particle physics rather well.
@@ -27,23 +29,24 @@ Generally, observables in particle physics take the form of~\cite{Weinzierl2000}
 \end{equation}
 with \( n \) outgoing particles from a collision between \( a \) and \( b \), where \( \dl \Phi_{n} \) is the Lorentz invariant phase space, \( \sfrac{1}{8 K(s)} \) is a kinematical factor, \( \mathcal{M} \) is the familiar matrix element and \( \Theta \) is a function defining the observable and experimental cuts.
 The matrix element can be calculated, as discussed in~\vref{sec:the_standard_model}\footnote{There are complications as there are higher-order Feynman diagrams; some can be calculated perturbatively, others cannot and must be solved in different ways.}, and the phase space is then up to MC methods to solve.
-% This can be done by re-expressing the phase space as sequential two-body decays; without delving into the algebra, outlined in~\cite{Weinzierl2000}, the phase space becomes
-% \begin{equation}
-% 	\dl \Phi_{2} = \frac{1}{\left( 2 \pi \right)^2} \frac{\sqrt{\lambda{(q_{i}^2, q_{i - 1}^2, m_{i}^2)}}}{8 q_{i}^2} \dl \phi_{i} \dl \left( \cos{\theta_{i}} \right)
-% \end{equation}
-The nuts and bolts are not important for this short discussion, but the long and short of it is that the final state momenta from the collision can be generated from re-expressing the phase space and inserting uniformly randomly generated numbers; rather like the approximation of \( \pi \).
-\todo[inline]{Ugh, more... this is hard!}
-% Generates Events for Neutrino Interaction Experiments (GENIE)
 
-% There exists a surprising number of different MC generators: PYTHIA, HERWIG, ISAJET, SHERPA etc.
+The nuts and bolts are not important for this short discussion, but the long and short of it is that the final state momenta from the collision can be generated from re-expressing the phase space and inserting uniformly randomly generated numbers; rather like the approximation of \( \pi \).
+
+While this handles the event generation part of the equation, simulation is needed afterwards to simulate properties of materials etc.
 
 \section{Distributions and selections}\label{sec:distributions_and_selections}
 
 The source of the data used is I3 files, as detailed in~\vref{sec:i3_file_format}, and moved to SQLite (\vref{sec:sqlite}) for training.
 It is structured in features and truth, where the features represent detector data (simulated for MC) and the truth is the truth variables from the MC generator.
 \todo[inline]{No feature engineering, cite Bjumse}
-The detector data contains 20 distinct features, extracted from the I3 files, while the truth contains 14.
-\todo[inline]{Table with features/truth and explanations}
+The detector data contains 13 distinct features (and two cleaning states), extracted from the I3 files, while the truth contains 12.
+Some features---the string number, DOM number, PMT number and PMT type---are not used for training, but have been useful for analysis purposes, while the directional PMT features are only useful for Upgrade purposes (in that for DeepCore, the values are always the same (\( \left[0, 0, 1 \right] \))) because all PMTs point downwards.
+
+In the end, the problem is one of converting 6 or 9 features into an output.
+
+In the following, the ISO convention of spherical coordinate systems is used such that \( \theta \) refers to the zenith angle, and \( \phi \) the azimuthal angle.
+
+\todo[inline]{Okay, we gotta talk about distributions, and something in the figure texts.}
 
 \begin{table}
     \centering
@@ -62,9 +65,7 @@ The detector data contains 20 distinct features, extracted from the I3 files, wh
         \verb|pmt_x| & \( x \) component of the PMT pointing unit vector & \verb|float| \\
         \verb|pmt_y| & \( y \) component of the PMT pointing unit vector & \verb|float| \\
         \verb|pmt_z| & \( z \) component of the PMT pointing unit vector & \verb|float| \\
-        \verb|pmt_area| & The surface area of the PMT that recorded the light pulse & \verb|float| \\
         \verb|pmt_type| & Type of PMT (IceCube, mDOM, D-Egg) & \verb|int| \\ \midrule
-        \verb|lc| & Local coincidence trigger & \verb|bool| \\
         \verb|pulse_width| & Pulse width, DAC-dependent & \verb|int| \\ \midrule
         \verb|SplitInIcePulses| & Pulse included in \verb|SplitInIcePulses| cleaning & \verb|bool| \\
         \verb|SRTInIcePulses| & Pulse included in \verb|SRTInIcePulses| cleaning & \verb|bool| \\ \bottomrule
@@ -73,7 +74,8 @@ The detector data contains 20 distinct features, extracted from the I3 files, wh
 \begin{table}
     \centering
     \caption{Truth labels used in the dataset with datatype.
-    Each entry represents an MC generated particle.}\label{tab:truth}
+    Each entry represents an MC generated particle.
+    While the directional and spherical angle are in some ways redundant, both are kept as it makes it easier to run algorithms reconstruction directional unit vectors or spherical angles.}\label{tab:truth}
     \begin{tabular}{@{}lll@{}} \toprule
         Name & Description & Type \\ \midrule
         \verb|energy_log10| & Energy of particle in \( \log_{10} \) & \verb|float| \\
@@ -92,7 +94,6 @@ The detector data contains 20 distinct features, extracted from the I3 files, wh
 \end{table}
 
 \subsection{oscNext}\label{sec:oscnext}
-\todo[inline]{Some oscNext distribution plots}
 
 \begin{figure}[h]
     \centering
@@ -101,7 +102,6 @@ The detector data contains 20 distinct features, extracted from the I3 files, wh
 \end{figure}
 
 \subsection{Upgrade}\label{sec:upgrade}
-\todo[inline]{Some upgrade distribution plots}
 
 \begin{figure}[h]
     \centering
@@ -129,7 +129,7 @@ Here, it is typical to organize image files in folders: in a classification task
 .2 cat.
 .2 dog.
 }
-\begin{listing}[ht]
+\begin{listing}
 	\inputminted{python}{./images/data/pickle_example.py}
 	\caption{An example of an event in Python dictionary form.
 	The data has been transformed by a robust scaler, as detailed in~\vref{sec:data_transformation}.}\label{listing:pickle_example}
@@ -167,11 +167,13 @@ As can be seen from~\vref{listing:pickle_example} the features are of shape \( M
 The natural database would accommodate this, and there exists solutions that, called NoSQL, which hold data in a JSON-like format.
 However, no widespread format was found that is file-oriented instead of client-server, a requirement for portability; thus SQLite was settled on.
 Each row in the truth table has a unique event number as its primary key, while each event (spread over several rows) in the features table has the same event number.
-\begin{figure}[ht]
+
+\begin{figure}
     \centering
     \includegraphics[width=0.5\textwidth]{./images/data/diagram.png}
     \caption{The structure of a dataset, with the features table holding (MC) detector data from events, and the truth table holding the (MC) particle truth variables.}\label{fig:sql_diagram_1}
 \end{figure}
+
 The structure can be seen in SQL diagram form in~\vref{fig:sql_diagram_1}.
 
 More intangible benefits derive from using SQLite.
