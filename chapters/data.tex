@@ -38,8 +38,10 @@ While this handles the event generation part of the equation, simulation is need
 
 The source of the data used is I3 files, as detailed in~\vref{sec:i3_file_format}, and moved to SQLite (\vref{sec:sqlite}) for training.
 It is structured in features and truth, where the features represent detector data (simulated for MC) and the truth is the truth variables from the MC generator.
-\todo[inline]{No feature engineering, cite Bjumse}
+
 The detector data contains 13 distinct features (and two cleaning states), extracted from the I3 files, while the truth contains 12.
+It should be noted that in~\cite{Molvig2020} feature engineering on the same dataset was attempted, resulting in no gains, and so is not re-applied here.
+
 Some features---the string number, DOM number, PMT number and PMT type---are not used for training, but have been useful for analysis purposes, while the directional PMT features are only useful for Upgrade purposes (in that for DeepCore, the values are always the same (\( \left[0, 0, 1 \right] \))) because all PMTs point downwards.
 
 In the end, the problem is one of converting 6 or 9 features into an output.

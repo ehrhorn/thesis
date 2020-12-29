@@ -122,7 +122,7 @@ However, the PMT hit rate is recorded in millisecond intervals, because an overa
 
 The PMT waveforms are digitized by two circuits, ATWD (Analog Transient Waveform Digitizer) and fADC (fast Analog to Digital Converter).
 These differ in their sampling time, \SI{427}{\nano\second} for ATWD, \SI{6.4}{\micro\second} for fADC.\@
-\todo[inline]{Expound on shortly digitizers; explain the resulting difference in \( \sigma(t) \).}
+Different conditions leads to different payloads sent from the DOM to the surface; if the local coincidence is triggered, both the fADC and the ATWD waveforms are sent.
 
 The DOMs also contain \enquote{flasher boards} outfitted with LEDs, used for calibration purposes such as measuring their positions and the optical properties of the ice.
 
@@ -168,7 +168,7 @@ When triggers have been activated, detector data is sent to IceCube Lab, which u
 The reconstruction is important as a filter, because the largest source of noise in the detector comes from background atmospheric muons.
 Using earth-filtering is the easiest way of determining whether a muon is atmospheric or caused by a neutrino, as the ground stops all of the former, but allows passage of the latter, but this does present a challenge: if one wants to determine (approximately) whence a muon came, one needs to assemble the disparate hits in the detector into something resembling a line.
 As several thousand events are read out each second, the algorithm must be fast, and fast on the available hardware (which tends not to be replaced often, seeing as how it is situated at one of the hardest to reach locations on Earth).
-The servers at the IceCube Lab perform first a quick reconstruction, \enquote{linefit}~\cite{Aartsen2014}---a minimizer using a Huber penalty---used as a seed for the \enquote{Single-Photo-Electron-Fit}, a maximum likelihood estimation~\cite{Ahrens2004}.
+The servers at the IceCube Lab perform first a quick reconstruction, \enquote{linefit}~\cite{Aartsen2014}---a minimizer using a Huber penalty---used as a seed for the \enquote{Single-Photo-Electron-Fit} (SPE), a maximum likelihood estimation~\cite{Ahrens2004}.
 This reconstruction has a median angular resolution (the arc-distance between reconstruction and the true track) on Monte Carlo (MC,~\vref{sec:monte_carlo_simulation}) data of \( \theta_{\text{med}} = \SI{4.2}{\degree} \)~\cite{Aartsen2014}.
 
 \todo[inline]{From Troels: It would be fitting to list the sources of noise/background and their rates. Noise: from DOMs, background: from particles (cosmic muons).}
@@ -216,7 +216,6 @@ Level 5's main function is removing so-called sneaky muons.
 These are particles that \enquote{sneak in} to DeepCore, without hitting any IceCube strings, a possibility caused by the hexagonal pattern of the detector.
 This is done by calculating the COG of an event, finding the closest DeepCore string to that, and if a set number of DOMs along some previously defined poorly instrumented corridors, within some volume cylinder and time, are hit, the event is dropped.
 Further, SPE is run on the event, and the calculated direction compared to the corridors; if it does not line up with any corridor, the event is kept.
-\todo[inline]{Whoops! What's SPE?}
 A starting containment cut is also employed, cutting events beginning outside, or close to the edge of, DeepCore.
 
 After L5, the rates are \SI{2.16}{\milli\hertz} for neutrinos, \SI{0.93}{\milli\hertz} for atmospheric muons and \SI{0.07}{\milli\hertz} for pure noise.
