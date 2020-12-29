@@ -51,6 +51,10 @@ Both the charged leptons and the quarks interact electromagnetically and weakly,
 Because they do not participate in anything but the weak force, neutrinos hardly ever interact, and are thus difficult (but not impossible!) to observe.
 An \si{\mega\electronvolt} neutrino has a cross section on the order of \SI{1e-44}{\centi\meter\squared}, and a beam of such particles must travel through a light year of lead before half of them is blocked.
 
+The Standard Model sports three generations of matter, differing in mass and flavor (a quantum number).
+The first generation contains the well-known electron and the up \& down quarks, the second contains the muon (of great interest to IceCube, as we shall see) and the charm \& strange quarks, while the third contains the tau and the top \& bottom quarks.
+
+It has been experimentally ascertained that no more than three generations can exist with a corresponding light neutrino of mass less than \SI{45}{\giga\electronvolt\per\clight\squared}~\cite{Decamp1989}; the cause of the universe's choice of three generations is still unknown.
 
 The experimental particle physicist uses Feynman diagrams to describe potential interactions between particles,
 depending on Fermi's golden rule, the Lorentz-invariant matrix element and for fermions the Dirac equation.
@@ -130,7 +134,7 @@ an expression of quantum mechanical probabilities for an interaction to happen, 
 \( s \) is the squared  COM energy, \( \mathrm{p} \) the particle momenta, and \( \Omega \) the solid angle a particle scatters into.
 
 The SM thus provides observables, as long as one can calculate the Lorentz invariant matrix element \( \mathcal{M} \), which in the fermion case can be done using~\vref{eq:dirac_equation_2}.
-This process is much simplified by Feynman diagrams, allowing the theorist to draw processes and using Feynman rules stitch together a matrix element describing the interaction.
+This process is much simplified by Feynman diagrams, allowing the theorist to draw processes and using Feynman rules stitch together a matrix element describing the interaction, thus allowing one to (relatively) easily carry out complex cross section calculations by \enquote{simply} drawing diagrams!
 Examples of Feynman diagrams can be seen in~\vref{fig:charged_neutral_current}.
 %\begin{equation}\label{eg:fermi_golden_rule}
 %	\Gamma_{\text{f} \text{i}} = \frac{\mathrm{p}^{*}}{32 \pi^2 m^{2}} \int \left| \mathcal{M} \right|^2 \, \mathrm{d} \Omega,
@@ -403,7 +407,11 @@ Using~\vref{eq:neutrino_wavefunction_2} this becomes
 \end{equation}
 which in the ultra-relativistic limit becomes
 \begin{equation}
-	P(\Pnu_{\Pmu} \rightarrow \Pnu_{\Pe}) = \sin^2{\left( 2 \theta \right)} \sin^2{\left[ \frac{\left( m_{1}^{2} - m_{2}^{2} \right) L}{4 E_{\Pnu}} \right]}.
+	P(\Pnu_{\Pmu} \rightarrow \Pnu_{\Pe}) = \sin^2{\left( 2 \theta \right)} \sin^2{\left[ \frac{\left( m_{1}^{2} - m_{2}^{2} \right) L}{4 E_{\Pnu}} \right]} = \sin^2{\left( 2 \theta \right)} \sin^2{\left( \Delta_{1 2} \right)},
+\end{equation}
+with
+\begin{equation}
+    \Delta_{i j} = \frac{\left( m_{i}^{2} - m_{j}^{2} \right) L}{4 E_{\Pnu}}.
 \end{equation}
 In plain words, then, the probability, or oscillation, depends firstly on the mixing angle, secondly the difference of the squared masses of the mass eigenstates, thirdly the energy of the neutrino and lastly the length it travels.
 An example of oscillation patterns can be seen in~\vref{fig:ocsillations}.
@@ -413,7 +421,7 @@ An example of oscillation patterns can be seen in~\vref{fig:ocsillations}.
      \begin{subfigure}[b]{0.49\textwidth}
          \centering
 		    \includegraphics[width=\textwidth]{./images/particle_physics/Oscillations_electron_long.svg.png}
-		    \caption{}
+		    \caption{}\label{fig:wiki_oscillations}
      \end{subfigure}
      \hfill
      \begin{subfigure}[b]{0.4\textwidth}
@@ -479,6 +487,7 @@ Moreover,~\vref{eq:survival_probability_1} now becomes
 	P(\Pnu_{\Pmu} \rightarrow \Pnu_{\Pmu}) = 1 - 4 \lvert U_{\Pmu 1} \rvert^2 \lvert U_{\Pmu 2} \rvert^2 \sin^{2}{\Delta_{2 1}} - 4 \lvert U_{\Pmu 1} \rvert^2 \lvert U_{\Pmu 3} \rvert^2 \sin^{2}{\Delta_{3 1}} - 4 \lvert U_{\Pmu 2} \rvert^2 \lvert U_{\Pmu 3} \rvert^2 \sin^{2}{\Delta_{3 2}},
 \end{equation}
 showing the possibility of experimentally determining the values of the neutrino mixing matrix, provided one can set up an experiment where enough neutrinos are captured, among other things.
+
 In the case of IceCube, this survival probability can be approximated as\cite{Aartsen2016}
 \begin{equation}
 P(\Pnu_{\Pmu} \rightarrow \Pnu_{\Pmu}) \approx 1 - \sin^{2}{\left( 2 \theta_{2 3} \right)} \sin^{2}{\left( 1.27 \frac{\Delta{m_{3 2}^{2}} L}{E} \right)}.
@@ -495,7 +504,7 @@ CP violation is required for explaining the baryon asymmetry, and has been ruled
 This of course also means that if we observe neutrino oscillations, it cannot be a massless particle.
 However, the observable in oscillation probabilities is the difference of the squared masses, meaning it is the only thing we can experimentally say anything about.
 As of this writing, the best fit values, from~\cite{nufit}, is on the order of
-\begin{align}
+\begin{align}\label{eq:mass_hierarchy}
 	\Delta{m_{2 1}^{2}} & \approx \SI{7.4e-5}{\electronvolt\squared} \\
 	\lvert \Delta{m_{3 2}^{2}} \lvert & \approx \SI{2.5e-3}{\electronvolt\squared}.
 \end{align}
@@ -504,11 +513,15 @@ The absolute mass scale is constrained by the density of relic neutrinos from Th
 	\sum_{i = 1}^{3} m_{\Pnu_{i}} \lesssim \SI{1}{\electronvolt}.
 \end{equation}
 Because we only know the mass differences, it is not a priori possible to say in which order the mass hierarchy goes.
-All we can say currently, is that the difference between \( \Pnu_{1} \) and \( \Pnu_{2} \) is much less than the difference between \( \Pnu_{3} \) and \( \Pnu_{2} \), but we do not know if \( \Pnu_{3} \) is heavier than the other two flavors.
+All we can say currently, is that the difference between \( \Pnu_{1} \) and \( \Pnu_{2} \) is much less than the difference between \( \Pnu_{3} \) and \( \Pnu_{2}\), but we do not know if \( \Pnu_{3} \) is heavier than the other two flavors.
 The mass ordering problem can tested using IceCube~\cite{Leuermann2018}.
 
 This should be cause for some consternation, or---perhaps more---excitement.
 First of all, the Standard Model does not automatically describe neutrino mass, and if it is introduced into the Lagrangian it requires that right-handed chiral neutrinos exist.
+
+\Vref{eq:survival_probability_2} depends on different \( \Delta \)s.
+Because of~\vref{eq:mass_hierarchy} it is reasonable to approximate \( \Delta_{3 1} \approx \Delta{3 2} \), which means the survival probability depends on \( \Delta_{2 1} \) and \( \Delta_{3 2} \).
+This leads to two types of oscillations, the long and short baselines, that develop on two dissimilar length scales; this can be seen in~\vref{fig:wiki_oscillations}, where two characteristic oscillation patterns can be seen for each neutrino type.
 
 \begin{figure}
     \centering
@@ -541,7 +554,6 @@ These will pick up Cherenkov cones as seen in~\vref{fig:cherenkov_cone}, and fro
 		    \includegraphics[width=\textwidth]{./images/particle_physics/1061px-Cherenkov_Wavefront.svg.png}
 		    \caption{}\label{fig:cherenkov_radiation}
      \end{subfigure}
-%     \hfill
      \begin{subfigure}[b]{0.49\textwidth}
          \centering
 		    \includegraphics[width=\textwidth]{./images/particle_physics/cherenkov.jpg}
@@ -551,9 +563,5 @@ These will pick up Cherenkov cones as seen in~\vref{fig:cherenkov_cone}, and fro
         (b), from~\cite{PhysicsOpenLabCherenkovDetector}, shows how a Cherenkov detector uses this radiation to infer particle properties.
         }\label{fig:cherenkov_figure}
 \end{figure}
-
-\todo[inline]{Mention flavors of quarks and CKM matrix}
-\todo[inline]{Mention that Feynman diagrams can be used for calculations}
-\todo[inline]{Mention long/short baselines + oscillation wavelength}
 
 \end{document}

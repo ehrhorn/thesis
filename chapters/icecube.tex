@@ -88,16 +88,19 @@ The whole detector is located near, and supported by, the Amundsen-Scott South P
 The observatory detects Cherenkov light from secondary particles---visualized in~\vref{fig:cherenkov_icecube}---from both charged- and neutral current neutrino interactions,
 with the large volume of ice providing a plentiful basin of potentially interacting ice molecules.
 In the case of neutral current interactions, the event signature is that of a cascade: the neutrino scatters of a charged lepton, escaping the detector again, with the deposited energy resulting in electromagnetic and hadronic cascades; hence the name.
+An electromagnetic cascade (or \enquote{shower}) comes from a high energy electron suffering bremsstrahlung, radiating a photon which creates an electron-positron pair.
+This pair production again experiences bremsstrahlung, and the process continues until the energy is spent.
+Hadronic cascades result from the nuclear interaction of hadrons (composite particles made up of two or more quarks) and the concept of color confinement which disallows a quark from existing alone; it requires less energy to create a companion quark from the void.
 These cascades can be contained fully within the detector, meaning the energy can be easily inferred, but it is difficult to reconstruct a track that points to the origin of the neutrino.
 Charged current (CC) interactions, on the other hand, present the possibility of track-like signals, which make for a much better pointing resolution.
 However, the flavor of the neutrino in this case determines the signature:
 \begin{itemize}
 	\item An electron neutrino CC interaction will produce an electron, which will create an electromagnetic shower, as the electron instigates pair production, and is slowed down by bremsstrahlung. This looks like a cascade signature
-	\item A tau lepton will live very shortly (on the order of \SI{1e-13}{\second}) owing to its massive nature, and decays again creating a cascade\todo{From Troels: \ldots or a muon track (20 percent). Explain\ldots}
-	\item Muons are special: they do not decay immediately, as taus, and are less affected by the processes stopping electrons. They are thus able to leave long tracks in the detector, a track-like signature\todo{From Troels: You need to explain why muons don't loose much energy in matter (like electrons)}
+	\item A tau lepton will live very shortly (on the order of \SI{1e-13}{\second}) owing to its massive nature, and decays again either hadronically (creating a cascade) or leptonically (creating neutrinos and a muon or an electron, with about equal probability)
+	\item Muons are special: they do not decay immediately, as taus, and are less affected by the processes stopping electrons. They are thus able to leave long tracks in the detector, a track-like signature simply because their dominant energy loss mechanism is ionisation, whilst electrons also lose energy to bremsstrahlung
 \end{itemize}
 All three flavors create a hadronic cascade at the interaction vertex, \( X \) in \( \Pnu_{\alpha} + N \rightarrow \Plepton_{\alpha} + X \) with \( N \) a nucleon, \( \Pnu_{\alpha} \) a neutrino and \( \Plepton_{\alpha} \) a lepton, both of flavor \( \alpha \).
-\todo[inline]{Gotta explain e-m and hadronic cascades}
+
 In the case of a tau neutrino, there is the possibility of another (as of yet unseen) signature: the double-bang.
 A tau will have a decay length of \SI{50}{\meter\per\peta\electronvolt}~\cite{Ahlers2018}, so very high energy tau neutrinos may interact and first create a hadronic cascade, then a track from a high energy tau, which then decays \SI{50}{\meter} or more away.
 The signatures can be seen in~\vref{fig:event_signatures}.
