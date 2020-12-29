@@ -48,8 +48,6 @@ In the end, the problem is one of converting 6 or 9 features into an output.
 
 In the following, the ISO convention of spherical coordinate systems is used such that \( \theta \) refers to the zenith angle, and \( \phi \) the azimuthal angle.
 
-\todo[inline]{Okay, we gotta talk about distributions, and something in the figure texts.}
-
 \begin{table}
     \centering
     \caption{Features used in the dataset with datatype.
@@ -97,19 +95,37 @@ In the following, the ISO convention of spherical coordinate systems is used suc
 
 \subsection{oscNext}\label{sec:oscnext}
 
-\begin{figure}[h]
+\begin{figure}
     \centering
     \input{./images/data/deepcore_truth_distributions.pgf}
-    \caption{}\label{fig:deepcore_truth_distributions}
+    \caption{Truth variable distributions for the DeepCore dataset used.
+    The distributions match data well, seeing as they have passed L5~(vref{sec:l5}), and it is obvious that the neutrinos are mostly up-going from the zenith distribution in the bottom left figure.
+    The energy range has been cut at \SI{1000}{\giga\electronvolt}, simply because there is a dearth of data there and it is not particular interesting to oscillation analysis.
+    Naturally the azimuth distribution is uniform, as there is no preferred direction or asymmetry there.
+    The time distribution is heavily peaked around \SI{10000}{\nano\second} by definition; when an event is triggered, it is set at this time, and \SI{10000}{\nano\second} before and after is read out.}\label{fig:deepcore_truth_distributions}
 \end{figure}
+
+The DeepCore dataset used contains CC interaction muon neutrinos, capped at \SI{1000}{\giga\electronvolt} due to lack of data above that point; in addition, the focus is on low energy events, further providing reason to cut there.
+The azimuthal distribution is uniform, and the neutrinos are mostly up-going.
+See~\vref{fig:deepcore_truth_distributions}.
 
 \subsection{Upgrade}\label{sec:upgrade}
 
-\begin{figure}[h]
+\begin{figure}
     \centering
     \input{./images/data/upgrade_truth_distributions.pgf}
-    \caption{}\label{fig:upgrade_truth_distributions}
+    \caption{Truth variable distributions for the Upgrade dataset used.
+    The azimuthal distribution is similar to the DeepCore set, but the similarities end there.
+    First of all, the energy distribution displays ridges, artifacts of stitching together of different MC runs; further, it ends abruptly at \SI{1000}{\giga\electronvolt}.
+    The zenith distribution is more skewed towards down-going neutrinos, while the time distribution shows noise with large outliers.
+    This is caused by the Upgrade dataset not yet having the same post-processing pipeline as DeepCore/oscNext, meaning cuts have not yet been applied.
+    This makes it rather hard to get a good working neural network algorithm on the dataset.}\label{fig:upgrade_truth_distributions}
 \end{figure}
+
+The Upgrade dataset was capped as well at \SI{1000}{\giga\electronvolt}, and a cut was made on at least 4 activated DOMs in the Upgrade fiducial volume.
+However, the dataset still contains noise, and it is clear that the energy distribution has issues, mainly due to stitching together MC runs of different energy levels.
+Much works needs to be done on this dataset, in a pipeline similar to the post-processing of oscNext~(\vref{sec:post_processing}), before great results can be obtained.
+The distributions can be seen in~\vref{fig:upgrade_truth_distributions}.
 
 \section{SQLite}\label{sec:sqlite}
 

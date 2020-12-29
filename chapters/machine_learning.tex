@@ -169,7 +169,6 @@ These down-sample the output of a convolutional layer by (typically) taking the 
 Standard CNNs have enjoyed enormous success over the past ten years, and many image applications were built using these.
 Another type of networks, \enquote{recurrent neural networks} (RNNs), though, took the machine translation, speech recognition and time series prediction world with storm.
 RNNs have storage, internal states that can be used for memory in series where connected events may happen at different intervals.
-\todo[inline]{More about RNNs!}
 
 Recently, however, it has been shown that a new type of CNN, \enquote{temporal convolutional networks} (TCNs)~\cite{Bai2018}, perform better in a wide variety of tasks once dominated by RNNs.
 The million-dollar idea of TCNs are dilated convolutions, used to great effect in~\cite{Oord2016}.
@@ -235,10 +234,12 @@ To normalize the output of a layer we calculate the mean and variance of the val
 Furthermore, the values are shifted and scaled by the learnable parameters \( \gamma \) and \( \beta \).
 
 The values are passed through a ReLU, shown in~\vref{fig:activation_functions}.
-\todo[inline]{Remember to explain dropout}
+Lastly, a dropout layer randomly---with probability \( p \), a hyperparameter---drop a node at training time for each mini-batch, in effect training a different network each time; when the time comes for testing, all nodes are used, but they are now reduced by a factor \( p \).
+This forces nodes to probabilistically take on more or less responsibility for the inputs~\cite{Dropout}, making the network more robust and less prone to overfitting.
+
 In this thesis a TCN is employed, and a regular 1D convolutional network as well.
 In a 1D CNN the kernel slides in only one direction, but is otherwise similar to image convolution networks.
-\todo{Need a little more on classic CNN used}
+The 1D CNN version was the starting point, before TCNs were discovered, and does have prediction power, albeit using more parameters (i.e. a  larger network) than TCNs.
 
 \section{Loss functions}\label{sec:loss_functions}
 
@@ -252,7 +253,18 @@ The choice of loss function influences the performance of the network.
 \end{figure}
 
 Of course, the function needs to be differentiable, or backpropagation will fail.
-\todo[inline]{Loss functions\ldots what clever thing to say? From Troels: Lots! Difference between Loss for classification and regression, and MAE vs. RMS for regression. Mention the problems with loss for multiple regression, with three solutions (make model for each output, transforming each term to contribute similarly, or transforming all variables), and which you chose and why. Also the problem with angular Loss (vanishing gradient), and that different loss function trainings can be combined in ensemble.}
+Some loss functions are typically used for classification purposes (where e.g. a label 0/1 is the target), such as cross-entropy, while others---such as MSE, MAE, Huber and logcosh---are popular regression losses, and these are highlighted in~vref{sec:algorithm}.
+
+Some care must be taken in implementing the loss function.
+As an example, one may build a network that produces several outputs, of varying scale, which can be a big problem for the loss function.
+Say that on output variable is in general much larger than another, then that one will completely dominate the loss values, and the smaller variable will be drowned out.
+This can be remedied in several ways: firstly, one might scale the input variable to be roughly the same size, as detailed in~\vref{sec:data_transformation}; this ensures that no variable dominates the loss function.
+Secondly, it is possible to assign weights to the different terms of a loss function, and thus solving any potential scale issues.
+Lastly, it is possible (as was chosen in this thesis) to simply focus on one variable as output, completely eliminating the issue, as long as this variable is on a sensible scale.
+The reason for this choice was more convenience than anything else, as it presented a nice way of segmenting and focusing the output prediction types and analysis.
+
+In addition, it is possible to create an ensemble network or meta-learner, which takes as input reconstructions from other networks/loss functions, and learns what loss function best suits which purpose.
+This has been tried with great success in other works~\cite{Molvig2020}, and is surely an avenue to investigate further.
 
 \section{Pre-processing}\label{sec:data_transformation}
 

@@ -171,7 +171,9 @@ As several thousand events are read out each second, the algorithm must be fast,
 The servers at the IceCube Lab perform first a quick reconstruction, \enquote{linefit}~\cite{Aartsen2014}---a minimizer using a Huber penalty---used as a seed for the \enquote{Single-Photo-Electron-Fit} (SPE), a maximum likelihood estimation~\cite{Ahrens2004}.
 This reconstruction has a median angular resolution (the arc-distance between reconstruction and the true track) on Monte Carlo (MC,~\vref{sec:monte_carlo_simulation}) data of \( \theta_{\text{med}} = \SI{4.2}{\degree} \)~\cite{Aartsen2014}.
 
-\todo[inline]{From Troels: It would be fitting to list the sources of noise/background and their rates. Noise: from DOMs, background: from particles (cosmic muons).}
+IceCube has two sources of unwanted noise, when detecting neutrinos: background atmospheric muons produced by cosmic rays, which trigger the detector at a rate of around \SI{3000}{\kilo\hertz}~\cite{Aartsen2016b}, and noise produced directly in the DOMs.
+This noise has two components, thermal and non-thermal~\cite{Blot2020}.
+The thermal variety stems from spontaneous emission of single electrons from the photocathodes, while the non-thermal comes from radioactive decays in the DOM glass and sees a rate of \SIrange{500}{800}{\hertz}~\cite{Kelley2014}.
 
 \section{Post processing}\label{sec:post_processing}
 
@@ -181,8 +183,8 @@ When data arrives from the Pole, different analysis groups apply different post-
 In the following we shall focus on the methods applied by the oscillation working group, a suite of processing software termed \enquote{oscNext}, documented in~\cite{Blot2020}.
 Six levels are used, each removing different types of noise and muons using several different methods (some of which are machine learning based).
 The muon and noise is reduced by a factor \( \mathcal{O}(10^{5}) \) by the post-processing, and at the final level a neutrino rate of \( \mathcal{O}(\SI{1}{\milli\hertz}) \) survives with a few \% background muons and almost no noise.
-
-\todo[inline]{From Troels: What is the neutrino efficiency?!?}
+After all cuts, at the final level, between \SI{22}{\percent} and \SI{36}{\percent} simulated neutrinos remain, depending on current type and flavor.
+In the case of charged current muon neutrinos, at level 2 the rate is \SI{6.16}{\milli\hertz}, while at level 5 it is \SI{1.39}{\milli\hertz}, with a neutrino efficiency of \SI{22.6}{\percent}~\cite{Blot2020}.
 
 The post-processing levels are shortly touched on in the following.
 
@@ -198,7 +200,8 @@ Lastly, a DeepCore fiducial volume, and a DeepCore veto volume are defined, and 
 
 At level 3, a number of cuts are made on several derived variables, described in~\cite{Blot2020}.
 The main point of this level is to bring the data into agreement with MC, the discrepancies mainly stemming from processes for which there is no simulation.
-\todo[inline]{More about L3; which processes, cuts, derived variables?}
+Muons are identified by looking for light in the upper regions of the detector, while noise is found by looking at hit timing or number of hits.
+Several variables are derived and cut on; examples include \verb|NchCleaned| (number of hit DOMs in the cleaned pulses series) cut at \( \geq 6 \)) to identify noise, \verb|VertexGuess Z| (\( z \)-coordinate of the first pulse in the cleaned pulses series) cut at \( < \SI{-120}{\meter} \) to identify muons and \verb|DCFiducialHits| (the number of hit DeepCore fiducial DOMs in the cleaned pulses series) cut at \( > 2 \) to identify noise.
 
 L3 removes around \SI{95}{\percent} of the background muon events, \SI{99}{\percent} of pure noise and keeps \SI{60}{\percent} of atmospheric neutrino events relative to level 2, such that the event rate is below \SI{1}{\hertz}~\cite{Blot2020}.
 
@@ -293,13 +296,13 @@ As such, DeepCore was intended to lower the useful energy limit, doing so by ins
 Each new string has a DOM spacing of \SI{7}{\meter} vs. IceCube's \SI{17}{\meter}, and many PMTs are of an improved quantum efficiency relative to the \enquote{old} PMTs.
 
 The IceCube DOMs include DOM-to-DOM communication capabilities, which was used in the early years to measure ice properties.
-This data was used to determine the optimal placement of DeepCore, around \SI{2100}{\meter}, in the clearest ice measured.
+This data was used to determine the optimal placement of DeepCore, around \SIrange{2100}{2450}{\meter}, in the clearest ice measured, escaping the antarctic dust layer, left behind some \num{65000} years ago~\cite{Abbasi2012}, which sees a significant uptick in scattering.
+DeepCore comprises eight new strings, with an average inter-string horizontal spacing of \SI{72}{\meter}, and is logically joined with seven near IceCube strings such that the two types on the whole comprise the DeepCore detector; some strings are placed only \SI{42}{\meter} apart.
+Each new DeepCore string has \num{50} DOMs below \SI{2100}{\meter}, with the remaining \num{10} above the dust layer.
 All these measures amount to a new lower limit on the neutrino energy useful for analysis to \SI{10}{\giga\electronvolt}~\cite{Abbasi2012}.
-The top-down geometry can be seen in~\vref{fig:deepcore_string_pattern}
+The top-down geometry can be seen in~\vref{fig:deepcore_string_pattern}.
 
 DeepCore has made possible precision measurements of neutrino oscillations, and has also been used in the hunt for WIMPs\footnote{Weakly interacting massive particles, a dark matter candidate}.
-
-\todo[inline]{Hmm, need more about DeepCore. Maybe the depth, the number of DOMs, volume, lowered energy reach.}
 
 \section{IceCube Upgrade}\label{sec:icecube_upgrade}
 
