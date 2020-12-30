@@ -104,13 +104,36 @@ If, however, the loss suffers, the network relies on the feature being present, 
 It is unsurprising that the \( z \)-coordinate of the activated DOMs plays a significant role in determining the zenith value of a neutrino, owing to the fact that \( z = \cos{\theta} \).
 Relative DOM activation times is similarly important, also not surprising as it gives the order in which the pulses arrive.
 
-The energy reconstruction also uses the \( y \)-coordinate to a larger degree than the zenith reconstruction.
-This may be because the length of the track is important, for which only one coordinate is insufficient.
-
-In both cases pulse width seems to be important, which might be a surprise, because the pulse width simply records what ADC is used for recording the pulse.
+The energy reconstruction also uses the \( y \)-coordinate to a larger degree than the zenith reconstruction, because the movement in the plane is probably important for the reconstruction.
+In both cases pulse width seems to be important, related to the resolution of the pulse information gathered by the DOM.\@
 
 \Vref{fig:energy_comparison,fig:zenith_comparison} show the overall performance of the best performing network, with the best performing hyperparameters as outlined in~\vref{chap:design}.
 Until around \SI{50}{\giga\electronvolt} CubeFlow outperforms Retro Reco, both in energy and zenith reconstruction.
 In the zenith case the performance drops off rapidly, and it should be noted that the lower plot---which shows the relative improvement---has been constrained to \( \pm \SI{100}{\percent} \).
+
+\begin{figure}
+    \centering
+    \input{./images/results/zenith_resolution_upgrade.pgf}
+    \caption{Zenith resolution performance of CNN 2.0 on the upgrade dataset.
+    The performance is worse than on DeepCore data, even with new hardware features fed to the network, probably due to excessive noise.
+    The network \textit{does} have some predictive power, though, starting to improve performance around \SI{10}{\giga\electronvolt}.
+    This is comforting for the future, as a noise removal pipeline akin to oscNext should drastically improve the results.}\label{fig:upgrade_resolution}
+\end{figure}
+
+The CNN 2.0 algorithm turned out to work best on the Upgrade dataset.
+Here, only zenith reconstruction (see~\vref{fig:upgrade_resolution}) gave some usable results, while energy construction showed poor predictive power as seen in~\vref{fig:upgrade_2d_hist}.
+The network tends to predict one value around \SI{30}{\giga\electronvolt} for events where it cannot do a meaningful reconstruction, thereby minimizing the loss.
+This is probably caused by the excessive amount of noise in the dataset, as no cuts akin to oscNext have been performed on the set (no similar pipeline exists).
+However, as expected the methodology transferred with no issues, amounting to simply adding new features (the directional pointing vectors of the PMTs) as inputs to the network; this bodes well for the future of deep learning as applied to the Upgrade set, pending work on cuts to bring the set in line with real data and the removal of noise.
+
+\begin{figure}
+    \centering
+    \includegraphics[width=1.0\textwidth]{./images/results/energy_log10_prediction_2d_histogram.pdf}
+    \caption{An example from an energy reconstruction run on the upgrade dataset.
+    The network does not perform well, probably because of noise, defaulting to a loss-minimizing value for events where no clear reconstruction can be performed.
+    This should be remedied by noise removal.}\label{fig:upgrade_2d_hist}
+\end{figure}
+
+
 
 \end{document}

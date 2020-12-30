@@ -5,16 +5,45 @@
 	sftitles,
 	alphafoot,
 ]{hepthesis}
+\usepackage[english, science, titlepage]{./style/ku-frontpage}
 \usepackage{./style/mehtemplate}
-\begin{document}
-\raggedright{}
 
-\listoftodos[Notes]
+\assignment{Master's thesis}
+\author{Mads Ehrhorn Kjær}
+
+\title{Convolutional neural network neutrino reconstruction in IceCube}
+\date{Handed in: \today}
+\advisor{Supervisor: Troels Petersen}
+% \frontpageimage{}
+
+\begin{document}
+
+\maketitle
+
+\raggedright{}
 
 \tableofcontents
 
+\chapter*{Acknowledgements}
+\thispagestyle{empty}
+
+Thank you to my supervisor, Troels Petersen, for many interesting discussion and so much support during very difficult times; you made physics exciting, the hardship tolerable and provided much needed help and input.
+
+To Bjørn Mølvig a special thanks: you gave me plenty of laughs, lots of friendship, and you made me better in the process.
+
+Tom Stuttard provided IceCube data and expertise, without which no thesis could be made.
+
+Oswin Krause, the machine learning wizard, gave invaluable help in creating the convolutional neural networks.
+
+This work is entirely dedicated to my mother and father; I could not have done this, nor survived the past seven years, without you.
+Thank you.
+
+\clearpage
+
 % textwidth in inches: \printinunitsof{in}\prntlen{\textwidth}
 % textheight in inches: \printinunitsof{in}\prntlen{\textheight}
+
+\subfile{./chapters/abstract}
 
 \chapter{Introduction}\label{chap:introduction}
 \subfile{./chapters/introduction}
@@ -40,7 +69,7 @@
 \chapter{Summary and outlook}\label{chap:summary_and_outlook}
 \subfile{./chapters/summary_and_outlook}
 
-\listoffigures
+% \listoffigures
 
 \printbibliography{}
 

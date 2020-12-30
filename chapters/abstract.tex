@@ -1,0 +1,19 @@
+%!TEX root = ../main.tex
+\documentclass[../main.tex]{subfiles}
+
+\begin{document}
+
+\begin{abstract}
+	The IceCube Neutrino Observatory, on the Geographic South Pole, finished construction almost exactly 10 years ago, and due to the project's success is due to receive an upgrade in 2022-23.
+	This is expected to make it a world-leader in measurements of certain neutrino properties, dependent on the energy \( E \) and path length traveled \( L \) of the detected neutrinos.
+	These properties need to be inferred from the observation, and subsequent reconstruction, of Cherenkov light from secondary particles, currently done using classical methods.
+
+	However, the advancement of machine learning (ML) in general---and neural networks in particular---open up the possibility of creating faster, more robust and scalable inference capabilities, as has been seen in areas such as image recognition and machine translation during the past decade.
+
+	This thesis develops a convolutional based neural network and accompanying tooling for low-energy neutrino reconstruction.
+	A novel approach to data management in IceCube specifically for ML purposes is introduced, together with a new event viewer, and algorithm comparison dashboard, to aid in the training and comparison of different network performances, generalizable for use by other groups studying ML applications in IceCube.
+
+	A temporal convolutional network is able to outperform the current best classical algorithm Retro Reco at low energies up to around \SI{50}{\giga\electronvolt} for both polar angle (a proxy for \( L \)) and \( E \) reconstruction.
+\end{abstract}
+
+\end{document}

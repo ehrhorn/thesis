@@ -14,10 +14,16 @@ Although the network presented in this thesis is by no means perfect, it does sh
 The network itself is simple enough, so there are many avenues for improvement.
 This work would be significantly helped by the right tooling, such as CubeDB and Powershovel, because groups working on different algorithms would be able to compare on even terms, and use the same data with common references (event IDs) resting assured that the same events are used for training and testing across the board.
 
+The scalability of neural networks is evident, as the Upgrade data was added and used as late as November; a working algorithm, hampered by noise, was up and running in mere minutes after the dataset was created, because it essentially only represents new data and the addition of new features (PMT directional vectors).
+Added hardware sensitivity coupled with enhanced reconstruction through ML will allow the Upgrade to achieve, and even succeed, in its goal of world leading measurements of \( \sin^{2}{\theta_{2 3}} \) and \( \Delta{m_{3 2}^{2}} \) through muon neutrino survival and muon to tau oscillations at the oscillation extremum around \SI{25}{\giga\electronvolt}, a range where CubeFlow performs well even in DeepCore.
+
+Supernova alarms is another case where the fast reconstruction of an ML algorithm is useful.
+The promise of multi-messenger astronomy is the many faceted observation of cosmic events, and a GPU on the South Pole may be able to point towards something interesting in the sky with milliseconds of increased neutrino activity, alerting electromagnetic telescopes to start turning to look.
+
+Of course the methods lack any validation in real data, a fact that might be remedied in time by observing the moon's shadow; because the moon stop most muons one would expect a deficit in its general direction, and the resolution can quantify the performance of the network.
+
 In any case, neural networks have arrived in every area of physics, and can no longer be overlooked.
 Newer methods, such as generative adversarial networks, are beginning to be used at the LHC as a supplement to MC data generation because it can generate new data from random noise by running a min-max game with a discriminator network; this reduces the computational burden of MC generation quite significantly.
 This might also be of interest to IceCube, and as soon as neural networks are a staple of the collaboration toolbox, such ideas have an easier time being accepted.
-
-\todo[inline]{From Troels: The summary should be short and concise\ldots But the outlook is where you should do your last \enquote{shine}---showing that you understand the context of this, that one might with the Upgrade and ML performance see the extra oscillation and get world leading results for both mu->tau and mu->mu oscillations. Also, briefly mention alarms, and that this approach can be validated both by seeing the moon in cosmics, and by comparing stopped muons in data and MC. And then list all the cool things you would do, if you had another year, more collaborations, 10 GPUs, upgrade data, etc\ldots dream (in a quantified manner!).}
 
 \end{document}
